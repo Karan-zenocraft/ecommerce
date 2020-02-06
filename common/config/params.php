@@ -12,8 +12,7 @@ return [
     'userroles' => [
         'super_admin' => '1',
         'admin' => '2',
-        'doctor' => '3',
-        'patient' => '4',
+        'user' => '3',
     ],
     'user_status' => array('1' => 'Active', '0' => 'In-Active'),
     'user_status_value' => array('active' => '1', 'in_active' => '0'),
@@ -27,5 +26,4 @@ return [
     'super_admin_role_id' => '1',
     'administrator_role_id' => '2',
     'action' => ["1" => "delete", "2" => "archive", "3" => "un_archive"],
-    'mail_sent' => ["false" => "0", "true" => "1"],
 ];
