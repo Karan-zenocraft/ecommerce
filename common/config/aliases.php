@@ -13,6 +13,7 @@ Yii::setAlias('frontend', dirname(dirname(__DIR__)) . '/frontend');
 Yii::setAlias('backend', dirname(dirname(__DIR__)) . '/backend');
 Yii::setAlias('console', dirname(dirname(__DIR__)) . '/console');
 Yii::setAlias('@root', realpath(dirname(__FILE__) . '/../../'));
+Yii::setAlias('@htmlpath', realpath(dirname(__FILE__) . '/../../../'));
 
 //START: site configuration
 Yii::setAlias('site_title', 'Marketplace');

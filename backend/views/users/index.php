@@ -77,12 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'attribute' => 'photo',
             'format' => 'image',
             'value' => function ($data) {
-                if (!empty($data->photo)) {
-                    $photo = Yii::$app->params['root_url'] . '/' . "uploads/profile_pictures/" . $data->photo;
-                } else {
-                    $photo = "-";
-                }
-                return $photo;
+                return $data->photo;
             },
         ],
         //'verification_code',
