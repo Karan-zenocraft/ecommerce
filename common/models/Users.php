@@ -51,7 +51,8 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return [
             [['role_id', 'user_name', 'email', 'password'], 'required'],
             // [['role_id', 'badge_count', 'status'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at', 'first_name', 'last_name', 'login_type'], 'safe'],
+            ['user_name', 'validateUserName'],
             [['photo'], 'image', 'extensions' => 'jpg, jpeg, gif, png'],
             [['user_name', 'email', 'password'], 'string', 'max' => 255],
             //  [['role_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserRoles::className(), 'targetAttribute' => ['role_id' => 'id']],
@@ -66,6 +67,8 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return [
             'id' => 'ID',
             'role_id' => 'Role ID',
+            'first_name' => 'First Name',
+            'last_name' => 'Last Name',
             'user_name' => 'User Name',
             'email' => 'Email',
             'password' => 'Password',
@@ -83,6 +86,15 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function getRole()
     {
         return $this->hasOne(UserRoles::className(), ['id' => 'role_id']);
+    }
+
+    public function validateUserName()
+    {
+        $validateName = Users::find()->where('user_name = "' . $this->user_name . '" and id != "' . $this->id . '"')->all();
+        if (!empty($validateName)) {
+            $this->addError('user_name', 'This user name is already registered.');
+            return true;
+        }
     }
 
     /**

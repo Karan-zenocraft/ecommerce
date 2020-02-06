@@ -15,14 +15,14 @@ color: #ffff;
 
 /* @var $this yii\web\View */
 
-$this->title = 'Food App';
+$this->title = 'Marketplace';
 ?>
 <div class="site-index">
 
     <div class="jumbotron" style="color: #ffff">
         <h1>Welcome</h1>
 
-        <p class="lead">To Food App</p>
+        <p class="lead">To Marketplace</p>
     </div>
 
     <div class="body-content">

@@ -9,7 +9,7 @@ use Yii;
  *
  * @property integer $id
  * @property integer $user_id
- * @property string $device_tocken
+ * @property string $device_token
  * @property string $type
  * @property string $gcm_id
  * @property string $created_at
@@ -34,7 +34,7 @@ class DeviceDetailsBase extends \yii\db\ActiveRecord
             [['user_id'], 'integer'],
             [['type', 'gcm_id'], 'string'],
             [['created_at'], 'safe'],
-            [['device_tocken'], 'string', 'max' => 255],
+            [['device_token'], 'string', 'max' => 255],
         ];
     }
 
@@ -46,7 +46,7 @@ class DeviceDetailsBase extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
-            'device_tocken' => 'Device Tocken',
+            'device_token' => 'Device Tocken',
             'type' => 'Type',
             'gcm_id' => 'Gcm ID',
             'created_at' => 'Created At',
