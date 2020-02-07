@@ -15,6 +15,8 @@ use Yii;
  * @property integer $seller_id
  * @property string $title
  * @property string $description
+ * @property string $brand
+ * @property integer $year_of_purchase
  * @property string $location_address
  * @property double $lat
  * @property double $longg
@@ -47,11 +49,11 @@ class ProductsBase extends \yii\db\ActiveRecord
     {
         return [
             [['category_id', 'seller_id', 'title', 'description', 'location_address', 'lat', 'longg', 'price', 'is_rent', 'rent_price', 'rent_price_duration', 'quantity', 'created_at', 'updated_at'], 'required'],
-            [['category_id', 'seller_id', 'price', 'rent_price', 'rent_price_duration', 'quantity', 'status'], 'integer'],
+            [['category_id', 'seller_id', 'year_of_purchase', 'price', 'rent_price', 'rent_price_duration', 'quantity', 'status'], 'integer'],
             [['description', 'location_address', 'is_rent'], 'string'],
             [['lat', 'longg'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
-            [['title'], 'string', 'max' => 255],
+            [['title', 'brand'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['seller_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['seller_id' => 'id']],
         ];
@@ -64,18 +66,20 @@ class ProductsBase extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'category_id' => 'Category ID',
-            'seller_id' => 'Seller ID',
+            'category_id' => 'Category',
+            'seller_id' => 'Seller',
             'title' => 'Title',
             'description' => 'Description',
+            'brand' => 'Brand',
+            'year_of_purchase' => 'Year Of Purchase',
             'location_address' => 'Location Address',
-            'lat' => 'Lat',
-            'longg' => 'Longg',
-            'price' => 'Price',
-            'is_rent' => 'Is Rent',
+            'lat' => 'Lattitude',
+            'longg' => 'Longitude',
+            'price' => 'Price in USD',
+            'is_rent' => 'Is avaliable for Rent',
             'rent_price' => 'Rent Price',
             'rent_price_duration' => 'Rent Price Duration',
-            'quantity' => 'Quantity',
+            'quantity' => 'Quantity in stock',
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

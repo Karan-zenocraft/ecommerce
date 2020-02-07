@@ -2,9 +2,9 @@
 
 namespace common\models;
 
+use common\models\Products;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Products;
 
 /**
  * ProductsSearch represents the model behind the search form of `common\models\Products`.
@@ -17,8 +17,8 @@ class ProductsSearch extends Products
     public function rules()
     {
         return [
-            [['id', 'category_id', 'seller_id', 'price', 'rent_price', 'rent_price_duration', 'quantity', 'status'], 'integer'],
-            [['title', 'description', 'location_address', 'is_rent', 'created_at', 'updated_at'], 'safe'],
+            [['id', 'category_id', 'price', 'rent_price', 'rent_price_duration', 'quantity', 'status'], 'integer'],
+            [['title', 'description', 'location_address', 'is_rent', 'created_at', 'updated_at', 'seller_id'], 'safe'],
             [['lat', 'longg'], 'number'],
         ];
     }
@@ -61,7 +61,6 @@ class ProductsSearch extends Products
         $query->andFilterWhere([
             'id' => $this->id,
             'category_id' => $this->category_id,
-            'seller_id' => $this->seller_id,
             'lat' => $this->lat,
             'longg' => $this->longg,
             'price' => $this->price,
@@ -77,6 +76,9 @@ class ProductsSearch extends Products
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'location_address', $this->location_address])
             ->andFilterWhere(['like', 'is_rent', $this->is_rent]);
+        $query->joinWith(['seller' => function ($query) {
+            $query->where('CONCAT(users.first_name," ", users.last_name) LIKE "%' . $this->seller_id . '%"');
+        }]);
 
         return $dataProvider;
     }

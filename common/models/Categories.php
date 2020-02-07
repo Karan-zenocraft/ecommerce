@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use yii\helpers\ArrayHelper;
+
 class Categories extends \common\models\base\CategoriesBase
 {
     public function beforeSave($insert)
@@ -22,5 +24,9 @@ class Categories extends \common\models\base\CategoriesBase
             [['created_at', 'updated_at'], 'safe'],
             [['title'], 'string', 'max' => 255],
         ];
+    }
+    public function CategoryDropdown()
+    {
+        return ArrayHelper::map(Categories::find()->orderBy('title')->asArray()->all(), 'id', 'title');
     }
 }

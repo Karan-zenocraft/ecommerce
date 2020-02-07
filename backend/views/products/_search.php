@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Categories;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -11,47 +12,69 @@ use yii\widgets\ActiveForm;
 <div class="products-search">
 
     <?php $form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
-    ]); ?>
+    'action' => ['index'],
+    'method' => 'get',
+]);?>
 
-    <?= $form->field($model, 'id') ?>
+<div class="row">
+    <div class="span3 style_input_width">
+    <?=$form->field($model, 'category_id')->dropDownList(array("" => "") + Categories::CategoryDropdown());?>
+</div>
+ <div class="span3 style_input_width">
+    <?=$form->field($model, 'seller_id')?>
+</div>
+</div>
+<div class="row">
+    <div class="span3 style_input_width">
+    <?=$form->field($model, 'title')?>
+</div>
+<div class="span3 style_input_width">
+    <?=$form->field($model, 'description')?>
+</div>
+</div>
+<div class="row">
+    <div class="span3 style_input_width">
+    <?php echo $form->field($model, 'location_address') ?>
+</div>
+<div class="span3 style_input_width">
+    <?php echo $form->field($model, 'lat') ?>
+</div>
+</div>
+<div class="row">
+    <div class="span3 style_input_width">
+    <?php echo $form->field($model, 'longg') ?>
+</div>
+<div class="span3 style_input_width">
+    <?php echo $form->field($model, 'price') ?>
+</div>
+</div>
+<div class="row">
+    <div class="span3 style_input_width">
+    <?php echo $form->field($model, 'is_rent') ?>
+</div>
+<div class="span3 style_input_width">
+    <?php echo $form->field($model, 'rent_price') ?>
+</div>
+</div>
+<div class="row">
+    <div class="span3 style_input_width">
+    <?php echo $form->field($model, 'rent_price_duration') ?>
+</div>
+<div class="span3 style_input_width">
+    <?php echo $form->field($model, 'quantity') ?>
+</div>
+</div>
+<div class="row">
+    <div class="span3 style_input_width">
+    <?php echo $form->field($model, 'status') ?>
+</div>
+</div>
 
-    <?= $form->field($model, 'category_id') ?>
-
-    <?= $form->field($model, 'seller_id') ?>
-
-    <?= $form->field($model, 'title') ?>
-
-    <?= $form->field($model, 'description') ?>
-
-    <?php // echo $form->field($model, 'location_address') ?>
-
-    <?php // echo $form->field($model, 'lat') ?>
-
-    <?php // echo $form->field($model, 'longg') ?>
-
-    <?php // echo $form->field($model, 'price') ?>
-
-    <?php // echo $form->field($model, 'is_rent') ?>
-
-    <?php // echo $form->field($model, 'rent_price') ?>
-
-    <?php // echo $form->field($model, 'rent_price_duration') ?>
-
-    <?php // echo $form->field($model, 'quantity') ?>
-
-    <?php // echo $form->field($model, 'status') ?>
-
-    <?php // echo $form->field($model, 'created_at') ?>
-
-    <?php // echo $form->field($model, 'updated_at') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+     <div class="form-group">
+        <?=Html::submitButton('Search', ['class' => 'btn btn-primary'])?>
+         <?=Html::a(Yii::t('app', '<i class="icon-refresh"></i> clear'), Yii::$app->urlManager->createUrl(['products/index', "temp" => "clear"]), ['class' => 'btn btn-default'])?>
     </div>
 
-    <?php ActiveForm::end(); ?>
+    <?php ActiveForm::end();?>
 
 </div>
