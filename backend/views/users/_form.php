@@ -24,6 +24,13 @@ use yii\widgets\ActiveForm;
 </div>
 </div>
 <div class="row">
+     <div class="span3 style_input_width"> <?=$form->field($model, 'first_name')->textInput(['maxlength' => true])?>
+</div>
+ <div class="span3 style_input_width">
+    <?=$form->field($model, 'last_name')->textInput(['maxlength' => true])?>
+</div>
+</div>
+<div class="row">
                 <div class="span3 style_input_width">
     <?=$form->field($model, 'email')->textInput(['maxlength' => true])?>
 </div>
@@ -45,10 +52,13 @@ use yii\widgets\ActiveForm;
 <div class="span3 style_input_width">
       <?=$form->field($model, 'photo')->fileInput(['id' => 'photo', 'value' => $model->photo]);?>
 </div>
+   <div class="span3 style_input_width">
+    <?=$form->field($model, 'city')->textInput()?>
+</div>
 </div>
       <div class="row">
 <div class="span3">
-    <img id="image" width="100px" hieght="100px" src="<?php echo Yii::getAlias('@web') . "/../uploads/" . $model->photo; ?>" alt="" />
+    <img id="image" width="100px" hieght="100px" src="<?php echo $model->photo; ?>" alt="" />
     </div>
 </div>
     <div class="form-group">

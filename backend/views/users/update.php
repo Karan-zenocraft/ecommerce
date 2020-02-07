@@ -7,7 +7,7 @@ $this->title = 'Update Users: ' . $model->user_name;
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="users-update">
+<div class="users-update email-format-create">
 
     <?=$this->render('_form', [
     'model' => $model,

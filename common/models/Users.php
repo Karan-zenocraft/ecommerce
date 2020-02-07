@@ -49,10 +49,15 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['role_id', 'user_name', 'email', 'password'], 'required'],
+            [['role_id', 'user_name', 'password', 'email', 'status', 'first_name', 'last_name', 'city'], 'required'],
+            [['role_id', 'user_name', 'email', 'status', 'first_name', 'last_name'], 'filter', 'filter' => 'trim'],
+            // [['role_id', 'user_name', 'email', 'password', 'status'], 'trim'],
             // [['role_id', 'badge_count', 'status'], 'integer'],
             [['created_at', 'updated_at', 'first_name', 'last_name', 'login_type'], 'safe'],
             ['user_name', 'validateUserName'],
+            [['phone'], 'integer'],
+            [['email'], 'email'],
+            ['email', 'validateEmail'],
             [['photo'], 'image', 'extensions' => 'jpg, jpeg, gif, png'],
             [['user_name', 'email', 'password'], 'string', 'max' => 255],
             //  [['role_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserRoles::className(), 'targetAttribute' => ['role_id' => 'id']],
@@ -75,6 +80,7 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'photo' => 'Photo',
             'badge_count' => 'Badge Count',
             'status' => 'Status',
+            'city' => 'City',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -93,6 +99,14 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         $validateName = Users::find()->where('user_name = "' . $this->user_name . '" and id != "' . $this->id . '"')->all();
         if (!empty($validateName)) {
             $this->addError('user_name', 'This user name is already registered.');
+            return true;
+        }
+    }
+    public function validateEmail()
+    {
+        $ASvalidateemail = Users::find()->where('email = "' . $this->email . '" and id != "' . $this->id . '"')->all();
+        if (!empty($ASvalidateemail)) {
+            $this->addError('email', 'This email is already registered.');
             return true;
         }
     }

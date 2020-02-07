@@ -1,7 +1,5 @@
 <?php
 
-use common\models\UserRoles;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -21,25 +19,26 @@ use yii\widgets\ActiveForm;
 ]);?>
 <div class="row">
     <div class="span3 style_input_width">
-<?php $UserRolesDropdown = ArrayHelper::map(array("" => "") + UserRoles::find()->where("id !=" . Yii::$app->params['super_admin_role_id'] . " AND id !=" . Yii::$app->params['administrator_role_id'])->asArray()->all(), 'id', 'role_name');?>
-    <?php echo $form->field($model, 'role_id')->dropDownList($UserRolesDropdown); ?>
+  <?=$form->field($model, 'first_name')?>
 </div>
     <div class="span3 style_input_width">
-
-    <?=$form->field($model, 'user_name')?>
+    <?=$form->field($model, 'last_name')?>
 </div>
 </div>
 <div class="row">
+    <div class="span3 style_input_width">
+    <?=$form->field($model, 'user_name')?>
+</div>
 <div class="span3 style_input_width">
     <?=$form->field($model, 'email')?>
 </div>
-<div class="span3 style_input_width">
-    <?php echo $form->field($model, 'phone') ?>
-</div>
 </div>
 <div class="row">
+    <div class="span3 style_input_width">
+    <?php echo $form->field($model, 'city') ?>
+</div>
 <div class="span3 style_input_width">
-    <div class="span3 style_input_width"><?=$form->field($model, 'status')->dropDownList(Yii::$app->params['user_status']);?></div>
+    <div class="span3 style_input_width" style="width:auto;"><?=$form->field($model, 'status')->dropDownList(Yii::$app->params['user_status']);?></div>
 </div>
 </div>
     <?php // echo $form->field($model, 'photo') ?>
@@ -65,7 +64,7 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group">
         <?=Html::submitButton('Search', ['class' => 'btn btn-primary'])?>
-        <?=Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary'])?>
+         <?=Html::a(Yii::t('app', '<i class="icon-refresh"></i> clear'), Yii::$app->urlManager->createUrl(['users/index', "temp" => "clear"]), ['class' => 'btn btn-default'])?>
     </div>
 
     <?php ActiveForm::end();?>

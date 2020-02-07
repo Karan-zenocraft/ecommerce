@@ -570,3 +570,10 @@ table.table_class tbody {  }
 .restaurants-form input, textarea, .uneditable-input {
     width: 91%;
 }
+input[type="text"], input[type="password"]{
+height: 33px;
+}
+select{
+    width: 235px;
+    height: 33px;
+}

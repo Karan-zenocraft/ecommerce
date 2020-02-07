@@ -80,8 +80,8 @@ class UsersController extends AdminCoreController
                 $file_name = $file->basename . "_" . uniqid() . "." . $file->extension;
                 //p(trim($file_name));
                 $file_filter = str_replace(" ", "", $file_name);
-                $model->photo = $file_filter;
-                $file->saveAs(Yii::getAlias('@root') . '/uploads/profile_pictures/' . $file_filter);
+                $model->photo = Yii::$app->params['root_url'] . '/uploads/dp/' . $file_filter;
+                $file->saveAs(Yii::getAlias('@root') . '/uploads/dp/' . $file_filter);
             }
             $model->generateAuthKey();
             $email_verify_link = Yii::$app->params['root_url'] . '/site/email-verify?verify=' . base64_encode($model->verification_code) . '&e=' . base64_encode($model->email);
@@ -98,6 +98,7 @@ class UsersController extends AdminCoreController
                 $ssResponse = Common::sendMailToUser($model->email, Yii::$app->params['adminEmail'], $ssSubject, $body);
 
             }
+            Yii::$app->session->setFlash('success', Yii::getAlias('@user_add_message'));
             return $this->redirect(['users/index']);
 
         }
@@ -119,7 +120,7 @@ class UsersController extends AdminCoreController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $old_image = $model->photo;
+        $old_image = basename($model->photo);
         $UserRolesDropdown = ArrayHelper::map(UserRoles::find()->where("id !=" . Yii::$app->params['userroles']['admin'] . " AND id !=" . Yii::$app->params['userroles']['super_admin'])->asArray()->all(), 'id', 'role_name');
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -128,15 +129,16 @@ class UsersController extends AdminCoreController
                 $delete = $model->oldAttributes['photo'];
                 $file_name = $file->basename . "_" . uniqid() . "." . $file->extension;
                 $file_filter = str_replace(" ", "", $file_name);
-                if (!empty($old_image) && file_exists(Yii::getAlias('@root') . '/uploads/' . $old_image)) {
-                    unlink(Yii::getAlias('@root') . '/uploads/profile_pictures/' . $old_image);
+                if (!empty($old_image) && file_exists(Yii::getAlias('@root') . '/uploads/dp/' . $old_image)) {
+                    unlink(Yii::getAlias('@root') . '/uploads/dp/' . $old_image);
                 }
-                $file->saveAs(Yii::getAlias('@root') . '/uploads/profile_pictures/' . $file_filter, false);
-                $model->photo = $file_filter;
+                $file->saveAs(Yii::getAlias('@root') . '/uploads/dp/' . $file_filter, false);
+                $model->photo = Yii::$app->params['root_url'] . '/uploads/dp/' . $file_filter;
             } else {
-                $model->photo = $old_image;
+                $model->photo = Yii::$app->params['root_url'] . '/uploads/dp/' . $old_image;
             }
-            $model->save();
+            Yii::$app->session->setFlash('success', Yii::getAlias('@user_update_message'));
+            $model->save(false);
             return $this->redirect(['users/index']);
         }
 
@@ -157,7 +159,7 @@ class UsersController extends AdminCoreController
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
+        Yii::$app->session->setFlash('success', Yii::getAlias('@user_delete_message'));
         return $this->redirect(['index']);
     }
 

@@ -92,6 +92,7 @@ class UsersController extends \yii\base\Controller
                     $amReponseParam['last_name'] = $model->last_name;
                     $amReponseParam['user_name'] = $model->user_name;
                     $amReponseParam['phone'] = !empty($model->phone) ? $model->phone : "";
+                    $amReponseParam['city'] = !empty($model->city) ? $model->city : "";
                     $parseUrl = parse_url($model->photo);
                     $amReponseParam['photo'] = !empty($model->photo) && file_exists(Yii::getAlias('@htmlpath') . '/' . $parseUrl['path']) ? $model->photo : Yii::$app->params['root_url'] . '/' . "uploads/dp/no_image.png";
                     $amReponseParam['device_token'] = $device_model->device_token;
@@ -146,6 +147,7 @@ class UsersController extends \yii\base\Controller
                         $amReponseParam['last_name'] = $model->last_name;
                         $amReponseParam['user_name'] = $model->user_name;
                         $amReponseParam['phone'] = !empty($model->phone) ? $model->phone : "";
+                        $amReponseParam['city'] = !empty($model->city) ? $model->city : "";
                         $amReponseParam['photo'] = !empty($model->photo) ? $model->photo : Yii::$app->params['root_url'] . '/' . "uploads/dp/no_image.png";
                         $amReponseParam['device_token'] = $device_model->device_token;
                         $amReponseParam['type'] = $device_model->type;
@@ -160,6 +162,7 @@ class UsersController extends \yii\base\Controller
                     $model->photo = $requestParam['photo'];
                     $model->role_id = Yii::$app->params['userroles']['customer'];
                     $model->user_name = $requestParam['user_name'];
+                    $model->city = !empty($requestParam['city']) ? $requestParam['city'] : "";
                     $ssAuthToken = Common::generateToken($model->id);
                     $model->auth_token = $ssAuthToken;
                     $model->save(false);
@@ -180,6 +183,7 @@ class UsersController extends \yii\base\Controller
                     $amReponseParam['last_name'] = $model->last_name;
                     $amReponseParam['user_name'] = $model->user_name;
                     $amReponseParam['phone'] = !empty($model->phone) ? $model->phone : "";
+                    $amReponseParam['city'] = !empty($model->city) ? $model->city : "";
                     $amReponseParam['photo'] = !empty($model->photo) ? $model->photo : Yii::$app->params['root_url'] . '/' . "uploads/dp/no_image.png";
                     $amReponseParam['device_token'] = $device_model->device_token;
                     $amReponseParam['type'] = $device_model->type;
@@ -200,6 +204,8 @@ class UsersController extends \yii\base\Controller
                 $model->first_name = $requestParam['first_name'];
                 $model->last_name = $requestParam['last_name'];
                 $model->photo = $requestParam['photo'];
+                $model->phone = !empty($requestParam['phone']) ? $requestParam['phone'] : "";
+                $model->city = !empty($requestParam['city']) ? $requestParam['city'] : "";
                 $model->is_code_verified = 1;
                 $model->save(false);
                 if (($device_model = DeviceDetails::findOne(['type' => $requestParam['type'], 'user_id' => $model->id])) === null) {
@@ -219,6 +225,7 @@ class UsersController extends \yii\base\Controller
                 $amReponseParam['last_name'] = $model->last_name;
                 $amReponseParam['user_name'] = $model->user_name;
                 $amReponseParam['phone'] = !empty($model->phone) ? $model->phone : "";
+                $amReponseParam['city'] = !empty($model->city) ? $model->city : "";
                 $amReponseParam['photo'] = !empty($model->photo) ? $model->photo : Yii::$app->params['root_url'] . '/' . "uploads/dp/no_image.png";
                 $amReponseParam['device_token'] = $device_model->device_token;
                 $amReponseParam['type'] = $device_model->type;
@@ -309,6 +316,7 @@ class UsersController extends \yii\base\Controller
         $model->password = md5($requestParam['password']);
         /* $model->address_line_1 = !empty($requestParam['address_line_1']) ? $requestParam['address_line_1'] : "";*/
         $model->phone = !empty($requestParam['phone']) ? Common::clean_special_characters($requestParam['phone']) : "";
+        $model->city = !empty($requestParam['city']) ? $requestParam['city'] : "";
         $model->role_id = Yii::$app->params['userroles']['user'];
         $model->status = Yii::$app->params['user_status_value']['active'];
         $ssAuthToken = Common::generateToken($model->id);
@@ -364,6 +372,7 @@ class UsersController extends \yii\base\Controller
             $amReponseParam['last_name'] = $model->last_name;
             $amReponseParam['user_name'] = $model->user_name;
             $amReponseParam['phone'] = $model->phone;
+            $amReponseParam['city'] = !empty($model->city) ? $model->city : "";
             $parseUrl = parse_url($model->photo);
             $amReponseParam['photo'] = !empty($model->photo) && file_exists(Yii::getAlias('@htmlpath') . '/' . $parseUrl['path']) ? $model->photo : Yii::$app->params['root_url'] . '/' . "uploads/dp/no_image.png";
             $amReponseParam['device_token'] = $device_model->device_token;

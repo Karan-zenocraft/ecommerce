@@ -33,8 +33,20 @@ Yii::setAlias('email_template_update_message', 'Template has been updated succes
 Yii::setAlias('email_template_delete_message', 'Template has been deleted successfully !');
 //END: Email template message
 
-//START: Restaurant message
+//START: User message
 Yii::setAlias('user_add_message', 'user has been added successfully !');
 Yii::setAlias('user_update_message', 'user has been updated successfully !');
 Yii::setAlias('user_delete_message', 'user has been deleted successfully !');
-//END:  Restaurant message
+//END:  User message
+
+//START: Categories message
+Yii::setAlias('category_add_message', 'category has been added successfully !');
+Yii::setAlias('category_update_message', 'category has been updated successfully !');
+Yii::setAlias('category_delete_message', 'category has been deleted successfully !');
+//END:  Categories message
+
+//START: Products message
+Yii::setAlias('product_add_message', 'product has been added successfully !');
+Yii::setAlias('product_update_message', 'product has been updated successfully !');
+Yii::setAlias('product_delete_message', 'product has been deleted successfully !');
+//END:  Products message
