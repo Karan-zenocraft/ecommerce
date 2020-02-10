@@ -67,7 +67,7 @@ class ProductsSearch extends Products
             'rent_price' => $this->rent_price,
             'rent_price_duration' => $this->rent_price_duration,
             'quantity' => $this->quantity,
-            'status' => $this->status,
+            'products.status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
