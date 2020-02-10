@@ -5,6 +5,7 @@ namespace api\controllers;
 use common\components\Common;
 use common\models\DeviceDetails;
 use common\models\EmailFormat;
+use common\models\UserAddresses;
 use common\models\Users;
 use Yii;
 
@@ -803,6 +804,66 @@ class UsersController extends \yii\base\Controller
             $oModelUser->save(false);
             $ssMessage = "Badge count updated successfully.";
             $amResponse = Common::successResponse($ssMessage);
+        } else {
+            $ssMessage = 'Invalid User.';
+            $amResponse = Common::errorResponse($ssMessage);
+        }
+        // FOR ENCODE RESPONSE INTO JSON //
+        Common::encodeResponseJSON($amResponse);
+    }
+    /*
+     * Function : AddAddresses()
+     * Description : Add Addresses
+     * Request Params : user_id
+     * Response Params : user's details
+     * Author : Rutusha Joshi
+     */
+
+    public function actionAddAddresses()
+    {
+        //Get all request parameter
+        $amData = Common::checkRequestType();
+        $amResponse = $amReponseParam = [];
+        // Check required validation for request parameter.
+        $amRequiredParams = array('user_id', 'address', 'pincode', 'is_default');
+        $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
+
+        // If any getting error in request paramter then set error message.
+        if (!empty($amParamsResult['error'])) {
+            $amResponse = Common::errorResponse($amParamsResult['error']);
+            Common::encodeResponseJSON($amResponse);
+        }
+        $requestParam = $amData['request_param'];
+        //Check User Status//
+        Common::matchUserStatus($requestParam['user_id']);
+        //VERIFY AUTH TOKEN
+        $authToken = Common::get_header('auth_token');
+        Common::checkAuthentication($authToken, $requestParam['user_id']);
+        $snUserId = $requestParam['user_id'];
+        $model = Users::findOne(["id" => $snUserId]);
+        if (!empty($model)) {
+            $addressModel = new UserAddresses();
+            $addressModel->user_id = $requestParam['user_id'];
+            $addressModel->address = $requestParam['address'];
+            $addressModel->pincode = $requestParam['pincode'];
+            $addressModel->lat = !empty($requestParam['lat']) ? $requestParam['lat'] : "";
+            $addressModel->longg = !empty($requestParam['longg']) ? $requestParam['longg'] : "";
+            $addressModel->is_default = $requestParam['is_default'];
+            $addressModel->save(false);
+            $UserAddresses = UserAddresses::find()->where(['user_id' => $requestParam['user_id']])->asArray()->all();
+            $amReponseParam = [];
+            if (!empty($UserAddresses)) {
+                array_walk($UserAddresses, function ($arr) use (&$amResponseData) {
+                    $ttt = $arr;
+                    $ttt['lat'] = !empty($ttt['lat']) ? $ttt['lat'] : "";
+                    $ttt['longg'] = !empty($ttt['longg']) ? $ttt['longg'] : "";
+                    $amResponseData[] = $ttt;
+                    return $amResponseData;
+                });
+                $amReponseParam = $amResponseData;
+            }
+            $ssMessage = "User Address added successfully.";
+            $amResponse = Common::successResponse($ssMessage, $amReponseParam);
         } else {
             $ssMessage = 'Invalid User.';
             $amResponse = Common::errorResponse($ssMessage);

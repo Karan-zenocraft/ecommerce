@@ -54,6 +54,7 @@ class ProductsBase extends \yii\db\ActiveRecord
             [['lat', 'longg'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
             [['title', 'brand'], 'string', 'max' => 255],
+            [['photo'], 'image', 'extensions' => 'jpg, jpeg, gif, png'],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['seller_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['seller_id' => 'id']],
         ];
@@ -70,6 +71,7 @@ class ProductsBase extends \yii\db\ActiveRecord
             'seller_id' => 'Seller',
             'title' => 'Title',
             'description' => 'Description',
+            'photo' => 'Photo',
             'brand' => 'Brand',
             'year_of_purchase' => 'Year Of Purchase',
             'location_address' => 'Location Address',

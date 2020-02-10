@@ -10,6 +10,7 @@ use Yii;
 
 /* USE COMMON MODELS */
 use yii\web\Controller;
+use \yii\web\UploadedFile;
 
 /**
  * MainController implements the CRUD actions for APIs.
@@ -31,7 +32,7 @@ class ProductsController extends \yii\base\Controller
         $amData = Common::checkRequestType();
         $amResponse = $amReponseParam = [];
         // Check required validation for request parameter.
-        $amRequiredParams = array('user_id', 'category_id', 'title', 'description', 'brand', 'year_of_purchase', 'location_address', 'lat', 'longg', 'price', 'is_rent', 'quantity', 'status');
+        $amRequiredParams = array('user_id', 'category_id', 'title', 'description', 'brand', 'year_of_purchase', 'location_address', 'lat', 'longg', 'price', 'is_rent', 'quantity', 'status', 'product_id');
         $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
 
         // If any getting error in request paramter then set error message.
@@ -40,6 +41,7 @@ class ProductsController extends \yii\base\Controller
             Common::encodeResponseJSON($amResponse);
         }
         $requestParam = $amData['request_param'];
+        $requestFileparam = $amData['file_param'];
         //Check User Status//
         Common::matchUserStatus($requestParam['user_id']);
         //VERIFY AUTH TOKEN
@@ -57,7 +59,11 @@ class ProductsController extends \yii\base\Controller
         if (!empty($model)) {
             $category_check = Categories::findOne($requestParam['category_id']);
             if (!empty($category_check)) {
-                $productModel = new Products();
+                if (!empty($requestParam['product_id'])) {
+                    $productModel = Products::findOne($requestParam['product_id']);
+                } else {
+                    $productModel = new Products();
+                }
                 $productModel->category_id = $requestParam['category_id'];
                 $productModel->seller_id = $requestParam['user_id'];
                 $productModel->title = $requestParam['title'];
@@ -73,6 +79,17 @@ class ProductsController extends \yii\base\Controller
                 $productModel->rent_price_duration = $requestParam['rent_price_duration'];
                 $productModel->quantity = $requestParam['quantity'];
                 $productModel->status = $requestParam['status'];
+                if (isset($requestFileparam['photo']['name'])) {
+                    $productModel->photo = UploadedFile::getInstanceByName('photo');
+                    $Modifier = md5(($productModel->photo));
+                    $OriginalModifier = $Modifier . rand(11111, 99999);
+                    $Extension = $productModel->photo->extension;
+                    $productModel->photo->saveAs(__DIR__ . "../../../uploads/products/" . $OriginalModifier . '.' . $productModel->photo->extension);
+                    $filename = $OriginalModifier . '.' . $Extension;
+                    $productModel->photo = Yii::$app->params['root_url'] . '/' . "uploads/products/" . $filename;
+                } else {
+                    $productModel->photo = !empty($requestParam['product_id']) ? $productModel->photo : Yii::$app->params['root_url'] . '/' . "uploads/products/noimg.jpg";
+                }
                 $productModel->save(false);
                 $amReponseParam = $productModel;
 

@@ -38,6 +38,7 @@ class UserAddressesBase extends \yii\db\ActiveRecord
             [['user_id', 'address', 'pincode', 'is_default', 'created_at', 'updated_at'], 'required'],
             [['user_id', 'pincode'], 'integer'],
             [['address', 'is_default'], 'string'],
+            [['lat', 'longg'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -52,6 +53,8 @@ class UserAddressesBase extends \yii\db\ActiveRecord
             'id' => 'ID',
             'user_id' => 'User ID',
             'address' => 'Address',
+            'lat' => 'Lattitude',
+            'longg' => 'Longitude',
             'pincode' => 'Pincode',
             'is_default' => 'Is Default',
             'created_at' => 'Created At',
