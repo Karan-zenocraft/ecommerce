@@ -1,6 +1,5 @@
 <?php
 
-use common\components\Common;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
@@ -84,25 +83,25 @@ $this->params['breadcrumbs'][] = $this->title;
         //'created_at',
         //'updated_at',
 
-        [
-            'header' => 'Actions',
-            'class' => 'yii\grid\ActionColumn',
-            'headerOptions' => ["style" => "width:40%;"],
-            'contentOptions' => ["style" => "width:40%;"],
-            'template' => '{update}{delete}',
-            'buttons' => [
-                'update' => function ($url, $model) {
-                    $flag = 1;
-                    return Common::template_update_button($url, $model, $flag);
-                },
-                'delete' => function ($url, $model) {
-                    $flag = 1;
-                    $confirmmessage = "Are you sure you want to delete this user?";
-                    return Common::template_delete_button($url, $model, $confirmmessage, $flag);
-                },
+        /*  [
+    'header' => 'Actions',
+    'class' => 'yii\grid\ActionColumn',
+    'headerOptions' => ["style" => "width:40%;"],
+    'contentOptions' => ["style" => "width:40%;"],
+    'template' => '{update}{delete}',
+    'buttons' => [
+    'update' => function ($url, $model) {
+    $flag = 1;
+    return Common::template_update_button($url, $model, $flag);
+    },
+    'delete' => function ($url, $model) {
+    $flag = 1;
+    $confirmmessage = "Are you sure you want to delete this user?";
+    return Common::template_delete_button($url, $model, $confirmmessage, $flag);
+    },
 
-            ],
-        ],
+    ],
+    ],*/
     ],
 ]);?>
        </div>

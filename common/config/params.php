@@ -5,9 +5,9 @@ return [
     'senderEmail' => 'noreply@example.com',
     'senderName' => 'Example.com mailer',
     'site_url' => stripos($_SERVER['SERVER_PROTOCOL'], 'https') === true ? 'https://' . $_SERVER['HTTP_HOST'] : 'http://' . $_SERVER['HTTP_HOST'],
-    'root_url' => stripos($_SERVER['SERVER_PROTOCOL'], 'https') === true ? 'https://' . $_SERVER['HTTP_HOST'] : 'http://' . $_SERVER['HTTP_HOST'] . "/marketplace",
-    'login_url' => '/marketplace/admin/login',
-    'frontend_login_url' => '/marketplace/login',
+    'root_url' => stripos($_SERVER['SERVER_PROTOCOL'], 'https') === true ? 'https://' . $_SERVER['HTTP_HOST'] : 'http://' . $_SERVER['HTTP_HOST'] . "/ecommerce",
+    'login_url' => '/ecommerce/admin/login',
+    'frontend_login_url' => '/ecommerce/login',
     'user.passwordResetTokenExpire' => 3600,
     'userroles' => [
         'super_admin' => '1',

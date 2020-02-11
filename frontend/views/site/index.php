@@ -15,14 +15,14 @@ color: #ffff;
 
 /* @var $this yii\web\View */
 
-$this->title = 'Marketplace';
+$this->title = 'ecommerce';
 ?>
 <div class="site-index">
 
     <div class="jumbotron" style="color: #ffff">
         <h1>Welcome</h1>
 
-        <p class="lead">To Marketplace</p>
+        <p class="lead">To ecommerce</p>
     </div>
 
     <div class="body-content">

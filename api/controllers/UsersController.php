@@ -256,7 +256,7 @@ class UsersController extends \yii\base\Controller
         $amResponse = $amReponseParam = [];
 
         // Check required validation for request parameter.
-        $amRequiredParams = array('user_name', 'first_name', 'last_name', 'email', 'password', 'device_token', 'phone', 'type');
+        $amRequiredParams = array('user_name', 'first_name', 'last_name', 'email', 'password', 'device_token', 'type');
         $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
 
         // If any getting error in request paramter then set error message.
@@ -272,9 +272,11 @@ class UsersController extends \yii\base\Controller
                 $amResponse = Common::errorResponse("This Email id is already registered.");
                 Common::encodeResponseJSON($amResponse);
             }
-            if (!empty(Users::find()->where(["phone" => $requestParam['phone']])->one())) {
-                $amResponse = Common::errorResponse("Phone you entered is already registered by other user.");
-                Common::encodeResponseJSON($amResponse);
+            if (!empty($requestParam['phone'])) {
+                if (!empty(Users::find()->where(["phone" => $requestParam['phone']])->one())) {
+                    $amResponse = Common::errorResponse("Phone you entered is already registered by other user.");
+                    Common::encodeResponseJSON($amResponse);
+                }
             }
             if (!empty(Users::find()->where(["user_name" => $requestParam['user_name']])->one())) {
                 $amResponse = Common::errorResponse("This user name is not avalaible.Please try another user name");
@@ -292,10 +294,12 @@ class UsersController extends \yii\base\Controller
                     $amResponse = Common::errorResponse("Email you entered is already registred by other user.");
                     Common::encodeResponseJSON($amResponse);
                 }
-                $modelUserr = Users::find()->where("id != '" . $snUserId . "' AND phone = '" . $requestParam['phone'] . "'")->all();
-                if (!empty($modelUserr)) {
-                    $amResponse = Common::errorResponse("Phone you entered is already registered by other user.");
-                    Common::encodeResponseJSON($amResponse);
+                if (!empty($requestParam['phone'])) {
+                    $modelUserr = Users::find()->where("id != '" . $snUserId . "' AND phone = '" . $requestParam['phone'] . "'")->all();
+                    if (!empty($modelUserr)) {
+                        $amResponse = Common::errorResponse("Phone you entered is already registered by other user.");
+                        Common::encodeResponseJSON($amResponse);
+                    }
                 }
                 $modelUserr = Users::find()->where("id != '" . $snUserId . "' AND user_name = '" . $requestParam['user_name'] . "'")->all();
                 if (!empty($modelUserr)) {
@@ -313,7 +317,7 @@ class UsersController extends \yii\base\Controller
         $model->first_name = $requestParam['first_name'];
         $model->last_name = $requestParam['last_name'];
         $model->email = $requestParam['email'];
-        $amReponseParam['login_type'] = $model->login_type;
+        $amReponseParam['login_type'] = "$model->login_type";
         $model->password = md5($requestParam['password']);
         /* $model->address_line_1 = !empty($requestParam['address_line_1']) ? $requestParam['address_line_1'] : "";*/
         $model->phone = !empty($requestParam['phone']) ? Common::clean_special_characters($requestParam['phone']) : "";
@@ -367,12 +371,12 @@ class UsersController extends \yii\base\Controller
 
             $ssMessage = 'You are successfully registered.';
             $amReponseParam['email'] = $model->email;
-            $amReponseParam['user_id'] = $model->id;
+            $amReponseParam['user_id'] = "$model->id";
             $amReponseParam['role_id'] = $model->role_id;
             $amReponseParam['first_name'] = $model->first_name;
             $amReponseParam['last_name'] = $model->last_name;
             $amReponseParam['user_name'] = $model->user_name;
-            $amReponseParam['phone'] = $model->phone;
+            $amReponseParam['phone'] = !empty($requestParam['phone']) ? $requestParam['phone'] : "";
             $amReponseParam['city'] = !empty($model->city) ? $model->city : "";
             $parseUrl = parse_url($model->photo);
             $amReponseParam['photo'] = !empty($model->photo) && file_exists(Yii::getAlias('@htmlpath') . '/' . $parseUrl['path']) ? $model->photo : Yii::$app->params['root_url'] . '/' . "uploads/dp/no_image.png";
@@ -842,13 +846,18 @@ class UsersController extends \yii\base\Controller
         $snUserId = $requestParam['user_id'];
         $model = Users::findOne(["id" => $snUserId]);
         if (!empty($model)) {
+            $oldAddress = UserAddresses::find()->where(['user_id' => $snUserId, "is_default" => 1])->one();
+            if (!empty($oldAddress)) {
+                $oldAddress->is_default = 0;
+                $oldAddress->save(false);
+            }
             $addressModel = new UserAddresses();
             $addressModel->user_id = $requestParam['user_id'];
             $addressModel->address = $requestParam['address'];
             $addressModel->pincode = $requestParam['pincode'];
             $addressModel->lat = !empty($requestParam['lat']) ? $requestParam['lat'] : "";
             $addressModel->longg = !empty($requestParam['longg']) ? $requestParam['longg'] : "";
-            $addressModel->is_default = $requestParam['is_default'];
+            $addressModel->is_default = 1;
             $addressModel->save(false);
             $UserAddresses = UserAddresses::find()->where(['user_id' => $requestParam['user_id']])->asArray()->all();
             $amReponseParam = [];

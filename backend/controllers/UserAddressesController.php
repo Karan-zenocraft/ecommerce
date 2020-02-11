@@ -33,7 +33,7 @@ return [
      * Lists all UserAddresses models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($uid)
     {
         $searchModel = new UserAddressesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);

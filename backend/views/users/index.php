@@ -107,11 +107,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'class' => 'yii\grid\ActionColumn',
             'headerOptions' => ["style" => "width:40%;"],
             'contentOptions' => ["style" => "width:40%;"],
-            'template' => '{update}{delete}',
+            'template' => '{update}{delete}{manage_user_addresses}',
             'buttons' => [
                 'update' => function ($url, $model) {
                     $flag = 1;
                     return Common::template_update_button($url, $model, $flag);
+                },
+                'manage_user_addresses' => function ($url, $model) {
+                    $title = "Manage User Addresses";
+                    $flag = 4;
+                    $url = Yii::$app->urlManager->createUrl(['user-addresses/index', 'uid' => $model->id]);
+                    return Common::template_view_gallery_button($url, $model, $title, $flag);
+
                 },
                 'delete' => function ($url, $model) {
                     $flag = 1;

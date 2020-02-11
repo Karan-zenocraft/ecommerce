@@ -2,9 +2,9 @@
 
 namespace common\models;
 
+use common\models\UserAddresses;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\UserAddresses;
 
 /**
  * UserAddressesSearch represents the model behind the search form of `common\models\UserAddresses`.
@@ -40,7 +40,7 @@ class UserAddressesSearch extends UserAddresses
      */
     public function search($params)
     {
-        $query = UserAddresses::find();
+        $query = UserAddresses::find()->where(['user_id' => $params['uid']]);
 
         // add conditions that should always apply here
 

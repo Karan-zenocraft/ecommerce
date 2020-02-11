@@ -4,6 +4,7 @@ namespace api\controllers;
 
 use common\components\Common;
 use common\models\Categories;
+use common\models\ProductPhotos;
 use common\models\Products;
 use common\models\Users;
 use Yii;
@@ -32,7 +33,7 @@ class ProductsController extends \yii\base\Controller
         $amData = Common::checkRequestType();
         $amResponse = $amReponseParam = [];
         // Check required validation for request parameter.
-        $amRequiredParams = array('user_id', 'category_id', 'title', 'description', 'brand', 'year_of_purchase', 'location_address', 'lat', 'longg', 'price', 'is_rent', 'quantity', 'status', 'product_id');
+        $amRequiredParams = array('user_id', 'category_id', 'title', 'description', 'brand', 'year_of_purchase', 'address_id', 'price', 'is_rent', 'quantity', 'status');
         $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
 
         // If any getting error in request paramter then set error message.
@@ -42,6 +43,7 @@ class ProductsController extends \yii\base\Controller
         }
         $requestParam = $amData['request_param'];
         $requestFileparam = $amData['file_param'];
+        // p($requestFileparam);
         //Check User Status//
         Common::matchUserStatus($requestParam['user_id']);
         //VERIFY AUTH TOKEN
@@ -70,28 +72,36 @@ class ProductsController extends \yii\base\Controller
                 $productModel->description = $requestParam['description'];
                 $productModel->brand = $requestParam['brand'];
                 $productModel->year_of_purchase = $requestParam['year_of_purchase'];
-                $productModel->location_address = $requestParam['location_address'];
-                $productModel->lat = $requestParam['lat'];
-                $productModel->longg = $requestParam['longg'];
+                $productModel->address_id = $requestParam['address_id'];
                 $productModel->price = $requestParam['price'];
                 $productModel->is_rent = $requestParam['is_rent'];
                 $productModel->rent_price = $requestParam['rent_price'];
                 $productModel->rent_price_duration = $requestParam['rent_price_duration'];
                 $productModel->quantity = $requestParam['quantity'];
                 $productModel->status = $requestParam['status'];
-                if (isset($requestFileparam['photo']['name'])) {
-                    $productModel->photo = UploadedFile::getInstanceByName('photo');
-                    $Modifier = md5(($productModel->photo));
-                    $OriginalModifier = $Modifier . rand(11111, 99999);
-                    $Extension = $productModel->photo->extension;
-                    $productModel->photo->saveAs(__DIR__ . "../../../uploads/products/" . $OriginalModifier . '.' . $productModel->photo->extension);
-                    $filename = $OriginalModifier . '.' . $Extension;
-                    $productModel->photo = Yii::$app->params['root_url'] . '/' . "uploads/products/" . $filename;
-                } else {
-                    $productModel->photo = !empty($requestParam['product_id']) ? $productModel->photo : Yii::$app->params['root_url'] . '/' . "uploads/products/noimg.jpg";
+                if ($productModel->save(false)) {
+                    if (isset($requestFileparam['photo']) && isset($requestFileparam['photo']['name'])) {
+                        //if()
+                        $photos = ProductPhotos::find()->where(['product_id' => $requestParam['product_id']])->all();
+                        foreach ($requestFileparam['photo']['name'] as $key => $name) {
+                            $photoModel = new ProductPhotos();
+                            $photoModel->image_name = UploadedFile::getInstanceByName("photo[$key]");
+                            $photoModel->product_id = $productModel->id;
+
+                            $Modifier = md5(($photoModel->image_name));
+                            $OriginalModifier = $Modifier . rand(11111, 99999);
+                            $Extension = $photoModel->image_name->extension;
+                            $photoModel->image_name->saveAs(__DIR__ . "../../../uploads/products/" . $OriginalModifier . '.' . $photoModel->image_name->extension);
+                            $filename = $OriginalModifier . '.' . $Extension;
+                            $photoModel->image_name = $filename;
+                            $photoModel->image_path = Yii::$app->params['root_url'] . '/' . "uploads/products/" . $filename;
+                            $photoModel->save(false);
+                            $ProductPhotos[] = $photoModel;
+                        }
+                    }
                 }
-                $productModel->save(false);
-                $amReponseParam = $productModel;
+                $amReponseParam['product'] = $productModel;
+                $amReponseParam['photos'] = $ProductPhotos;
 
                 $ssMessage = 'Your Product added successfully.';
                 $amResponse = Common::successResponse($ssMessage, $amReponseParam);
