@@ -41,12 +41,12 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'scriptUrl' => ($_SERVER['HTTP_HOST'] == "localhost") ? '/marketplace/admin' : '/marketplace/admin',
+            'scriptUrl' => ($_SERVER['HTTP_HOST'] == "localhost") ? '/ecommerce/admin' : '/ecommerce/admin',
             'rules' => [
             ],
         ],
         'request' => [
-            'baseUrl' => ($_SERVER['HTTP_HOST'] == "localhost") ? '/marketplace/admin' : '/marketplace/admin',
+            'baseUrl' => ($_SERVER['HTTP_HOST'] == "localhost") ? '/ecommerce/admin' : '/ecommerce/admin',
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'pbB0NvlmxlWRk7XFCN_7XUC2uvX0vyCD',
         ],
