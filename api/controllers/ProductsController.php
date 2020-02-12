@@ -33,7 +33,7 @@ class ProductsController extends \yii\base\Controller
         $amData = Common::checkRequestType();
         $amResponse = $amReponseParam = [];
         // Check required validation for request parameter.
-        $amRequiredParams = array('user_id', 'category_id', 'title', 'description', 'brand', 'year_of_purchase', 'address_id', 'price', 'is_rent', 'quantity', 'status');
+        $amRequiredParams = array('user_id', 'category_id', 'subcategory_id', 'title', 'description', 'year_of_purchase', 'price', 'is_rent', 'quantity', 'lat', 'longg', 'location_address');
         $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
 
         // If any getting error in request paramter then set error message.
@@ -67,22 +67,25 @@ class ProductsController extends \yii\base\Controller
                     $productModel = new Products();
                 }
                 $productModel->category_id = $requestParam['category_id'];
+                $productModel->subcategory_id = $requestParam['subcategory_id'];
                 $productModel->seller_id = $requestParam['user_id'];
                 $productModel->title = $requestParam['title'];
                 $productModel->description = $requestParam['description'];
-                $productModel->brand = $requestParam['brand'];
+                $productModel->brand = !empty($requestParam['brand']) ? $requestParam['brand'] : "";
                 $productModel->year_of_purchase = $requestParam['year_of_purchase'];
-                $productModel->address_id = $requestParam['address_id'];
+                $productModel->lat = $requestParam['lat'];
+                $productModel->longg = $requestParam['longg'];
+                $productModel->location_address = $requestParam['location_address'];
+                $productModel->city = $requestParam['city'];
                 $productModel->price = $requestParam['price'];
                 $productModel->is_rent = $requestParam['is_rent'];
                 $productModel->rent_price = $requestParam['rent_price'];
                 $productModel->rent_price_duration = $requestParam['rent_price_duration'];
                 $productModel->quantity = $requestParam['quantity'];
-                $productModel->status = $requestParam['status'];
                 if ($productModel->save(false)) {
                     if (isset($requestFileparam['photo']) && isset($requestFileparam['photo']['name'])) {
                         //if()
-                        $photos = ProductPhotos::find()->where(['product_id' => $requestParam['product_id']])->all();
+                        /*$photos = ProductPhotos::find()->where(['product_id' => $requestParam['product_id']])->all();*/
                         foreach ($requestFileparam['photo']['name'] as $key => $name) {
                             $photoModel = new ProductPhotos();
                             $photoModel->image_name = UploadedFile::getInstanceByName("photo[$key]");
@@ -149,13 +152,16 @@ class ProductsController extends \yii\base\Controller
         $snUserId = $requestParam['user_id'];
         $model = Users::findOne(["id" => $snUserId]);
         if (!empty($model)) {
-            if (!empty($requestParam['category_id'])) {
-                $products = Products::find()->where(["category_id" => $requestParam['category_id']])->asArray()->all();
-            } else if (!empty($requestParam['lat']) && !empty($requestParam['longg'])) {
+            if (!empty($requestParam['lat']) && !empty($requestParam['longg'])) {
                 $user_latitude = $requestParam['lat'];
                 $user_longitude = $requestParam['longg'];
-                $radius = 10;
-                $products = Products::find()->where("(6371 * acos( cos(radians({$user_latitude}) ) * cos(radians( `lat`))*cos( radians( `longg` ) - radians({$user_longitude}) ) + sin( radians({$user_latitude}) ) * sin( radians( `lat`)))) < {$radius}  ")->asArray()->all();
+                $radius = 30;
+                $query = "select products.*,user_adresses.*
+                            from products
+                            LEFT JOIN user_adresses ON products.address_id = user_adresses.id
+                            WHERE round(( 3959 * acos( least(1.0,cos( radians(" . $user_latitude . ") ) * cos( radians(user_adresses.lat) ) * cos( radians(user_adresses.longg) - radians(" . $user_longitude . ") ) + sin( radians(" . $user_latitude . ") ) * sin( radians(user_adresses.lat))))), 1) < " . $radius . " AND is_approve = " . Yii::$app->params['is_approve_value']['true'] . "";
+                $products = Yii::$app->db->createCommand($query)->queryAll();
+                p($products);
             } else {
                 $products = Products::find()->asArray()->all();
             }

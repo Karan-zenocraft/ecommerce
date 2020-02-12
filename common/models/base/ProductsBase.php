@@ -5,7 +5,7 @@ namespace common\models\base;
 use common\models\Categories;
 use common\models\ProductPhotos;
 use common\models\ProductsQuery;
-use common\models\UserAdresses;
+use common\models\SubCategories;
 use common\models\Users;
 use Yii;
 
@@ -14,26 +14,30 @@ use Yii;
  *
  * @property integer $id
  * @property integer $category_id
+ * @property integer $subcategory_id
  * @property integer $seller_id
  * @property string $title
  * @property string $description
  * @property string $brand
  * @property string $year_of_purchase
- * @property integer $address_id
+ * @property double $lat
+ * @property double $longg
+ * @property string $location_address
+ * @property string $city
  * @property integer $price
  * @property string $is_rent
  * @property integer $rent_price
  * @property integer $rent_price_duration
  * @property integer $quantity
  * @property integer $status
+ * @property string $is_approve
  * @property string $created_at
  * @property string $updated_at
  *
  * @property ProductPhotos[] $productPhotos
- * @property UserAdresses $address
  * @property Categories $category
  * @property Users $seller
- * @property UserAdresses $address0
+ * @property SubCategories $subcategory
  */
 class ProductsBase extends \yii\db\ActiveRecord
 {
@@ -51,15 +55,15 @@ class ProductsBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'seller_id', 'title', 'description', 'address_id', 'price', 'is_rent', 'quantity', 'created_at', 'updated_at'], 'required'],
-            [['category_id', 'seller_id', 'address_id', 'price', 'rent_price', 'rent_price_duration', 'quantity', 'status'], 'integer'],
-            [['description', 'is_rent'], 'string'],
+            [['category_id', 'subcategory_id', 'seller_id', 'title', 'description', 'lat', 'longg', 'location_address', 'city', 'price', 'is_rent', 'quantity', 'created_at', 'updated_at'], 'required'],
+            [['category_id', 'subcategory_id', 'seller_id', 'price', 'rent_price', 'rent_price_duration', 'quantity', 'status'], 'integer'],
+            [['description', 'location_address', 'is_rent', 'is_approve'], 'string'],
             [['year_of_purchase', 'created_at', 'updated_at'], 'safe'],
-            [['title', 'brand'], 'string', 'max' => 255],
-            [['address_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserAdresses::className(), 'targetAttribute' => ['address_id' => 'id']],
+            [['lat', 'longg'], 'number'],
+            [['title', 'brand', 'city'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['seller_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['seller_id' => 'id']],
-            [['address_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserAdresses::className(), 'targetAttribute' => ['address_id' => 'id']],
+            [['subcategory_id'], 'exist', 'skipOnError' => true, 'targetClass' => SubCategories::className(), 'targetAttribute' => ['subcategory_id' => 'id']],
         ];
     }
 
@@ -71,18 +75,23 @@ class ProductsBase extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'category_id' => 'Category ID',
+            'subcategory_id' => 'Subcategory ID',
             'seller_id' => 'Seller ID',
             'title' => 'Title',
             'description' => 'Description',
             'brand' => 'Brand',
             'year_of_purchase' => 'Year Of Purchase',
-            'address_id' => 'Address ID',
+            'lat' => 'Lat',
+            'longg' => 'Longg',
+            'location_address' => 'Location Address',
+            'city' => 'City',
             'price' => 'Price',
             'is_rent' => 'Is Rent',
             'rent_price' => 'Rent Price',
             'rent_price_duration' => 'Rent Price Duration',
             'quantity' => 'Quantity',
             'status' => 'Status',
+            'is_approve' => 'Is Approve',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -94,14 +103,6 @@ class ProductsBase extends \yii\db\ActiveRecord
     public function getProductPhotos()
     {
         return $this->hasMany(ProductPhotos::className(), ['product_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAddress()
-    {
-        return $this->hasOne(UserAdresses::className(), ['id' => 'address_id']);
     }
 
     /**
@@ -123,9 +124,9 @@ class ProductsBase extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAddress0()
+    public function getSubcategory()
     {
-        return $this->hasOne(UserAdresses::className(), ['id' => 'address_id']);
+        return $this->hasOne(SubCategories::className(), ['id' => 'subcategory_id']);
     }
 
     /**
