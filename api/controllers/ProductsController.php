@@ -156,12 +156,10 @@ class ProductsController extends \yii\base\Controller
                 $user_latitude = $requestParam['lat'];
                 $user_longitude = $requestParam['longg'];
                 $radius = 30;
-                $query = "select products.*,user_adresses.*
+                $query = "select *
                             from products
-                            LEFT JOIN user_adresses ON products.address_id = user_adresses.id
-                            WHERE round(( 3959 * acos( least(1.0,cos( radians(" . $user_latitude . ") ) * cos( radians(user_adresses.lat) ) * cos( radians(user_adresses.longg) - radians(" . $user_longitude . ") ) + sin( radians(" . $user_latitude . ") ) * sin( radians(user_adresses.lat))))), 1) < " . $radius . " AND is_approve = " . Yii::$app->params['is_approve_value']['true'] . "";
+                            WHERE round(( 3959 * acos( least(1.0,cos( radians(" . $user_latitude . ") ) * cos( radians(lat) ) * cos( radians(longg) - radians(" . $user_longitude . ") ) + sin( radians(" . $user_latitude . ") ) * sin( radians(lat))))), 1) < " . $radius . " AND is_approve = " . Yii::$app->params['is_approve_value']['true'] . "";
                 $products = Yii::$app->db->createCommand($query)->queryAll();
-                p($products);
             } else {
                 $products = Products::find()->asArray()->all();
             }
