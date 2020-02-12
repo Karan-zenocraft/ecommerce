@@ -43,6 +43,21 @@ return [
             'showScriptName' => false,
             'scriptUrl' => ($_SERVER['HTTP_HOST'] == "localhost") ? '/ecommerce/admin' : '/ecommerce/admin',
             'rules' => [
+                "dashboard" => "site/index",
+                "create-user" => "users/create",
+                "update-user/<id>" => "users/update",
+                "manage-users" => "users/index",
+                "delete-user/<id>" => "users/delete",
+                "create-category" => "categories/create",
+                "update-category/<id>" => "categories/update",
+                "manage-categories" => "categories/index",
+                "delete-category/<id>" => "categories/delete",
+                "manage-products" => "products/index",
+                "create-subcategory/<cid>" => "sub-categories/create",
+                "update-subcategory/<cid>/<id>" => "categories/update",
+                "manage-subcategories/<cid>" => "categories/index",
+                "delete-subcategory/<cid>/<id>" => "categories/delete",
+
             ],
         ],
         'request' => [

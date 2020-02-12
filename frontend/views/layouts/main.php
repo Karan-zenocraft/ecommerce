@@ -76,7 +76,29 @@ NavBar::end();
         <p class="pull-right"><?=Yii::powered()?></p>
     </div>
 </footer>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
 
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCaVpkmy1qvaaCrLhiQJlzQd77AT-K1OY8",
+    authDomain: "ecommerce-acd47.firebaseapp.com",
+    databaseURL: "https://ecommerce-acd47.firebaseio.com",
+    projectId: "ecommerce-acd47",
+    storageBucket: "ecommerce-acd47.appspot.com",
+    messagingSenderId: "681968475052",
+    appId: "1:681968475052:web:03c42f8711b5f9e8b27809",
+    measurementId: "G-0KWQNS565B"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
 <?php $this->endBody()?>
 </body>
 </html>

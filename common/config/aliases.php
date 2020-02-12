@@ -50,3 +50,8 @@ Yii::setAlias('product_add_message', 'product has been added successfully !');
 Yii::setAlias('product_update_message', 'product has been updated successfully !');
 Yii::setAlias('product_delete_message', 'product has been deleted successfully !');
 //END:  Products message
+//START: Sub Categories message
+Yii::setAlias('subcategory_add_message', 'Sub Category has been added successfully !');
+Yii::setAlias('subcategory_update_message', 'Sub Category has been updated successfully !');
+Yii::setAlias('subcategory_delete_message', 'Sub Category has been deleted successfully !');
+//END:  Sub Categories message

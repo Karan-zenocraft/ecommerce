@@ -1,18 +1,17 @@
 <?php
-
 use common\components\Common;
 use yii\grid\GridView;
 use yii\helpers\Html;
-
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\CategoriesSearch */
+/* @var $searchModel common\models\SubCategoriesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Categories';
+$this->title = 'Sub Categories';
+$this->params['breadcrumbs'][] = ['label' => 'Manage Categories', 'url' => ['categories/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="categories-index email-format-index">
-     <div class="email-format-index">
+<div class="sub-categories-index email-format-index">
+ <div class="email-format-index">
     <div class="navbar navbar-inner block-header">
         <div class="muted pull-left">Search Here</div>
     </div>
@@ -21,11 +20,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
      <?=Html::a(Yii::t('app', '<i class="icon-filter icon-white"></i> Filter'), "javascript:void(0);", ['class' => 'btn btn-primary open_search']);?>
      <?php if (!empty($_REQUEST['CategoriesSearch']) || (!empty($_GET['temp']) && $_GET['temp'] == "clear")) {?>
-        <div class="categoriess-serach common_search">
+        <div class="sub-categoriess-serach common_search">
          <?php echo $this->render('_search', ['model' => $searchModel]); ?>
         </div>
 <?php } else {?>
-    <div class="categories-serach common_search">
+    <div class="sub-categories-serach common_search">
          <?php echo $this->render('_search', ['model' => $searchModel]); ?>
         </div>
     <?php }?>
@@ -35,13 +34,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="navbar navbar-inner block-header">
         <div class="muted pull-left"><?=Html::encode($this->title)?></div>
         <div class="pull-right">
-            <?=Html::a(Yii::t('app', '<i class="icon-plus"></i> Add Category'), ['create'], ['class' => 'btn btn-success'])?>
+            <?=Html::a(Yii::t('app', '<i class="icon-plus"></i> Add Sub Category'), ['create', 'cid' => $_GET['cid']], ['class' => 'btn btn-success'])?>
             <?=Html::a(Yii::t('app', '<i class="icon-refresh"></i> Reset'), Yii::$app->urlManager->createUrl(['categories/index']), ['class' => 'btn btn-primary'])?>
         </div>
     </div>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
  <div class="block-content">
         <div class="goodtable">
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
     <?=GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => null,
@@ -49,10 +50,16 @@ $this->params['breadcrumbs'][] = $this->title;
     'columns' => [
         ['class' => 'yii\grid\SerialColumn'],
 
-        //'id',
+        // 'id',
+        [
+            'attribute' => 'category_id',
+            'value' => function ($data) {
+                return !empty($data->category_id) ? $data->category->title : '-';
+            },
+        ],
         'title',
         'description:ntext',
-        //'created_at',
+        // 'created_at',
         //'updated_at',
 
         [
@@ -60,22 +67,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'class' => 'yii\grid\ActionColumn',
             'headerOptions' => ["style" => "width:40%;"],
             'contentOptions' => ["style" => "width:40%;"],
-            'template' => '{update}{manage_sub_categories}{delete}',
+            'template' => '{update}{delete}',
             'buttons' => [
                 'update' => function ($url, $model) {
                     $flag = 1;
+                    $url = Yii::$app->urlManager->createUrl(['sub-categories/update', "cid" => $_GET['cid'], 'id' => $model->id]);
                     return Common::template_update_button($url, $model, $flag);
-                },
-                'manage_sub_categories' => function ($url, $model) {
-                    $title = "Manage Sub Categories";
-                    $flag = 4;
-                    $url = Yii::$app->urlManager->createUrl(['sub-categories/index', 'cid' => $model->id]);
-                    return Common::template_view_gallery_button($url, $model, $title, $flag);
-
                 },
                 'delete' => function ($url, $model) {
                     $flag = 1;
-                    $confirmmessage = "Are you sure you want to delete this Category?";
+                    $confirmmessage = "Are you sure you want to delete this sub category?";
                     return Common::template_delete_button($url, $model, $confirmmessage, $flag);
                 },
 
@@ -83,17 +84,15 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ],
 ]);?>
-
-
        </div>
     </div>
 </div>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 <script type="text/javascript">
 $( document ).ready(function() {
-    $('.categories-serach').hide();
+    $('.sub-categories-serach').hide();
         $('.open_search').click(function(){
-            $('.categories-serach').toggle();
+            $('.sub-categories-serach').toggle();
         });
     });
 

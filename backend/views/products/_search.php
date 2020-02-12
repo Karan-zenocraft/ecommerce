@@ -33,38 +33,27 @@ use yii\widgets\ActiveForm;
 </div>
 </div>
 <div class="row">
-    <div class="span3 style_input_width">
-    <?php echo $form->field($model, 'location_address') ?>
-</div>
-<div class="span3 style_input_width">
-    <?php echo $form->field($model, 'lat') ?>
-</div>
-</div>
-<div class="row">
-    <div class="span3 style_input_width">
-    <?php echo $form->field($model, 'longg') ?>
-</div>
 <div class="span3 style_input_width">
     <?php echo $form->field($model, 'price') ?>
 </div>
-</div>
-<div class="row">
-    <div class="span3 style_input_width">
+  <div class="span3 style_input_width">
     <?php echo $form->field($model, 'is_rent') ?>
 </div>
+</div>
+<div class="row">
+
 <div class="span3 style_input_width">
     <?php echo $form->field($model, 'rent_price') ?>
 </div>
-</div>
-<div class="row">
     <div class="span3 style_input_width">
     <?php echo $form->field($model, 'rent_price_duration') ?>
 </div>
+</div>
+<div class="row">
+
 <div class="span3 style_input_width">
     <?php echo $form->field($model, 'quantity') ?>
 </div>
-</div>
-<div class="row">
     <div class="span3 style_input_width">
     <?=$form->field($model, 'status')->dropDownList(Yii::$app->params['user_status']);?>
 </div>

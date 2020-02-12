@@ -3,39 +3,39 @@
 namespace backend\controllers;
 
 use backend\components\AdminCoreController;
-use common\models\Products;
-use common\models\ProductsSearch;
+use common\models\SubCategories;
+use common\models\SubCategoriesSearch;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 /**
- * ProductsController implements the CRUD actions for Products model.
+ * SubCategoriesController implements the CRUD actions for SubCategories model.
  */
-class ProductsController extends AdminCoreController
+class SubCategoriesController extends AdminCoreController
 {
     /**
      * {@inheritdoc}
      */
-/*    public function behaviors()
-{
-return [
-'verbs' => [
-'class' => VerbFilter::className(),
-'actions' => [
-'delete' => ['POST'],
-],
-],
-];
-}*/
+    /* public function behaviors()
+    {
+    return [
+    'verbs' => [
+    'class' => VerbFilter::className(),
+    'actions' => [
+    'delete' => ['POST'],
+    ],
+    ],
+    ];
+    }*/
 
     /**
-     * Lists all Products models.
+     * Lists all SubCategories models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($cid)
     {
-        $searchModel = new ProductsSearch();
+        $searchModel = new SubCategoriesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ return [
     }
 
     /**
-     * Displays a single Products model.
+     * Displays a single SubCategories model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,17 +58,19 @@ return [
     }
 
     /**
-     * Creates a new Products model.
+     * Creates a new SubCategories model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Products();
+        $model = new SubCategories();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', Yii::getAlias('@product_add_message'));
-            return $this->redirect(['index']);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->category_id = !empty($_GET['cid']) ? $_GET['cid'] : "";
+            $model->save(false);
+            Yii::$app->session->setFlash('success', Yii::getAlias('@subcategory_add_message'));
+            return $this->redirect(['index', 'cid' => $model->category_id]);
         }
 
         return $this->render('create', [
@@ -77,7 +79,7 @@ return [
     }
 
     /**
-     * Updates an existing Products model.
+     * Updates an existing SubCategories model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -88,8 +90,8 @@ return [
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', Yii::getAlias('@product_update_message'));
-            return $this->redirect(['index']);
+            Yii::$app->session->setFlash('success', Yii::getAlias('@subcategory_update_message'));
+            return $this->redirect(['index', 'cid' => $model->category_id]);
         }
 
         return $this->render('update', [
@@ -98,7 +100,7 @@ return [
     }
 
     /**
-     * Deletes an existing Products model.
+     * Deletes an existing SubCategories model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -106,38 +108,25 @@ return [
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        $model = $this->findModel($id);
+        $model->delete();
+        Yii::$app->session->setFlash('success', Yii::getAlias('@subcategory_delete_message'));
+        return $this->redirect(['index', 'cid' => $model->category_id]);
     }
 
     /**
-     * Finds the Products model based on its primary key value.
+     * Finds the SubCategories model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Products the loaded model
+     * @return SubCategories the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Products::findOne($id)) !== null) {
+        if (($model = SubCategories::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-    public function actionApproveProduct()
-    {
-        if (!empty($_POST)) {
-            $product = Products::find()->where(['id' => $_POST['product_id']])->one();
-            if (!empty($product)) {
-                $is_approve = ($_POST['checked'] == "true") ? Yii::$app->params['is_approve_value']['true'] : Yii::$app->params['is_approve_value']['false'];
-                $product->is_approve = $is_approve;
-                $product->save(false);
-                return json_encode("success");
-            } else {
-                return json_encode("error");
-            }
-        }
     }
 }

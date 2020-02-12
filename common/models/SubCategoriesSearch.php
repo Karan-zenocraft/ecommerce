@@ -2,14 +2,14 @@
 
 namespace common\models;
 
-use common\models\Products;
+use common\models\SubCategories;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * ProductsSearch represents the model behind the search form of `common\models\Products`.
+ * SubCategoriesSearch represents the model behind the search form of `common\models\SubCategories`.
  */
-class ProductsSearch extends Products
+class SubCategoriesSearch extends SubCategories
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class ProductsSearch extends Products
     public function rules()
     {
         return [
-            [['id', 'category_id', 'price', 'rent_price', 'rent_price_duration', 'quantity', 'status'], 'integer'],
-            [['title', 'description', 'is_rent', 'created_at', 'updated_at', 'seller_id', 'address_id'], 'safe'],
+            [['id', 'category_id'], 'integer'],
+            [['title', 'description', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class ProductsSearch extends Products
      */
     public function search($params)
     {
-        $query = Products::find();
+        $query = SubCategories::find()->where(["category_id" => $params['cid']]);
 
         // add conditions that should always apply here
 
@@ -60,21 +60,12 @@ class ProductsSearch extends Products
         $query->andFilterWhere([
             'id' => $this->id,
             'category_id' => $this->category_id,
-            'price' => $this->price,
-            'rent_price' => $this->rent_price,
-            'rent_price_duration' => $this->rent_price_duration,
-            'quantity' => $this->quantity,
-            'products.status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'is_rent', $this->is_rent]);
-        $query->joinWith(['seller' => function ($query) {
-            $query->where('CONCAT(users.first_name," ", users.last_name) LIKE "%' . $this->seller_id . '%"');
-        }]);
+            ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }

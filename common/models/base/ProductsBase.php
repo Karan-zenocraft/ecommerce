@@ -4,6 +4,7 @@ namespace common\models\base;
 
 use common\models\Categories;
 use common\models\ProductPhotos;
+use common\models\ProductsQuery;
 use common\models\UserAdresses;
 use common\models\Users;
 use Yii;

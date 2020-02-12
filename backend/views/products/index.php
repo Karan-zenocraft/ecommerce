@@ -61,7 +61,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'title',
         'description:ntext',
-        'location_address:ntext',
         //'lat',
         //'longg',
         'price',
@@ -74,6 +73,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'rent_price',
         'rent_price_duration',
         'quantity',
+        [
+            'attribute' => 'is_approve',
+            'filter' => Yii::$app->params['is_approve'],
+            'format' => 'raw',
+            'filterOptions' => ["style" => "width:13%;"],
+            'headerOptions' => ["style" => "width:13%;"],
+            'contentOptions' => ["style" => "width:13%;"],
+            'value' => function ($data) {
+                $url = "#";
+                $is_approve = ($data->is_approve == 1) ? "true" : "false";
+                $class = ($data->is_approve == 1) ? "switch2" : "";
+                return Html::a('<label class="switch"><input type="checkbox" value="' . $is_approve . '" onclick="approve_product(' . $data->id . ');" id="' . $data->id . '" class="' . $class . '"><span class="slider round"></span></label>', $url);
+            },
+        ],
         [
             'attribute' => 'status',
             'value' => function ($data) {
@@ -115,5 +128,51 @@ $( document ).ready(function() {
             $('.products-serach').toggle();
         });
     });
+
+function approve_product(id){
+      $("#"+id).toggleClass("switch2");
+   if ($("#"+id).val() == "true") {
+   $("#"+id).attr('value', 'false');
+      $.ajax({
+     url: "products/approve-product",
+     type: 'post',
+     dataType: 'json',
+     data: {
+               checked: false,
+               product_id:id,
+           },
+     success: function (data) {
+      if(data == "success"){
+         alert("Product is not approved.");
+        location.reload();
+      }else if(data=="error"){
+        alert("Something went wrong");
+         location.reload();
+      }
+     }
+  });
+ } else {
+   $("#"+id).attr('value', 'true');
+         $.ajax({
+     url: "products/approve-product",
+     type: 'post',
+     dataType: 'json',
+     data: {
+               checked: true,
+               product_id:id,
+           },
+     success: function (data) {
+      if(data == "success"){
+       alert("Product is approved.");
+        location.reload();
+      }else if(data=="error"){
+        alert("Something went wrong");
+         location.reload();
+      }
+     }
+  });
+ }
+//document.getElementById(id).checked = false;
+}
 
 </script>

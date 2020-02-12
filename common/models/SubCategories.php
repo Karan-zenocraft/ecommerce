@@ -2,9 +2,7 @@
 
 namespace common\models;
 
-use yii\helpers\ArrayHelper;
-
-class Categories extends \common\models\base\CategoriesBase
+class SubCategories extends \common\models\base\SubCategoriesBase
 {
     public function beforeSave($insert)
     {
@@ -20,18 +18,23 @@ class Categories extends \common\models\base\CategoriesBase
         return [
             [['title', 'description'], 'required'],
             [['title', 'description'], 'filter', 'filter' => 'trim'],
+            [['category_id'], 'integer'],
             [['description'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['title'], 'string', 'max' => 255],
+            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
         ];
     }
-    public function CategoryDropdown()
+
+    public function attributeLabels()
     {
-        return ArrayHelper::map(Categories::find()->orderBy('title')->asArray()->all(), 'id', 'title');
-    }
-    public static function CategoriesDropDown()
-    {
-        //->where(['status'=>Yii::$app->params['department_active_status']])
-        return ArrayHelper::map(Categories::find()->orderBy('title')->asArray()->all(), 'id', 'title');
+        return [
+            'id' => 'ID',
+            'category_id' => 'Category',
+            'title' => 'Title',
+            'description' => 'Description',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+        ];
     }
 }
