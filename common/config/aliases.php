@@ -55,3 +55,9 @@ Yii::setAlias('subcategory_add_message', 'Sub Category has been added successful
 Yii::setAlias('subcategory_update_message', 'Sub Category has been updated successfully !');
 Yii::setAlias('subcategory_delete_message', 'Sub Category has been deleted successfully !');
 //END:  Sub Categories message
+
+//START: Brands message
+Yii::setAlias('brand_add_message', 'Brand has been added successfully !');
+Yii::setAlias('brand_update_message', 'Brand has been updated successfully !');
+Yii::setAlias('brand_delete_message', 'Brand has been deleted successfully !');
+//END:  Brands message

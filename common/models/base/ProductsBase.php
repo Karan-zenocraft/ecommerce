@@ -2,10 +2,9 @@
 
 namespace common\models\base;
 
-use common\models\Categories;
+use common\models\Brands;
+use common\models\Category;
 use common\models\ProductPhotos;
-use common\models\ProductsQuery;
-use common\models\SubCategories;
 use common\models\Users;
 use Yii;
 
@@ -18,7 +17,7 @@ use Yii;
  * @property integer $seller_id
  * @property string $title
  * @property string $description
- * @property string $brand
+ * @property integer $brand_id
  * @property string $year_of_purchase
  * @property double $lat
  * @property double $longg
@@ -35,9 +34,10 @@ use Yii;
  * @property string $updated_at
  *
  * @property ProductPhotos[] $productPhotos
- * @property Categories $category
+ * @property Brands $brand
+ * @property Category $category
  * @property Users $seller
- * @property SubCategories $subcategory
+ * @property Category $subcategory
  */
 class ProductsBase extends \yii\db\ActiveRecord
 {
@@ -56,14 +56,15 @@ class ProductsBase extends \yii\db\ActiveRecord
     {
         return [
             [['category_id', 'subcategory_id', 'seller_id', 'title', 'description', 'lat', 'longg', 'location_address', 'city', 'price', 'is_rent', 'quantity', 'created_at', 'updated_at'], 'required'],
-            [['category_id', 'subcategory_id', 'seller_id', 'price', 'rent_price', 'rent_price_duration', 'quantity', 'status'], 'integer'],
+            [['category_id', 'subcategory_id', 'seller_id', 'brand_id', 'price', 'rent_price', 'rent_price_duration', 'quantity', 'status'], 'integer'],
             [['description', 'location_address', 'is_rent', 'is_approve'], 'string'],
             [['year_of_purchase', 'created_at', 'updated_at'], 'safe'],
             [['lat', 'longg'], 'number'],
-            [['title', 'brand', 'city'], 'string', 'max' => 255],
-            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
+            [['title', 'city'], 'string', 'max' => 255],
+            [['brand_id'], 'exist', 'skipOnError' => true, 'targetClass' => Brands::className(), 'targetAttribute' => ['brand_id' => 'id']],
+            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['seller_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['seller_id' => 'id']],
-            [['subcategory_id'], 'exist', 'skipOnError' => true, 'targetClass' => SubCategories::className(), 'targetAttribute' => ['subcategory_id' => 'id']],
+            [['subcategory_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['subcategory_id' => 'id']],
         ];
     }
 
@@ -79,7 +80,7 @@ class ProductsBase extends \yii\db\ActiveRecord
             'seller_id' => 'Seller ID',
             'title' => 'Title',
             'description' => 'Description',
-            'brand' => 'Brand',
+            'brand_id' => 'Brand ID',
             'year_of_purchase' => 'Year Of Purchase',
             'lat' => 'Lat',
             'longg' => 'Longg',
@@ -108,9 +109,17 @@ class ProductsBase extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getBrand()
+    {
+        return $this->hasOne(Brands::className(), ['id' => 'brand_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getCategory()
     {
-        return $this->hasOne(Categories::className(), ['id' => 'category_id']);
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
     /**
@@ -126,15 +135,6 @@ class ProductsBase extends \yii\db\ActiveRecord
      */
     public function getSubcategory()
     {
-        return $this->hasOne(SubCategories::className(), ['id' => 'subcategory_id']);
-    }
-
-    /**
-     * @inheritdoc
-     * @return ProductsQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new ProductsQuery(get_called_class());
+        return $this->hasOne(Category::className(), ['id' => 'subcategory_id']);
     }
 }

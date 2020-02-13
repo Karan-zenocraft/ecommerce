@@ -71,7 +71,7 @@ class ProductsController extends \yii\base\Controller
                 $productModel->seller_id = $requestParam['user_id'];
                 $productModel->title = $requestParam['title'];
                 $productModel->description = $requestParam['description'];
-                $productModel->brand = !empty($requestParam['brand']) ? $requestParam['brand'] : "";
+                $productModel->brand_id = !empty($requestParam['brand_id']) ? $requestParam['brand_id'] : "";
                 $productModel->year_of_purchase = $requestParam['year_of_purchase'];
                 $productModel->lat = $requestParam['lat'];
                 $productModel->longg = $requestParam['longg'];
@@ -167,6 +167,54 @@ class ProductsController extends \yii\base\Controller
                 $amReponseParam = $products;
                 $ssMessage = 'Products List';
                 $amResponse = Common::successResponse($ssMessage, $products);
+            } else {
+                $amReponseParam = [];
+                $ssMessage = 'Products not found.';
+                $amResponse = Common::successResponse($ssMessage, $amReponseParam);
+            }
+
+        } else {
+            $ssMessage = 'Invalid User.';
+            $amResponse = Common::errorResponse($ssMessage);
+        }
+        // FOR ENCODE RESPONSE INTO JSON //
+        Common::encodeResponseJSON($amResponse);
+    }
+    /*
+     * Function : GetProductDetails()
+     * Description : Get Product Details
+     * Request Params : user_id
+     * Response Params : user's details
+     * Author : Rutusha Joshi
+     */
+    public function actionGetProductDetails()
+    {
+        //Get all request parameter
+        $amData = Common::checkRequestType();
+        $amResponse = $amReponseParam = [];
+        // Check required validation for request parameter.
+        $amRequiredParams = array('user_id', 'product_id');
+        $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
+
+        // If any getting error in request paramter then set error message.
+        if (!empty($amParamsResult['error'])) {
+            $amResponse = Common::errorResponse($amParamsResult['error']);
+            Common::encodeResponseJSON($amResponse);
+        }
+        $requestParam = $amData['request_param'];
+        //Check User Status//
+        Common::matchUserStatus($requestParam['user_id']);
+        //VERIFY AUTH TOKEN
+        $authToken = Common::get_header('auth_token');
+        Common::checkAuthentication($authToken, $requestParam['user_id']);
+        $snUserId = $requestParam['user_id'];
+        $model = Users::findOne(["id" => $snUserId]);
+        if (!empty($model)) {
+            $product = Products::find()->with('brand')->where(["id" => $requestParam['product_id']])->asArray()->all();
+            if (!empty($product)) {
+                $amReponseParam = $product[0];
+                $ssMessage = "Product's details";
+                $amResponse = Common::successResponse($ssMessage, $amReponseParam);
             } else {
                 $amReponseParam = [];
                 $ssMessage = 'Products not found.';
