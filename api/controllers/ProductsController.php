@@ -76,7 +76,7 @@ class ProductsController extends \yii\base\Controller
                 $productModel->lat = $requestParam['lat'];
                 $productModel->longg = $requestParam['longg'];
                 $productModel->location_address = $requestParam['location_address'];
-                $productModel->city = $requestParam['city'];
+                $productModel->city = !empty($requestParam['city']) ? $requestParam['city'] : "";
                 $productModel->price = $requestParam['price'];
                 $productModel->is_rent = $requestParam['is_rent'];
                 $productModel->rent_price = $requestParam['rent_price'];
