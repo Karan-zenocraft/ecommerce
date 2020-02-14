@@ -84,8 +84,10 @@ class ProductsController extends \yii\base\Controller
                 $productModel->quantity = $requestParam['quantity'];
                 if ($productModel->save(false)) {
                     if (isset($requestFileparam['photo']) && isset($requestFileparam['photo']['name'])) {
-                        //if()
-                        /*$photos = ProductPhotos::find()->where(['product_id' => $requestParam['product_id']])->all();*/
+                        if (!empty($requestParam['product_id'])) {
+                            $photos = ProductPhotos::deleteAll(['product_id' => $requestParam['product_id']]);
+                        }
+
                         foreach ($requestFileparam['photo']['name'] as $key => $name) {
                             $photoModel = new ProductPhotos();
                             $photoModel->image_name = UploadedFile::getInstanceByName("photo[$key]");
@@ -104,7 +106,13 @@ class ProductsController extends \yii\base\Controller
                     }
                 }
                 $amReponseParam['product'] = $productModel;
-                $amReponseParam['photos'] = $ProductPhotos;
+                if (isset($requestFileparam['photo']) && isset($requestFileparam['photo']['name'])) {
+                    $amReponseParam['photos'] = $ProductPhotos;
+                }
+                if (!empty($requestParam['product_id'])) {
+                    $photos = ProductPhotos::find()->where(['product_id' => $requestParam['product_id']])->asArray()->all();
+                    $amReponseParam['photos'] = $photos;
+                }
 
                 $ssMessage = 'Your Product added successfully.';
                 $amResponse = Common::successResponse($ssMessage, $amReponseParam);

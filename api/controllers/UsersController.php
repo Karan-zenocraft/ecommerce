@@ -829,7 +829,7 @@ class UsersController extends \yii\base\Controller
         $amData = Common::checkRequestType();
         $amResponse = $amReponseParam = [];
         // Check required validation for request parameter.
-        $amRequiredParams = array('user_id', 'address', 'pincode', 'is_default', 'lat', 'longg');
+        $amRequiredParams = array('user_id', 'address', 'pincode', 'is_default');
         $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
 
         // If any getting error in request paramter then set error message.
@@ -872,6 +872,47 @@ class UsersController extends \yii\base\Controller
                 $amReponseParam = $amResponseData;
             }
             $ssMessage = "User Address added successfully.";
+            $amResponse = Common::successResponse($ssMessage, $amReponseParam);
+        } else {
+            $ssMessage = 'Invalid User.';
+            $amResponse = Common::errorResponse($ssMessage);
+        }
+        // FOR ENCODE RESPONSE INTO JSON //
+        Common::encodeResponseJSON($amResponse);
+    }
+
+    public function actionGetAddressList()
+    {
+        //Get all request parameter
+        $amData = Common::checkRequestType();
+        $amResponse = $amReponseParam = [];
+        // Check required validation for request parameter.
+        $amRequiredParams = array('user_id');
+        $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
+
+        // If any getting error in request paramter then set error message.
+        if (!empty($amParamsResult['error'])) {
+            $amResponse = Common::errorResponse($amParamsResult['error']);
+            Common::encodeResponseJSON($amResponse);
+        }
+        $requestParam = $amData['request_param'];
+        //Check User Status//
+        Common::matchUserStatus($requestParam['user_id']);
+        //VERIFY AUTH TOKEN
+        $authToken = Common::get_header('auth_token');
+        Common::checkAuthentication($authToken, $requestParam['user_id']);
+        $snUserId = $requestParam['user_id'];
+        $model = Users::findOne(["id" => $snUserId]);
+        $snUserAddressList = [];
+        if (!empty($model)) {
+            $snUserAddressList = UserAddresses::find()->where(['user_id' => $requestParam['user_id']])->asArray()->all();
+
+            if (!empty($snUserAddressList)) {
+                $amReponseParam = $snUserAddressList;
+                $ssMessage = 'User Address List';
+            } else {
+                $ssMessage = 'User Addresses not found.';
+            }
             $amResponse = Common::successResponse($ssMessage, $amReponseParam);
         } else {
             $ssMessage = 'Invalid User.';
