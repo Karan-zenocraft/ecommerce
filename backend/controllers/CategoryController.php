@@ -65,7 +65,17 @@ return [
     {
         $model = new Category();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+
+            $file = \yii\web\UploadedFile::getInstance($model, 'photo');
+            if (!empty($file)) {
+                $file_name = $file->basename . "_" . uniqid() . "." . $file->extension;
+                //p(trim($file_name));
+                $file_filter = str_replace(" ", "", $file_name);
+                $model->photo = Yii::$app->params['root_url'] . '/uploads/category/' . $file_filter;
+                $file->saveAs(Yii::getAlias('@root') . '/uploads/category/' . $file_filter);
+            }
+            $model->save(false);
             Yii::$app->session->setFlash('success', Yii::getAlias('@category_add_message'));
             return $this->redirect(['index']);
         }
@@ -85,8 +95,23 @@ return [
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $old_image = basename($model->photo);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $file = \yii\web\UploadedFile::getInstance($model, 'photo');
+            if (!empty($file)) {
+                $delete = $model->oldAttributes['photo'];
+                $file_name = $file->basename . "_" . uniqid() . "." . $file->extension;
+                $file_filter = str_replace(" ", "", $file_name);
+                if (!empty($old_image) && file_exists(Yii::getAlias('@root') . '/uploads/category/' . $old_image)) {
+                    unlink(Yii::getAlias('@root') . '/uploads/category/' . $old_image);
+                }
+                $file->saveAs(Yii::getAlias('@root') . '/uploads/category/' . $file_filter, false);
+                $model->photo = Yii::$app->params['root_url'] . '/uploads/category/' . $file_filter;
+            } else {
+                $model->photo = Yii::$app->params['root_url'] . '/uploads/category/' . $old_image;
+            }
+            $model->save(false);
             Yii::$app->session->setFlash('success', Yii::getAlias('@category_update_message'));
             return $this->redirect(['index']);
         }

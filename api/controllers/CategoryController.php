@@ -135,7 +135,23 @@ class CategoryController extends \yii\base\Controller
             $snCategoriesList = Category::find()->with('categories')->where("parent_id is NULL")->asArray()->all();
             $amReponseParam = [];
             if (!empty($snCategoriesList)) {
-                $amReponseParam = $snCategoriesList;
+                array_walk($snCategoriesList, function ($arr) use (&$amResponseData) {
+                    $ttt = $arr;
+                    $ttt['parent_id'] = !empty($ttt['parent_id']) ? $ttt['parent_id'] : "";
+                    $ttt['photo'] = !empty($ttt['photo']) ? $ttt['photo'] : "";
+                    if (!empty($ttt['categories'])) {
+                        array_walk($ttt['categories'], function ($arr) use (&$amResponseDataCategories) {
+                            $ttt = $arr;
+                            $ttt['photo'] = !empty($ttt['photo']) ? $ttt['photo'] : "";
+                            $amResponseDataCategories[] = $ttt;
+                            return $amResponseDataCategories;
+                        });
+                        $ttt['categories'] = $amResponseDataCategories;
+                    }
+                    $amResponseData[] = $ttt;
+                    return $amResponseData;
+                });
+                $amReponseParam = $amResponseData;
                 $ssMessage = 'Categories List';
             } else {
                 $ssMessage = 'Categories not found.';

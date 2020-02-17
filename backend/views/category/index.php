@@ -58,6 +58,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 return !empty($data->parent_id) ? $data->parent->title : '-';
             },
         ],
+        [
+            'attribute' => 'photo',
+            'format' => 'image',
+            'value' => function ($data) {
+                return $data->photo;
+            },
+        ],
         // 'created_at',
         //'updated_at',
 

@@ -39,6 +39,16 @@ use yii\widgets\ActiveForm;
 
 </div>
 </div>
+<div class="row">
+<div class="span3 style_input_width">
+      <?=$form->field($model, 'photo')->fileInput(['id' => 'photo', 'value' => $model->photo]);?>
+</div>
+</div>
+      <div class="row">
+<div class="span3">
+    <img id="image" width="100px" hieght="100px" src="<?php echo $model->photo; ?>" alt="" />
+    </div>
+</div>
 
     <div class="form-group">
         <?=Html::submitButton('Save', ['class' => 'btn btn-success'])?>
@@ -48,3 +58,23 @@ use yii\widgets\ActiveForm;
 </div>
 </div>
 </div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script type="text/javascript">
+ $( document ).ready(function(){
+        $("#photo").change(function() {
+        readURL(this);
+        });
+    });
+    function readURL(input) {
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $('#image').attr('src', e.target.result);
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+</script>
