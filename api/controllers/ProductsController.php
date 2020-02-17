@@ -167,11 +167,27 @@ class ProductsController extends \yii\base\Controller
                 $query = "select *
                             from products
                             WHERE round(( 3959 * acos( least(1.0,cos( radians(" . $user_latitude . ") ) * cos( radians(lat) ) * cos( radians(longg) - radians(" . $user_longitude . ") ) + sin( radians(" . $user_latitude . ") ) * sin( radians(lat))))), 1) < " . $radius . " AND is_approve = " . Yii::$app->params['is_approve_value']['true'] . "";
+                if (!empty($requestParam['category_id'])) {
+                    $query .= " AND category_id = '" . $requestParam['category_id'] . "'";
+                }
                 $products = Yii::$app->db->createCommand($query)->queryAll();
             } else {
-                $products = Products::find()->asArray()->all();
+                if (!empty($requestParam['category_id'])) {
+                    $products = Products::find()->where(['category_id' => $requestParam['category_id']])->asArray()->all();
+                } else {
+                    $products = Products::find()->asArray()->all();
+                }
             }
             if (!empty($products)) {
+                foreach ($products as $key => $product) {
+                    $productPhotos = ProductPhotos::find()->where(['product_id' => $product['id']])->asArray()->all();
+                    $product['rent_price'] = !empty($product['rent_price']) ? $product['rent_price'] : "";
+                    $product['rent_price_duration'] = !empty($product['rent_price_duration']) ? $product['rent_price_duration'] : "";
+                    $product['lat'] = !empty($product['lat']) ? $product['lat'] : "";
+                    $product['longg'] = !empty($product['longg']) ? $product['longg'] : "";
+                    $product['productPhotos'] = !empty($productPhotos) ? $productPhotos : [];
+                    $products[$key] = $product;
+                }
                 $amReponseParam = $products;
                 $ssMessage = 'Products List';
                 $amResponse = Common::successResponse($ssMessage, $products);
@@ -218,8 +234,12 @@ class ProductsController extends \yii\base\Controller
         $snUserId = $requestParam['user_id'];
         $model = Users::findOne(["id" => $snUserId]);
         if (!empty($model)) {
-            $product = Products::find()->with('brand')->where(["id" => $requestParam['product_id']])->asArray()->all();
+            $product = Products::find()->with('brand')->with('productPhotos')->with('seller')->where(["id" => $requestParam['product_id']])->asArray()->all();
             if (!empty($product)) {
+                $product[0]['seller_first_name'] = $product[0]['seller']['first_name'];
+                $product[0]['seller_last_name'] = $product[0]['seller']['last_name'];
+                $product[0]['productPhotos'] = !empty($product[0]['productPhotos']) ? $product[0]['productPhotos'] : [];
+                unset($product[0]['seller']);
                 $amReponseParam = $product[0];
                 $ssMessage = "Product's details";
                 $amResponse = Common::successResponse($ssMessage, $amReponseParam);
