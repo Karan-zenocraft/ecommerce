@@ -238,6 +238,7 @@ class ProductsController extends \yii\base\Controller
             if (!empty($product)) {
                 $product[0]['seller_first_name'] = $product[0]['seller']['first_name'];
                 $product[0]['seller_last_name'] = $product[0]['seller']['last_name'];
+                $product[0]['seller_email'] = !empty($product[0]['seller']['email']) ? $product[0]['seller']['email'] : "";
                 $product[0]['seller_photo'] = !empty($product[0]['seller']['photo']) ? $product[0]['seller']['photo'] : "";
                 $product[0]['productPhotos'] = !empty($product[0]['productPhotos']) ? $product[0]['productPhotos'] : [];
                 unset($product[0]['seller']);
