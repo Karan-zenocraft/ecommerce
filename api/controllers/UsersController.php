@@ -295,6 +295,7 @@ class UsersController extends \yii\base\Controller
             }
             $model = new Users();
             $model->login_type = 1;
+            $model->password = !empty($requestParam['password']) ? md5($requestParam['password']) : "";
         } else {
             $snUserId = $requestParam['user_id'];
             $model = Users::findOne(["id" => $snUserId]);
@@ -329,7 +330,6 @@ class UsersController extends \yii\base\Controller
         $model->last_name = $requestParam['last_name'];
         $model->email = $requestParam['email'];
         $amReponseParam['login_type'] = "$model->login_type";
-        $model->password = md5($requestParam['password']);
         /* $model->address_line_1 = !empty($requestParam['address_line_1']) ? $requestParam['address_line_1'] : "";*/
         $model->phone = !empty($requestParam['phone']) ? Common::clean_special_characters($requestParam['phone']) : "";
         $model->city = !empty($requestParam['city']) ? $requestParam['city'] : "";
