@@ -267,7 +267,7 @@ class UsersController extends \yii\base\Controller
         $amResponse = $amReponseParam = [];
 
         // Check required validation for request parameter.
-        $amRequiredParams = array('user_name', 'first_name', 'last_name', 'email', 'password', 'device_token', 'type');
+        $amRequiredParams = array('user_name', 'first_name', 'last_name', 'email', 'device_token', 'type');
         $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
 
         // If any getting error in request paramter then set error message.
