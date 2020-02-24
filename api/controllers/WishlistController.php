@@ -4,6 +4,7 @@ namespace api\controllers;
 use common\components\Common;
 
 /* USE COMMON MODELS */
+use common\models\ProductPhotos;
 use common\models\Users;
 use common\models\Wishlist;
 use Yii;
@@ -37,11 +38,24 @@ class WishlistController extends \yii\base\Controller
         $snUserId = $requestParam['user_id'];
         $model = Users::findOne(["id" => $snUserId]);
         if (!empty($model)) {
-            $snWishList = Wishlist::find()->where(['user_id' => $requestParam['user_id']])->asArray()->all();
+            $snWishList = Wishlist::find()->with('product')->where(['user_id' => $requestParam['user_id']])->asArray()->all();
 
             $amReponseParam = [];
             if (!empty($snWishList)) {
-                $amReponseParam = $snWishList;
+                array_walk($snWishList, function ($arr) use (&$amResponseData) {
+                    $ttt = $arr;
+                    $ttt['product_title'] = !empty($ttt['product']) ? $ttt['product']['title'] : "";
+                    $ttt['product_price'] = !empty($ttt['product']) ? $ttt['product']['price'] : "";
+                    $ttt['product_price'] = !empty($ttt['product']) ? $ttt['product']['price'] : "";
+                    $ttt['product_is_rent'] = !empty($ttt['product']['is_rent']) ? $ttt['product']['is_rent'] : "0";
+                    $ttt['product_rent_price'] = !empty($ttt['product']['rent_price']) ? $ttt['product']['rent_price'] : "";
+                    $ttt['product_rent_price_duration'] = !empty($ttt['product']['rent_price_duration']) ? $ttt['product']['rent_price_duration'] : "";
+                    $ttt['product_photos'] = ProductPhotos::find()->where(['product_id' => $ttt['product_id']])->asArray()->all();
+                    unset($ttt['product']);
+                    $amResponseData[] = $ttt;
+                    return $amResponseData;
+                });
+                $amReponseParam = $amResponseData;
                 $ssMessage = 'Wish List';
             } else {
                 $ssMessage = 'Wish List not found.';

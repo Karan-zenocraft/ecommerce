@@ -318,10 +318,10 @@ class Common
     public static function template_update_permission_button($url, $model, $flag)
     {
 
-        return Html::a('<i class="icon-time icon-white"></i> ', $url, [
-            'title' => Yii::t('yii', "Edit Restaurant's working Hours"),
+        return Html::a('<i class="icon-edit icon-white"></i> ', $url, [
+            'title' => Yii::t('yii', "Approve Product"),
             'class' => 'btn btn-primary btn-small colorbox_popup',
-            'onClick' => 'javascript:openColorBox(1090,820);',
+            'onClick' => 'javascript:openColorBox(420,500);',
         ]);
 
     }

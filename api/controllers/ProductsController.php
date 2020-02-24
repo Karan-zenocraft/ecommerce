@@ -185,6 +185,7 @@ class ProductsController extends \yii\base\Controller
                     $product['rent_price_duration'] = !empty($product['rent_price_duration']) ? $product['rent_price_duration'] : "";
                     $product['lat'] = !empty($product['lat']) ? $product['lat'] : "";
                     $product['longg'] = !empty($product['longg']) ? $product['longg'] : "";
+                    $product['owner_discount'] = !empty($product['owner_discount']) ? $product['owner_discount'] : "0";
                     $product['productPhotos'] = !empty($productPhotos) ? $productPhotos : [];
                     $products[$key] = $product;
                 }
@@ -238,8 +239,13 @@ class ProductsController extends \yii\base\Controller
             if (!empty($product)) {
                 $product[0]['seller_first_name'] = $product[0]['seller']['first_name'];
                 $product[0]['seller_last_name'] = $product[0]['seller']['last_name'];
+                $product[0]['owner_discount'] = !empty($product[0]['owner_discount']) ? $product[0]['owner_discount'] : "0";
                 $product[0]['seller_email'] = !empty($product[0]['seller']['email']) ? $product[0]['seller']['email'] : "";
                 $product[0]['seller_photo'] = !empty($product[0]['seller']['photo']) ? $product[0]['seller']['photo'] : "";
+                $product[0]['rent_price'] = !empty($product[0]['rent_price']) ? $product[0]['rent_price'] : "";
+                $product[0]['rent_price_duration'] = !empty($product[0]['rent_price_duration']) ? $product[0]['rent_price_duration'] : "";
+                $product[0]['lat'] = !empty($product[0]['lat']) ? $product[0]['lat'] : "";
+                $product[0]['longg'] = !empty($product[0]['longg']) ? $product[0]['longg'] : "";
                 $product[0]['productPhotos'] = !empty($product[0]['productPhotos']) ? $product[0]['productPhotos'] : [];
                 unset($product[0]['seller']);
                 $amReponseParam = $product[0];

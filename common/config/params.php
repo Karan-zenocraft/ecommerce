@@ -26,6 +26,7 @@ return [
     'super_admin_role_id' => '1',
     'administrator_role_id' => '2',
     'action' => ["1" => "delete", "2" => "archive", "3" => "un_archive"],
-    'is_approve' => ['1' => "true", "2" => "false"],
-    'is_approve_value' => ['true' => "1", "false" => "0"],
+    'is_approve' => ['0' => 'Waiting', '1' => "Approve", "2" => "Decline"],
+    'is_approve_value' => ['wait' => '0', 'true' => "1", "false" => "2"],
+    'is_approve_admin' => ['1' => "Approve", "2" => "Decline"],
 ];

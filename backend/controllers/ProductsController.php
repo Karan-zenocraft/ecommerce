@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use backend\components\AdminCoreController;
+use common\components\Common;
 use common\models\Products;
 use common\models\ProductsSearch;
 use Yii;
@@ -126,18 +127,21 @@ return [
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-    public function actionApproveProduct()
+    public function actionApproveProduct($product_id)
     {
-        if (!empty($_POST)) {
-            $product = Products::find()->where(['id' => $_POST['product_id']])->one();
-            if (!empty($product)) {
-                $is_approve = ($_POST['checked'] == "true") ? Yii::$app->params['is_approve_value']['true'] : Yii::$app->params['is_approve_value']['false'];
-                $product->is_approve = $is_approve;
-                $product->save(false);
-                return json_encode("success");
-            } else {
-                return json_encode("error");
-            }
+        $this->layout = 'popup';
+        $productModel = Products::find()->where(['id' => $product_id])->one();
+        if (!empty(Yii::$app->request->post()) && !empty($productModel)) {
+            $postData = Yii::$app->request->post();
+            $productModel->is_approve = $postData['Products']['is_approve'];
+            $productModel->owner_discount = $postData['Products']['owner_discount'];
+            $productModel->save(false);
+            Yii::$app->session->setFlash('success', Yii::getAlias('@product_update_message'));
+            return Common::closeColorBox();
+
         }
+        return $this->render('approve_product', [
+            'productModel' => $productModel,
+        ]);
     }
 }

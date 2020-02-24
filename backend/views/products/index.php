@@ -1,5 +1,6 @@
 <?php
 
+use common\components\Common;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
@@ -81,10 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'headerOptions' => ["style" => "width:13%;"],
             'contentOptions' => ["style" => "width:13%;"],
             'value' => function ($data) {
-                $url = "#";
-                $is_approve = ($data->is_approve == 1) ? "true" : "false";
-                $class = ($data->is_approve == 1) ? "switch2" : "";
-                return Html::a('<label class="switch"><input type="checkbox" value="' . $is_approve . '" onclick="approve_product(' . $data->id . ');" id="' . $data->id . '" class="' . $class . '"><span class="slider round"></span></label>', $url);
+                return !empty($data->is_approve) ? Yii::$app->params['is_approve'][$data->is_approve] : "Waiting";
             },
         ],
         [
@@ -96,25 +94,24 @@ $this->params['breadcrumbs'][] = $this->title;
         //'created_at',
         //'updated_at',
 
-        /*  [
-    'header' => 'Actions',
-    'class' => 'yii\grid\ActionColumn',
-    'headerOptions' => ["style" => "width:40%;"],
-    'contentOptions' => ["style" => "width:40%;"],
-    'template' => '{update}{delete}',
-    'buttons' => [
-    'update' => function ($url, $model) {
-    $flag = 1;
-    return Common::template_update_button($url, $model, $flag);
-    },
-    'delete' => function ($url, $model) {
-    $flag = 1;
-    $confirmmessage = "Are you sure you want to delete this user?";
-    return Common::template_delete_button($url, $model, $confirmmessage, $flag);
-    },
+        [
+            'header' => 'Actions',
+            'class' => 'yii\grid\ActionColumn',
+            'headerOptions' => ["style" => "width:40%;"],
+            'contentOptions' => ["style" => "width:40%;"],
+            'template' => '{approve_product}',
+            'buttons' => [
 
-    ],
-    ],*/
+                'approve_product' => function ($url, $model) {
+                    $title = "Approve Product";
+                    $flag = 1;
+                    $url = Yii::$app->urlManager->createUrl(['products/approve-product', 'product_id' => $model->id]);
+                    return Common::template_update_permission_button($url, $model, $title, $flag);
+
+                },
+
+            ],
+        ],
     ],
 ]);?>
        </div>
@@ -128,51 +125,5 @@ $( document ).ready(function() {
             $('.products-serach').toggle();
         });
     });
-
-function approve_product(id){
-      $("#"+id).toggleClass("switch2");
-   if ($("#"+id).val() == "true") {
-   $("#"+id).attr('value', 'false');
-      $.ajax({
-     url: "products/approve-product",
-     type: 'post',
-     dataType: 'json',
-     data: {
-               checked: false,
-               product_id:id,
-           },
-     success: function (data) {
-      if(data == "success"){
-         alert("Product is not approved.");
-        location.reload();
-      }else if(data=="error"){
-        alert("Something went wrong");
-         location.reload();
-      }
-     }
-  });
- } else {
-   $("#"+id).attr('value', 'true');
-         $.ajax({
-     url: "products/approve-product",
-     type: 'post',
-     dataType: 'json',
-     data: {
-               checked: true,
-               product_id:id,
-           },
-     success: function (data) {
-      if(data == "success"){
-       alert("Product is approved.");
-        location.reload();
-      }else if(data=="error"){
-        alert("Something went wrong");
-         location.reload();
-      }
-     }
-  });
- }
-//document.getElementById(id).checked = false;
-}
 
 </script>

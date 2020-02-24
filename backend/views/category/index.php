@@ -1,3 +1,9 @@
+<style type="text/css">
+img{
+height: 43px !important;
+width: 43px !important;
+}
+</style>
 <?php
 
 use common\components\Common;
