@@ -264,4 +264,65 @@ class ProductsController extends \yii\base\Controller
         // FOR ENCODE RESPONSE INTO JSON //
         Common::encodeResponseJSON($amResponse);
     }
+
+    /*
+     * Function : GetMyProductsList()
+     * Description : Get My Product List
+     * Request Params : user_id
+     * Response Params : user's details
+     * Author : Rutusha Joshi
+     */
+
+    public function actionGetMyProductsList()
+    {
+        //Get all request parameter
+        $amData = Common::checkRequestType();
+        $amResponse = $amReponseParam = [];
+        // Check required validation for request parameter.
+        $amRequiredParams = array('user_id');
+        $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
+
+        // If any getting error in request paramter then set error message.
+        if (!empty($amParamsResult['error'])) {
+            $amResponse = Common::errorResponse($amParamsResult['error']);
+            Common::encodeResponseJSON($amResponse);
+        }
+        $requestParam = $amData['request_param'];
+        //Check User Status//
+        Common::matchUserStatus($requestParam['user_id']);
+        //VERIFY AUTH TOKEN
+        $authToken = Common::get_header('auth_token');
+        Common::checkAuthentication($authToken, $requestParam['user_id']);
+        $snUserId = $requestParam['user_id'];
+        $model = Users::findOne(["id" => $snUserId]);
+        if (!empty($model)) {
+            $products = Products::find()->where(['seller_id' => $requestParam['user_id']])->asArray()->all();
+
+            if (!empty($products)) {
+                foreach ($products as $key => $product) {
+                    $productPhotos = ProductPhotos::find()->where(['product_id' => $product['id']])->asArray()->all();
+                    $product['rent_price'] = !empty($product['rent_price']) ? $product['rent_price'] : "";
+                    $product['rent_price_duration'] = !empty($product['rent_price_duration']) ? $product['rent_price_duration'] : "";
+                    $product['lat'] = !empty($product['lat']) ? $product['lat'] : "";
+                    $product['longg'] = !empty($product['longg']) ? $product['longg'] : "";
+                    $product['owner_discount'] = !empty($product['owner_discount']) ? $product['owner_discount'] : "0";
+                    $product['productPhotos'] = !empty($productPhotos) ? $productPhotos : [];
+                    $products[$key] = $product;
+                }
+                $amReponseParam = $products;
+                $ssMessage = 'Products List';
+                $amResponse = Common::successResponse($ssMessage, $products);
+            } else {
+                $amReponseParam = [];
+                $ssMessage = 'Products not found.';
+                $amResponse = Common::successResponse($ssMessage, $amReponseParam);
+            }
+
+        } else {
+            $ssMessage = 'Invalid User.';
+            $amResponse = Common::errorResponse($ssMessage);
+        }
+        // FOR ENCODE RESPONSE INTO JSON //
+        Common::encodeResponseJSON($amResponse);
+    }
 }
