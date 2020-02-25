@@ -1716,7 +1716,7 @@ class Common
 
         if ($valid != 1) {
             // FOR GENERATE ERROR RESPONSE IF TOKEN NOT VALID
-            $errormessage['success'] = '401';
+            $errormessage['success'] = '402';
             $errormessage['message'] = 'Restaurant is not active today.';
             $errormessage['data'] = array();
             Common::encodeResponseJSON($errormessage);
@@ -1738,7 +1738,7 @@ class Common
 
         if ($valid != 1) {
             // FOR GENERATE ERROR RESPONSE IF TOKEN NOT VALID
-            $errormessage['success'] = '401';
+            $errormessage['success'] = '402';
             $errormessage['message'] = 'Restaurant is deleted.';
             $errormessage['data'] = array();
             Common::encodeResponseJSON($errormessage);
