@@ -1,4 +1,7 @@
 <?php
+use common\models\Brands;
+use common\models\Category;
+use common\models\Products;
 use common\models\Users;
 use yii\helpers\Html;
 /* @var $this yii\web\View */
@@ -13,27 +16,27 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <div class="block-content collapse in">
         <div class="span3">
-            <div class="chart" data-percent="<?=Users::find()->count();?>"><?=Users::find()->count() . "%";?></div>
+            <div class="chart" data-percent="<?=Users::find()->where(['role_id' => Yii::$app->params['userroles']['user']])->count();?>"><?=Users::find()->where(['role_id' => Yii::$app->params['userroles']['user']])->count() . "%";?></div>
             <div class="chart-bottom-heading">
                 <span class="label label-info">Users</span>
             </div>
         </div>
         <div class="span3">
-            <div class="chart" data-percent="<?=Users::find()->count();?>"><?=Users::find()->count() . "%";?></div>
+            <div class="chart" data-percent="<?=Category::find()->count();?>"><?=Category::find()->count() . "%";?></div>
             <div class="chart-bottom-heading">
-                <span class="label label-info">Users</span>
+                <span class="label label-info">Categories</span>
             </div>
         </div>
         <div class="span3">
-            <div class="chart" data-percent="<?=Users::find()->count();?>"><?=Users::find()->count() . "%";?></div>
+            <div class="chart" data-percent="<?=Brands::find()->count();?>"><?=Brands::find()->count() . "%";?></div>
             <div class="chart-bottom-heading">
-                <span class="label label-info">Users</span>
+                <span class="label label-info">Brands</span>
             </div>
         </div>
         <div class="span3">
-            <div class="chart" data-percent="<?=Users::find()->count();?>"><?=Users::find()->count() . "%";?></div>
+            <div class="chart" data-percent="<?=Products::find()->count();?>"><?=Products::find()->count() . "%";?></div>
             <div class="chart-bottom-heading">
-                <span class="label label-info">Menu Categories</span>
+                <span class="label label-info">Products</span>
             </div>
         </div>
     </div>
