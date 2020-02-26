@@ -33,7 +33,7 @@ class ProductsController extends \yii\base\Controller
         $amData = Common::checkRequestType();
         $amResponse = $amReponseParam = [];
         // Check required validation for request parameter.
-        $amRequiredParams = array('user_id', 'category_id', 'subcategory_id', 'title', 'description', 'year_of_purchase', 'price', 'is_rent', 'quantity', 'lat', 'longg', 'location_address');
+        $amRequiredParams = array('user_id', 'category_id', 'subcategory_id', 'title', 'description', 'year_of_purchase', 'price', 'is_rent', 'quantity', 'lat', 'longg', 'location_address', 'discount');
         $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
 
         // If any getting error in request paramter then set error message.
@@ -78,6 +78,7 @@ class ProductsController extends \yii\base\Controller
                 $productModel->location_address = $requestParam['location_address'];
                 $productModel->city = !empty($requestParam['city']) ? $requestParam['city'] : "";
                 $productModel->price = $requestParam['price'];
+                $productModel->discount = $requestParam['discount'];
                 $productModel->is_rent = $requestParam['is_rent'];
                 $productModel->rent_price = $requestParam['rent_price'];
                 $productModel->rent_price_duration = $requestParam['rent_price_duration'];
