@@ -111,7 +111,7 @@ class UsersController extends \yii\base\Controller
                 $amResponse = Common::errorResponse($ssMessage);
             }
         } else {
-            $amRequiredParams = array('email', 'device_token', 'login_type', 'photo', 'user_name', 'first_name', 'last_name');
+            $amRequiredParams = array('email', 'device_token', 'login_type', 'user_name', 'first_name', 'last_name');
             $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
 
             // If any getting error in request paramter then set error message.

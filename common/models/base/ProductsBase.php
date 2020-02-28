@@ -3,6 +3,7 @@
 namespace common\models\base;
 
 use common\models\Brands;
+use common\models\Cart;
 use common\models\Category;
 use common\models\ProductPhotos;
 use common\models\ProductsQuery;
@@ -152,6 +153,15 @@ class ProductsBase extends \yii\db\ActiveRecord
         return $this->hasMany(WishList::className(), ['product_id' => 'id']);
     }
 
+    public function getCarts()
+    {
+        return $this->hasMany(Cart::className(), ['product_id' => 'id']);
+    }
+    public function getOrderProducts()
+    {
+        return $this->hasMany(ProductPhotos::className(), ['product_id' => 'id']);
+        return $this->hasMany(OrderProducts::className(), ['product_id' => 'id']);
+    }
     /**
      * @inheritdoc
      * @return ProductsQuery the active query used by this AR class.

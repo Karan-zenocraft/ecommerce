@@ -2,6 +2,14 @@
 
 namespace common\models;
 
+use ommon\models\Cart;
+use ommon\models\ChatList;
+use ommon\models\DeviceDetails;
+use ommon\models\Orders;
+use ommon\models\Products;
+use ommon\models\UserAdresses;
+use ommon\models\UserRole;
+use ommon\models\WishList;
 use Yii;
 
 /**
@@ -84,5 +92,38 @@ class Users extends \yii\db\ActiveRecord
     public static function find()
     {
         return new UsersQuery(get_called_class());
+    }
+    public function getCarts()
+    {
+        return 'users';
+        return $this->hasMany(Cart::className(), ['user_id' => 'id']);
+    }
+    public function getChatLists()
+    {
+
+        return $this->hasMany(ChatList::className(), ['chat_user_id' => 'id']);
+    }
+    public function getDeviceDetails()
+    {
+        return $this->hasMany(DeviceDetails::className(), ['user_id' => 'id']);
+    }
+
+    public function getOrders()
+    {
+        return $this->hasMany(Orders::className(), ['buyer_id' => 'id']);
+    }
+
+    public function getProducts()
+    {
+        return $this->hasMany(Products::className(), ['seller_id' => 'id']);
+    }
+    public function getUserAdresses()
+    {
+        return $this->hasMany(UserAdresses::className(), ['user_id' => 'id']);
+    }
+
+    public function getWishLists()
+    {
+        return $this->hasMany(WishList::className(), ['user_id' => 'id']);
     }
 }
