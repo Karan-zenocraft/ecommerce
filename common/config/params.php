@@ -29,4 +29,6 @@ return [
     'is_approve' => ['0' => 'Waiting', '1' => "Approve", "2" => "Decline"],
     'is_approve_value' => ['wait' => '0', 'true' => "1", "false" => "2"],
     'is_approve_admin' => ['1' => "Approve", "2" => "Decline"],
+    'order_status' => ['placed' => '1', 'on_the_way' => '2', 'delievered' => '3', 'cancelled' => '4'],
+    'order_status_value' => ['1' => 'Placed', '2' => 'On the Way', '3' => 'Delievered', '4' => 'Cancelled'],
 ];
