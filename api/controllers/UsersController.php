@@ -164,7 +164,7 @@ class UsersController extends \yii\base\Controller
                     }
                 } else {
                     $model->login_type = $requestParam['login_type'];
-                    $model->photo = $requestParam['photo'];
+                    $model->photo = !empty($requestParam['photo']) : $requestParam['photo'] : "";
                     $model->role_id = Yii::$app->params['userroles']['customer'];
                     $model->user_name = $requestParam['user_name'];
                     $model->city = !empty($requestParam['city']) ? $requestParam['city'] : "";
@@ -211,7 +211,7 @@ class UsersController extends \yii\base\Controller
                 $model->user_name = $requestParam['user_name'];
                 $model->first_name = $requestParam['first_name'];
                 $model->last_name = $requestParam['last_name'];
-                $model->photo = $requestParam['photo'];
+                $model->photo = !empty($requestParam['photo']) ? $requestParam['photo'] : "";
                 $model->auth_id = !empty($requestParam['auth_id']) ? $requestParam['auth_id'] : "";
                 $model->phone = !empty($requestParam['phone']) ? $requestParam['phone'] : "";
                 $model->city = !empty($requestParam['city']) ? $requestParam['city'] : "";
