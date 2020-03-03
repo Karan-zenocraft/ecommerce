@@ -164,7 +164,7 @@ class UsersController extends \yii\base\Controller
                     }
                 } else {
                     $model->login_type = $requestParam['login_type'];
-                    $model->photo = !empty($requestParam['photo']) : $requestParam['photo'] : "";
+                    $model->photo = !empty($requestParam['photo']) ? $requestParam['photo'] : "";
                     $model->role_id = Yii::$app->params['userroles']['customer'];
                     $model->user_name = $requestParam['user_name'];
                     $model->city = !empty($requestParam['city']) ? $requestParam['city'] : "";
