@@ -7,8 +7,8 @@ use common\models\Categories;
 use common\models\ProductPhotos;
 use common\models\Products;
 use common\models\Users;
+use common\models\Wishlist;
 use Yii;
-
 /* USE COMMON MODELS */
 use yii\web\Controller;
 use \yii\web\UploadedFile;
@@ -180,8 +180,11 @@ class ProductsController extends \yii\base\Controller
                 }
             }
             if (!empty($products)) {
+                $wishlist = Wishlist::find()->where(['user_id' => $requestParam['user_id']])->asArray()->all();
+                $wishlist_arr = array_column($wishlist, 'product_id');
                 foreach ($products as $key => $product) {
                     $productPhotos = ProductPhotos::find()->where(['product_id' => $product['id']])->asArray()->all();
+                    $product['is_wishlist'] = in_array($product['id'], $wishlist_arr) ? "true" : "false";
                     $product['rent_price'] = !empty($product['rent_price']) ? $product['rent_price'] : "";
                     $product['rent_price_duration'] = !empty($product['rent_price_duration']) ? $product['rent_price_duration'] : "";
                     $product['lat'] = !empty($product['lat']) ? $product['lat'] : "";
@@ -238,6 +241,9 @@ class ProductsController extends \yii\base\Controller
         if (!empty($model)) {
             $product = Products::find()->with('brand')->with('productPhotos')->with('seller')->where(["id" => $requestParam['product_id']])->asArray()->all();
             if (!empty($product)) {
+                $wishlist = Wishlist::find()->where(['user_id' => $requestParam['user_id']])->asArray()->all();
+                $wishlist_arr = array_column($wishlist, 'product_id');
+                $product[0]['is_wishlist'] = in_array($requestParam['product_id'], $wishlist_arr) ? "true" : "false";
                 $product[0]['seller_first_name'] = $product[0]['seller']['first_name'];
                 $product[0]['seller_last_name'] = $product[0]['seller']['last_name'];
                 $product[0]['owner_discount'] = !empty($product[0]['owner_discount']) ? $product[0]['owner_discount'] : "0";
