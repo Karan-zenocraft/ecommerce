@@ -72,73 +72,124 @@ class PaymentsController extends \yii\base\Controller
         die();
         curl_close($ch1);
     }
-    public function makePayment()
+
+    public function actionMakePaypalPayout()
     {
-        $ppemail = "rutusha.joshi@zenocraft.com"
-        $payLoad = array();
+        // or whatever yours is called
 
-//prepare the receivers
-        $receiverList = array();
-        $counter = 0;
-        $receiverList["receiver"][$counter]["amount"] = $r["withdrawalAmount"];
-        $receiverList["receiver"][$counter]["email"] = $r["paypalEmail"];
-        $receiverList["receiver"][$counter]["paymentType"] = "SERVICE"; //this could be SERVICE or PERSONAL (which makes it free!)
-        $receiverList["receiver"][$counter]["invoiceId"] = $r["withdrawalID"]; //NB that this MUST be unique otherwise paypal will reject it and get shitty. However it is a totally optional field
-
-//prepare the call
-        $payLoad["actionType"] = "PAY";
-        $payLoad["cancelUrl"] = "http://localhost/ecommerce"; //this is required even though it isnt used
-        $payLoad["returnUrl"] = "http://localhost/ecommerce"; //this is required even though it isnt used
-        $payLoad["currencyCode"] = "INR";
-        $payLoad["receiverList"] = $receiverList;
-        $payLoad["feesPayer"] = "EACHRECEIVER"; //this could be SENDER or EACHRECEIVER
-        //$payLoad["fundingConstraint"]=array("allowedFundingType"=>array("fundingTypeInfo"=>array("fundingType"=>"BALANCE")));//defaults to ECHECK but this takes ages and ages, so better to reject the payments if there isnt enough money in the account and then do a manual pull of bank funds through; more importantly, echecks have to be accepted/rejected by the user and i THINK balance doesnt
-        $payLoad["sender"]["email"] = $ppemail; //the paypal email address of the where the money is coming from
-
-//run the call
-        $API_Endpoint = "https://svcs$ppapicall.paypal.com/AdaptivePayments/Pay";
-        $payLoad["requestEnvelope"] = array("errorLanguage" => urlencode("en_US"), "detailLevel" => urlencode("ReturnAll")); //add some debugging info the payLoad and setup the requestEnvelope
+        //$access_token = "access_token$sandbox$qt27xx989g9tkhbf$0da8529aa3f41f21b1ac87748e32f1eb";
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $API_Endpoint);
-        curl_setopt($ch, CURLOPT_VERBOSE, 1);
+        $clientId = "AdXlVUx_J_ooi908lajfxEC6Ah1iXsRqc84l4j3_lv0-Qy-r8aghEFlBGqPsIzagvt4P-ZwUwqIwozMT";
+        $secret = "EOmofrb8O4bXqLIAd13SINvQ1QLBjqhZCRkClgY6DFR2MgobqJpTTjj8YDGfFtQwi9ASROKPsQsD4uuz";
+
+        curl_setopt($ch, CURLOPT_URL, "https://api.sandbox.paypal.com/v1/oauth2/token");
+        curl_setopt($ch, CURLOPT_HEADER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'X-PAYPAL-REQUEST-DATA-FORMAT: JSON',
-            'X-PAYPAL-RESPONSE-DATA-FORMAT: JSON',
-            'X-PAYPAL-SECURITY-USERID: ' . $ppuserid,
-            'X-PAYPAL-SECURITY-PASSWORD: ' . $pppass,
-            'X-PAYPAL-SECURITY-SIGNATURE: ' . $ppsig,
-            'X-PAYPAL-APPLICATION-ID: ' . $ppappid,
-        ));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payLoad)); //
-        $response = curl_exec($ch);
-        $response = json_decode($response, 1);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_USERPWD, $clientId . ":" . $secret);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
 
-//analyse the output
-        $payKey = $response["payKey"];
-        $paymentExecStatus = $response["paymentExecStatus"];
-        $correlationId = $response["responseEnvelope"]["correlationId"];
-        $paymentInfoList = isset($response["paymentInfoList"]) ? $response["paymentInfoList"] : null;
-
-        if ($paymentExecStatus != "ERROR") {
-
-            foreach ($paymentInfoList["paymentInfo"] as $paymentInfo) {
-//they will only be in this array if they had a paypal account
-                $receiverEmail = $paymentInfo["receiver"]["email"];
-                $receiverAmount = $paymentInfo["receiver"]["amount"];
-                $withdrawalID = $paymentInfo["receiver"]["invoiceId"];
-                $transactionId = $paymentInfo["transactionId"]; //what shows in their paypal account
-                $senderTransactionId = $paymentInfo["senderTransactionId"]; //what shows in our paypal account
-                $senderTransactionStatus = $paymentInfo["senderTransactionStatus"];
-                $pendingReason = isset($paymentInfo["pendingReason"]) ? $paymentInfo["pendingReason"] : null;
-            }
-
+        $result = curl_exec($ch);
+        $access_token = "";
+        if (empty($result)) {
+            die("Error: No response.");
         } else {
-//deal with it
+            $json = json_decode($result);
+            $access_token = $json->access_token;
         }
+        curl_close($ch);
+
+        $ch1 = curl_init('https://api.sandbox.paypal.com/v1/payments/payouts');
+        curl_setopt($ch1, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Authorization: Bearer ' . $access_token,
+        ));
+
+        curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
+
+        $payloadData = '{
+  "sender_batch_header": {
+    "sender_batch_id": "5l5f75ff11616",
+    "email_subject": "You have a payout!",
+    "email_message": "You have received a payout! Thanks for using our service!"
+  },
+  "items": [
+    {
+      "recipient_type": "EMAIL",
+      "amount": {
+        "value": "15",
+        "currency": "USD"
+      },
+      "note": "Thanks for your patronage",
+      "sender_item_id": "item_1",
+      "receiver": "sb-cobtt865996@business.example.com"
+    },
+    {
+      "recipient_type": "EMAIL",
+      "amount": {
+        "value": "10",
+        "currency": "USD"
+      },
+      "note": "Thanks for your support!",
+      "sender_item_id": "item_2",
+      "receiver": "sb-ehuv1866022@business.example.com"
+    }
+  ]
+}';
+        curl_setopt($ch1, CURLOPT_POSTFIELDS, $payloadData);
+        curl_setopt($ch1, CURLOPT_FOLLOWLOCATION, 1);
+
+        $result = curl_exec($ch1);
+        print_r($result);
+        $httpStatusCode = curl_getinfo($ch1, CURLINFO_HTTP_CODE);
+        print_r($httpStatusCode);
+        die();
+        curl_close($ch1);
+    }
+    public function actionMakeBankAccount()
+    {
+        $ch1 = curl_init('https://api.stripe.com/v1/charges');
+        curl_setopt($ch1, CURLOPT_HTTPHEADER, array(
+            'Authorization: Bearer sk_test_q5kNBiI1nvi7EXP6xtTvyPtJ00xQUK5yxl',
+        ));
+
+        curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
+
+        /*      $payloadData = '{
+        "sender_batch_header": {
+        "sender_batch_id": "5l5f75ff11616",
+        "email_subject": "You have a payout!",
+        "email_message": "You have received a payout! Thanks for using our service!"
+        },
+        "items": [
+        {
+        "recipient_type": "EMAIL",
+        "amount": {
+        "value": "15",
+        "currency": "USD"
+        },
+        "note": "Thanks for your patronage",
+        "sender_item_id": "item_1",
+        "receiver": "sb-cobtt865996@business.example.com"
+        },
+        {
+        "recipient_type": "EMAIL",
+        "amount": {
+        "value": "10",
+        "currency": "USD"
+        },
+        "note": "Thanks for your support!",
+        "sender_item_id": "item_2",
+        "receiver": "sb-ehuv1866022@business.example.com"
+        }
+        ]
+        }';
+        curl_setopt($ch1, CURLOPT_POSTFIELDS, $payloadData);
+        curl_setopt($ch1, CURLOPT_FOLLOWLOCATION, 1);*/
+
+        $result = curl_exec($ch1);
+        print_r($result);
     }
 
 }

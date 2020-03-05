@@ -2,7 +2,9 @@
 
 namespace common\models\base;
 
+use common\models\OrderPayment;
 use common\models\OrderProducts;
+use common\models\UserAdresses;
 use common\models\Users;
 use Yii;
 
@@ -13,7 +15,6 @@ use Yii;
  * @property integer $buyer_id
  * @property string $payment_type
  * @property integer $discount
- * @property double $tax
  * @property double $total_amount_paid
  * @property integer $status
  * @property string $created_at
@@ -41,8 +42,8 @@ class OrdersBase extends \yii\db\ActiveRecord
             [['buyer_id', 'payment_type', 'created_at', 'updated_at'], 'required'],
             [['buyer_id', 'status'], 'integer'],
             [['payment_type'], 'string'],
-            [['tax', 'total_amount_paid'], 'number'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['total_amount_paid'], 'number'],
+            [['created_at', 'updated_at', 'user_address_id'], 'safe'],
             [['buyer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['buyer_id' => 'id']],
         ];
     }
@@ -56,8 +57,8 @@ class OrdersBase extends \yii\db\ActiveRecord
             'id' => 'ID',
             'buyer_id' => 'Buyer ID',
             'payment_type' => 'Payment Type',
-            'tax' => 'Tax',
             'total_amount_paid' => 'Total Amount Paid',
+            'user_address_id' => 'User Address',
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
@@ -70,6 +71,14 @@ class OrdersBase extends \yii\db\ActiveRecord
     public function getOrderProducts()
     {
         return $this->hasMany(OrderProducts::className(), ['order_id' => 'id']);
+    }
+    public function getOrderPayment()
+    {
+        return $this->hasOne(OrderPayment::className(), ['order_id' => 'id']);
+    }
+    public function getUserAddress()
+    {
+        return $this->hasOne(UserAdresses::className(), ['id' => 'user_address_id']);
     }
 
     /**

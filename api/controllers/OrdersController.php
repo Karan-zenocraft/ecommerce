@@ -23,7 +23,7 @@ class OrdersController extends \yii\base\Controller
         $amData = Common::checkRequestType();
         $amResponse = $amReponseParam = [];
         // Check required validation for request parameter.
-        $amRequiredParams = array('user_id', 'payment_type', 'discount', 'tax', 'transaction_id');
+        $amRequiredParams = array('user_id', 'payment_type', 'transaction_id', 'user_address_id');
         $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
 
         // If any getting error in request paramter then set error message.
@@ -56,29 +56,47 @@ class OrdersController extends \yii\base\Controller
                         $ssMessage = 'This product is not available';
                         $amResponse = Common::errorResponse($ssMessage);
                         Common::encodeResponseJSON($amResponse);
-                    } else {
-                        p($productVerify);
                     }
                 }
                 $order = new Orders();
                 $order->buyer_id = $requestParam['user_id'];
                 $order->payment_type = $requestParam['payment_type'];
-                $order->tax = $requestParam['tax'];
+                $order->user_address_id = $requestParam['user_address_id'];
                 $order->status = Yii::$app->params['order_status']['placed'];
                 if ($order->save(false)) {
                     $orderPayment = new orderPayment();
                     $orderPayment->order_id = $order->id;
                     $orderPayment->transaction_id = $requestParam['transaction_id'];
+                    $orderPayment->buyer_stripe_id = !empty($requestParam['buyer_stripe_id']) ? $requestParam['buyer_stripe_id'] : "";
                     $orderPayment->save(false);
                     foreach ($products as $key => $product) {
+                        $productDetails = Products::findOne($product['product_id']);
                         $orderProducts = new OrderProducts();
                         $orderProducts->order_id = $order->id;
                         $orderProducts->product_id = $product['product_id'];
-                        $orderProducts->quantity = $product['quantity'];
-                        $orderProducts->save(false);
+                        $orderProducts->discount = $productDetails->discount;
+                        $orderProducts->tax = $productDetails->tax;
+                        $price = $productDetails->price;
+                        if (!empty($productDetails->discount) && ($productDetails->discount != "0")) {
+                            $discountPrice = ($productDetails->discount / 100) * $price;
+                            $discountedPrice = $price - $discountPrice;
+                        } else {
+                            $discountedPrice = $price;
+                        }
+                        if (!empty($productDetails->tax) && ($productDetails->tax != "0")) {
+                            $sellPrice = $discountedPrice + $productDetails->tax;
+                        } else {
+                            $sellPrice = $discountedPrice;
+                        }
+                        $orderProducts->sell_price = $sellPrice;
+                        $prices[] = $sellPrice;
+                        //$orderProducts->save(false);
+
                         $addedProducts[] = $orderProducts;
                     }
-                    $amReponseParam = $order;
+                    $order->total_amount_paid = array_sum($prices);
+                    $order->save(false);
+                    $amReponseParam['order'] = $order;
                     $amReponseParam['orderPayment'] = $orderPayment;
                     $amReponseParam['orderProducts'] = $addedProducts;
                     $ssMessage = 'Order added successfully';

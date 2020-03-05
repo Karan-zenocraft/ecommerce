@@ -49,4 +49,13 @@ return [
     'updated_at' => 'Updated At',
 ];
 }
+
+    /**
+     * @inheritdoc
+     * @return OrderPaymentQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new OrderPaymentQuery(get_called_class());
+}
 }
