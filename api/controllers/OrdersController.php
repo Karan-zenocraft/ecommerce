@@ -17,7 +17,7 @@ use yii\web\Controller;
  */
 class OrdersController extends \yii\base\Controller
 {
-    public function actionAddOrder()
+    public function actionCreateOrder()
     {
         //Get all request parameter
         $amData = Common::checkRequestType();
