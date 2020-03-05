@@ -51,6 +51,10 @@ class CartController extends \yii\base\Controller
                     $ttt['product_is_rent'] = !empty($ttt['product']['is_rent']) ? $ttt['product']['is_rent'] : "0";
                     $ttt['product_rent_price'] = !empty($ttt['product']['rent_price']) ? $ttt['product']['rent_price'] : "";
                     $ttt['product_rent_price_duration'] = !empty($ttt['product']['rent_price_duration']) ? $ttt['product']['rent_price_duration'] : "";
+                    $ttt['lat'] = !empty($ttt['product']) ? $ttt['product']['lat'] : "";
+                    $ttt['longg'] = !empty($ttt['product']) ? $ttt['product']['longg'] : "";
+                    $ttt['location_address'] = !empty($ttt['product']) ? $ttt['product']['location_address'] : "";
+                    $ttt['city'] = !empty($ttt['product']) ? $ttt['product']['city'] : "";
                     $ttt['product_photos'] = ProductPhotos::find()->where(['product_id' => $ttt['product_id']])->asArray()->all();
                     unset($ttt['product']);
                     $amResponseData[] = $ttt;
