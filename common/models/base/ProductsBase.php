@@ -100,7 +100,7 @@ class ProductsBase extends \yii\db\ActiveRecord
             'quantity' => 'Quantity',
             'status' => 'Status',
             'is_approve' => 'Is Approve',
-            'owner_discount' => 'Owner Discount',
+            'owner_discount' => 'Owner Percentage',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];

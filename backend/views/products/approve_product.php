@@ -21,6 +21,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             <?=$form->field($productModel, "is_approve")->dropDownList(Yii::$app->params['is_approve_admin'])?>
 
                               <?=$form->field($productModel, "owner_discount")->textInput(['class' => "form-control opening_time_common", 'id' => 'owner_discount', 'required' => "required"])?>
+
+                               <?=$form->field($productModel, "tax")->textInput(['class' => "form-control opening_time_common", 'id' => 'tax', 'required' => "required", "placeholder" => "USD", "type" => "number", "min" => "0", "max" => $productModel->price])->label("Tax(in USD)")?>
                        </div>
                    </div>
 

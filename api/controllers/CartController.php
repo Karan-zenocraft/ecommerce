@@ -48,7 +48,22 @@ class CartController extends \yii\base\Controller
                     $ttt['product_title'] = !empty($ttt['product']) ? $ttt['product']['title'] : "";
                     $ttt['product_price'] = !empty($ttt['product']) ? $ttt['product']['price'] : "";
                     $ttt['product_price'] = !empty($ttt['product']) ? $ttt['product']['price'] : "";
+                    $ttt['product_discount'] = !empty($ttt['product']) ? $ttt['product']['discount'] : "";
+                    $ttt['product_tax'] = !empty($ttt['product']) ? $ttt['product']['tax'] : "";
                     $ttt['product_is_rent'] = !empty($ttt['product']['is_rent']) ? $ttt['product']['is_rent'] : "0";
+                    if (!empty($ttt['product']['discount']) && ($ttt['product']['discount'] != "0")) {
+                        $discountPrice = ($ttt['product']['discount'] / 100) * $ttt['product']['price'];
+                        $discountedPrice = $ttt['product']['price'] - $discountPrice;
+                    } else {
+                        $discountedPrice = $ttt['product']['price'];
+                    }
+                    if (!empty($ttt['product']['tax']) && ($ttt['product']['tax'] != "0")) {
+                        $sellPrice = $discountedPrice + $ttt['product']['tax'];
+                    } else {
+                        $sellPrice = $discountedPrice;
+                    }
+                    $ttt['product_sell_price'] = $sellPrice;
+
                     $ttt['product_rent_price'] = !empty($ttt['product']['rent_price']) ? $ttt['product']['rent_price'] : "";
                     $ttt['product_rent_price_duration'] = !empty($ttt['product']['rent_price_duration']) ? $ttt['product']['rent_price_duration'] : "";
                     $ttt['lat'] = !empty($ttt['product']) ? $ttt['product']['lat'] : "";
@@ -57,7 +72,7 @@ class CartController extends \yii\base\Controller
                     $ttt['city'] = !empty($ttt['product']) ? $ttt['product']['city'] : "";
                     $ttt['product_photos'] = ProductPhotos::find()->where(['product_id' => $ttt['product_id']])->asArray()->all();
                     unset($ttt['product']);
-                    $amResponseData[] = $ttt;
+                    $amResponseData[] = $ttt
                     return $amResponseData;
                 });
                 $amReponseParam = $amResponseData;

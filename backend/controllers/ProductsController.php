@@ -135,6 +135,7 @@ return [
             $postData = Yii::$app->request->post();
             $productModel->is_approve = $postData['Products']['is_approve'];
             $productModel->owner_discount = $postData['Products']['owner_discount'];
+            $productModel->tax = $postData['Products']['tax'];
             $productModel->save(false);
             Yii::$app->session->setFlash('success', Yii::getAlias('@product_update_message'));
             return Common::closeColorBox();

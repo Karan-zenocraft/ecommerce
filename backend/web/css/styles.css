@@ -635,3 +635,6 @@ input:focus + .slider {
 .slider.round:before {
  border-radius: 50%;
 }
+input[type="number"]{
+height: 33px;
+}
