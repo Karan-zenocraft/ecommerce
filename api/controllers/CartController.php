@@ -73,12 +73,11 @@ class CartController extends \yii\base\Controller
                     $ttt['product_photos'] = ProductPhotos::find()->where(['product_id' => $ttt['product_id']])->asArray()->all();
                     unset($ttt['product']);
                     $amResponseData[] = $ttt;
-                    //  $sell_price[] = $ttt['product_sell_price'];
                     return $amResponseData;
                 });
-
-                $amReponseParam = $amResponseData;
-                //$amReponseParam['total_amount'] = array_sum($sell_price);
+                $amReponseParam['list'] = $amResponseData;
+                $total_sell_price_arr = array_column($amResponseData, "product_sell_price");
+                $amReponseParam['total_sell_price'] = array_sum($total_sell_price_arr);
                 $ssMessage = 'Cart Product List';
             } else {
                 $ssMessage = 'Your cart is Empty';
