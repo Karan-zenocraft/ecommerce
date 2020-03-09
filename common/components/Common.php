@@ -522,6 +522,16 @@ class Common
             'target' => '_blanck',
         ]);
     }
+    public static function template_view_menu_items($url, $model, $flag)
+    {
+
+        return Html::a('<i class="icon-list icon-white"></i> ', $url, [
+            'title' => Yii::t('yii', "View Products"),
+            'class' => 'btn btn-primary btn-small colorbox_popup',
+            'onClick' => 'javascript:openColorBox(700,300);',
+        ]);
+
+    }
     /*
      * Set designing for Grideview Download button
      */

@@ -31,4 +31,12 @@ return [
     'is_approve_admin' => ['1' => "Approve", "2" => "Decline"],
     'order_status' => ['placed' => '1', 'on_the_way' => '2', 'delievered' => '3', 'cancelled' => '4'],
     'order_status_value' => ['1' => 'Placed', '2' => 'On the Way', '3' => 'Delievered', '4' => 'Cancelled'],
+    'payment_type_value' => [
+        '1' => 'paypal',
+        '2' => 'stripe',
+    ],
+    'payment_type' => [
+        'paypal' => '1',
+        'stripe' => '2',
+    ],
 ];

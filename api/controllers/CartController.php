@@ -47,6 +47,7 @@ class CartController extends \yii\base\Controller
                     $ttt = $arr;
                     $ttt['product_title'] = !empty($ttt['product']) ? $ttt['product']['title'] : "";
                     $ttt['product_price'] = !empty($ttt['product']) ? $ttt['product']['price'] : "";
+                    $ttt['product_quantity'] = !empty($ttt['product']) ? $ttt['product']['quantity'] : "";
                     $ttt['product_price'] = !empty($ttt['product']) ? $ttt['product']['price'] : "";
                     $ttt['product_discount'] = !empty($ttt['product']) ? $ttt['product']['discount'] : "";
                     $ttt['product_tax'] = !empty($ttt['product']) ? $ttt['product']['tax'] : "";

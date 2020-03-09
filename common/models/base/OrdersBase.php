@@ -4,7 +4,7 @@ namespace common\models\base;
 
 use common\models\OrderPayment;
 use common\models\OrderProducts;
-use common\models\UserAdresses;
+use common\models\UserAddresses;
 use common\models\Users;
 use Yii;
 
@@ -55,7 +55,7 @@ class OrdersBase extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'buyer_id' => 'Buyer ID',
+            'buyer_id' => 'Buyer',
             'payment_type' => 'Payment Type',
             'total_amount_paid' => 'Total Amount Paid',
             'user_address_id' => 'User Address',
@@ -78,7 +78,7 @@ class OrdersBase extends \yii\db\ActiveRecord
     }
     public function getUserAddress()
     {
-        return $this->hasOne(UserAdresses::className(), ['id' => 'user_address_id']);
+        return $this->hasOne(UserAddresses::className(), ['id' => 'user_address_id']);
     }
 
     /**
