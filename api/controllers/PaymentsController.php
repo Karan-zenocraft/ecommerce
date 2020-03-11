@@ -156,37 +156,14 @@ class PaymentsController extends \yii\base\Controller
 
         curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
 
-        /*      $payloadData = '{
-        "sender_batch_header": {
-        "sender_batch_id": "5l5f75ff11616",
-        "email_subject": "You have a payout!",
-        "email_message": "You have received a payout! Thanks for using our service!"
-        },
-        "items": [
-        {
-        "recipient_type": "EMAIL",
-        "amount": {
-        "value": "15",
-        "currency": "USD"
-        },
-        "note": "Thanks for your patronage",
-        "sender_item_id": "item_1",
-        "receiver": "sb-cobtt865996@business.example.com"
-        },
-        {
-        "recipient_type": "EMAIL",
-        "amount": {
-        "value": "10",
-        "currency": "USD"
-        },
-        "note": "Thanks for your support!",
-        "sender_item_id": "item_2",
-        "receiver": "sb-ehuv1866022@business.example.com"
-        }
-        ]
+        $payloadData = '{
+        "amount":"50",
+        "currency":"USD",
+        "description":"test",
+        "source":"tok_mastercard",
         }';
         curl_setopt($ch1, CURLOPT_POSTFIELDS, $payloadData);
-        curl_setopt($ch1, CURLOPT_FOLLOWLOCATION, 1);*/
+        curl_setopt($ch1, CURLOPT_FOLLOWLOCATION, 1);
 
         $result = curl_exec($ch1);
         print_r($result);
