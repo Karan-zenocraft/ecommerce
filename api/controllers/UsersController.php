@@ -106,6 +106,7 @@ class UsersController extends \yii\base\Controller
                         $amReponseParam['default_lat'] = $UserAddressDefault->lat;
                         $amReponseParam['default_longg'] = $UserAddressDefault->longg;
                         $amReponseParam['default_pincode'] = $UserAddressDefault->pincode;
+                        $amReponseParam['default_address_id'] = $UserAddressDefault->id;
                     }
                     // $amReponseParam['gcm_registration_id'] = !empty($device_model->gcm_id) ? $device_model->gcm_id : "";
                     $amReponseParam['auth_token'] = $ssAuthToken;
@@ -154,6 +155,7 @@ class UsersController extends \yii\base\Controller
                             $amReponseParam['default_lat'] = $UserAddressDefault->lat;
                             $amReponseParam['default_longg'] = $UserAddressDefault->longg;
                             $amReponseParam['default_pincode'] = $UserAddressDefault->pincode;
+                            $amReponseParam['default_address_id'] = $UserAddressDefault->id;
                         }
                         $ssMessage = 'successfully login.';
                         $amReponseParam['email'] = $model->email;
@@ -202,6 +204,7 @@ class UsersController extends \yii\base\Controller
                         $amReponseParam['default_lat'] = $UserAddressDefault->lat;
                         $amReponseParam['default_longg'] = $UserAddressDefault->longg;
                         $amReponseParam['default_pincode'] = $UserAddressDefault->pincode;
+                        $amReponseParam['default_address_id'] = $UserAddressDefault->id;
                     }
                     $amReponseParam['user_id'] = $model->id;
                     $amReponseParam['role_id'] = $model->role_id;
