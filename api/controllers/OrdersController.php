@@ -95,12 +95,14 @@ class OrdersController extends \yii\base\Controller
                         $addedProducts[] = $orderProducts;
                     }
                     $order->total_amount_paid = array_sum($prices);
-                    $order->save(false);
-                    $amReponseParam['order'] = $order;
-                    $amReponseParam['orderPayment'] = $orderPayment;
-                    $amReponseParam['orderProducts'] = $addedProducts;
-                    $ssMessage = 'Order added successfully';
-                    $amResponse = Common::successResponse($ssMessage, $amReponseParam);
+                    if ($order->save(false)) {
+                        Cart::deleteAll(['user_id' => $requestParam['user_id']]);
+                        $amReponseParam['order'] = $order;
+                        $amReponseParam['orderPayment'] = $orderPayment;
+                        $amReponseParam['orderProducts'] = $addedProducts;
+                        $ssMessage = 'Order added successfully';
+                        $amResponse = Common::successResponse($ssMessage, $amReponseParam);
+                    }
                 }
             } else {
                 $ssMessage = 'Products can not be blank';
