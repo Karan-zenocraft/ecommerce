@@ -84,7 +84,8 @@ class UsersController extends \yii\base\Controller
                     $ssAuthToken = Common::generateToken($model->id);
                     $model->auth_token = $ssAuthToken;
                     $model->save(false);
-
+                    $UserAddressDefault = UserAddresses::find()->where(['user_id' => $requestParam['user_id'], "is_default" => "1"])->one();
+                    $amReponseParam = [];
                     $ssMessage = 'successfully login.';
                     $amReponseParam['email'] = $model->email;
                     $amReponseParam['user_id'] = $model->id;
@@ -100,6 +101,7 @@ class UsersController extends \yii\base\Controller
                     $amReponseParam['photo'] = !empty($model->photo) && file_exists(Yii::getAlias('@htmlpath') . '/' . $parseUrl['path']) ? $model->photo : Yii::$app->params['root_url'] . '/' . "uploads/dp/no_image.png";
                     $amReponseParam['device_token'] = $device_model->device_token;
                     $amReponseParam['type'] = $device_model->type;
+                    $amReponseParam['userDefaultAddress'] = !empty($UserAddressDefault) ? $UserAddressDefault : [];
                     // $amReponseParam['gcm_registration_id'] = !empty($device_model->gcm_id) ? $device_model->gcm_id : "";
                     $amReponseParam['auth_token'] = $ssAuthToken;
                     $amReponseParam['login_type'] = $model->login_type;
