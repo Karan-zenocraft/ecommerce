@@ -149,24 +149,103 @@ class PaymentsController extends \yii\base\Controller
     }
     public function actionMakeBankAccount()
     {
-        $ch1 = curl_init('https://api.stripe.com/v1/charges');
-        curl_setopt($ch1, CURLOPT_HTTPHEADER, array(
-            'Authorization: Bearer sk_test_q5kNBiI1nvi7EXP6xtTvyPtJ00xQUK5yxl',
+        \Stripe\Stripe::setApiKey("sk_test_q5kNBiI1nvi7EXP6xtTvyPtJ00xQUK5yxl");
+        try {
+            // first create bank token
+            $bankToken = \Stripe\Token::create([
+                'bank_account' => [
+                    'country' => 'US',
+                    'currency' => 'usd',
+                    'account_holder_name' => 'Test User',
+                    'account_holder_type' => 'individual',
+                    'routing_number' => '110000000',
+                    'account_number' => '000123456789',
+                ],
+            ]);
+            // second create stripe account
+            $stripeAccount = \Stripe\Account::create([
+                "type" => "custom",
+                "country" => "US",
+                "email" => "testingforproject0@gmail.com",
+                "business_type" => "individual",
+                "requested_capabilities" => ["transfers", "card_payments"],
+            ]);
+            // third link the bank account with the stripe account
+            $bankAccount = \Stripe\Account::createExternalAccount(
+                $stripeAccount->id, ['external_account' => $bankToken->id]
+            );
+            // Fourth stripe account update for tos acceptance
+            \Stripe\Account::update(
+                $stripeAccount->id, [
+                    'tos_acceptance' => [
+                        'date' => time(),
+                        'ip' => $_SERVER['REMOTE_ADDR'], // Assumes you're not using a proxy
+                    ],
+                ]
+            );
+            $response = ["bankToken" => $bankToken->id, "stripeAccount" => $stripeAccount->id, "bankAccount" => $bankAccount->id];
+            p($response);
+        } catch (\Exception $e) {
+            p($e);
+        }
+
+        /* $stripeSecret = "sk_test_q5kNBiI1nvi7EXP6xtTvyPtJ00xQUK5yxl";
+        \Stripe\Stripe::setApiKey($stripeSecret);
+        $acct = \Stripe\Account::create(array(
+        "country" => "US",
+        "type" => "custom",
+        "email" => "testingforproject0@gmail.com",
+        "requested_capabilities" => ["transfers", "card_payments"],
+        ));
+        if ($acct->id) {
+        try {
+
+        \Stripe\Stripe::setApiKey("sk_test_q5kNBiI1nvi7EXP6xtTvyPtJ00xQUK5yxl");
+
+        $account = \Stripe\Account::retrieve($acct->id);
+        $account->external_accounts->create(array(
+        "external_account" => array(
+        "object" => "bank_account",
+        "account_number" => "00012345",
+        "country" => "US",
+        "currency" => "usd",
+        "routing_number" => "110000000",
+        ),
         ));
 
-        curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
+        $message = 'OK';
+        $status = true;
 
-        $payloadData = '{
-        "amount":"50",
-        "currency":"USD",
-        "description":"test",
-        "source":"tok_mastercard",
-        }';
-        curl_setopt($ch1, CURLOPT_POSTFIELDS, $payloadData);
-        curl_setopt($ch1, CURLOPT_FOLLOWLOCATION, 1);
+        } catch (\Exception $error) {
+        $message = $error->getMessage();
+        $status = false;
+        }
 
-        $result = curl_exec($ch1);
-        print_r($result);
+        $results = (object) array(
+        'message' => $message,
+        'status' => $status,
+        );
+
+        p($results);
+        }*/
+/*        $ch1 = curl_init('https://api.stripe.com/v1/charges');
+curl_setopt($ch1, CURLOPT_HTTPHEADER, array(
+'Authorization: Bearer sk_test_q5kNBiI1nvi7EXP6xtTvyPtJ00xQUK5yxl',
+));
+
+curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
+
+$payloadData = '{
+"amount":"50",
+"currency":"USD",
+"description":"test",
+"source":"tok_mastercard",
+}';
+curl_setopt($ch1, CURLOPT_POSTFIELDS, $payloadData);
+curl_setopt($ch1, CURLOPT_FOLLOWLOCATION, 1);
+
+$result = curl_exec($ch1);
+print_r($result);*/
     }
 
 }
