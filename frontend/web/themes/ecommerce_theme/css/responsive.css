@@ -1,0 +1,69 @@
+@media (min-width:1200px) and (max-width:1360px){
+    
+    
+    
+}
+
+@media (min-width:768px) and (max-width:1199px){
+    .Banner .BannerRight .Mobile img{max-width: 45%;top: 0;}    
+    .Unique .Title{padding: 0px 100px;margin-bottom: 40px;}
+    .Unique .MainBox{padding: 40px 15px;}
+    .Unique .Box .MainBox .Icon{font-size: 20px;padding: 25px;}
+    .Unique .Box .MainBox p{font-size: 14px;}
+    .Banner .BannerLeft .Box p{font-size: 14px;}
+    .Banner .BannerLeft .Box h1{margin-bottom: 15px;}
+    .Unique p{font-size: 14px;}
+    .Banner .BannerLeft .Technology .Android .Des p{font-size: 12px;}
+    .Banner .BannerLeft .Technology .Android .Des p span{font-size: 20px;}
+    .Unique{padding: 60px 15px;padding-bottom: 130px;}
+    .Unique .Box .MainBox h3{font-size: 16px;}
+    .Unique .Box .MainBox p{margin-top: 5px;}
+    .Unique .Customrow:after{right: 2.3%;width: 250px;
+    height: 250px;}
+    .Unique h2{margin-bottom: 5px;
+    font-size: 30px;}
+    .Client .wrapper p{font-size: 16px;}
+    .Client .wrapper{width: 100%;}
+    .Unique.Screen{padding-bottom: 60px;}
+    footer p{font-size: 13px;text-align: justify;}
+    footer ul li a{font-size: 13px;text-align: justify;}
+    footer h5{margin-bottom: 10px;font-size: 14px;}
+    footer .Social li i{    font-size: 17px!important;}
+    footer .Social li{padding: 12px;}
+    .text-muted{text-align: center;}
+    footer ul li{padding-left: 20px;}
+}
+
+@media (min-width:320px) and (max-width:767px){
+    
+    .Banner{padding: 120px 0px;padding-bottom: 40px;}
+    .Banner .BannerLeft .Box h1{font-size: 32px;line-height: 45px;margin-bottom: 15px;text-align: center}
+    .Banner .BannerLeft .Box p{font-size: 14px;text-align: center}
+    .Banner .BannerRight .Mobile img{position: unset;max-width: 100%;display: block;}
+    .Banner .BannerLeft .Technology{    flex-direction: column;}
+    .Banner .BannerLeft .Technology .Android.Ios{    margin-left: 0px;margin-top: 15px;}
+    .Banner .BannerRight .Mobile{ margin-top: 60px;}
+    .Unique h2{font-size: 26px;line-height: 30px;text-align: center;}
+    .Unique .Title {padding: 0px 0px;margin-bottom: 40px;}
+    .Unique p{font-size: 14px;}
+    .Unique{    padding: 40px 15px;}
+    .Unique .Customrow .Box{padding: 0;}
+    .Unique .Box .MainBox .Icon{font-size: 18px;
+    padding: 25px;    margin-bottom: 20px;}
+    .Unique .Box .MainBox h3{font-size: 18px;line-height: 24px;}
+    .Unique .Box .MainBox p{font-size: 14px;margin-top: 10px;}
+    .Unique .MainBox{margin-bottom: 20px;}
+    .Unique .Customrow:after{content: unset}
+    .Client .ClientInner{margin: 0px 15px;}
+    .Client .wrapper{width: 100%}
+    .Client .wrapper p{font-size: 18px;line-height: 24px;}
+    .Client .dot{height: 40px;width: 40px;margin: 0px 5px;}
+    footer h5{font-size: 16px;line-height: 24px;margin-bottom: 10px;}
+    footer p{font-size: 14px;}
+    footer .col-md-4{margin-bottom: 30px;}
+    footer .Social li{padding: 16px;}
+    footer .Social li i{font-size:14px!important;}
+    footer .Social{    max-width: 100%;}
+    footer .Customerow{margin-top: 0;}
+    footer p{margin-bottom: 0;}
+}
