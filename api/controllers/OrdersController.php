@@ -4,6 +4,7 @@ namespace api\controllers;
 use common\components\Common;
 
 /* USE COMMON MODELS */
+use common\models\Cart;
 use common\models\OrderPayment;
 use common\models\OrderProducts;
 use common\models\Orders;

@@ -149,24 +149,168 @@ class PaymentsController extends \yii\base\Controller
     }
     public function actionMakeBankAccount()
     {
-        $ch1 = curl_init('https://api.stripe.com/v1/charges');
-        curl_setopt($ch1, CURLOPT_HTTPHEADER, array(
-            'Authorization: Bearer sk_test_q5kNBiI1nvi7EXP6xtTvyPtJ00xQUK5yxl',
+        \Stripe\Stripe::setApiKey("sk_test_q5kNBiI1nvi7EXP6xtTvyPtJ00xQUK5yxl");
+        try {
+            // first create bank token
+            $bankToken = \Stripe\Token::create([
+                'bank_account' => [
+                    'country' => 'US',
+                    'currency' => 'usd',
+                    'account_holder_name' => 'Test User',
+                    'account_holder_type' => 'individual',
+                    'routing_number' => '110000000',
+                    'account_number' => '000123456789',
+                ],
+            ]);
+            // second create stripe account
+            $stripeAccount = \Stripe\Account::create([
+                "type" => "custom",
+                "country" => "US",
+                "email" => "jay.varan@zenocraft.com",
+                "business_type" => "individual",
+                "requested_capabilities" => ['card_payments', 'transfers'],
+            ]);
+            // third link the bank account with the stripe account
+            $bankAccount = \Stripe\Account::createExternalAccount(
+                $stripeAccount->id, ['external_account' => $bankToken->id]
+            );
+            // Fourth stripe account update for tos acceptance
+            \Stripe\Account::update(
+                $stripeAccount->id, [
+                    /* 'support_email' => 'jay.varan@zenocraft.com',
+                    'support_phone' => '5555671212',*/
+                    'tos_acceptance' => [
+                        'date' => time(),
+                        'ip' => $_SERVER['REMOTE_ADDR'], // Assumes you're not using a proxy
+                    ],
+                    /* 'legal_entity' => [
+                'type' => "company",
+                'business_name' => "Zenocraft INC", // Assumes you're not using a proxy
+                'additional_owners' => null, // Assumes you're not using a proxy
+                'first_name' => "Jay", // Assumes you're not using a proxy
+                'last_name' => "Varan", // Assumes you're not using a proxy
+                'dob' => [
+                'day' => 24,
+                'month' => 3, // Assumes you're not using a proxy
+                'year' => 1988, // Assumes you're not using a proxy
+                ],
+                'address' => [
+                'city' => "New York",
+                'country' => "US", // Assumes you're not using a proxy
+                'line1' => "Street Number 1", // Assumes you're not using a proxy
+                'line2' => "Near Church", // Assumes you're not using a proxy
+                'postal_code' => "10001", // Assumes you're not using a proxy
+                'state' => "New York", // Assumes you're not using a proxy
+                ],
+                'personal_address' => [
+                'city' => "New York",
+                'country' => "US", // Assumes you're not using a proxy
+                'line1' => "Street Number 1", // Assumes you're not using a proxy
+                'line2' => "Near Church", // Assumes you're not using a proxy
+                'postal_code' => "10001", // Assumes you're not using a proxy
+                'state' => "New York", // Assumes you're not using a proxy
+                ],
+                ],*/
+
+                ]
+            );
+            $response = ["bankToken" => $bankToken->id, "stripeAccount" => $stripeAccount->id, "bankAccount" => $bankAccount->id];
+            p($response);
+        } catch (\Exception $e) {
+            p($e);
+        }
+
+        /* $stripeSecret = "sk_test_q5kNBiI1nvi7EXP6xtTvyPtJ00xQUK5yxl";
+        \Stripe\Stripe::setApiKey($stripeSecret);
+        $acct = \Stripe\Account::create(array(
+        "country" => "US",
+        "type" => "custom",
+        "email" => "testingforproject0@gmail.com",
+        "requested_capabilities" => ["transfers", "card_payments"],
+        ));
+        if ($acct->id) {
+        try {
+
+        \Stripe\Stripe::setApiKey("sk_test_q5kNBiI1nvi7EXP6xtTvyPtJ00xQUK5yxl");
+
+        $account = \Stripe\Account::retrieve($acct->id);
+        $account->external_accounts->create(array(
+        "external_account" => array(
+        "object" => "bank_account",
+        "account_number" => "00012345",
+        "country" => "US",
+        "currency" => "usd",
+        "routing_number" => "110000000",
+        ),
         ));
 
-        curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
+        $message = 'OK';
+        $status = true;
 
-        $payloadData = '{
-        "amount":"50",
-        "currency":"USD",
-        "description":"test",
-        "source":"tok_mastercard",
-        }';
-        curl_setopt($ch1, CURLOPT_POSTFIELDS, $payloadData);
-        curl_setopt($ch1, CURLOPT_FOLLOWLOCATION, 1);
+        } catch (\Exception $error) {
+        $message = $error->getMessage();
+        $status = false;
+        }
 
-        $result = curl_exec($ch1);
-        print_r($result);
+        $results = (object) array(
+        'message' => $message,
+        'status' => $status,
+        );
+
+        p($results);
+        }*/
+/*        $ch1 = curl_init('https://api.stripe.com/v1/charges');
+curl_setopt($ch1, CURLOPT_HTTPHEADER, array(
+'Authorization: Bearer sk_test_q5kNBiI1nvi7EXP6xtTvyPtJ00xQUK5yxl',
+));
+
+curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
+
+$payloadData = '{
+"amount":"50",
+"currency":"USD",
+"description":"test",
+"source":"tok_mastercard",
+}';
+curl_setopt($ch1, CURLOPT_POSTFIELDS, $payloadData);
+curl_setopt($ch1, CURLOPT_FOLLOWLOCATION, 1);
+
+$result = curl_exec($ch1);
+print_r($result);*/
+    }
+
+    public function actionMakeStripePayout()
+    {
+        \Stripe\Stripe::setApiKey('sk_test_q5kNBiI1nvi7EXP6xtTvyPtJ00xQUK5yxl');
+
+// Create a PaymentIntent:
+        try {
+            $paymentIntent = \Stripe\PaymentIntent::create([
+                'amount' => 100,
+                'currency' => 'usd',
+                'payment_method_types' => ['card'],
+                'transfer_group' => '{ORDER10}',
+            ]);
+
+// Create a Transfer to a connected account (later):
+            $transfer = \Stripe\Transfer::create([
+                'amount' => 2000,
+                'currency' => 'usd',
+                'destination' => 'acct_1GNHcLJm63O7HFgl',
+                'transfer_group' => 'ORDER10',
+            ]);
+
+// Create a second Transfer to another connected account (later):
+            $transfer = \Stripe\Transfer::create([
+                'amount' => 2000,
+                'currency' => 'usd',
+                'destination' => 'acct_1GNEnSKkGYYI4n4a',
+                'transfer_group' => 'ORDER10',
+            ]);
+            p($transfer);
+        } catch (\Exception $e) {
+            p($e);
+        }
     }
 
 }
