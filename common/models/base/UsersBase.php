@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\models\AccountDetails;
 use ommon\models\Cart;
 use ommon\models\ChatList;
 use ommon\models\DeviceDetails;
@@ -76,7 +77,10 @@ class Users extends \yii\db\ActiveRecord
             'pincode' => 'Pin Code',
         ];
     }
-
+    public function getAccountDetails()
+    {
+        return $this->hasMany(AccountDetails::className(), ['user_id' => 'id']);
+    }
     /**
      * @return \yii\db\ActiveQuery
      */

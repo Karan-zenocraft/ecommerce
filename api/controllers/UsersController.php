@@ -1035,6 +1035,11 @@ class UsersController extends \yii\base\Controller
         $model = Users::findOne(["id" => $snUserId]);
         $snUserAddressList = [];
         if (!empty($model)) {
+            /*    $AccountDetails = AccountDetails::find()->where(["user_id" => $requestParam['user_id']])->one();
+            if (!empty($AccountDetails)) {
+            $ssMessage = 'Your account details are already added';
+            $amResponse = Common::errorResponse($ssMessage);
+            }*/
             if ($requestParam['account_type'] == Yii::$app->params['payment_type']['paypal']) {
                 $amRequiredParams = array('user_id', 'account_type', 'paypal_email');
                 $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
