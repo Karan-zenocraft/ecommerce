@@ -1,3 +1,9 @@
+<?php
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+use yii\captcha\Captcha;
+?>
+
 <section class="Banner">
         <div class="container">
             <div class="row">
@@ -203,4 +209,53 @@
 
         </div>
 
+    </section>
+
+    <section class="Unique Contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 Title">
+                    <h2>Get in Touch With Us</h2>
+                    <p> We'd love to hear from you. Here's how you can reach us.</p>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-8 ContactLeft">
+        <?php $form = ActiveForm::begin(); ?>
+
+    <?= $form->field($model, 'name') ?>
+
+    <?= $form->field($model, 'email') ?>
+
+    <?= $form->field($model, 'subject') ?>
+
+     <?= $form->field($model, 'message') ?>
+
+
+     <?= $form->field($model, 'captcha')->widget(Captcha::className(), 
+            ['template' => '<div class="captcha_img"><span>Captcha Code</span>{image}</div>'
+
+                . '<a class="refreshcaptcha" href="#">'
+
+                . Html::img('/images/imageName.png',[]).'</a>'
+                . 'Enter Captcha Code{input}',
+            ])->label(FALSE); ?> 
+
+    <div class="form-group">
+        <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
+    </div>
+
+    <div class="alert"><?=  Yii::$app->session->getFlash('success'); ?></div>
+
+<?php ActiveForm::end(); ?>
+                </div>
+
+
+                <div class="col-md-4 ContactRight d-flex align-items-end justify-content-center"> 
+                    <img src="<?php echo Yii::getAlias('@web') . "/themes/ecommerce_theme/image/contact-us.png" ?>" alt="" class="img-fluid">
+                </div>
+            </div>
+        </div>
     </section>

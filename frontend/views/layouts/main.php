@@ -97,11 +97,11 @@ EcommerceAsset::register($this);
                 <div class="col-md-4">
                     <h5>Don’t forget to follow us on:</h5>
                     <ul class="Social">
-                        <li class="facebook" title="Facebook"><a href="" ><i class="fa fa-facebook"></i></a></li>
-                        <li class="instagram" title="Instagram"><a href="" ><i class="fa fa-instagram"></i></a></li>
-                        <li class="linkedin" title="Linkedin"><a href="" ><i class="fa fa-linkedin"></i></a></li>
-                        <li class="youtube" title="Youtube"><a href="" ><i class="fa fa-youtube"></i></a></li>
-                        <li class="twitter" title="Twitter"><a href="" ><i class="fa fa-twitter"></i></a></li>
+                        <li class="facebook" title="Facebook"><a href="javascript:void(0);" ><i class="fa fa-facebook"></i></a></li>
+                        <li class="instagram" title="Instagram"><a href="javascript:void(0);" ><i class="fa fa-instagram"></i></a></li>
+                        <li class="linkedin" title="Linkedin"><a href="javascript:void(0);" ><i class="fa fa-linkedin"></i></a></li>
+                        <li class="youtube" title="Youtube"><a href="javascript:void(0);" ><i class="fa fa-youtube"></i></a></li>
+                        <li class="twitter" title="Twitter"><a href="javascript:void(0);" ><i class="fa fa-twitter"></i></a></li>
                     </ul>
                 </div>
 
@@ -110,7 +110,7 @@ EcommerceAsset::register($this);
             <div class="row Customerow">
             <div class="col-md-12 Copyright">
                 
-           <p class="text-muted mt-0 mb-0">Copyright <a href="www.Stablecorp.co.in">www.Stablecorp.co.in </a> 2019©.
+           <p class="text-muted mt-0 mb-0">Copyright <a href="javascript:void(0);">www.Stablecorp.co.in </a> 2019©.
         Made with <i style="color: red;" class="fa fa-heart"></i> by  <a class="link-inherit" href="http://www.zenocraft.com/" target="_blank"><b>Zenocraft</b> </a>. </p>
             </div>
             
