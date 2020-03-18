@@ -3,6 +3,12 @@
     color: #fff;
 }
 
+@media(min-width: 320px) and (max-width: 460px){
+
+    .field-contactus-captcha{display: flex;
+        flex-direction: column;}
+}
+
 .load {
     position: fixed;
     background: #fff;
@@ -14,9 +20,57 @@
     z-index: 9999999;
 }
 
+.Unique.Contact{padding-top: 15px;
+    padding-bottom: 0px}
+    .Contact .Title{margin-bottom: 50px!important;}
+.Contact .form-group{margin-bottom: 20px;}
+   .Contact form label{margin-bottom: 0px;letter-spacing: 2px;
+    font-size: 12px;
+    font-family: sans-serif;
+    font-weight: 600;
+    color: #777;}
 
+.help-block{letter-spacing: 2px;
+    font-family: sans-serif;}
+.captcha_img{float: right;}
+.Contact input:focus{outline: none;box-shadow: none!important;border-color: #2152e3!important}
+.Contact input{border: none;box-shadow: none!important;padding: 0px 0px;
+    height: 20px;
+    font-size: 14px;
+    letter-spacing: 2px;
+    font-family: sans-serif;
+    font-weight: 500;
+    border-bottom: 0.5px solid #777;
+    border-top: none;
+    outline: none;
+    border-radius: 0;}
+.alert{font-size: 14px;
+    text-align: center;
+    letter-spacing: 2px;
+    color: #155724;
+    padding: 0!important;font-weight: 600;}
 
-
+    .field-contactus-captcha{margin-bottom: 0px;
+    letter-spacing: 2px;
+    font-size: 12px;
+    font-family: sans-serif;
+    font-weight: 600;
+    color: #777;}
+.Contact .btn-primary:focus, .Contact .btn-primary:active, .Contact .btn-primary:hover{outline: none;
+    box-shadow: none!important;
+    border-color: #2152e3!important;border-radius: 25px;transition: 0.8s all}
+.Contact .btn-primary{
+width: 100%;
+transition: 0.8s all;
+border-radius: 0px;
+    margin-top: 15px;
+    background: #2152e3;
+    font-size: 14px;
+    font-family: sans-serif;
+    letter-spacing: 2px;
+    font-weight: 800;
+    padding: 5px 0px;
+    outline: none;}
 /*---------------------Scrolling Bar-------------------------------------*/
 
 .scrollbar-dusty-grass::-webkit-scrollbar-thumb {

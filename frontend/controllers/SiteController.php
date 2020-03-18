@@ -15,6 +15,7 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
+use frontend\models\ContactUs;
 
 /**
  * Site controller
@@ -82,7 +83,29 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $this->layout = 'main';
-        return $this->render('index');
+        $model = new ContactUs();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $postData =Yii::$app->request->post();
+            $model->name = $postData['ContactUs']['name'];
+            $model->email = $postData['ContactUs']['email'];
+            $model->subject=$postData['ContactUs']['subject'];
+            $model->message=$postData['ContactUs']['message'];
+            $model->save(false);
+            Yii::$app->session->setFlash('success', 'Thank you for contacting us – we will get back to you soon!');
+            return $this->goHome();
+        }
+
+        return $this->render('index', [
+            'model' => $model,
+        ]);
+
+        return [
+        
+        'captcha' => [
+            'class' => 'yii\captcha\CaptchaAction',
+//                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+        ],
+    ];
     }
 
     /**
