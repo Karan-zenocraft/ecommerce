@@ -13,7 +13,7 @@ return [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;dbname=ecommerce',
             'username' => 'root',
-            'password' => 'Zenocraft@123',
+            'password' => 'rutusha@123',
             'charset' => 'utf8',
         ],
         'assetManager' => [
@@ -41,6 +41,24 @@ return [
                 'encryption' => 'tls',
             ],
         ],
+        'cm' => [ // bad abbreviation of "CashMoney"; not sustainable long-term
+            'class' => 'app/components/CashMoney', // note: this has to correspond with the newly created folder, else you'd get a ReflectionError
+
+            // Next up, we set the public parameters of the class
+            'client_id' => 'ASBZA0Yx355sCWCSO7cOrJRqJeQc7WvwE8M1V2i5lflPtvUYNjkS-YDQOyD3c2DdBGtFYXrz_dsBwr_U',
+            'client_secret' => 'EArZoxY5krsdOaqkInKveE369O-k2O6bU57fXgG5aWOjlKY9xnrsd5wnd9i7L3Z_ZjQ3iZfmpKGkP7kK',
+            'isProduction' => false,
+            'config' => [
+                'mode' => 'sandbox', // 'sandbox' (development mode) or 'live' (production mode)
+            ],
+            // You may choose to include other configuration options from PayPal
+            // as they have specified in the documentation
+        ],
+        'onesignal' => [
+            'class' => '\rocketfirm\onesignal\OneSignal',
+            'appId' => 'ONESIGNAL_APP_ID',
+            'apiKey' => 'ONESIGNAL_API_KEY',
+        ],
         /*     'pdf' => [
     'class' => Pdf::classname(),
     'format' => Pdf::FORMAT_A4,
@@ -50,5 +68,14 @@ return [
     'tempPath' => Yii::$app->getAlias('@app/runtime/mpdf'),
     // refer settings section for all configuration options
     ],*/
+    ],
+    'modules' => [
+
+        'paypal' => [
+            'class' => PaypalModule::class,
+            'paypalRoles' => ['admin'],
+            'showTitles' => false,
+        ],
+
     ],
 ];
