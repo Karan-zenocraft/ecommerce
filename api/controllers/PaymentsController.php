@@ -149,14 +149,14 @@ class PaymentsController extends \yii\base\Controller
     }
     public function actionMakeBankAccount()
     {
-        \Stripe\Stripe::setApiKey("sk_test_q5kNBiI1nvi7EXP6xtTvyPtJ00xQUK5yxl");
+        \Stripe\Stripe::setApiKey("sk_test_ZBaRU0wL5z8YaEEPUhY3jzgF00tdHXg5cp");
         try {
             // first create bank token
             $bankToken = \Stripe\Token::create([
                 'bank_account' => [
                     'country' => 'US',
                     'currency' => 'usd',
-                    'account_holder_name' => 'Test User',
+                    'account_holder_name' => 'Jay Varan',
                     'account_holder_type' => 'individual',
                     'routing_number' => '110000000',
                     'account_number' => '000123456789',
@@ -166,9 +166,47 @@ class PaymentsController extends \yii\base\Controller
             $stripeAccount = \Stripe\Account::create([
                 "type" => "custom",
                 "country" => "US",
-                "email" => "jay.varan@zenocraft.com",
+                "email" => "testingforproject0@gmail.com",
                 "business_type" => "individual",
-                "requested_capabilities" => ['card_payments', 'transfers'],
+                "business_profile" => [
+                    "url" => "http://www.zenocraft.com",
+                ],
+                "individual" => [
+                    /* 'address' => [
+                    'city' => 'New Jersy',
+                    'line1' => '3084 State Route 27, Suite 12, Kendall Park',
+                    'postal_code' => '08540',
+                    ],
+                    'dob' => [
+                    "day" => '25',
+                    "month" => '02',
+                    "year" => '1994',
+                    ],
+                    'ssn_last_4' => "8989",
+                    "email" => 'jay.varan@zenocraft.com',*/
+                    "first_name" => 'Jay',
+                    "last_name" => 'Varan',
+                    /* "gender" => 'male',
+                "phone" => "7406888817",*/
+                ],
+                /*      "individual" => [
+                'address' => [
+                'city' => 'London',
+                'line1' => '16a, Little London, Milton Keynes, MK19 6HT ',
+                'postal_code' => 'MK19 6HT',
+                ],
+                'dob' => [
+                "day" => '25',
+                "month" => '02',
+                "year" => '1994',
+                ],
+                "email" => 'testingforproject0@gmail.com',
+                "first_name" => 'Soura',
+                "last_name" => 'Ghosh',
+                "gender" => 'male',
+                "phone" => "7898898881",
+                ],*/
+                "requested_capabilities" => ['transfers'],
             ]);
             // third link the bank account with the stripe account
             $bankAccount = \Stripe\Account::createExternalAccount(
@@ -183,35 +221,6 @@ class PaymentsController extends \yii\base\Controller
                         'date' => time(),
                         'ip' => $_SERVER['REMOTE_ADDR'], // Assumes you're not using a proxy
                     ],
-                    /* 'legal_entity' => [
-                'type' => "company",
-                'business_name' => "Zenocraft INC", // Assumes you're not using a proxy
-                'additional_owners' => null, // Assumes you're not using a proxy
-                'first_name' => "Jay", // Assumes you're not using a proxy
-                'last_name' => "Varan", // Assumes you're not using a proxy
-                'dob' => [
-                'day' => 24,
-                'month' => 3, // Assumes you're not using a proxy
-                'year' => 1988, // Assumes you're not using a proxy
-                ],
-                'address' => [
-                'city' => "New York",
-                'country' => "US", // Assumes you're not using a proxy
-                'line1' => "Street Number 1", // Assumes you're not using a proxy
-                'line2' => "Near Church", // Assumes you're not using a proxy
-                'postal_code' => "10001", // Assumes you're not using a proxy
-                'state' => "New York", // Assumes you're not using a proxy
-                ],
-                'personal_address' => [
-                'city' => "New York",
-                'country' => "US", // Assumes you're not using a proxy
-                'line1' => "Street Number 1", // Assumes you're not using a proxy
-                'line2' => "Near Church", // Assumes you're not using a proxy
-                'postal_code' => "10001", // Assumes you're not using a proxy
-                'state' => "New York", // Assumes you're not using a proxy
-                ],
-                ],*/
-
                 ]
             );
             $response = ["bankToken" => $bankToken->id, "stripeAccount" => $stripeAccount->id, "bankAccount" => $bankAccount->id];
@@ -281,7 +290,7 @@ print_r($result);*/
 
     public function actionMakeStripePayout()
     {
-        \Stripe\Stripe::setApiKey('sk_test_q5kNBiI1nvi7EXP6xtTvyPtJ00xQUK5yxl');
+        \Stripe\Stripe::setApiKey('sk_test_ZBaRU0wL5z8YaEEPUhY3jzgF00tdHXg5cp');
 
 // Create a PaymentIntent:
         try {
@@ -290,23 +299,25 @@ print_r($result);*/
                 'currency' => 'usd',
                 'payment_method_types' => ['card'],
                 'transfer_group' => '{ORDER10}',
+
             ]);
 
 // Create a Transfer to a connected account (later):
             $transfer = \Stripe\Transfer::create([
                 'amount' => 2000,
                 'currency' => 'usd',
-                'destination' => 'acct_1GNHcLJm63O7HFgl',
+                'destination' => 'acct_1GNz6UBR53n7euxB',
                 'transfer_group' => 'ORDER10',
+                'source_transaction' => 'ch_1GNzXGBha6OGeEPHMOa4Fr7j',
             ]);
 
 // Create a second Transfer to another connected account (later):
-            $transfer = \Stripe\Transfer::create([
-                'amount' => 2000,
-                'currency' => 'usd',
-                'destination' => 'acct_1GNEnSKkGYYI4n4a',
-                'transfer_group' => 'ORDER10',
-            ]);
+            /*  $transfer = \Stripe\Transfer::create([
+            'amount' => 2000,
+            'currency' => 'usd',
+            'destination' => 'acct_1GNEnSKkGYYI4n4a',
+            'transfer_group' => 'ORDER10',
+            ]);*/
             p($transfer);
         } catch (\Exception $e) {
             p($e);
