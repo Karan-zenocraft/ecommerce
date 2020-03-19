@@ -1514,6 +1514,12 @@ class Common
         return $amResponse;
     }
 
+    public static function errorResponseWithData($ssErrorMessage, $amReponseParam)
+    {
+        $amResponse = array('success' => "0", 'message' => $ssErrorMessage, 'data' => $amReponseParam);
+        return $amResponse;
+    }
+
     /**
      * function: encodeResponseJSON()
      * For generate random number

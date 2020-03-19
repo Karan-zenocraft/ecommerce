@@ -1017,7 +1017,7 @@ class UsersController extends \yii\base\Controller
         $amData = Common::checkRequestType();
         $amResponse = $amReponseParam = [];
         // Check required validation for request parameter.
-        $amRequiredParams = array('user_id', 'account_type');
+        $amRequiredParams = array('user_id', 'paypal_email', 'stripe_bank_account_holder_name', 'stripe_bank_account_holder_type', 'stripe_bank_routing_number', 'stripe_bank_account_number');
         $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
 
         // If any getting error in request paramter then set error message.
@@ -1035,133 +1035,78 @@ class UsersController extends \yii\base\Controller
         $model = Users::findOne(["id" => $snUserId]);
         $snUserAddressList = [];
         if (!empty($model)) {
-            /*    $AccountDetails = AccountDetails::find()->where(["user_id" => $requestParam['user_id']])->one();
+            $AccountDetails = AccountDetails::find()->where(["user_id" => $requestParam['user_id']])->one();
             if (!empty($AccountDetails)) {
-            $ssMessage = 'Your account details are already added';
-            $amResponse = Common::errorResponse($ssMessage);
-            }*/
-            if ($requestParam['account_type'] == Yii::$app->params['payment_type']['paypal']) {
-                $amRequiredParams = array('user_id', 'account_type', 'paypal_email');
-                $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
-                if (!empty($amParamsResult['error'])) {
-                    $amResponse = Common::errorResponse($amParamsResult['error']);
-                    Common::encodeResponseJSON($amResponse);
-                }
+                $ssMessage = 'Your account details are already added';
+                $amResponse = Common::errorResponse($ssMessage);
+                Common::encodeResponseJSON($amResponse);
+            }
+// Generate Stripe Bank account and connect account from the data
+            \Stripe\Stripe::setApiKey("sk_test_ZBaRU0wL5z8YaEEPUhY3jzgF00tdHXg5cp");
+            try {
+                // first create bank token
+                $bankToken = \Stripe\Token::create([
+                    'bank_account' => [
+                        'country' => 'US',
+                        'currency' => 'usd',
+                        'account_holder_name' => $requestParam['stripe_bank_account_holder_name'],
+                        'account_holder_type' => $requestParam['stripe_bank_account_holder_type'],
+                        'routing_number' => $requestParam['stripe_bank_routing_number'],
+                        'account_number' => $requestParam['stripe_bank_account_number'],
+                    ],
+                ]);
+                $account_holder_name = explode(" ", $requestParam['stripe_bank_account_holder_name']);
+                $first_name = $account_holder_name[0];
+                $last_name = $account_holder_name[1];
+                // second create stripe account
+                $stripeAccount = \Stripe\Account::create([
+                    "type" => "custom",
+                    "country" => "US",
+                    "email" => $model->email,
+                    "business_type" => "individual",
+                    "business_profile" => [
+                        "url" => "http://www.zenocraft.com",
+                    ],
+                    "individual" => [
+                        "first_name" => $first_name,
+                        "last_name" => $last_name,
+                    ],
+                    "requested_capabilities" => ['transfers'],
+                ]);
+                // third link the bank account with the stripe account
+                $bankAccount = \Stripe\Account::createExternalAccount(
+                    $stripeAccount->id, ['external_account' => $bankToken->id]
+                );
+                // Fourth stripe account update for tos acceptance
+                \Stripe\Account::update(
+                    $stripeAccount->id, [
+                        'tos_acceptance' => [
+                            'date' => time(),
+                            'ip' => $_SERVER['REMOTE_ADDR'], // Assumes you're not using a proxy
+                        ],
+                    ]
+                );
+                $response = ["bankToken" => $bankToken->id, "stripeAccount" => $stripeAccount->id, "bankAccount" => $bankAccount->id];
                 $accountDetailModel = new AccountDetails();
-                $accountDetailModel->paypal_email = $requestParam['paypal_email'];
                 $accountDetailModel->user_id = $requestParam['user_id'];
-                $accountDetailModel->account_type = $requestParam['account_type'];
+                $accountDetailModel->stripe_bank_account_holder_name = $requestParam['stripe_bank_account_holder_name'];
+                $accountDetailModel->stripe_bank_account_holder_type = $requestParam['stripe_bank_account_holder_type'];
+                $accountDetailModel->stripe_bank_routing_number = $requestParam['stripe_bank_routing_number'];
+                $accountDetailModel->stripe_bank_account_number = $requestParam['stripe_bank_account_number'];
+                $accountDetailModel->stripe_bank_token = $response['bankToken'];
+                $accountDetailModel->stripe_connect_account_id = $response['stripeAccount'];
+                $accountDetailModel->stripe_bank_accout_id = $response['bankAccount'];
+                $accountDetailModel->paypal_email = $requestParam['paypal_email'];
                 $accountDetailModel->save(false);
                 $amReponseParam = $accountDetailModel;
-                $ssMessage = 'Paypal account detail successfully added';
+                $ssMessage = 'Stripe account detail successfully added.';
                 $amResponse = Common::successResponse($ssMessage, $amReponseParam);
 
-            } else {
-                $amRequiredParams = array('user_id', 'account_type', 'stripe_bank_account_holder_name', 'stripe_bank_account_holder_type', 'stripe_bank_routing_number', 'stripe_bank_account_number');
-                $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
-                if (!empty($amParamsResult['error'])) {
-                    $amResponse = Common::errorResponse($amParamsResult['error']);
-                    Common::encodeResponseJSON($amResponse);
-                }
-// Generate Stripe Bank account and connect account from the data
-                \Stripe\Stripe::setApiKey("sk_test_ZBaRU0wL5z8YaEEPUhY3jzgF00tdHXg5cp");
-                try {
-                    // first create bank token
-                    $bankToken = \Stripe\Token::create([
-                        'bank_account' => [
-                            'country' => 'US',
-                            'currency' => 'usd',
-                            'account_holder_name' => $requestParam['stripe_bank_account_holder_name'],
-                            'account_holder_type' => $requestParam['stripe_bank_account_holder_type'],
-                            'routing_number' => $requestParam['stripe_bank_routing_number'],
-                            'account_number' => $requestParam['stripe_bank_account_number'],
-                        ],
-                    ]);
-                    $account_holder_name = explode(" ", $requestParam['stripe_bank_account_holder_name']);
-                    $first_name = $account_holder_name[0];
-                    $last_name = $account_holder_name[1];
-                    // second create stripe account
-                    $stripeAccount = \Stripe\Account::create([
-                        "type" => "custom",
-                        "country" => "US",
-                        "email" => $model->email,
-                        "business_type" => "individual",
-                        "business_profile" => [
-                            "url" => "http://www.zenocraft.com",
-                        ],
-                        "individual" => [
-                            /* 'address' => [
-                            'city' => 'New Jersy',
-                            'line1' => '3084 State Route 27, Suite 12, Kendall Park',
-                            'postal_code' => '08540',
-                            ],
-                            'dob' => [
-                            "day" => '25',
-                            "month" => '02',
-                            "year" => '1994',
-                            ],
-                            'ssn_last_4' => "8989",
-                            "email" => 'jay.varan@zenocraft.com',*/
-                            "first_name" => $first_name,
-                            "last_name" => $last_name,
-                            /* "gender" => 'male',
-                        "phone" => "7406888817",*/
-                        ],
-                        /*      "individual" => [
-                        'address' => [
-                        'city' => 'London',
-                        'line1' => '16a, Little London, Milton Keynes, MK19 6HT ',
-                        'postal_code' => 'MK19 6HT',
-                        ],
-                        'dob' => [
-                        "day" => '25',
-                        "month" => '02',
-                        "year" => '1994',
-                        ],
-                        "email" => 'testingforproject0@gmail.com',
-                        "first_name" => 'Soura',
-                        "last_name" => 'Ghosh',
-                        "gender" => 'male',
-                        "phone" => "7898898881",
-                        ],*/
-                        "requested_capabilities" => ['transfers'],
-                    ]);
-                    // third link the bank account with the stripe account
-                    $bankAccount = \Stripe\Account::createExternalAccount(
-                        $stripeAccount->id, ['external_account' => $bankToken->id]
-                    );
-                    // Fourth stripe account update for tos acceptance
-                    \Stripe\Account::update(
-                        $stripeAccount->id, [
-                            /* 'support_email' => 'jay.varan@zenocraft.com',
-                            'support_phone' => '5555671212',*/
-                            'tos_acceptance' => [
-                                'date' => time(),
-                                'ip' => $_SERVER['REMOTE_ADDR'], // Assumes you're not using a proxy
-                            ],
-                        ]
-                    );
-                    $response = ["bankToken" => $bankToken->id, "stripeAccount" => $stripeAccount->id, "bankAccount" => $bankAccount->id];
-                    $accountDetailModel = new AccountDetails();
-                    $accountDetailModel->user_id = $requestParam['user_id'];
-                    $accountDetailModel->stripe_bank_account_holder_name = $requestParam['stripe_bank_account_holder_name'];
-                    $accountDetailModel->stripe_bank_account_holder_type = $requestParam['stripe_bank_account_holder_type'];
-                    $accountDetailModel->stripe_bank_routing_number = $requestParam['stripe_bank_routing_number'];
-                    $accountDetailModel->stripe_bank_account_number = $requestParam['stripe_bank_account_number'];
-                    $accountDetailModel->stripe_bank_token = $response['bankToken'];
-                    $accountDetailModel->stripe_connect_account_id = $response['stripeAccount'];
-                    $accountDetailModel->stripe_bank_accout_id = $response['bankAccount'];
-                    $accountDetailModel->account_type = $requestParam['account_type'];
-                    $accountDetailModel->save(false);
-                    $amReponseParam = $accountDetailModel;
-                    $ssMessage = 'Stripe account detail successfully added.';
-                    $amResponse = Common::successResponse($ssMessage, $amReponseParam);
-
-                } catch (\Exception $e) {
-                    $ssMessage = 'Something went wrong';
-                    $amResponse = Common::errorResponse($ssMessage);
-                }
+            } catch (\Exception $e) {
+                $ssMessage = 'Something went wrong';
+                $amResponse = Common::errorResponse($ssMessage);
             }
+
         } else {
             $ssMessage = 'Invalid User.';
             $amResponse = Common::errorResponse($ssMessage);
