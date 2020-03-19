@@ -1103,6 +1103,7 @@ class UsersController extends \yii\base\Controller
                 $amResponse = Common::successResponse($ssMessage, $amReponseParam);
 
             } catch (\Exception $e) {
+                p($e);
                 $ssMessage = 'Something went wrong';
                 $amResponse = Common::errorResponse($ssMessage);
             }
