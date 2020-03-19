@@ -2,7 +2,6 @@
 
 namespace common\models;
 
-use common\models\AccountDetails;
 use ommon\models\Cart;
 use ommon\models\ChatList;
 use ommon\models\DeviceDetails;
@@ -77,17 +76,9 @@ class Users extends \yii\db\ActiveRecord
             'pincode' => 'Pin Code',
         ];
     }
-    public function getAccountDetails()
-    {
-        return $this->hasMany(AccountDetails::className(), ['user_id' => 'id']);
-    }
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getRole()
-    {
-        return $this->hasOne(UserRole::className(), ['id' => 'role_id']);
-    }
 
     /**
      * {@inheritdoc}
@@ -97,9 +88,16 @@ class Users extends \yii\db\ActiveRecord
     {
         return new UsersQuery(get_called_class());
     }
+    public function getRole()
+    {
+        return $this->hasOne(UserRole::className(), ['id' => 'role_id']);
+    }
+    public function getAccountDetails()
+    {
+        return $this->hasOne(AccountDetails::className(), ['user_id' => 'id']);
+    }
     public function getCarts()
     {
-        return 'users';
         return $this->hasMany(Cart::className(), ['user_id' => 'id']);
     }
     public function getChatLists()

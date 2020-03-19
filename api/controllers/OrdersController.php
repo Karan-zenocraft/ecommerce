@@ -75,21 +75,28 @@ class OrdersController extends \yii\base\Controller
                         $orderProducts = new OrderProducts();
                         $orderProducts->order_id = $order->id;
                         $orderProducts->product_id = $product['product_id'];
+                        $orderProducts->quantity = $product['quantity'];
                         $orderProducts->discount = $productDetails->discount;
                         $orderProducts->tax = $productDetails->tax;
                         $price = $productDetails->price;
+                        $price_with_quantity = $product['quantity'] * $price;
                         if (!empty($productDetails->discount) && ($productDetails->discount != "0")) {
-                            $discountPrice = ($productDetails->discount / 100) * $price;
-                            $discountedPrice = $price - $discountPrice;
+                            $discountPrice = ($productDetails->discount / 100) * $price_with_quantity;
+                            $discountedPrice = $price_with_quantity - $discountPrice;
                         } else {
-                            $discountedPrice = $price;
+                            $discountedPrice = $price_with_quantity;
                         }
+                        $orderProducts->discounted_price = $discountedPrice;
+                        $orderProducts->actual_price = $price;
+                        $orderProducts->price_with_quantity = $price_with_quantity;
+
                         if (!empty($productDetails->tax) && ($productDetails->tax != "0")) {
                             $sellPrice = $discountedPrice + $productDetails->tax;
                         } else {
                             $sellPrice = $discountedPrice;
                         }
-                        $orderProducts->sell_price = $sellPrice;
+                        $orderProducts->total_price_with_tax_discount = $sellPrice;
+                        $orderProducts->save(false);
                         $prices[] = $sellPrice;
                         //$orderProducts->save(false);
 
