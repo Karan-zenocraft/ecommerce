@@ -68,7 +68,6 @@ class OrdersController extends \yii\base\Controller
                     $orderPayment = new orderPayment();
                     $orderPayment->order_id = $order->id;
                     $orderPayment->transaction_id = $requestParam['transaction_id'];
-                    $orderPayment->buyer_stripe_id = !empty($requestParam['buyer_stripe_id']) ? $requestParam['buyer_stripe_id'] : "";
                     $orderPayment->save(false);
                     foreach ($products as $key => $product) {
                         $productDetails = Products::findOne($product['product_id']);
@@ -78,6 +77,7 @@ class OrdersController extends \yii\base\Controller
                         $orderProducts->quantity = $product['quantity'];
                         $orderProducts->discount = $productDetails->discount;
                         $orderProducts->tax = $productDetails->tax;
+                        $orderProducts->seller_id = $productDetails->seller_id;
                         $price = $productDetails->price;
                         $price_with_quantity = $product['quantity'] * $price;
                         if (!empty($productDetails->discount) && ($productDetails->discount != "0")) {
@@ -86,6 +86,10 @@ class OrdersController extends \yii\base\Controller
                         } else {
                             $discountedPrice = $price_with_quantity;
                         }
+                        $ownerCharge = $productDetails->owner_discount;
+                        $ownerCharge = $ownerCharge / 100 * $product['quantity'];
+                        $charge = $discountedPrice * $ownerCharge;
+                        $orderProducts->seller_amount = $discountedPrice - $charge;
                         $orderProducts->discounted_price = $discountedPrice;
                         $orderProducts->actual_price = $price;
                         $orderProducts->price_with_quantity = $price_with_quantity;
