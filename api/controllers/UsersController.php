@@ -104,13 +104,13 @@ class UsersController extends \yii\base\Controller
                     $amReponseParam['photo'] = !empty($model->photo) && file_exists(Yii::getAlias('@htmlpath') . '/' . $parseUrl['path']) ? $model->photo : Yii::$app->params['root_url'] . '/' . "uploads/dp/no_image.png";
                     $amReponseParam['device_token'] = $device_model->device_token;
                     $amReponseParam['type'] = $device_model->type;
-                    if (!empty($UserAddressDefault)) {
-                        $amReponseParam['defaultAddress'] = $UserAddressDefault->address;
-                        $amReponseParam['default_lat'] = $UserAddressDefault->lat;
-                        $amReponseParam['default_longg'] = $UserAddressDefault->longg;
-                        $amReponseParam['default_pincode'] = $UserAddressDefault->pincode;
-                        $amReponseParam['default_address_id'] = $UserAddressDefault->id;
-                    }
+
+                    $amReponseParam['defaultAddress'] = !empty($UserAddressDefault) ? $UserAddressDefault->address : "";
+                    $amReponseParam['default_lat'] = !empty($UserAddressDefault) ? $UserAddressDefault->lat : "";
+                    $amReponseParam['default_longg'] = !empty($UserAddressDefault) ? $UserAddressDefault->longg : "";
+                    $amReponseParam['default_pincode'] = !empty($UserAddressDefault) ? $UserAddressDefault->pincode : "";
+                    $amReponseParam['default_address_id'] = !empty($UserAddressDefault) ? $UserAddressDefault->id : "";
+
                     // $amReponseParam['gcm_registration_id'] = !empty($device_model->gcm_id) ? $device_model->gcm_id : "";
                     $amReponseParam['auth_token'] = $ssAuthToken;
                     $amReponseParam['login_type'] = $model->login_type;
@@ -153,13 +153,11 @@ class UsersController extends \yii\base\Controller
                         $model->auth_token = $ssAuthToken;
                         $model->save(false);
                         $UserAddressDefault = UserAddresses::find()->where(['user_id' => $model->id, "is_default" => "1"])->one();
-                        if (!empty($UserAddressDefault)) {
-                            $amReponseParam['defaultAddress'] = $UserAddressDefault->address;
-                            $amReponseParam['default_lat'] = $UserAddressDefault->lat;
-                            $amReponseParam['default_longg'] = $UserAddressDefault->longg;
-                            $amReponseParam['default_pincode'] = $UserAddressDefault->pincode;
-                            $amReponseParam['default_address_id'] = $UserAddressDefault->id;
-                        }
+                        $amReponseParam['defaultAddress'] = !empty($UserAddressDefault) ? $UserAddressDefault->address : "";
+                        $amReponseParam['default_lat'] = !empty($UserAddressDefault) ? $UserAddressDefault->lat : "";
+                        $amReponseParam['default_longg'] = !empty($UserAddressDefault) ? $UserAddressDefault->longg : "";
+                        $amReponseParam['default_pincode'] = !empty($UserAddressDefault) ? $UserAddressDefault->pincode : "";
+                        $amReponseParam['default_address_id'] = !empty($UserAddressDefault) ? $UserAddressDefault->id : "";
                         $AccountDetails = AccountDetails::find()->where(['user_id' => $model->id])->one();
                         $ssMessage = 'successfully login.';
                         $amReponseParam['email'] = $model->email;
@@ -204,13 +202,11 @@ class UsersController extends \yii\base\Controller
                     $ssMessage = 'successfully login.';
                     $amReponseParam['email'] = $model->email;
                     $UserAddressDefault = UserAddresses::find()->where(['user_id' => $model->id, "is_default" => "1"])->one();
-                    if (!empty($UserAddressDefault)) {
-                        $amReponseParam['defaultAddress'] = $UserAddressDefault->address;
-                        $amReponseParam['default_lat'] = $UserAddressDefault->lat;
-                        $amReponseParam['default_longg'] = $UserAddressDefault->longg;
-                        $amReponseParam['default_pincode'] = $UserAddressDefault->pincode;
-                        $amReponseParam['default_address_id'] = $UserAddressDefault->id;
-                    }
+                    $amReponseParam['defaultAddress'] = !empty($UserAddressDefault) ? $UserAddressDefault->address : "";
+                    $amReponseParam['default_lat'] = !empty($UserAddressDefault) ? $UserAddressDefault->lat : "";
+                    $amReponseParam['default_longg'] = !empty($UserAddressDefault) ? $UserAddressDefault->longg : "";
+                    $amReponseParam['default_pincode'] = !empty($UserAddressDefault) ? $UserAddressDefault->pincode : "";
+                    $amReponseParam['default_address_id'] = !empty($UserAddressDefault) ? $UserAddressDefault->id : "";
                     $AccountDetails = AccountDetails::find()->where(['user_id' => $model->id])->one();
                     $amReponseParam['sell_active'] = !empty($AccountDetails) ? "true" : "false";
                     $amReponseParam['user_id'] = $model->id;
@@ -273,6 +269,11 @@ class UsersController extends \yii\base\Controller
                 $amReponseParam['photo'] = !empty($model->photo) ? $model->photo : Yii::$app->params['root_url'] . '/' . "uploads/dp/no_image.png";
                 $amReponseParam['device_token'] = $device_model->device_token;
                 $amReponseParam['type'] = $device_model->type;
+                $amReponseParam['defaultAddress'] = "";
+                $amReponseParam['default_lat'] = "";
+                $amReponseParam['default_longg'] = "";
+                $amReponseParam['default_pincode'] = "";
+                $amReponseParam['default_address_id'] = "";
                 // $amReponseParam['gcm_registration_id'] = !empty($device_model->gcm_id) ? $device_model->gcm_id : "";
                 $amReponseParam['auth_token'] = $ssAuthToken;
                 $amReponseParam['login_type'] = $model->login_type;
@@ -417,6 +418,12 @@ class UsersController extends \yii\base\Controller
             $ssMessage = 'You are successfully registered.';
             $amReponseParam['email'] = $model->email;
             $AccountDetails = AccountDetails::find()->where(['user_id' => $model->id])->one();
+            $UserAddressDefault = UserAddresses::find()->where(['user_id' => $model->id, "is_default" => "1"])->one();
+            $amReponseParam['defaultAddress'] = !empty($UserAddressDefault) ? $UserAddressDefault->address : "";
+            $amReponseParam['default_lat'] = !empty($UserAddressDefault) ? $UserAddressDefault->lat : "";
+            $amReponseParam['default_longg'] = !empty($UserAddressDefault) ? $UserAddressDefault->longg : "";
+            $amReponseParam['default_pincode'] = !empty($UserAddressDefault) ? $UserAddressDefault->pincode : "";
+            $amReponseParam['default_address_id'] = !empty($UserAddressDefault) ? $UserAddressDefault->id : "";
             $amReponseParam['sell_active'] = !empty($AccountDetails) ? "true" : "false";
             $amReponseParam['user_id'] = "$model->id";
             $amReponseParam['role_id'] = $model->role_id;
