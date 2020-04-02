@@ -86,9 +86,11 @@ class UsersController extends \yii\base\Controller
                     $model->auth_token = $ssAuthToken;
                     $model->save(false);
                     $UserAddressDefault = UserAddresses::find()->where(['user_id' => $model->id, "is_default" => "1"])->one();
+                    $AccountDetails = AccountDetails::find()->where(['user_id' => $model->id])->one();
                     $amReponseParam = [];
                     $ssMessage = 'successfully login.';
                     $amReponseParam['email'] = $model->email;
+                    $amReponseParam['sell_active'] = !empty($AccountDetails) ? "true" : "false";
                     $amReponseParam['user_id'] = $model->id;
                     $amReponseParam['role_id'] = $model->role_id;
                     $amReponseParam['first_name'] = $model->first_name;
@@ -158,8 +160,10 @@ class UsersController extends \yii\base\Controller
                             $amReponseParam['default_pincode'] = $UserAddressDefault->pincode;
                             $amReponseParam['default_address_id'] = $UserAddressDefault->id;
                         }
+                        $AccountDetails = AccountDetails::find()->where(['user_id' => $model->id])->one();
                         $ssMessage = 'successfully login.';
                         $amReponseParam['email'] = $model->email;
+                        $amReponseParam['sell_active'] = !empty($AccountDetails) ? "true" : "false";
                         $amReponseParam['user_id'] = $model->id;
                         $amReponseParam['role_id'] = $model->role_id;
                         $amReponseParam['first_name'] = $model->first_name;
@@ -207,6 +211,8 @@ class UsersController extends \yii\base\Controller
                         $amReponseParam['default_pincode'] = $UserAddressDefault->pincode;
                         $amReponseParam['default_address_id'] = $UserAddressDefault->id;
                     }
+                    $AccountDetails = AccountDetails::find()->where(['user_id' => $model->id])->one();
+                    $amReponseParam['sell_active'] = !empty($AccountDetails) ? "true" : "false";
                     $amReponseParam['user_id'] = $model->id;
                     $amReponseParam['role_id'] = $model->role_id;
                     $amReponseParam['first_name'] = $model->first_name;
@@ -253,6 +259,8 @@ class UsersController extends \yii\base\Controller
                 $device_model->save(false);
                 $ssMessage = 'successfully login.';
                 $amReponseParam['email'] = $model->email;
+                $AccountDetails = AccountDetails::find()->where(['user_id' => $model->id])->one();
+                $amReponseParam['sell_active'] = !empty($AccountDetails) ? "true" : "false";
                 $amReponseParam['user_id'] = $model->id;
                 $amReponseParam['role_id'] = $model->role_id;
                 $amReponseParam['first_name'] = $model->first_name;
@@ -408,6 +416,8 @@ class UsersController extends \yii\base\Controller
 
             $ssMessage = 'You are successfully registered.';
             $amReponseParam['email'] = $model->email;
+            $AccountDetails = AccountDetails::find()->where(['user_id' => $model->id])->one();
+            $amReponseParam['sell_active'] = !empty($AccountDetails) ? "true" : "false";
             $amReponseParam['user_id'] = "$model->id";
             $amReponseParam['role_id'] = $model->role_id;
             $amReponseParam['first_name'] = $model->first_name;
