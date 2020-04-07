@@ -4,6 +4,7 @@ namespace common\models\base;
 
 use common\models\Orders;
 use common\models\Products;
+use common\models\Users;
 use Yii;
 
 /**
@@ -37,7 +38,9 @@ class OrderProductsBase extends \yii\db\ActiveRecord
         return [
             [['order_id', 'product_id', 'quantity', 'created_at', 'updated_at'], 'required'],
             [['order_id', 'product_id', 'quantity'], 'integer'],
-            [['created_at', 'updated_at', 'discount', 'tax', 'sell_price'], 'safe'],
+            [['created_at', 'updated_at', 'discount', 'tax', 'actual_price', 'price_with_quantity'
+                , 'discounted_price'
+                , 'total_price_with_tax_discount', 'seller_id', 'seller_amount'], 'safe'],
             [['order_id'], 'exist', 'skipOnError' => true, 'targetClass' => Orders::className(), 'targetAttribute' => ['order_id' => 'id']],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Products::className(), 'targetAttribute' => ['product_id' => 'id']],
         ];
@@ -55,7 +58,12 @@ class OrderProductsBase extends \yii\db\ActiveRecord
             'quantity' => 'Quantity',
             'discount' => 'Discount',
             'tax' => 'Tax',
-            'sell_price' => 'Sell Price',
+            'price_with_quantity' => 'Price with Quantity',
+            'discounted_price' => 'Discounted Price',
+            'actual_price' => 'Actual Product Price',
+            'total_price_with_tax_discount' => 'Total Price with tax and discount',
+            'seller_id' => 'Seller',
+            'seller_amount' => 'Seller Amount',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -69,6 +77,10 @@ class OrderProductsBase extends \yii\db\ActiveRecord
         return $this->hasOne(Orders::className(), ['id' => 'order_id']);
     }
 
+    public function getSeller()
+    {
+        return $this->hasOne(Users::className(), ['id' => 'seller_id']);
+    }
     /**
      * @return \yii\db\ActiveQuery
      */

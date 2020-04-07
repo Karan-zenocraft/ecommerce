@@ -68,28 +68,39 @@ class OrdersController extends \yii\base\Controller
                     $orderPayment = new orderPayment();
                     $orderPayment->order_id = $order->id;
                     $orderPayment->transaction_id = $requestParam['transaction_id'];
-                    $orderPayment->buyer_stripe_id = !empty($requestParam['buyer_stripe_id']) ? $requestParam['buyer_stripe_id'] : "";
                     $orderPayment->save(false);
                     foreach ($products as $key => $product) {
                         $productDetails = Products::findOne($product['product_id']);
                         $orderProducts = new OrderProducts();
                         $orderProducts->order_id = $order->id;
                         $orderProducts->product_id = $product['product_id'];
+                        $orderProducts->quantity = $product['quantity'];
                         $orderProducts->discount = $productDetails->discount;
                         $orderProducts->tax = $productDetails->tax;
+                        $orderProducts->seller_id = $productDetails->seller_id;
                         $price = $productDetails->price;
+                        $price_with_quantity = $product['quantity'] * $price;
                         if (!empty($productDetails->discount) && ($productDetails->discount != "0")) {
-                            $discountPrice = ($productDetails->discount / 100) * $price;
-                            $discountedPrice = $price - $discountPrice;
+                            $discountPrice = ($productDetails->discount / 100) * $price_with_quantity;
+                            $discountedPrice = $price_with_quantity - $discountPrice;
                         } else {
-                            $discountedPrice = $price;
+                            $discountedPrice = $price_with_quantity;
                         }
+                        $ownerCharge = $productDetails->owner_discount;
+                        $ownerCharge = $ownerCharge / 100 * $product['quantity'];
+                        $charge = $discountedPrice * $ownerCharge;
+                        $orderProducts->seller_amount = $discountedPrice - $charge;
+                        $orderProducts->discounted_price = $discountedPrice;
+                        $orderProducts->actual_price = $price;
+                        $orderProducts->price_with_quantity = $price_with_quantity;
+
                         if (!empty($productDetails->tax) && ($productDetails->tax != "0")) {
                             $sellPrice = $discountedPrice + $productDetails->tax;
                         } else {
                             $sellPrice = $discountedPrice;
                         }
-                        $orderProducts->sell_price = $sellPrice;
+                        $orderProducts->total_price_with_tax_discount = $sellPrice;
+                        $orderProducts->save(false);
                         $prices[] = $sellPrice;
                         //$orderProducts->save(false);
 

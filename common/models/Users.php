@@ -93,7 +93,10 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return $this->hasOne(UserRoles::className(), ['id' => 'role_id']);
     }
-
+    public function getAccountDetails()
+    {
+        return $this->hasOne(AccountDetails::className(), ['user_id' => 'id']);
+    }
     public function validateUserName()
     {
         $validateName = Users::find()->where('user_name = "' . $this->user_name . '" and id != "' . $this->id . '"')->all();
