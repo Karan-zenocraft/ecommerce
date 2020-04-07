@@ -16,8 +16,8 @@ Yii::setAlias('@root', realpath(dirname(__FILE__) . '/../../'));
 Yii::setAlias('@htmlpath', realpath(dirname(__FILE__) . '/../../../'));
 
 //START: site configuration
-Yii::setAlias('site_title', 'Ecommerce');
-Yii::setAlias('site_footer', 'Ecommerce');
+Yii::setAlias('site_title', 'Stable');
+Yii::setAlias('site_footer', 'Stable');
 //END: site configuration
 
 //START: BACK-END message
