@@ -153,6 +153,7 @@ class ProductsController extends \yii\base\Controller
             Common::encodeResponseJSON($amResponse);
         }
         $requestParam = $amData['request_param'];
+        p($requestParam);
         //Check User Status//
         Common::matchUserStatus($requestParam['user_id']);
         //VERIFY AUTH TOKEN
