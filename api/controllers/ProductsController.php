@@ -167,7 +167,7 @@ class ProductsController extends \yii\base\Controller
                 $radius = 30;
                 $query = "select *
                             from products
-                            WHERE round(( 3959 * acos( least(1.0,cos( radians(" . $user_latitude . ") ) * cos( radians(lat) ) * cos( radians(longg) - radians(" . $user_longitude . ") ) + sin( radians(" . $user_latitude . ") ) * sin( radians(lat))))), 1) < " . $radius . " AND is_approve = " . Yii::$app->params['is_approve_value']['true'] . "";
+                            WHERE round(( 3959 * acos( least(1.0,cos( radians(" . $user_latitude . ") ) * cos( radians(lat) ) * cos( radians(longg) - radians(" . $user_longitude . ") ) + sin( radians(" . $user_latitude . ") ) * sin( radians(lat))))), 1) < " . $radius . " AND is_approve = '" . Yii::$app->params['is_approve_value']['true'] . "'";
                 if (!empty($requestParam['category_id'])) {
                     $query .= " AND category_id = '" . $requestParam['category_id'] . "'";
                 }
