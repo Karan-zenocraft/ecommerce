@@ -77,7 +77,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 return Yii::$app->params['order_status_value'][$data->status];
             },
         ],
-        //'created_at',
+        [
+            'attribute' => 'created_at',
+            'label' => 'Date',
+            'value' => function ($data) {
+                return $data->created_at;
+            },
+        ],
         //'updated_at',
 
         [

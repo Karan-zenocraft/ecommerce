@@ -1,6 +1,13 @@
+<style type="text/css">
+    .from_date{
+    width: 235px !important;
+    height: 32px !important;
+}
+</style>
 <?php
 
 use yii\helpers\Html;
+use yii\jui\DatePicker;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -32,9 +39,11 @@ use yii\widgets\ActiveForm;
 </div>
 
     <?php // echo $form->field($model, 'status') ?>
-
-    <?php // echo $form->field($model, 'created_at') ?>
-
+<div class="row">
+    <div class="span3 style_input_width">
+  <?=$form->field($model, 'created_at')->widget(DatePicker::className(), ['dateFormat' => 'yyyy-MM-dd', 'options' => ['class' => 'from_date']/*, 'clientOptions' => ['minDate'=>'0']*/])->label('Date')?>
+</div>
+</div>
     <?php // echo $form->field($model, 'updated_at') ?>
 
     <div class="form-group">

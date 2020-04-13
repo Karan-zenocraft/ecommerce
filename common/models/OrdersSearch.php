@@ -65,13 +65,14 @@ class OrdersSearch extends Orders
             'user_address_id' => $this->user_address_id,
             'payment_type' => $this->payment_type,
             'status' => $this->status,
-            'created_at' => $this->created_at,
+            // 'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
         $query->joinWith(['buyer' => function ($query) {
-            $query->where('users.user_name LIKE "%' . $this->buyer_id . '%"');
+            $query->andFilterWhere(['like', 'users.user_name', $this->buyer_id]);
         }]);
+        $query->andFilterWhere(['like', 'orders.created_at', $this->created_at]);
 
         return $dataProvider;
     }

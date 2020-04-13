@@ -668,3 +668,7 @@ table.table_class tbody {  }
     height: 32px !important;
 }*/
 
+.from_date{
+    width: 235px;
+    height: 32px;
+}
