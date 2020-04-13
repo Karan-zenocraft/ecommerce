@@ -81,6 +81,7 @@ class CartController extends \yii\base\Controller
                 $amReponseParam['total_sell_price'] = array_sum($total_sell_price_arr);
                 $ssMessage = 'Cart Product List';
             } else {
+                $amReponseParam = "";
                 $ssMessage = 'Your cart is Empty';
             }
             $amResponse = Common::successResponse($ssMessage, $amReponseParam);
