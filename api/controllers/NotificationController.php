@@ -2,13 +2,14 @@
 namespace api\controllers;
 
 /* USE COMMON MODELS */
+use common\components\Common;
 use Yii;
 use yii\web\Controller;
 
 /**
  * MainController implements the CRUD actions for APIs.
  */
-class SendNotificationController extends \yii\base\Controller
+class NotificationController extends \yii\base\Controller
 {
     public function actionSend()
     {
@@ -52,6 +53,10 @@ class SendNotificationController extends \yii\base\Controller
         curl_close($ch);
 
         return $response;
+    }
+    public function actionTest()
+    {
+        Common::SendNotificationIOS();
     }
 
 }
