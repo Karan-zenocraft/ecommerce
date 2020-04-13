@@ -40,7 +40,6 @@ class CartController extends \yii\base\Controller
         $model = Users::findOne(["id" => $snUserId]);
         if (!empty($model)) {
             $snCartList = Cart::find()->with('product')->where(['user_id' => $requestParam['user_id']])->asArray()->all();
-            p($snCartList);
 
             $amReponseParam = [];
             if (!empty($snCartList)) {
@@ -77,6 +76,7 @@ class CartController extends \yii\base\Controller
                     $amResponseData[] = $ttt;
                     return $amResponseData;
                 });
+                p($amResponseData);
                 $amReponseParam['list'] = $amResponseData;
                 $total_sell_price_arr = array_column($amResponseData, "product_sell_price");
                 $amReponseParam['total_sell_price'] = array_sum($total_sell_price_arr);
