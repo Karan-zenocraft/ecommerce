@@ -7,6 +7,9 @@ body {
 
 .breadcrumb li a{color: #006dcc}
 
+.brand.logo{height: 58px;display: flex!important;align-items: center;justify-content: center;}
+.brand.logo img{height: unset!important;width: unset!important;}
+
 #login-form hr, #forgot-password-form hr{border-bottom: 1px solid #ddd!important;}
 #login-form, #forgot-password-form{
     box-shadow: 0 10px 30px rgba(0,0,0,.1);background: #fff;border: 1px solid #e5e5e5;border-radius: 5px;
