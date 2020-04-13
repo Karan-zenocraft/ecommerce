@@ -2,14 +2,14 @@
 
 namespace common\models;
 
-use common\models\Products;
+use common\models\OrderProducts;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * ProductsSearch represents the model behind the search form of `common\models\Products`.
+ * OrderProductsSearch represents the model behind the search form of `common\models\OrderProducts`.
  */
-class ProductsSearch extends Products
+class OrderProductsSearch extends OrderProducts
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,9 @@ class ProductsSearch extends Products
     public function rules()
     {
         return [
-            [['id', 'category_id', 'price', 'rent_price', 'rent_price_duration', 'quantity', 'status'], 'integer'],
-            [['title', 'description', 'is_rent', 'created_at', 'updated_at', 'seller_id', 'address_id', 'subcategory_id'], 'safe'],
+            [['id', 'order_id', 'product_id', 'quantity', 'seller_id'], 'integer'],
+            [['actual_price', 'price_with_quantity', 'discount', 'tax', 'discounted_price', 'total_price_with_tax_discount', 'seller_amount'], 'number'],
+            [['created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -40,7 +41,7 @@ class ProductsSearch extends Products
      */
     public function search($params)
     {
-        $query = Products::find();
+        $query = OrderProducts::find()->where(['order_id' => $params['order_id']]);
 
         // add conditions that should always apply here
 
@@ -59,23 +60,20 @@ class ProductsSearch extends Products
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'category_id' => $this->category_id,
-            'subcategory_id' => $this->subcategory_id,
-            'price' => $this->price,
-            'rent_price' => $this->rent_price,
-            'rent_price_duration' => $this->rent_price_duration,
+            'order_id' => $this->order_id,
+            'product_id' => $this->product_id,
+            'actual_price' => $this->actual_price,
+            'price_with_quantity' => $this->price_with_quantity,
             'quantity' => $this->quantity,
-            'products.status' => $this->status,
+            'discount' => $this->discount,
+            'tax' => $this->tax,
+            'discounted_price' => $this->discounted_price,
+            'total_price_with_tax_discount' => $this->total_price_with_tax_discount,
+            'seller_id' => $this->seller_id,
+            'seller_amount' => $this->seller_amount,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
-
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'is_rent', $this->is_rent]);
-        $query->joinWith(['seller' => function ($query) {
-            $query->where('CONCAT(users.first_name," ", users.last_name) LIKE "%' . $this->seller_id . '%"');
-        }]);
 
         return $dataProvider;
     }

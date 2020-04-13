@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\components\AdminCoreController;
 use common\components\Common;
+use common\models\Category;
 use common\models\Products;
 use common\models\ProductsSearch;
 use Yii;
@@ -38,18 +39,19 @@ return [
     {
         $searchModel = new ProductsSearch();
         $queryParams = array_merge(array(), Yii::$app->request->getQueryParams());
-        if (isset(["TimesheetSearch"]["task_id"])) {
-
-            $snTaskId = ($_GET['tid'] > 0) ? $_GET['tid'] : 0;
-            $queryParams["TimesheetSearch"]["task_id"] = $snTaskId;
+        if (isset($_GET['ProductsSearch']['category_id'])) {
+            $amSubCategories = Category::SubCategoryDropdown($_GET['ProductsSearch']['category_id']);
+        } else {
+            $amSubCategories = Category::SubCategoryDropdown($searchModel->category_id);
         }
-
-        //p($queryParams);
+        if (isset($_GET['ProductsSearch']['subcategory_id']) && !empty($_GET['ProductsSearch']['subcategory_id'])) {
+            $searchModel->subcategory_id = $_GET['ProductsSearch']['subcategory_id'];
+        }
         $dataProvider = $searchModel->search($queryParams);
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
+            'amSubCategories' => $amSubCategories,
             'dataProvider' => $dataProvider,
         ]);
     }

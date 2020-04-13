@@ -25,13 +25,9 @@ use yii\widgets\ActiveForm;
                 });',
 ]);?>
 </div>
-<?php
 
-$model->subcategory_id = !empty($_REQUEST['ProductsSearch']['subcategory_id']) ? $_REQUEST['ProductsSearch']['subcategory_id'] : '';
-
-?>
     <div class="span3 style_input_width">
-    <?=$form->field($model, 'subcategory_id')->dropDownList(array("" => ""), [
+    <?=$form->field($model, 'subcategory_id')->dropDownList($amSubCategories, [
     'prompt' => Yii::t('app', '-Choose Sub Category-'),
 ]);?>
 </div>
@@ -40,37 +36,38 @@ $model->subcategory_id = !empty($_REQUEST['ProductsSearch']['subcategory_id']) ?
  <div class="span3 style_input_width">
     <?=$form->field($model, 'seller_id')?>
 </div>
-</div>
-<div class="row">
     <div class="span3 style_input_width">
     <?=$form->field($model, 'title')?>
-</div>
-<div class="span3 style_input_width">
-    <?=$form->field($model, 'description')?>
-</div>
-</div>
-<div class="row">
-<div class="span3 style_input_width">
-    <?php echo $form->field($model, 'price') ?>
-</div>
-  <div class="span3 style_input_width">
-    <?php echo $form->field($model, 'is_rent')->dropDownList(array("" => "") + Yii::$app->params['user_status']); ?>
 </div>
 </div>
 <div class="row">
 
 <div class="span3 style_input_width">
-    <?php echo $form->field($model, 'rent_price') ?>
+    <?=$form->field($model, 'description')?>
 </div>
-    <div class="span3 style_input_width">
-    <?php echo $form->field($model, 'rent_price_duration') ?>
+<div class="span3 style_input_width">
+    <?php echo $form->field($model, 'price') ?>
 </div>
 </div>
 <div class="row">
+  <div class="span3 style_input_width">
+    <?php echo $form->field($model, 'is_rent')->dropDownList(array("" => "") + Yii::$app->params['user_status']); ?>
+</div>
+<div class="span3 style_input_width">
+    <?php echo $form->field($model, 'rent_price') ?>
+</div>
+</div>
+<div class="row">
+
+    <div class="span3 style_input_width">
+    <?php echo $form->field($model, 'rent_price_duration') ?>
+</div>
 
 <div class="span3 style_input_width">
     <?php echo $form->field($model, 'quantity') ?>
 </div>
+</div>
+<div class="row">
     <div class="span3 style_input_width">
     <?=$form->field($model, 'status')->dropDownList(Yii::$app->params['user_status']);?>
 </div>
