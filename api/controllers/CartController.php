@@ -80,10 +80,12 @@ class CartController extends \yii\base\Controller
                 $total_sell_price_arr = array_column($amResponseData, "product_sell_price");
                 $amReponseParam['total_sell_price'] = array_sum($total_sell_price_arr);
                 $ssMessage = 'Cart Product List';
+                $amResponse = Common::successResponse($ssMessage, $amReponseParam);
+
             } else {
                 $ssMessage = 'Your cart is Empty';
+                $amResponse = Common::errorResponse($ssMessage);
             }
-            $amResponse = Common::errorResponse($ssMessage);
         } else {
             $ssMessage = 'Invalid User.';
             $amResponse = Common::errorResponse($ssMessage);
