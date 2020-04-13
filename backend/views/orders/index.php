@@ -86,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'view_menu_items' => function ($url, $model) {
                     $title = "View Products";
                     $flag = 1;
-                    $url = Yii::$app->urlManager->createUrl(['order-menus/index', 'order_id' => $model->id]);
+                    $url = Yii::$app->urlManager->createUrl(['order-products/index', 'order_id' => $model->id]);
                     return Common::template_view_menu_items($url, $model, $title, $flag);
 
                 },

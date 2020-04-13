@@ -55,6 +55,12 @@ $this->params['breadcrumbs'][] = $this->title;
             },
         ],
         [
+            'attribute' => 'subcategory_id',
+            'value' => function ($data) {
+                return !empty($data->subcategory_id) ? $data->subcategory->title : '-';
+            },
+        ],
+        [
             'attribute' => 'seller_id',
             'value' => function ($data) {
                 return !empty($data->seller_id) ? $data->seller->first_name . " " . $data->seller->last_name : '-';

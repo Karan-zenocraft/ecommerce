@@ -32,6 +32,6 @@ class Categories extends \common\models\base\CategoriesBase
     public static function CategoriesDropDown()
     {
         //->where(['status'=>Yii::$app->params['department_active_status']])
-        return ArrayHelper::map(Categories::find()->orderBy('title')->asArray()->all(), 'id', 'title');
+        return ArrayHelper::map(Category::find()->orderBy('title')->asArray()->all(), 'id', 'title');
     }
 }

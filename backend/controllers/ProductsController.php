@@ -37,6 +37,15 @@ return [
     public function actionIndex()
     {
         $searchModel = new ProductsSearch();
+        $queryParams = array_merge(array(), Yii::$app->request->getQueryParams());
+        if (isset(["TimesheetSearch"]["task_id"])) {
+
+            $snTaskId = ($_GET['tid'] > 0) ? $_GET['tid'] : 0;
+            $queryParams["TimesheetSearch"]["task_id"] = $snTaskId;
+        }
+
+        //p($queryParams);
+        $dataProvider = $searchModel->search($queryParams);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

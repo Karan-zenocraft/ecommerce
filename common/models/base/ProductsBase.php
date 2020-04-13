@@ -80,12 +80,12 @@ class ProductsBase extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'category_id' => 'Category ID',
-            'subcategory_id' => 'Subcategory ID',
-            'seller_id' => 'Seller ID',
+            'category_id' => 'Category',
+            'subcategory_id' => 'Subcategory',
+            'seller_id' => 'Seller',
             'title' => 'Title',
             'description' => 'Description',
-            'brand_id' => 'Brand ID',
+            'brand_id' => 'Brand',
             'year_of_purchase' => 'Year Of Purchase',
             'lat' => 'Lat',
             'longg' => 'Longg',

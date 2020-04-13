@@ -1947,10 +1947,10 @@ class Common
     public static function SendNotificationIOS()
     {
         $url = "https://fcm.googleapis.com/fcm/send";
-        $token = "e44o8roG9kT4unIsq8iaAL:APA91bEAtOR8VP-KuTnkg7hxtUhxzleWfvE16EmNFBuZgzcUOpwO6six9M3H-5a-uhyoYIfPsH3JdxMUZD_lEhurbrstxggbzJ-CBSWaBE3qXP8CqKsvDX1oorw4qX0iibs4MgMFUqnq";
+        $token = "druGK2HOe0ImsT_wOthDwh:APA91bGr972TP4GFrzad3vvZJeXDFXtI123MMLuKevW5lzLVGLyL5GZhzFwkjStiNArmqg-aQhSfBDHQj52CwXIoA70hp2PtURz7Ki4ESThL5wfKQsjXs5JfDAq2BtUsOnkoDSVqH2ce";
         $serverKey = 'AAAAos2bA6Q:APA91bH6kF0NmNg1B8GE8jIVMvmY_R3beLdYUn5tKOK29UNHZmJxof4fE52IvlEF4od3TRmMSxuUka7t5eoUG01vn5FoyNxV9W28UJrGH_ILwlI3M2mHv6Fucpoqh6OrI75L3vUE3NVl';
-        $title = "Test IOS Notification";
-        $body = "Test IOS Notification";
+        $title = "Test IOS Notification 2";
+        $body = "Test IOS Notification 2";
         $notification = array('title' => $title, 'text' => $body, 'sound' => 'default', 'badge' => '1');
         $arrayToSend = array('to' => $token, 'notification' => $notification, 'priority' => 'high');
         $json = json_encode($arrayToSend);

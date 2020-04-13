@@ -1,9 +1,8 @@
 <?php
 
-use common\models\Categories;
+use common\models\Category;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
 /* @var $this yii\web\View */
 /* @var $model common\models\ProductsSearch */
 /* @var $form yii\widgets\ActiveForm */
@@ -18,8 +17,26 @@ use yii\widgets\ActiveForm;
 
 <div class="row">
     <div class="span3 style_input_width">
-    <?=$form->field($model, 'category_id')->dropDownList(array("" => "") + Categories::CategoryDropdown());?>
+    <?=$form->field($model, 'category_id')->dropDownList(array("" => "") + Category::ParentCategoryDropdown(), [
+    'prompt' => Yii::t('app', '-Choose Parent Category-'),
+    'onchange' => '
+                $.post( "' . Yii::$app->urlManager->createUrl('category/get-subcategory?id=') . '"+$(this).val(), function( data ) {
+                  $( "select#productssearch-subcategory_id" ).html( data );
+                });',
+]);?>
 </div>
+<?php
+
+$model->subcategory_id = !empty($_REQUEST['ProductsSearch']['subcategory_id']) ? $_REQUEST['ProductsSearch']['subcategory_id'] : '';
+
+?>
+    <div class="span3 style_input_width">
+    <?=$form->field($model, 'subcategory_id')->dropDownList(array("" => ""), [
+    'prompt' => Yii::t('app', '-Choose Sub Category-'),
+]);?>
+</div>
+</div>
+<div class="row">
  <div class="span3 style_input_width">
     <?=$form->field($model, 'seller_id')?>
 </div>
@@ -37,7 +54,7 @@ use yii\widgets\ActiveForm;
     <?php echo $form->field($model, 'price') ?>
 </div>
   <div class="span3 style_input_width">
-    <?php echo $form->field($model, 'is_rent') ?>
+    <?php echo $form->field($model, 'is_rent')->dropDownList(array("" => "") + Yii::$app->params['user_status']); ?>
 </div>
 </div>
 <div class="row">
