@@ -3,7 +3,6 @@
 use common\models\Category;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
 /* @var $this yii\web\View */
 /* @var $model common\models\BrandsSearch */
 /* @var $form yii\widgets\ActiveForm */
@@ -33,13 +32,15 @@ use yii\widgets\ActiveForm;
                 $.post( "' . Yii::$app->urlManager->createUrl('category/get-subcategory?id=') . '"+$(this).val(), function( data ) {
                   $( "select#brandssearch-sub_category_id" ).html( data );
                 });',
-]);
-?>
-</div></div>
+]);?>
+</div>
+</div>
 <div class="row">
     <div class="span3 style_input_width">
-        <?php $subCategories = [];?>
-   <?=$form->field($model, 'sub_category_id')->dropDownList($subCategories)?>
+    <?=$form->field($model, 'sub_category_id')->dropDownList($amSubCategories, [
+    'prompt' => Yii::t('app', '-Choose Sub Category-'),
+]);?>
+</div>
 </div>
 </div>
 

@@ -20,13 +20,13 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="users-form span12">
 
      <?=Html::a(Yii::t('app', '<i class="icon-filter icon-white"></i> Filter'), "javascript:void(0);", ['class' => 'btn btn-primary open_search']);?>
-     <?php if (!empty($_REQUEST['CategorySearch']) || (!empty($_GET['temp']) && $_GET['temp'] == "clear")) {?>
+     <?php if (!empty($_REQUEST['BrandsSearch']) || (!empty($_GET['temp']) && $_GET['temp'] == "clear")) {?>
         <div class="brands-serach common_search">
-         <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+         <?php echo $this->render('_search', ['model' => $searchModel, 'amSubCategories' => $amSubCategories]); ?>
         </div>
 <?php } else {?>
     <div class="brand-serach common_search">
-         <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+         <?php echo $this->render('_search', ['model' => $searchModel, 'amSubCategories' => $amSubCategories]); ?>
         </div>
     <?php }?>
 </div>
@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="navbar navbar-inner block-header">
         <div class="muted pull-left"><?=Html::encode($this->title)?></div>
         <div class="pull-right">
-            <?=Html::a(Yii::t('app', '<i class="icon-plus"></i> Add Category'), ['create'], ['class' => 'btn btn-success'])?>
+            <?=Html::a(Yii::t('app', '<i class="icon-plus"></i> Add Brand'), ['create'], ['class' => 'btn btn-success'])?>
             <?=Html::a(Yii::t('app', '<i class="icon-refresh"></i> Reset'), Yii::$app->urlManager->createUrl(['categories/index']), ['class' => 'btn btn-primary'])?>
         </div>
     </div>

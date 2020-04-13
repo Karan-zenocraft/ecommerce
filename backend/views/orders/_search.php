@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
 <div class="row">
     <div class="span3 style_input_width">
 
-    <?=$form->field($model, 'payment_type')?>
+    <?=$form->field($model, 'payment_type')->dropdownList(array("" => "") + Yii::$app->params['payment_type_value'])?>
 </div>
 </div>
 <div class="row">

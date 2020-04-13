@@ -37,10 +37,21 @@ class BrandsController extends AdminCoreController
     public function actionIndex()
     {
         $searchModel = new BrandsSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        //$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $queryParams = array_merge(array(), Yii::$app->request->getQueryParams());
+        if (isset($_GET['BrandsSearch']['parent_category_id'])) {
+            $amSubCategories = Category::SubCategoryDropdown($_GET['BrandsSearch']['parent_category_id']);
+        } else {
+            $amSubCategories = Category::SubCategoryDropdown($searchModel->parent_category_id);
+        }
+        if (isset($_GET['BrandsSearch']['sub_category_id']) && !empty($_GET['BrandsSearch']['sub_category_id'])) {
+            $searchModel->sub_category_id = $_GET['BrandsSearch']['sub_category_id'];
+        }
+        $dataProvider = $searchModel->search($queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
+            'amSubCategories' => $amSubCategories,
             'dataProvider' => $dataProvider,
         ]);
     }

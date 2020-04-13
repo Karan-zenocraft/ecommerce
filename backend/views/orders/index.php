@@ -71,7 +71,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'label' => 'transaction_id',
             'value' => 'orderPayment.transaction_id',
         ],
-        //'status',
+        [
+            'attribute' => 'status',
+            'value' => function ($data) {
+                return Yii::$app->params['order_status_value'][$data->status];
+            },
+        ],
         //'created_at',
         //'updated_at',
 

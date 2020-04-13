@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
 <div class="row">
     <div class="span3 style_input_width">
-    <?=$form->field($model, 'category_id')->dropDownList(array("" => "") + Category::ParentCategoryDropdown(), [
+    <?=$form->field($model, 'category_id')->dropDownList(Category::ParentCategoryDropdown(), [
     'prompt' => Yii::t('app', '-Choose Parent Category-'),
     'onchange' => '
                 $.post( "' . Yii::$app->urlManager->createUrl('category/get-subcategory?id=') . '"+$(this).val(), function( data ) {

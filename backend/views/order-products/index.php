@@ -46,7 +46,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'tax',
         //'discounted_price',
         //'total_price_with_tax_discount',
-        'seller_id',
         [
             'attribute' => 'seller_id',
             'value' => function ($data) {
