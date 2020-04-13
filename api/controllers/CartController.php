@@ -40,6 +40,7 @@ class CartController extends \yii\base\Controller
         $model = Users::findOne(["id" => $snUserId]);
         if (!empty($model)) {
             $snCartList = Cart::find()->with('product')->where(['user_id' => $requestParam['user_id']])->asArray()->all();
+            p($snCartList);
 
             $amReponseParam = [];
             if (!empty($snCartList)) {
