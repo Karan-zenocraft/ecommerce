@@ -76,7 +76,6 @@ class CartController extends \yii\base\Controller
                     $amResponseData[] = $ttt;
                     return $amResponseData;
                 });
-                p($amResponseData);
                 $amReponseParam['list'] = $amResponseData;
                 $total_sell_price_arr = array_column($amResponseData, "product_sell_price");
                 $amReponseParam['total_sell_price'] = array_sum($total_sell_price_arr);
