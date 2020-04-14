@@ -294,4 +294,62 @@ class OrdersController extends \yii\base\Controller
         // FOR ENCODE RESPONSE INTO JSON //
         Common::encodeResponseJSON($amResponse);
     }
+
+    public function actionGetSellerProductOrderList()
+    {
+        //Get all request parameter
+        $amData = Common::checkRequestType();
+        $amResponse = $amReponseParam = [];
+        // Check required validation for request parameter.
+        $amRequiredParams = array('user_id');
+        $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
+
+        // If any getting error in request paramter then set error message.
+        if (!empty($amParamsResult['error'])) {
+            $amResponse = Common::errorResponse($amParamsResult['error']);
+            Common::encodeResponseJSON($amResponse);
+        }
+        $requestParam = $amData['request_param'];
+        //Check User Status//
+        Common::matchUserStatus($requestParam['user_id']);
+        //VERIFY AUTH TOKEN
+        $authToken = Common::get_header('auth_token');
+        Common::checkAuthentication($authToken, $requestParam['user_id']);
+        $snUserId = $requestParam['user_id'];
+        $model = Users::findOne(["id" => $snUserId]);
+        if (!empty($model)) {
+            $sellerProducts = Products::find()->select('GROUP_CONCAT(id) AS product_id')->where(['seller_id' => $requestParam['user_id']])->asArray()->all();
+            $seller_products = current($sellerProducts);
+            if (!empty($seller_products['product_id'])) {
+                $query = "SELECT DISTINCT GROUP_CONCAT(orders.`id`) AS order_id
+                FROM `orders`
+                LEFT JOIN order_payment
+                ON `orders`.id=`order_payment`.order_id
+                LEFT JOIN order_products
+                ON `orders`.id=`order_products`.order_id
+                WHERE `order_products`.product_id IN (" . $seller_products['product_id'] . ")";
+                $orders = Yii::$app->db->createCommand($query)->queryAll();
+                $orderss = current($orders);
+                if (!empty($orderss['order_id'])) {
+                    $ordersList = Orders::find()->with('orderPayment')->with('orderProducts')->where("id IN(" . $orderss['order_id'] . ")")->asArray()->all();
+                    $amReponseParam = $ordersList;
+                    $ssMessage = "Seller Product's Orders List";
+                    $amResponse = Common::successResponse($ssMessage, $amReponseParam);
+                } else {
+                    $amReponseParam = [];
+                    $ssMessage = 'Orders List not found';
+                    $amResponse = Common::successResponse($ssMessage, $amReponseParam);
+                }
+            } else {
+                $amReponseParam = [];
+                $ssMessage = 'You have not added any product yet.';
+                $amResponse = Common::successResponse($ssMessage, $amReponseParam);
+            }
+        } else {
+            $ssMessage = 'Invalid User.';
+            $amResponse = Common::errorResponse($ssMessage);
+        }
+        // FOR ENCODE RESPONSE INTO JSON //
+        Common::encodeResponseJSON($amResponse);
+    }
 }
