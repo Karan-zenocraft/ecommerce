@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\models\NotificationList;
 use ommon\models\Cart;
 use ommon\models\ChatList;
 use ommon\models\DeviceDetails;
@@ -92,6 +93,11 @@ class Users extends \yii\db\ActiveRecord
     {
         return $this->hasOne(UserRole::className(), ['id' => 'role_id']);
     }
+    public function getNotificationLists()
+    {
+        return $this->hasMany(NotificationList::className(), ['user_id' => 'id']);
+    }
+
     public function getAccountDetails()
     {
         return $this->hasOne(AccountDetails::className(), ['user_id' => 'id']);

@@ -1,8 +1,12 @@
 <?php
+
 namespace api\controllers;
 
-/* USE COMMON MODELS */
 use common\components\Common;
+use common\models\NotificationList;
+
+/* USE COMMON MODELS */
+use common\models\Users;
 use Yii;
 use yii\web\Controller;
 
@@ -11,52 +15,45 @@ use yii\web\Controller;
  */
 class NotificationController extends \yii\base\Controller
 {
-    public function actionSend()
+    public function actionGetNotificationList()
     {
-        $response = $this->sendMessage();
-        $return["allresponses"] = $response;
-        $return = json_encode($return);
-        print("\n\nJSON received:\n");
-        print($return);
-        print("\n");
+        //Get all request parameter
+        $amData = Common::checkRequestType();
+        $amResponse = $amReponseParam = [];
+
+        // Check required validation for request parameter.
+        $amRequiredParams = array('user_id');
+        $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
+
+        // If any getting error in request paramter then set error message.
+        if (!empty($amParamsResult['error'])) {
+            $amResponse = Common::errorResponse($amParamsResult['error']);
+            Common::encodeResponseJSON($amResponse);
+        }
+
+        $requestParam = $amData['request_param'];
+        //Check User Status//
+        Common::matchUserStatus($requestParam['user_id']);
+        //VERIFY AUTH TOKEN
+        $authToken = Common::get_header('auth_token');
+        Common::checkAuthentication($authToken, $requestParam['user_id']);
+        $snUserId = $requestParam['user_id'];
+        $model = Users::findOne($snUserId);
+        if (!empty($model)) {
+            $notificationList = NotificationList::find()->where(["user_id" => $requestParam['user_id']])->asArray()->All();
+            if (!empty($notificationList)) {
+                $ssMessage = 'Notifications List';
+                $amReponseParam = $notificationList;
+                $amResponse = Common::successResponse($ssMessage, $amReponseParam);
+            } else {
+                $ssMessage = 'Notifications not found';
+                $amResponse = Common::successResponse($ssMessage, $amReponseParam);
+            }
+        } else {
+            $ssMessage = 'Invalid User.';
+            $amResponse = Common::errorResponse($ssMessage);
+        }
+        // FOR ENCODE RESPONSE INTO JSON //
+        Common::encodeResponseJSON($amResponse);
     }
-    public function sendMessage()
-    {
-        $content = array(
-            "en" => 'Testing Message',
-        );
-
-        $fields = array(
-            'app_id' => "e6dee169-93d8-411f-a737-b4a62bce8247",
-            'included_segments' => array('All'),
-            'include_player_ids' => array(),
-            'data' => array("foo" => "bar"),
-            'large_icon' => "ic_launcher_round.png",
-            'contents' => $content,
-        );
-
-        $fields = json_encode($fields);
-        print("\nJSON sent:\n");
-        print($fields);
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8',
-            'Authorization: Basic xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-        $response = curl_exec($ch);
-        curl_close($ch);
-
-        return $response;
-    }
-    public function actionTest()
-    {
-        Common::SendNotificationIOS();
-    }
-
 }

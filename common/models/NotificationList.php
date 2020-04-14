@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-class ProductPhotos extends \common\models\base\ProductPhotosBase
+class NotificationList extends \common\models\base\NotificationListBase
 {
     public function beforeSave($insert)
     {

@@ -3,11 +3,11 @@
 namespace common\models;
 
 /**
- * This is the ActiveQuery class for [[SubCategories]].
+ * This is the ActiveQuery class for [[NotificationList]].
  *
- * @see SubCategories
+ * @see NotificationList
  */
-class SubCategoriesQuery extends \yii\db\ActiveQuery
+class NotificationListQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -17,7 +17,7 @@ class SubCategoriesQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return SubCategories[]|array
+     * @return NotificationList[]|array
      */
     public function all($db = null)
     {
@@ -26,7 +26,7 @@ class SubCategoriesQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return SubCategories|array|null
+     * @return NotificationList|array|null
      */
     public function one($db = null)
     {

@@ -39,4 +39,6 @@ return [
         'paypal' => '1',
         'stripe' => '2',
     ],
+    'device_type' => ["android" => "1", "ios" => "2"],
+
 ];
