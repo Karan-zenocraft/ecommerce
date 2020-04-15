@@ -184,7 +184,11 @@ class OrdersController extends \yii\base\Controller
         $snUserId = $requestParam['user_id'];
         $model = Users::findOne(["id" => $snUserId]);
         if (!empty($model)) {
-            $ordersList = Orders::find()->with('orderPayment')->with('orderProducts')->where(['buyer_id' => $requestParam['user_id']])->asArray()->all();
+            $ordersList = Orders::find()->with('orderPayment')->with(['orderProducts' => function ($q) {
+                return $q->with(['product' => function ($q) {
+                    return $q->select('products.id,title')->with('productPhotos');
+                }]);
+            }])->where(['buyer_id' => $requestParam['user_id']])->asArray()->all();
             if (!empty($ordersList)) {
                 $amReponseParam = $ordersList;
                 $ssMessage = 'Orders List';
@@ -233,7 +237,7 @@ class OrdersController extends \yii\base\Controller
                 $today_date = date_create($date);
                 $diff = date_diff($order_date, $today_date);
                 $days = $diff->days;
-                if ($days <= 2) {
+                if ($days <= so2) {
                     if ($order->payment_type == Yii::$app->params['payment_type']['paypal']) {
                         $ch = curl_init();
                         $clientId = "AdXlVUx_J_ooi908lajfxEC6Ah1iXsRqc84l4j3_lv0-Qy-r8aghEFlBGqPsIzagvt4P-ZwUwqIwozMT";
@@ -257,7 +261,7 @@ class OrdersController extends \yii\base\Controller
                         }
                         curl_close($ch);
 
-                        $ch1 = curl_init('https://api.sandbox.paypal.com/v2/payments/captures/2GG279541U471931P/refund');
+                        $ch1 = curl_init('https://api.sandbox.paypal.com/v2/payments/captures/' . $order->orderPayment['transaction_id'] . '/refund');
                         curl_setopt($ch1, CURLOPT_HTTPHEADER, array(
                             'Content-Type: application/json',
                             'Authorization: Bearer ' . $access_token,
