@@ -35,7 +35,7 @@ return [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.gmail.com',
-                'username' => 'clinessentialsapp@gmail.com',
+                'username' => 'stableapp12@gmail.com',
                 'password' => 'Zenocraft@123',
                 'port' => '587',
                 'encryption' => 'tls',
