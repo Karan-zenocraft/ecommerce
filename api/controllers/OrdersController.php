@@ -237,7 +237,7 @@ class OrdersController extends \yii\base\Controller
                 $today_date = date_create($date);
                 $diff = date_diff($order_date, $today_date);
                 $days = $diff->days;
-                if ($days <= so2) {
+                if ($days <= 2) {
                     if ($order->payment_type == Yii::$app->params['payment_type']['paypal']) {
                         $ch = curl_init();
                         $clientId = "AdXlVUx_J_ooi908lajfxEC6Ah1iXsRqc84l4j3_lv0-Qy-r8aghEFlBGqPsIzagvt4P-ZwUwqIwozMT";
@@ -261,29 +261,38 @@ class OrdersController extends \yii\base\Controller
                         }
                         curl_close($ch);
 
-                        $ch1 = curl_init('https://api.sandbox.paypal.com/v2/payments/captures/' . $order->orderPayment['transaction_id'] . '/refund');
-                        curl_setopt($ch1, CURLOPT_HTTPHEADER, array(
-                            'Content-Type: application/json',
-                            'Authorization: Bearer ' . $access_token,
-                        ));
-
+                        $header = array(
+                            "Content-Type: application/json",
+                            "Authorization: Bearer " . $access_token,
+                        );
+                        $ch1 = curl_init("https://api.sandbox.paypal.com/v1/payments/sale/" . $order->orderPayment['transaction_id'] . "/refund");
                         curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
-                        $payloadData = '{
-                              "amount": {
-                                "value": "' . $order->total_amount_paid . '",
-                                "currency_code": "USD"
-                              },
-                              "invoice_id": "' . $order->orderPayment['transaction_id'] . '",
-                              "note_to_payer": "Defective product"
-                            }';
-                        curl_setopt($ch1, CURLOPT_POSTFIELDS, $payloadData);
-                        curl_setopt($ch1, CURLOPT_FOLLOWLOCATION, 1);
-                        $result = curl_exec($ch1);
-                        p($result);
-                        $httpStatusCode = curl_getinfo($ch1, CURLINFO_HTTP_CODE);
-                        p($httpStatusCode);
-                        die();
+                        curl_setopt($ch1, CURLOPT_POST, true);
+                        curl_setopt($ch1, CURLOPT_POSTFIELDS, '{}');
+                        curl_setopt($ch1, CURLOPT_HTTPHEADER, $header);
+                        $res = json_decode(curl_exec($ch1));
+                        $code = curl_getinfo($ch1, CURLINFO_HTTP_CODE);
                         curl_close($ch1);
+                        p($res);
+                        // if res has a state, retrieve it
+                        if (isset($res->state)) {
+                            $state = $res->state;
+                        } else {
+                            $state = null; // otherwise, set to NULL
+                        }
+
+                        // if we have a state in the response...
+                        if ($state == 'completed') {
+                            $ssMessage = 'Order cancelled successfully.';
+                            $amResponse = Common::successResponse($ssMessage, $amReponseParam);
+                            // the refund was successful
+                        } else {
+                            // the refund failed
+                            $errorName = $res->name; // ex. 'Transaction Refused.'
+                            $errorReason = $res->message; // ex. 'The requested transaction has already been fully refunded.'
+                            $ssMessage = $errorReason;
+                            $amResponse = Common::errorResponse($ssMessage);
+                        }
                     } else {
                         \Stripe\Stripe::setApiKey('sk_test_ZBaRU0wL5z8YaEEPUhY3jzgF00tdHXg5cp');
                         $refund = \Stripe\Refund::create([
