@@ -21,7 +21,7 @@ class CronController extends \yii\base\Controller
                     return $q->with('accountDetails');
                 }]);
             }]);
-        }])->with('orderPayment')->where(['DATE(created_at)' => $date])->asArray()->all();
+        }])->with('orderPayment')->where(['DATE(created_at)' => $date, 'status' => Yii::$app->params['order_status']['delievered']])->asArray()->all();
         if (!empty($orders)) {
             foreach ($orders as $key => $order) {
                 $orderPayment = $order['orderPayment'];

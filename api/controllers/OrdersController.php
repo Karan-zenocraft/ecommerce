@@ -240,9 +240,8 @@ class OrdersController extends \yii\base\Controller
                 if ($days <= 2) {
                     if ($order->payment_type == Yii::$app->params['payment_type']['paypal']) {
                         $ch = curl_init();
-                        $clientId = "AdXlVUx_J_ooi908lajfxEC6Ah1iXsRqc84l4j3_lv0-Qy-r8aghEFlBGqPsIzagvt4P-ZwUwqIwozMT";
-                        $secret = "EOmofrb8O4bXqLIAd13SINvQ1QLBjqhZCRkClgY6DFR2MgobqJpTTjj8YDGfFtQwi9ASROKPsQsD4uuz";
-
+                        $clientId = "AdI6M9kcjNlm-fCoMJHwiFYkwz3HynVl7fY63ohIr0ESRULeMzlxS3Qi9Gn109UMjhbpV8PWviMIKQgN";
+                        $secret = 'EO2sBrlqyhbslZZ74rEejDExktaZwrfaHf15EogN6V19Hh4kdaR8tLkZi5Z_Ban7sDTeicaDXwS5wAlw';
                         curl_setopt($ch, CURLOPT_URL, "https://api.sandbox.paypal.com/v1/oauth2/token");
                         curl_setopt($ch, CURLOPT_HEADER, false);
                         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -283,6 +282,8 @@ class OrdersController extends \yii\base\Controller
 
                         // if we have a state in the response...
                         if ($state == 'completed') {
+                            $order->status = Yii::$app->params['order_status']['cancelled'];
+                            $order->save(false);
                             $ssMessage = 'Order cancelled successfully.';
                             $amResponse = Common::successResponse($ssMessage, $amReponseParam);
                             // the refund was successful
@@ -298,7 +299,15 @@ class OrdersController extends \yii\base\Controller
                         $refund = \Stripe\Refund::create([
                             'charge' => $order->orderPayment['transaction_id'],
                         ]);
-                        p($refund);
+                        if ($refund) {
+                            $order->status = Yii::$app->params['order_status']['cancelled'];
+                            $order->save(false);
+                            $ssMessage = 'Order cancelled successfully.';
+                            $amResponse = Common::successResponse($ssMessage, $amReponseParam);
+                        } else {
+                            $ssMessage = "Something went wrong";
+                            $amResponse = Common::errorResponse($ssMessage);
+                        }
 
                     }
 
