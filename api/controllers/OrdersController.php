@@ -6,6 +6,7 @@ use common\components\Common;
 /* USE COMMON MODELS */
 use common\models\Cart;
 use common\models\DeviceDetails;
+use common\models\EmailFormat;
 use common\models\NotificationList;
 use common\models\OrderPayment;
 use common\models\OrderProducts;
@@ -128,6 +129,18 @@ class OrdersController extends \yii\base\Controller
                             $NotificationListModel->body = $body;
                             $NotificationListModel->status = 1;
                             $NotificationListModel->save(false);
+                        }
+                        $emailformatemodel = EmailFormat::findOne(["title" => 'order_placed', "status" => '1']);
+                        if ($emailformatemodel) {
+
+                            //create template file
+                            $AreplaceString = array('{username}' => $model->user_name);
+
+                            $body = Common::MailTemplate($AreplaceString, $emailformatemodel->body);
+                            $ssSubject = $emailformatemodel->subject;
+                            //send email for new generated password
+                            $ssResponse = Common::sendMail($model->email, Yii::$app->params['adminEmail'], $ssSubject, $body);
+
                         }
                         Cart::deleteAll(['user_id' => $requestParam['user_id']]);
                         $amReponseParam['order'] = $order;
