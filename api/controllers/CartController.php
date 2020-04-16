@@ -46,15 +46,15 @@ class CartController extends \yii\base\Controller
                 array_walk($snCartList, function ($arr) use (&$amResponseData) {
                     $ttt = $arr;
                     $ttt['product_title'] = !empty($ttt['product']) ? $ttt['product']['title'] : "";
-                    $ttt['product_price'] = !empty($ttt['product']) ? $ttt['product']['price'] : "";
+                    $ttt['product_price'] = !empty($ttt['product']) ? round($ttt['product']['price']) : "";
                     $ttt['product_quantity'] = !empty($ttt['product']) ? $ttt['product']['quantity'] : "";
-                    $ttt['product_price'] = !empty($ttt['product']) ? $ttt['product']['price'] : "";
-                    $ttt['product_discount'] = !empty($ttt['product']) ? $ttt['product']['discount'] : "";
-                    $ttt['product_tax'] = !empty($ttt['product']) ? $ttt['product']['tax'] : "";
+                    $ttt['product_price'] = !empty($ttt['product']) ? round($ttt['product']['price']) : "";
+                    $ttt['product_discount'] = !empty($ttt['product']) ? round($ttt['product']['discount']) : "";
+                    $ttt['product_tax'] = !empty($ttt['product']) ? round($ttt['product']['tax']) : "";
                     $ttt['product_is_rent'] = !empty($ttt['product']['is_rent']) ? $ttt['product']['is_rent'] : "0";
                     if (!empty($ttt['product']['discount']) && ($ttt['product']['discount'] != "0")) {
-                        $discountPrice = ($ttt['product']['discount'] / 100) * $ttt['product']['price'];
-                        $discountedPrice = $ttt['product']['price'] - $discountPrice;
+                        $discountPrice = (round($ttt['product']['discount']) / 100) * round($ttt['product']['price']);
+                        $discountedPrice = round($ttt['product']['price']) - $discountPrice;
                     } else {
                         $discountedPrice = $ttt['product']['price'];
                     }
@@ -63,9 +63,9 @@ class CartController extends \yii\base\Controller
                     } else {
                         $sellPrice = $discountedPrice;
                     }
-                    $ttt['product_sell_price'] = $sellPrice;
+                    $ttt['product_sell_price'] = round($sellPrice);
 
-                    $ttt['product_rent_price'] = !empty($ttt['product']['rent_price']) ? $ttt['product']['rent_price'] : "";
+                    $ttt['product_rent_price'] = !empty($ttt['product']['rent_price']) ? round($ttt['product']['rent_price']) : "";
                     $ttt['product_rent_price_duration'] = !empty($ttt['product']['rent_price_duration']) ? $ttt['product']['rent_price_duration'] : "";
                     $ttt['lat'] = !empty($ttt['product']) ? $ttt['product']['lat'] : "";
                     $ttt['longg'] = !empty($ttt['product']) ? $ttt['product']['longg'] : "";
