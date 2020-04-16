@@ -332,14 +332,15 @@ class OrdersController extends \yii\base\Controller
                                     }
                                     $ssMessage = 'Order cancelled successfully.';
                                     $amResponse = Common::successResponse($ssMessage, $amReponseParam);
+
+                                    // the refund was successful
+                                } else {
+                                    // the refund failed
+                                    $errorName = $res->name; // ex. 'Transaction Refused.'
+                                    $errorReason = $res->message; // ex. 'The requested transaction has already been fully refunded.'
+                                    $ssMessage = $errorReason;
+                                    $amResponse = Common::errorResponse($ssMessage);
                                 }
-                                // the refund was successful
-                            } else {
-                                // the refund failed
-                                $errorName = $res->name; // ex. 'Transaction Refused.'
-                                $errorReason = $res->message; // ex. 'The requested transaction has already been fully refunded.'
-                                $ssMessage = $errorReason;
-                                $amResponse = Common::errorResponse($ssMessage);
                             }
                         } else {
                             \Stripe\Stripe::setApiKey('sk_test_ZBaRU0wL5z8YaEEPUhY3jzgF00tdHXg5cp');
