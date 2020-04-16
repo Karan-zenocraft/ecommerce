@@ -272,7 +272,7 @@ class OrdersController extends \yii\base\Controller
                         $phoneList = curl_exec($cURLConnection);
                         curl_close($cURLConnection);
 
-                        $jsonArrayResponse - json_decode($phoneList);
+                        $jsonArrayResponse = json_decode($phoneList);
                         p($jsonArrayResponse);
                         $header = array(
                             "Content-Type: application/json",
