@@ -465,7 +465,13 @@ class OrdersController extends \yii\base\Controller
                 $orders = Yii::$app->db->createCommand($query)->queryAll();
                 $orderss = current($orders);
                 if (!empty($orderss['order_id'])) {
-                    $ordersList = Orders::find()->with('orderPayment')->with('orderProducts')->where("id IN(" . $orderss['order_id'] . ")")->asArray()->all();
+                    $ordersList = Orders::find()->with('orderPayment')->with(['orderProducts' => function ($q) {
+                        return $q->with(['product' => function ($q) {
+                            return $q->select('products.id,title')->with('productPhotos');
+                        }]);
+                    }])->with(['buyer' => function ($q) {
+                        return $q->select("users.id,users.user_name");
+                    }])->where("id IN(" . $orderss['order_id'] . ")")->asArray()->all();
                     $amReponseParam = $ordersList;
                     $ssMessage = "Seller Product's Orders List";
                     $amResponse = Common::successResponse($ssMessage, $amReponseParam);
