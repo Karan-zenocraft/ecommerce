@@ -290,7 +290,6 @@ class OrdersController extends \yii\base\Controller
                         $res = json_decode(curl_exec($ch1));
                         $code = curl_getinfo($ch1, CURLINFO_HTTP_CODE);
                         curl_close($ch1);
-                        p($res);
                         // if res has a state, retrieve it
                         if (isset($res->state)) {
                             $state = $res->state;
