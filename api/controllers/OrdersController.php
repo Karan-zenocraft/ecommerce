@@ -274,8 +274,8 @@ class OrdersController extends \yii\base\Controller
                             curl_close($cURLConnection);
 
                             $jsonArrayResponse = json_decode($phoneList);
+                            p($jsonArrayResponse);
                             if (!empty($jsonArrayResponse)) {
-                                p($jsonArrayResponse);
 
                                 $sale_id = $jsonArrayResponse->transactions[0]->related_resources[0]->sale->id;
                                 $header = array(
