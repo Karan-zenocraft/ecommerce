@@ -260,6 +260,20 @@ class OrdersController extends \yii\base\Controller
                         }
                         curl_close($ch);
 
+                        $cURLConnection = curl_init();
+                        $header = array(
+                            "Content-Type: application/json",
+                            "Authorization: Bearer " . $access_token,
+                        );
+                        curl_setopt($cURLConnection, CURLOPT_URL, 'https://api.sandbox.paypal.com/v1/payments/payment/' . $order->orderPayment['transaction_id']);
+                        curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, $header);
+
+                        $phoneList = curl_exec($cURLConnection);
+                        curl_close($cURLConnection);
+
+                        $jsonArrayResponse - json_decode($phoneList);
+                        p($jsonArrayResponse);
                         $header = array(
                             "Content-Type: application/json",
                             "Authorization: Bearer " . $access_token,
