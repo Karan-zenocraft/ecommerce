@@ -274,14 +274,14 @@ class OrdersController extends \yii\base\Controller
 
                         $jsonArrayResponse = json_decode($phoneList);
                         // $t_id = $jsonArrayResponse->transactions[0]->related_resources[0]->authorization->id;
-                        p($jsonArrayResponse);
-                        // p($t_id);
+                        $sale_id = $jsonArrayResponse->transactions[0]->related_resources[0]['sale']->id;
+                        p($sale_id, 0);
                         //$payer_id = $jsonArrayResponse->cart;
                         $header = array(
                             "Content-Type: application/json",
                             "Authorization: Bearer " . $access_token,
                         );
-                        $ch1 = curl_init("https://api.sandbox.paypal.com/v1/payments/sale/" . $t_id . "/refund");
+                        $ch1 = curl_init("https://api.sandbox.paypal.com/v1/payments/sale/" . $sale_id . "/refund");
                         curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
                         curl_setopt($ch1, CURLOPT_POST, true);
                         curl_setopt($ch1, CURLOPT_POSTFIELDS, '{}');
