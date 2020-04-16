@@ -273,11 +273,10 @@ class OrdersController extends \yii\base\Controller
                         curl_close($cURLConnection);
 
                         $jsonArrayResponse = json_decode($phoneList);
-                        p($jsonArrayResponse->transactions[0], 0);
+                        p($jsonArrayResponse->transactions[0]->related_resources[0]->sale->id, 0);
                         // $t_id = $jsonArrayResponse->transactions[0]->related_resources[0]->authorization->id;
                         //$sale_id = $jsonArrayResponse->transactions[0]->related_resources[0]['sale']->id;
-                        $sale_id = 1;
-                        p($sale_id, 0);
+                        $sale_id = $jsonArrayResponse->transactions[0]->related_resources[0]->sale->id;
                         //$payer_id = $jsonArrayResponse->cart;
                         $header = array(
                             "Content-Type: application/json",
