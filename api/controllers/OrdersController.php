@@ -264,7 +264,7 @@ class OrdersController extends \yii\base\Controller
                             "Content-Type: application/json",
                             "Authorization: Bearer " . $access_token,
                         );
-                        $ch1 = curl_init("https://api.sandbox.paypal.com/v1/payments/sale/" . $order->orderPayment['transaction_id'] . "/refund");
+                        $ch1 = curl_init("https://api.sandbox.paypal.com/v2/payments/captures/" . $order->orderPayment['transaction_id'] . "/refund");
                         curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
                         curl_setopt($ch1, CURLOPT_POST, true);
                         curl_setopt($ch1, CURLOPT_POSTFIELDS, '{}');
@@ -284,6 +284,36 @@ class OrdersController extends \yii\base\Controller
                         if ($state == 'completed') {
                             $order->status = Yii::$app->params['order_status']['cancelled'];
                             $order->save(false);
+                            $deviceModel = DeviceDetails::find()->select('device_token,type')->where(['user_id' => $requestParam['user_id']])->one();
+                            $device_token = $deviceModel->device_token;
+                            $type = $deviceModel->type;
+                            $title = "Order cancelled successfully";
+                            $body = "Your order is " . Yii::$app->params['order_status_value'][$order->status];
+                            $status = Common::SendNotificationIOS($device_token, $title, $body);
+                            $statusArr = json_decode($status);
+                            /*  } else {
+                            $status = Common::push_notification_android($device_tocken, $title, $body);
+                            }*/
+                            if (!empty($statusArr) && ($statusArr->success == "1")) {
+                                $NotificationListModel = new NotificationList();
+                                $NotificationListModel->user_id = $requestParam['user_id'];
+                                $NotificationListModel->title = $title;
+                                $NotificationListModel->body = $body;
+                                $NotificationListModel->status = 1;
+                                $NotificationListModel->save(false);
+                            }
+                            $emailformatemodel = EmailFormat::findOne(["title" => 'order_cancelled', "status" => '1']);
+                            if ($emailformatemodel) {
+
+                                //create template file
+                                $AreplaceString = array('{username}' => $model->user_name);
+
+                                $body = Common::MailTemplate($AreplaceString, $emailformatemodel->body);
+                                $ssSubject = $emailformatemodel->subject;
+                                //send email for new generated password
+                                $ssResponse = Common::sendMail($model->email, Yii::$app->params['adminEmail'], $ssSubject, $body);
+
+                            }
                             $ssMessage = 'Order cancelled successfully.';
                             $amResponse = Common::successResponse($ssMessage, $amReponseParam);
                             // the refund was successful
@@ -302,6 +332,36 @@ class OrdersController extends \yii\base\Controller
                         if ($refund) {
                             $order->status = Yii::$app->params['order_status']['cancelled'];
                             $order->save(false);
+                            $deviceModel = DeviceDetails::find()->select('device_token,type')->where(['user_id' => $requestParam['user_id']])->one();
+                            $device_token = $deviceModel->device_token;
+                            $type = $deviceModel->type;
+                            $title = "Order cancelled successfully";
+                            $body = "Your order is " . Yii::$app->params['order_status_value'][$order->status];
+                            $status = Common::SendNotificationIOS($device_token, $title, $body);
+                            $statusArr = json_decode($status);
+                            /*  } else {
+                            $status = Common::push_notification_android($device_tocken, $title, $body);
+                            }*/
+                            if (!empty($statusArr) && ($statusArr->success == "1")) {
+                                $NotificationListModel = new NotificationList();
+                                $NotificationListModel->user_id = $requestParam['user_id'];
+                                $NotificationListModel->title = $title;
+                                $NotificationListModel->body = $body;
+                                $NotificationListModel->status = 1;
+                                $NotificationListModel->save(false);
+                            }
+                            $emailformatemodel = EmailFormat::findOne(["title" => 'order_cancelled', "status" => '1']);
+                            if ($emailformatemodel) {
+
+                                //create template file
+                                $AreplaceString = array('{username}' => $model->user_name);
+
+                                $body = Common::MailTemplate($AreplaceString, $emailformatemodel->body);
+                                $ssSubject = $emailformatemodel->subject;
+                                //send email for new generated password
+                                $ssResponse = Common::sendMail($model->email, Yii::$app->params['adminEmail'], $ssSubject, $body);
+
+                            }
                             $ssMessage = 'Order cancelled successfully.';
                             $amResponse = Common::successResponse($ssMessage, $amReponseParam);
                         } else {
