@@ -375,7 +375,6 @@ class OrdersController extends \yii\base\Controller
                                         $body = "Your product's order is " . Yii::$app->params['order_status_value'][$order->status];
                                         $status = Common::SendNotificationIOS($device_token, $title, $body);
                                         $statusArr = json_decode($status);
-                                        p($statusArr, 0);
                                         /*  } else {
                                         $status = Common::push_notification_android($device_tocken, $title, $body);
                                         }*/
@@ -397,7 +396,6 @@ class OrdersController extends \yii\base\Controller
                                             $ssSubject = $emailformatemodel->subject;
                                             //send email for new generated password
                                             $ssResponse = Common::sendMail($sellerDetails->email, Yii::$app->params['adminEmail'], $ssSubject, $body);
-                                            p($ssResponse,0)
 
                                         }
                                         # code...
