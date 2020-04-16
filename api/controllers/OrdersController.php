@@ -276,6 +276,7 @@ class OrdersController extends \yii\base\Controller
                             $jsonArrayResponse = json_decode($phoneList);
                             $sale_id = !empty($jsonArrayResponse->transactions[0]) ? $jsonArrayResponse->transactions[0]->related_resources[0]->sale->id : "";
                             if (!empty($sale_id)) {
+                                p($sale_id);
                                 $header = array(
                                     "Content-Type: application/json",
                                     "Authorization: Bearer " . $access_token,
@@ -339,6 +340,9 @@ class OrdersController extends \yii\base\Controller
                                     $ssMessage = $errorReason;
                                     $amResponse = Common::errorResponse($ssMessage);
                                 }
+                            } else {
+                                $ssMessage = 'Something went wrong please try again later';
+                                $amResponse = Common::errorResponse($ssMessage);
                             }
                         } else {
                             \Stripe\Stripe::setApiKey('sk_test_ZBaRU0wL5z8YaEEPUhY3jzgF00tdHXg5cp');
@@ -386,9 +390,6 @@ class OrdersController extends \yii\base\Controller
                             }
 
                         }
-
-                        $ssMessage = 'Order cancelled successfully.';
-                        $amResponse = Common::successResponse($ssMessage, $amReponseParam);
                     } else {
                         $ssMessage = 'You can cancel order in 2 working days after creation';
                         $amResponse = Common::errorResponse($ssMessage);
