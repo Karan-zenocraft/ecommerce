@@ -271,10 +271,10 @@ class OrdersController extends \yii\base\Controller
                             curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, $header);
 
                             $phoneList = curl_exec($cURLConnection);
+                            p($phoneList);
                             curl_close($cURLConnection);
 
                             $jsonArrayResponse = json_decode($phoneList);
-                            p($jsonArrayResponse);
                             if (!empty($jsonArrayResponse)) {
 
                                 $sale_id = $jsonArrayResponse->transactions[0]->related_resources[0]->sale->id;
