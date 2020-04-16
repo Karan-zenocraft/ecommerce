@@ -5,9 +5,9 @@ use common\models\EmailFormat;
 use common\models\LeaveQuota;
 use common\models\Milestones;
 use common\models\ProblemSets;
+use common\models\Products;
 use common\models\Projects;
 use common\models\Questions;
-use common\models\RestaurantFloors;
 use common\models\Restaurants;
 use common\models\SystemConfig;
 use common\models\Tasks;
@@ -1217,10 +1217,10 @@ class Common
             $question = $snQuestionDetail->question;
             return !empty($question) ? $question : '';
         }
-        if ($flag == "RestaurantFloors") {
-            $snRestaurantsDetail = RestaurantFloors::find()->where(['id' => $id])->one();
-            $name = $snRestaurantsDetail->name;
-            return !empty($name) ? $name : '';
+        if ($flag == "Products") {
+            $productDetails = Products::find()->where(['id' => $id])->one();
+            $title = $productDetails->title;
+            return !empty($title) ? $title : '';
 
         }
         if ($flag == "Users") {

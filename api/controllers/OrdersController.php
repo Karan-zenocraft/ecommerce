@@ -305,7 +305,7 @@ class OrdersController extends \yii\base\Controller
                                         foreach ($orderProducts as $key => $product) {
                                             $seller_id = $product['seller_id'];
                                             $sellerDetails = Common::get_name_by_id($seller_id, "Users");
-
+                                            $product_name = Common::get_name_by_id($product['product_id'], "Products");
                                             $deviceModel = DeviceDetails::find()->select('device_token,type')->where(['user_id' => $seller_id])->one();
                                             $device_token = $deviceModel->device_token;
                                             $type = $deviceModel->type;
@@ -328,7 +328,7 @@ class OrdersController extends \yii\base\Controller
                                             if ($emailformatemodel) {
 
                                                 //create template file
-                                                $AreplaceString = array('{username}' => $sellerDetails->user_name);
+                                                $AreplaceString = array('{username}' => $sellerDetails->user_name, '{buyer_name}' => $model->user_name, '{product_name}' => $product_name);
 
                                                 $body = Common::MailTemplate($AreplaceString, $emailformatemodel->body);
                                                 $ssSubject = $emailformatemodel->subject;
@@ -367,7 +367,7 @@ class OrdersController extends \yii\base\Controller
                                     foreach ($orderProducts as $key => $product) {
                                         $seller_id = $product['seller_id'];
                                         $sellerDetails = Common::get_name_by_id($seller_id, "Users");
-
+                                        $product_name = Common::get_name_by_id($product['product_id'], "Products");
                                         $deviceModel = DeviceDetails::find()->select('device_token,type')->where(['user_id' => $seller_id])->one();
                                         $device_token = $deviceModel->device_token;
                                         $type = $deviceModel->type;
@@ -390,7 +390,7 @@ class OrdersController extends \yii\base\Controller
                                         if ($emailformatemodel) {
 
                                             //create template file
-                                            $AreplaceString = array('{username}' => $sellerDetails->user_name);
+                                            $AreplaceString = array('{username}' => $sellerDetails->user_name, '{buyer_name}' => $model->user_name, '{product_name}' => $product_name);
 
                                             $body = Common::MailTemplate($AreplaceString, $emailformatemodel->body);
                                             $ssSubject = $emailformatemodel->subject;
