@@ -116,12 +116,12 @@ class OrdersController extends \yii\base\Controller
                         $type = $deviceModel->type;
                         $title = "Order Placed successfully";
                         $body = "Your order is " . Yii::$app->params['order_status_value'][$order->status];
-
                         $status = Common::SendNotificationIOS($device_token, $title, $body);
+                        $statusArr = json_decode($status);
                         /*  } else {
                         $status = Common::push_notification_android($device_tocken, $title, $body);
                         }*/
-                        if (!empty($status)) {
+                        if (!empty($statusArr) && ($statusArr->success == "1")) {
                             $NotificationListModel = new NotificationList();
                             $NotificationListModel->user_id = $requestParam['user_id'];
                             $NotificationListModel->title = $title;

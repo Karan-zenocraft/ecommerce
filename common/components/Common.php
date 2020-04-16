@@ -1951,15 +1951,17 @@ class Common
         $notification = array('title' => $title, 'text' => $body, 'sound' => 'default', 'badge' => '1');
         $arrayToSend = array('to' => $token, 'notification' => $notification, 'priority' => 'high');
         $json = json_encode($arrayToSend);
+
         $headers = array();
         $headers[] = 'Content-Type: application/json';
         $headers[] = 'Authorization: key=' . $serverKey;
         $ch = curl_init();
+
         curl_setopt($ch, CURLOPT_URL, $url);
 
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST,
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-            "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 //Send the request
