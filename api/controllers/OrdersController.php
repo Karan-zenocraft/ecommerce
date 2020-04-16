@@ -259,22 +259,6 @@ class OrdersController extends \yii\base\Controller
                             $access_token = $json->access_token;
                         }
                         curl_close($ch);
-                        $header = array(
-                            "Content-Type: application/json",
-                            "Authorization: Bearer " . $access_token,
-                        );
-                        $test = file_get_contents("https://api.sandbox.paypal.com/v1/payments/payment/" . $order->orderPayment['transaction_id']);
-                        p($test);
-                        /* $chh = curl_init("https://api.sandbox.paypal.com/v1/payments/payment/" . $order->orderPayment['transaction_id']);
-                        curl_setopt($chh, CURLOPT_RETURNTRANSFER, true);
-                        curl_setopt($chh, CURLOPT_POST, true);
-                        curl_setopt($chh, CURLOPT_POSTFIELDS, '{}');
-                        curl_setopt($chh, CURLOPT_HTTPHEADER, $header);
-                        $res = json_decode(curl_exec($chh));
-                        $code = curl_getinfo($chh, CURLINFO_HTTP_CODE);
-                        curl_close($chh);
-                        p($res);*/
-                        // if res has a state, retrieve it
 
                         $header = array(
                             "Content-Type: application/json",
