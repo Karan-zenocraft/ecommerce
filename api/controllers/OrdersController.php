@@ -295,6 +295,7 @@ class OrdersController extends \yii\base\Controller
                                 } else {
                                     $state = null; // otherwise, set to NULL
                                 }
+                                p($state);
 
                                 // if we have a state in the response...
                                 if ($state == 'completed') {
