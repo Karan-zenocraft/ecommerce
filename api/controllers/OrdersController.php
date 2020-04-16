@@ -273,7 +273,7 @@ class OrdersController extends \yii\base\Controller
                         curl_close($cURLConnection);
 
                         $jsonArrayResponse = json_decode($phoneList);
-                        $payer_id = $jsonArrayResponse->payer->payer_info->payer_id;
+                        $payer_id = $jsonArrayResponse->cart;
                         $header = array(
                             "Content-Type: application/json",
                             "Authorization: Bearer " . $access_token,
