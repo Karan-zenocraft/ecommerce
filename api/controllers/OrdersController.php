@@ -325,7 +325,7 @@ class OrdersController extends \yii\base\Controller
                                                 $NotificationListModel->save(false);
                                             }
                                             $emailformatemodel = EmailFormat::findOne(["title" => 'order_cancelled', "status" => '1']);
-                                            if ($emailformatemodel) {
+                                            if ($emailformatemodel && !empty($sellerDetails->email)) {
 
                                                 //create template file
                                                 $AreplaceString = array('{username}' => $sellerDetails->user_name, '{buyer_name}' => $model->user_name, '{product_name}' => $product_name);
@@ -387,7 +387,7 @@ class OrdersController extends \yii\base\Controller
                                             $NotificationListModel->save(false);
                                         }
                                         $emailformatemodel = EmailFormat::findOne(["title" => 'order_cancelled', "status" => '1']);
-                                        if ($emailformatemodel) {
+                                        if ($emailformatemodel && !empty($sellerDetails->email)) {
 
                                             //create template file
                                             $AreplaceString = array('{username}' => $sellerDetails->user_name, '{buyer_name}' => $model->user_name, '{product_name}' => $product_name);

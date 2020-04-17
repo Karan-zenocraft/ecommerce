@@ -92,18 +92,29 @@ class WishlistController extends \yii\base\Controller
         $snUserId = $requestParam['user_id'];
         $model = Users::findOne(["id" => $snUserId]);
         if (!empty($model)) {
-            $WModel = Wishlist::find()->where(['user_id' => $requestParam['user_id'], "product_id" => $requestParam['product_id']])->one();
-            if (!empty($WModel)) {
-                $ssMessage = 'This product already added on your wish list';
-                $amResponse = Common::errorResponse($ssMessage);
+            $Product = Products::find()->where(['id' => $requestParam['product_id']])->one();
+            if (!empty($Product)) {
+                if ($Product->seller_id != $requestParam['user_id']) {
+                    $WModel = Wishlist::find()->where(['user_id' => $requestParam['user_id'], "product_id" => $requestParam['product_id']])->one();
+                    if (!empty($WModel)) {
+                        $ssMessage = 'This product already added on your wish list';
+                        $amResponse = Common::errorResponse($ssMessage);
+                    } else {
+                        $WishlistModel = new Wishlist();
+                        $WishlistModel->user_id = $requestParam['user_id'];
+                        $WishlistModel->product_id = $requestParam['product_id'];
+                        $WishlistModel->save(false);
+                        $amReponseParam = $WishlistModel;
+                        $ssMessage = 'Product successfully added to your wish list.';
+                        $amResponse = Common::successResponse($ssMessage, $amReponseParam);
+                    }
+                } else {
+                    $ssMessage = 'You cant add your own products to wishlist';
+                    $amResponse = Common::errorResponse($ssMessage);
+                }
             } else {
-                $WishlistModel = new Wishlist();
-                $WishlistModel->user_id = $requestParam['user_id'];
-                $WishlistModel->product_id = $requestParam['product_id'];
-                $WishlistModel->save(false);
-                $amReponseParam = $WishlistModel;
-                $ssMessage = 'Product successfully added to your wish list.';
-                $amResponse = Common::successResponse($ssMessage, $amReponseParam);
+                $ssMessage = 'Invalid Product';
+                $amResponse = Common::errorResponse($ssMessage);
             }
         } else {
             $ssMessage = 'Invalid User.';
