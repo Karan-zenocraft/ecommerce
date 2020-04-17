@@ -55,12 +55,13 @@ class CartController extends \yii\base\Controller
                     $ttt['product_is_rent'] = !empty($ttt['product']['is_rent']) ? $ttt['product']['is_rent'] : "0";
                     if (!empty($ttt['product']['discount']) && ($ttt['product']['discount'] != "0")) {
                         $discountPrice = (round($ttt['product']['discount']) / 100) * round($ttt['product']['price']);
-                        $discountedPrice = round($ttt['product']['price']) - $discountPrice;
+                        $discountedPriceOne = round($ttt['product']['price']) - $discountPrice;
+                        $discountedPrice = $ttt['product']['quantity'] * $discountedPriceOne;
                     } else {
-                        $discountedPrice = $ttt['product']['price'];
+                        $discountedPrice = $ttt['product']['quantity'] * $ttt['product']['price'];
                     }
                     if (!empty($ttt['product']['tax']) && ($ttt['product']['tax'] != "0")) {
-                        $sellPrice = $discountedPrice + $ttt['product']['tax'];
+                        $sellPrice = $discountedPrice + ($ttt['product']['quantity'] * $ttt['product']['tax']);
                     } else {
                         $sellPrice = $discountedPrice;
                     }
@@ -123,7 +124,7 @@ class CartController extends \yii\base\Controller
                 $ssMessage = 'This product already added on your cart';
                 $amResponse = Common::errorResponse($ssMessage);
             } else {
-                $Product = Products::find()->where(['id' => $requestParam['product_id']])->one();
+                $Product = Products::find()->where(['id' => $requestParam['product_id'], "is_approve" => 1])->one();
                 if (!empty($Product)) {
                     if ($Product->seller_id != $requestParam['user_id']) {
                         $cartModel = new Cart();

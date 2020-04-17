@@ -62,7 +62,7 @@ class Users extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'role_id' => 'Role ID',
+            'role_id' => 'Role',
             'user_name' => 'User Name',
             'email' => 'Email',
             'password' => 'Password',
