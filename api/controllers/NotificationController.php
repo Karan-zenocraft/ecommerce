@@ -91,7 +91,6 @@ class NotificationController extends \yii\base\Controller
                 /*  } else {
                 $status = Common::push_notification_android($device_tocken, $title, $body);
                 }*/
-                p($statusArr);
                 if (!empty($statusArr) && ($statusArr->success == "1")) {
                     $ssMessage = 'Notification sent successfully';
                     $amReponseParam = [];
