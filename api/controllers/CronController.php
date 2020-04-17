@@ -30,14 +30,14 @@ class CronController extends \yii\base\Controller
                 foreach ($orderProducts as $key => $orderProduct) {
                     $quantity = $orderProduct['quantity'];
                     $product_id = $orderProduct['product_id'];
-                    $payment_arr[$product_id]['discounted_price'] = $orderProduct['discounted_price'];
-                    $payment_arr[$product_id]['product_title'] = $orderProduct['product']['title'];
-                    $payment_arr[$product_id]['price_to_seller'] = $orderProduct['seller_amount'];
-                    $payment_arr[$product_id]['seller_id'] = $orderProduct['seller_id'];
-                    $payment_arr[$product_id]['payment_type'] = $payment_type;
-                    $payment_arr[$product_id]['accountDetails'] = $orderProduct['product']['seller']['accountDetails'];
+                    $seller_id = $orderProduct['seller_id'];
+                    $payment_arr[$seller_id]['price_to_seller'][] = $orderProduct['seller_amount'];
+                    $payment_arr[$seller_id]['payment_type'] = $payment_type;
+                    $payment_arr[$seller_id]['accountDetails'] = $orderProduct['product']['seller']['accountDetails'];
 
                 }
+                p($payment_arr);
+                die();
                 foreach ($payment_arr as $key_payment => $payment) {
                     if ($payment['payment_type'] == Yii::$app->params['payment_type']['paypal']) {
                         $ch = curl_init();
