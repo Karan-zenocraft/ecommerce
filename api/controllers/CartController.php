@@ -56,9 +56,9 @@ class CartController extends \yii\base\Controller
                     if (!empty($ttt['product']['discount']) && ($ttt['product']['discount'] != "0")) {
                         $discountPrice = (round($ttt['product']['discount']) / 100) * round($ttt['product']['price']);
                         $discountedPriceOne = round($ttt['product']['price']) - $discountPrice;
-                        $discountedPrice = $ttt['product']['quantity'] * $discountedPriceOne;
+                        $discountedPrice = $ttt['quantity'] * $discountedPriceOne;
                     } else {
-                        $discountedPrice = $ttt['product']['quantity'] * $ttt['product']['price'];
+                        $discountedPrice = $ttt['quantity'] * $ttt['product']['price'];
                     }
                     if (!empty($ttt['product']['tax']) && ($ttt['product']['tax'] != "0")) {
                         $sellPrice = $discountedPrice + $ttt['product']['tax'];
