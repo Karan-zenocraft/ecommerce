@@ -6,6 +6,7 @@ use common\components\Common;
 /* USE COMMON MODELS */
 use common\models\Cart;
 use common\models\ProductPhotos;
+use common\models\Products;
 use common\models\Users;
 use common\models\Wishlist;
 use Yii;
@@ -122,14 +123,26 @@ class CartController extends \yii\base\Controller
                 $ssMessage = 'This product already added on your cart';
                 $amResponse = Common::errorResponse($ssMessage);
             } else {
-                $cartModel = new Cart();
-                $cartModel->user_id = $requestParam['user_id'];
-                $cartModel->product_id = $requestParam['product_id'];
-                $cartModel->quantity = $requestParam['quantity'];
-                $cartModel->save(false);
-                $amReponseParam = $cartModel;
-                $ssMessage = 'Product successfully added to your cart.';
-                $amResponse = Common::successResponse($ssMessage, $amReponseParam);
+                $Product = Products::find()->where(['id' => $requestParam['product_id']])->one();
+                if (!empty($Product)) {
+                    if ($Product->seller_id != $requestParam['user_id']) {
+                        $cartModel = new Cart();
+                        $cartModel->user_id = $requestParam['user_id'];
+                        $cartModel->product_id = $requestParam['product_id'];
+                        $cartModel->quantity = $requestParam['quantity'];
+                        $cartModel->save(false);
+                        $amReponseParam = $cartModel;
+                        $ssMessage = 'Product successfully added to your cart.';
+                        $amResponse = Common::successResponse($ssMessage, $amReponseParam);
+
+                    } else {
+                        $ssMessage = 'You cant buy your own products';
+                        $amResponse = Common::errorResponse($ssMessage);
+                    }
+                } else {
+                    $ssMessage = 'Invalid Product';
+                    $amResponse = Common::errorResponse($ssMessage);
+                }
             }
         } else {
             $ssMessage = 'Invalid User.';
