@@ -69,6 +69,9 @@ use yii\widgets\ActiveForm;
 </div>
 <div class="row">
     <div class="span3 style_input_width">
+    <?php echo $form->field($model, 'discount') ?>
+</div>
+    <div class="span3 style_input_width">
     <?=$form->field($model, 'status')->dropDownList(Yii::$app->params['user_status']);?>
 </div>
 </div>

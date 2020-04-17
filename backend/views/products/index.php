@@ -80,6 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'rent_price',
         'rent_price_duration',
         'quantity',
+        'discount',
         [
             'attribute' => 'is_approve',
             'filter' => Yii::$app->params['is_approve'],

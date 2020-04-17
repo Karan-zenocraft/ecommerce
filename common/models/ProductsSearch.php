@@ -18,7 +18,7 @@ class ProductsSearch extends Products
     {
         return [
             [['id', 'category_id', 'price', 'rent_price', 'rent_price_duration', 'quantity', 'status'], 'integer'],
-            [['title', 'description', 'is_rent', 'created_at', 'updated_at', 'seller_id', 'address_id', 'subcategory_id'], 'safe'],
+            [['title', 'description', 'is_rent', 'created_at', 'updated_at', 'seller_id', 'address_id', 'subcategory_id', 'discount'], 'safe'],
         ];
     }
 
@@ -65,6 +65,7 @@ class ProductsSearch extends Products
             'rent_price' => $this->rent_price,
             'rent_price_duration' => $this->rent_price_duration,
             'quantity' => $this->quantity,
+            'discount' => $this->discount,
             'products.status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
