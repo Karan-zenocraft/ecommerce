@@ -60,7 +60,7 @@ class CategoryBase extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
             'description' => 'Description',
-            'parent_id' => 'Parent ID',
+            'parent_id' => 'Parent Category',
             'photo' => 'Photo',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
