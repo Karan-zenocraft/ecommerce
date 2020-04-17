@@ -141,6 +141,44 @@ class OrdersController extends \yii\base\Controller
                             $ssResponse = Common::sendMail($model->email, Yii::$app->params['adminEmail'], $ssSubject, $body);
 
                         }
+                        if (!empty($addedProducts)) {
+                            foreach ($addedProducts as $key => $product) {
+                                $seller_id = $product['seller_id'];
+                                $sellerDetails = Common::get_name_by_id($seller_id, "Users");
+                                $product_name = Common::get_name_by_id($product['product_id'], "Products");
+                                $deviceModel = DeviceDetails::find()->select('device_token,type')->where(['user_id' => $seller_id])->one();
+                                $device_token = $deviceModel->device_token;
+                                $type = $deviceModel->type;
+                                $title = "Your Product -" . $product_name . " order";
+                                $body = "Your Product -" . $product_name . " is ordered by " . $model->user_name . "";
+                                $status = Common::SendNotificationIOS($device_token, $title, $body);
+                                $statusArr = json_decode($status);
+                                /*  } else {
+                                $status = Common::push_notification_android($device_tocken, $title, $body);
+                                }*/
+                                if (!empty($statusArr) && ($statusArr->success == "1")) {
+                                    $NotificationListModel = new NotificationList();
+                                    $NotificationListModel->user_id = $seller_id;
+                                    $NotificationListModel->title = $title;
+                                    $NotificationListModel->body = $body;
+                                    $NotificationListModel->status = 1;
+                                    $NotificationListModel->save(false);
+                                }
+                                $emailformatemodel = EmailFormat::findOne(["title" => 'order_placed_seller', "status" => '1']);
+                                if ($emailformatemodel && !empty($sellerDetails->email)) {
+
+                                    //create template file
+                                    $AreplaceString = array('{username}' => $sellerDetails->user_name, '{buyer_name}' => $model->user_name, '{product_name}' => $product_name);
+
+                                    $body = Common::MailTemplate($AreplaceString, $emailformatemodel->body);
+                                    $ssSubject = $emailformatemodel->subject;
+                                    //send email for new generated password
+                                    $ssResponse = Common::sendMail($sellerDetails->email, Yii::$app->params['adminEmail'], $ssSubject, $body);
+
+                                }
+                                # code...
+                            }
+                        }
                         Cart::deleteAll(['user_id' => $requestParam['user_id']]);
                         $amReponseParam['order'] = $order;
                         $amReponseParam['orderPayment'] = $orderPayment;
