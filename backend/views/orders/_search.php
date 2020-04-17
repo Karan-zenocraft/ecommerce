@@ -25,23 +25,27 @@ use yii\widgets\ActiveForm;
     <div class="span3 style_input_width">
     <?=$form->field($model, 'buyer_id')?>
 </div>
-</div>
-<div class="row">
-    <div class="span3 style_input_width">
+<div class="span3 style_input_width">
 
     <?=$form->field($model, 'payment_type')->dropdownList(array("" => "") + Yii::$app->params['payment_type_value'])?>
 </div>
 </div>
 <div class="row">
+
+</div>
+<div class="row">
     <div class="span3 style_input_width">
     <?=$form->field($model, 'total_amount_paid')?>
+</div>
+<div class="span3 style_input_width">
+  <?=$form->field($model, 'created_at')->widget(DatePicker::className(), ['dateFormat' => 'yyyy-MM-dd', 'options' => ['class' => 'from_date']/*, 'clientOptions' => ['minDate'=>'0']*/])->label('Date')?>
 </div>
 </div>
 
     <?php // echo $form->field($model, 'status') ?>
 <div class="row">
-    <div class="span3 style_input_width">
-  <?=$form->field($model, 'created_at')->widget(DatePicker::className(), ['dateFormat' => 'yyyy-MM-dd', 'options' => ['class' => 'from_date']/*, 'clientOptions' => ['minDate'=>'0']*/])->label('Date')?>
+  <div class="span3 style_input_width">
+    <?=$form->field($model, 'status')->dropDownList(Yii::$app->params['order_status_value']);?>
 </div>
 </div>
     <?php // echo $form->field($model, 'updated_at') ?>

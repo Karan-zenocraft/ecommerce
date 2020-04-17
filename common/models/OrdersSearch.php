@@ -64,7 +64,7 @@ class OrdersSearch extends Orders
             'total_amount_paid' => $this->total_amount_paid,
             'user_address_id' => $this->user_address_id,
             'payment_type' => $this->payment_type,
-            'status' => $this->status,
+            'orders.status' => $this->status,
             // 'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);

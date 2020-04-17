@@ -20,12 +20,12 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="users-form span12">
 
      <?=Html::a(Yii::t('app', '<i class="icon-filter icon-white"></i> Filter'), "javascript:void(0);", ['class' => 'btn btn-primary open_search']);?>
-     <?php if (!empty($_REQUEST['ProductsSearch']) || (!empty($_GET['temp']) && $_GET['temp'] == "clear")) {?>
-        <div class="productss-serach common_search">
+     <?php if (!empty($_REQUEST['OrdersSearch']) || (!empty($_GET['temp']) && $_GET['temp'] == "clear")) {?>
+        <div class="orderss-serach common_search">
          <?php echo $this->render('_search', ['model' => $searchModel]); ?>
         </div>
 <?php } else {?>
-    <div class="products-serach common_search">
+    <div class="orders-serach common_search">
          <?php echo $this->render('_search', ['model' => $searchModel]); ?>
         </div>
     <?php }?>
@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="muted pull-left"><?=Html::encode($this->title)?></div>
         <div class="pull-right">
             <?php //Html::a(Yii::t('app', '<i class="icon-plus"></i> Add Product'), ['create'], ['class' => 'btn btn-success'])?>
-            <?=Html::a(Yii::t('app', '<i class="icon-refresh"></i> Reset'), Yii::$app->urlManager->createUrl(['products/index']), ['class' => 'btn btn-primary'])?>
+            <?=Html::a(Yii::t('app', '<i class="icon-refresh"></i> Reset'), Yii::$app->urlManager->createUrl(['orders/index']), ['class' => 'btn btn-primary'])?>
         </div>
     </div>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -112,9 +112,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 <script type="text/javascript">
 $( document ).ready(function() {
-    $('.products-serach').hide();
+    $('.orders-serach').hide();
         $('.open_search').click(function(){
-            $('.products-serach').toggle();
+            $('.orders-serach').toggle();
         });
     });
 
