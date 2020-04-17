@@ -51,7 +51,7 @@ class UserAddressesBase extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
+            'user_id' => 'User',
             'address' => 'Address',
             'lat' => 'Lattitude',
             'longg' => 'Longitude',
