@@ -1079,7 +1079,7 @@ class UsersController extends \yii\base\Controller
                 $stripeAccount = \Stripe\Account::create([
                     "type" => "custom",
                     "country" => "US",
-                    "email" => $model->email,
+                    "email" => !empty($model->email) ? $model->email : $requestParam['paypal_email'],
                     "business_type" => "individual",
                     "business_profile" => [
                         "url" => "http://www.zenocraft.com",
