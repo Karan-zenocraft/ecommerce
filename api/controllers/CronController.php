@@ -21,7 +21,8 @@ class CronController extends \yii\base\Controller
                     return $q->with('accountDetails');
                 }]);
             }]);
-        }])->with('orderPayment')->where(['DATE(created_at)' => $date, 'status' => Yii::$app->params['order_status']['delievered']])->asArray()->all();
+        }])->with('orderPayment')->where("DATE(created_at) = '".$date."' AND status != ".Yii::$app->params['order_status']['cancelled'])->asArray()->all();
+       
         if (!empty($orders)) {
             foreach ($orders as $key => $order) {
                 $orderPayment = $order['orderPayment'];
@@ -30,16 +31,22 @@ class CronController extends \yii\base\Controller
                 foreach ($orderProducts as $key => $orderProduct) {
                     $quantity = $orderProduct['quantity'];
                     $product_id = $orderProduct['product_id'];
+                    $order_id = $orderProduct['order_id'];
                     $seller_id = $orderProduct['seller_id'];
-                    $payment_arr[$seller_id]['price_to_seller'][] = $orderProduct['seller_amount'];
-                    $payment_arr[$seller_id]['payment_type'] = $payment_type;
-                    $payment_arr[$seller_id]['accountDetails'] = $orderProduct['product']['seller']['accountDetails'];
+                   $payment_arr[$order_id][$product_id]['discounted_price'] = $orderProduct['discounted_price'];
+                    $payment_arr[$order_id][$product_id]['product_title'] = $orderProduct['product']['title'];
+                    $payment_arr[$order_id][$product_id]['price_to_seller'] = $orderProduct['seller_amount'];
+                    $payment_arr[$order_id][$product_id]['seller_id'] = $orderProduct['seller_id'];
+                    $payment_arr[$order_id][$product_id]['payment_type'] = $payment_type;
+                    $payment_arr[$order_id][$product_id]['accountDetails'] = $orderProduct['product']['seller']['accountDetails'];
 
                 }
-                p($payment_arr);
-                die();
-                foreach ($payment_arr as $key_payment => $payment) {
-                    if ($payment['payment_type'] == Yii::$app->params['payment_type']['paypal']) {
+            }
+               /// p($payment_arr);
+                    foreach ($payment_arr as $key_order => $payment) {
+                        foreach ($payment as $key_product => $product_detail) {
+                        
+                    if ($product_detail['payment_type'] == Yii::$app->params['payment_type']['paypal']) {
                         $ch = curl_init();
                         $clientId = "AdI6M9kcjNlm-fCoMJHwiFYkwz3HynVl7fY63ohIr0ESRULeMzlxS3Qi9Gn109UMjhbpV8PWviMIKQgN";
                         $secret = "EO2sBrlqyhbslZZ74rEejDExktaZwrfaHf15EogN6V19Hh4kdaR8tLkZi5Z_Ban7sDTeicaDXwS5wAlw";
@@ -80,12 +87,12 @@ class CronController extends \yii\base\Controller
                             {
                               "recipient_type": "EMAIL",
                               "amount": {
-                                "value": "' . $payment['price_to_seller'] . '",
+                                "value": "' . $product_detail['price_to_seller'] . '",
                                 "currency": "USD"
                               },
                               "note": "Thanks for your patronage",
-                              "sender_item_id": "' . $payment['product_title'] . '",
-                              "receiver": "' . $payment['accountDetails']['paypal_email'] . '"
+                              "sender_item_id": "' . $product_detail['product_title'] . '",
+                              "receiver": "' . $product_detail['accountDetails']['paypal_email'] . '"
                             }
                           ]
                         }';
@@ -104,10 +111,10 @@ class CronController extends \yii\base\Controller
 // Create a PaymentIntent:
                         try {
                             $paymentIntent = \Stripe\PaymentIntent::create([
-                                'amount' => $payment['price_to_seller'],
+                                'amount' => $product_detail['price_to_seller'],
                                 'currency' => 'usd',
                                 'payment_method_types' => ['card'],
-                                'transfer_group' => '{ORDER' . $payment[$key_payment] . '}',
+                                'transfer_group' => '{ORDER' . $product_detail[$key_order] . '}',
 
                             ]);
                             p($transfer);

@@ -40,7 +40,7 @@ class OrderProductsBase extends \yii\db\ActiveRecord
             [['order_id', 'product_id', 'quantity'], 'integer'],
             [['created_at', 'updated_at', 'discount', 'tax', 'actual_price', 'price_with_quantity'
                 , 'discounted_price'
-                , 'total_price_with_tax_discount', 'seller_id', 'seller_amount'], 'safe'],
+                , 'total_price_with_tax_discount', 'seller_id', 'seller_amount','seller_payment_status','seller_transfer_transaction_id'], 'safe'],
             [['order_id'], 'exist', 'skipOnError' => true, 'targetClass' => Orders::className(), 'targetAttribute' => ['order_id' => 'id']],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Products::className(), 'targetAttribute' => ['product_id' => 'id']],
         ];
