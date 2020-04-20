@@ -117,6 +117,7 @@ class CronController extends Controller
                        }
                         $orderModel = Orders::findOne($key_order);
                             $orderModel->seller_payment_status = 1;
+                            $orderModel->status = 3;
                             $orderModel->save(false);
                         curl_close($ch1);
                     } else {
@@ -138,6 +139,7 @@ class CronController extends Controller
                             $orderProductModel->save(false);
                             $orderModel = Orders::findOne($key_order);
                             $orderModel->seller_payment_status = 1;
+                            $orderModel->status = 3;
                             $orderModel->save(false);
                             print_r($paymentIntent);
                             }else{
