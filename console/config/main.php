@@ -1,9 +1,12 @@
 <?php
 $params = array_merge(
-    require __DIR__ . '/../../common/config/params.php',
-    require __DIR__ . '/../../common/config/params-local.php',
+  // require __DIR__ . '/../../common/config/params.php',
+    require __DIR__ . '/../../common/config/main.php',
+    //require __DIR__ . '/../../common/config/main-local.php',
     require __DIR__ . '/params.php',
-    require __DIR__ . '/params-local.php'
+   // require __DIR__ . '/../../vendor/yiisoft/yii2/Yii.php',
+    require __DIR__ . '/../../vendor/autoload.php'
+    //require __DIR__ . '/params-local.php'
 );
 
 return [

@@ -1,18 +1,18 @@
 <?php
+namespace console\controllers;
 
-namespace api\controllers;
+use yii\console\Controller;
 
 use common\models\Orders;
 use common\models\OrderProducts;
 /* USE COMMON MODELS */
 use Yii;
-use yii\web\Controller;
 use common\components\Common;
 
 /**
  * MainController implements the CRUD actions for APIs.
  */
-class CronController extends \yii\base\Controller
+class CronController extends Controller
 {
     public function actionSendPaymentToSellers()
     {
@@ -23,7 +23,7 @@ class CronController extends \yii\base\Controller
                     return $q->with('accountDetails');
                 }]);
             }]);
-        }])->with('orderPayment')->where("DATE(created_at) = '".$date."' AND status != ".Yii::$app->params['order_status']['cancelled']." AND seller_payment_status = 0")->asArray()->all();
+        }])->with('orderPayment')->where("DATE(created_at) = '".$date."' AND status != '4' AND seller_payment_status = '0'")->asArray()->all();
        
         if (!empty($orders)) {
     
@@ -52,7 +52,7 @@ class CronController extends \yii\base\Controller
        
                     foreach ($payment_arr as $key_order => $payment) {
                         foreach ($payment as $key_product => $product_detail) {
-                    if ($product_detail['payment_type'] == Yii::$app->params['payment_type']['paypal']) {
+                    if ($product_detail['payment_type'] == 1) {
                         $ch = curl_init();
                         $clientId = "AdI6M9kcjNlm-fCoMJHwiFYkwz3HynVl7fY63ohIr0ESRULeMzlxS3Qi9Gn109UMjhbpV8PWviMIKQgN";
                         $secret = "EO2sBrlqyhbslZZ74rEejDExktaZwrfaHf15EogN6V19Hh4kdaR8tLkZi5Z_Ban7sDTeicaDXwS5wAlw";
@@ -157,7 +157,7 @@ class CronController extends \yii\base\Controller
     }
 
     public function actionTestCron(){
-         $ssResponse = Common::sendMail('rutusha.joshi@zenocraft.com', Yii::$app->params['adminEmail'], "Test Mail","Hi this is Cron job testing");
+         $ssResponse = Common::sendMail('rutusha.joshi@zenocraft.com', Yii::$app->params['adminEmail'], "Test Mail","Hi this is Cron job testing mail");
 
     }
 }
