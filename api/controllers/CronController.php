@@ -3,6 +3,7 @@
 namespace api\controllers;
 
 use common\models\Orders;
+use common\models\OrderProducts;
 /* USE COMMON MODELS */
 use Yii;
 use yii\web\Controller;
@@ -21,18 +22,21 @@ class CronController extends \yii\base\Controller
                     return $q->with('accountDetails');
                 }]);
             }]);
-        }])->with('orderPayment')->where("DATE(created_at) = '".$date."' AND status != ".Yii::$app->params['order_status']['cancelled'])->asArray()->all();
+        }])->with('orderPayment')->where("DATE(created_at) = '".$date."' AND status != ".Yii::$app->params['order_status']['cancelled']." AND seller_payment_status = 0")->asArray()->all();
        
         if (!empty($orders)) {
+    
             foreach ($orders as $key => $order) {
                 $orderPayment = $order['orderPayment'];
                 $payment_type = $order['payment_type'];
                 $orderProducts = $order['orderProducts'];
+                if(!empty($orderProducts)){
                 foreach ($orderProducts as $key => $orderProduct) {
                     $quantity = $orderProduct['quantity'];
                     $product_id = $orderProduct['product_id'];
                     $order_id = $orderProduct['order_id'];
                     $seller_id = $orderProduct['seller_id'];
+                    $payment_arr[$order_id][$product_id]['order_product_id'] = $orderProduct['id'];
                    $payment_arr[$order_id][$product_id]['discounted_price'] = $orderProduct['discounted_price'];
                     $payment_arr[$order_id][$product_id]['product_title'] = $orderProduct['product']['title'];
                     $payment_arr[$order_id][$product_id]['price_to_seller'] = $orderProduct['seller_amount'];
@@ -42,10 +46,11 @@ class CronController extends \yii\base\Controller
 
                 }
             }
-               /// p($payment_arr);
+            }
+        
+       
                     foreach ($payment_arr as $key_order => $payment) {
                         foreach ($payment as $key_product => $product_detail) {
-                        
                     if ($product_detail['payment_type'] == Yii::$app->params['payment_type']['paypal']) {
                         $ch = curl_init();
                         $clientId = "AdI6M9kcjNlm-fCoMJHwiFYkwz3HynVl7fY63ohIr0ESRULeMzlxS3Qi9Gn109UMjhbpV8PWviMIKQgN";
@@ -79,7 +84,7 @@ class CronController extends \yii\base\Controller
 
                         $payloadData = '{
                           "sender_batch_header": {
-                            "sender_batch_id": "5l5f75ff1162",
+                            "sender_batch_id": "'.$key_order.rand(0,9).$product_detail['order_product_id'].'",
                             "email_subject": "You have a payout!",
                             "email_message": "You have received a payout! Thanks for using our service!"
                           },
@@ -102,8 +107,16 @@ class CronController extends \yii\base\Controller
                         $result = curl_exec($ch1);
                         print_r($result);
                         $httpStatusCode = curl_getinfo($ch1, CURLINFO_HTTP_CODE);
-                        print_r($httpStatusCode);
-                        die();
+                       if(!empty($result) && ($httpStatusCode == "201")){
+                        $resultObj = json_decode($result);
+                        $orderProductModel = OrderProducts::findOne($product_detail['order_product_id']);
+                        $orderProductModel->seller_payment_status = 1;
+                        $orderProductModel->seller_transfer_transaction_id = $resultObj->batch_header->payout_batch_id;
+                        $orderProductModel->save(false);
+                       }
+                        $orderModel = Orders::findOne($key_order);
+                            $orderModel->seller_payment_status = 1;
+                            $orderModel->save(false);
                         curl_close($ch1);
                     } else {
                         \Stripe\Stripe::setApiKey('sk_test_ZBaRU0wL5z8YaEEPUhY3jzgF00tdHXg5cp');
@@ -114,10 +127,21 @@ class CronController extends \yii\base\Controller
                                 'amount' => $product_detail['price_to_seller'],
                                 'currency' => 'usd',
                                 'payment_method_types' => ['card'],
-                                'transfer_group' => '{ORDER' . $product_detail[$key_order] . '}',
+                                'transfer_group' => '{ORDER' .$key_order.$product_detail['order_product_id']. '}',
 
                             ]);
-                            p($transfer);
+                            if(!empty($paymentIntent)){
+                            $orderProductModel = OrderProducts::findOne($product_detail['order_product_id']);
+                            $orderProductModel->seller_payment_status = 1;
+                            $orderProductModel->seller_transfer_transaction_id = $paymentIntent->id;
+                            $orderProductModel->save(false);
+                            $orderModel = Orders::findOne($key_order);
+                            $orderModel->seller_payment_status = 1;
+                            $orderModel->save(false);
+                            print_r($paymentIntent);
+                            }else{
+                                p("Error");
+                            }
                         } catch (\Exception $e) {
                             p($e);
                         }
@@ -125,6 +149,9 @@ class CronController extends \yii\base\Controller
                 }
 
             }
+        
+        }else{
+            print_r("No Orders Found");
         }
     }
 }

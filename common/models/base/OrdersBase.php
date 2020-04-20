@@ -43,7 +43,7 @@ class OrdersBase extends \yii\db\ActiveRecord
             [['buyer_id', 'status'], 'integer'],
             [['payment_type'], 'string'],
             [['total_amount_paid'], 'number'],
-            [['created_at', 'updated_at', 'user_address_id'], 'safe'],
+            [['created_at', 'updated_at', 'user_address_id','seller_payment_status'], 'safe'],
             [['buyer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['buyer_id' => 'id']],
         ];
     }
