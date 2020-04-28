@@ -52,7 +52,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 return $data->seller->user_name;
             },
         ],
-        //'seller_amount',
+        [
+            'attribute' => 'seller_payment_status',
+            'value' => function ($data) {
+                return ($data->seller_payment_status == "0") ? "Pending" : "Done";
+            },
+        ],
+        'seller_transfer_transaction_id'
         //'created_at',
         //'updated_at',
 
