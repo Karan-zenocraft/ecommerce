@@ -183,7 +183,8 @@ class ProductsController extends \yii\base\Controller
             }
             if(!empty($requestParam['is_rent']) && ($requestParam['is_rent'] == "3")){
                 $query = $query;
-            }else{
+            }
+            if(isset($requestParam['is_rent']) && ($requestParam['is_rent'] != "3") ){
                 $query = $query." AND is_rent = '" . $requestParam['is_rent'] . "'";
             }
             $products = Yii::$app->db->createCommand($query)->queryAll();
