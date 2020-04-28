@@ -183,7 +183,7 @@ class ProductsController extends \yii\base\Controller
             }
             if(!empty($requestParam['is_rent']) && ($requestParam['is_rent'] == "3")){
                 $query = $query;
-            }
+            } 
             if(isset($requestParam['is_rent']) && ($requestParam['is_rent'] != "3") ){
                 $query = $query." AND is_rent = '" . $requestParam['is_rent'] . "'";
             }
