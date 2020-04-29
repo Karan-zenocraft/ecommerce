@@ -114,6 +114,7 @@ class OrdersController extends \yii\base\Controller
                     $order->total_amount_paid = array_sum($prices);
                     if ($order->save(false)) {
                         $deviceModel = DeviceDetails::find()->select('device_token,type')->where(['user_id' => $requestParam['user_id']])->one();
+                         if(!empty($deviceModel) && !empty($deviceModel->device_token)){
                         $device_token = $deviceModel->device_token;
                         $type = $deviceModel->type;
                         $title = "Order Placed successfully";
@@ -131,6 +132,7 @@ class OrdersController extends \yii\base\Controller
                             $NotificationListModel->status = 1;
                             $NotificationListModel->save(false);
                         }
+                    }
                         $emailformatemodel = EmailFormat::findOne(["title" => 'order_placed', "status" => '1']);
                         if ($emailformatemodel && !empty($model->email)) {
 
@@ -149,6 +151,7 @@ class OrdersController extends \yii\base\Controller
                                 $sellerDetails = Common::get_name_by_id($seller_id, "Users");
                                 $product_name = Common::get_name_by_id($product['product_id'], "Products");
                                 $deviceModel = DeviceDetails::find()->select('device_token,type')->where(['user_id' => $seller_id])->one();
+                                if(!empty($deviceModel) && !empty($deviceModel->device_token)){
                                 $device_token = $deviceModel->device_token;
                                 $type = $deviceModel->type;
                                 $title = "Your Product -" . $product_name . " order";
@@ -166,6 +169,7 @@ class OrdersController extends \yii\base\Controller
                                     $NotificationListModel->status = 1;
                                     $NotificationListModel->save(false);
                                 }
+                            }
                                 $emailformatemodel = EmailFormat::findOne(["title" => 'order_placed_seller', "status" => '1']);
                                 if ($emailformatemodel && !empty($sellerDetails->email)) {
 
