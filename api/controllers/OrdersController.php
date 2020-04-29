@@ -104,6 +104,8 @@ class OrdersController extends \yii\base\Controller
                         }
                         $orderProducts->total_price_with_tax_discount = $sellPrice;
                         $orderProducts->save(false);
+                        $productDetails->quantity = $productDetails->quantity - $product['quantity'];
+                        $productDetails->save(false);
                         $prices[] = $sellPrice;
                         //$orderProducts->save(false);
 

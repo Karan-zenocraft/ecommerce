@@ -127,6 +127,7 @@ class CartController extends \yii\base\Controller
                 $Product = Products::find()->where(['id' => $requestParam['product_id'], "is_approve" => "1"])->one();
                 if (!empty($Product)) {
                     if ($Product->seller_id != $requestParam['user_id']) {
+                        if($Product->quantity >= $requestParam['quantity']){
                         $cartModel = new Cart();
                         $cartModel->user_id = $requestParam['user_id'];
                         $cartModel->product_id = $requestParam['product_id'];
@@ -134,10 +135,14 @@ class CartController extends \yii\base\Controller
                         $cartModel->save(false);
                         $amReponseParam = $cartModel;
                         $ssMessage = 'Product successfully added to your cart.';
-                        $amResponse = Common::successResponse($ssMessage, $amReponseParam);
+                        $amResponse = Common::successResponse($ssMessage, $amReponseParam);  
+                        }else{
+                            $ssMessage = "You can not add this product to cart because it has only ".$Product->quantity." items left in stock";
+                            $amResponse = Common::errorResponse($ssMessage);
+                        }
 
                     } else {
-                        $ssMessage = 'You cant buy your own products';
+                        $ssMessage = "You can't buy your own products";
                         $amResponse = Common::errorResponse($ssMessage);
                     }
                 } else {

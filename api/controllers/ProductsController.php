@@ -162,7 +162,7 @@ class ProductsController extends \yii\base\Controller
         $model = Users::findOne(["id" => $snUserId]);
         if (!empty($model)) {
             $query = "select *
-                            from products WHERE is_approve = '" . Yii::$app->params['is_approve_value']['true'] . "'";
+                            from products WHERE is_approve = '" . Yii::$app->params['is_approve_value']['true'] . "' AND quantity >= '1'";
             if (!empty($requestParam['lat']) && !empty($requestParam['longg'])) {
                 $user_latitude = $requestParam['lat'];
                 $user_longitude = $requestParam['longg'];
