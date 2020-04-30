@@ -230,7 +230,11 @@ class OrdersController extends \yii\base\Controller
         if (!empty($model)) {
             $ordersList = Orders::find()->with('orderPayment')->with(['orderProducts' => function ($q) {
                 return $q->with(['product' => function ($q) {
-                    return $q->select('products.id,title')->with('productPhotos');
+                    return $q->select('products.id,category_id,subcategory_id,title')->with(['category'=>function($q){
+                        return $q->select('id,title');
+                    }])->with(['subcategory'=>function($q){
+                        return $q->select('id,title');
+                    }])->with('productPhotos');
                 }]);
             }])->where(['buyer_id' => $requestParam['user_id']])->asArray()->all();
             if (!empty($ordersList)) {
