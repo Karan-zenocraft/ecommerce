@@ -20,14 +20,7 @@ class BrandsController extends \yii\base\Controller
         $amData = Common::checkRequestType();
         $amResponse = $amReponseParam = [];
         // Check required validation for request parameter.
-        $amRequiredParams = array('user_id', 'parent_category_id', 'sub_category_id');
-        $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
-
-        // If any getting error in request paramter then set error message.
-        if (!empty($amParamsResult['error'])) {
-            $amResponse = Common::errorResponse($amParamsResult['error']);
-            Common::encodeResponseJSON($amResponse);
-        }
+       
         $requestParam = $amData['request_param'];
         //Check User Status//
         Common::matchUserStatus($requestParam['user_id']);
@@ -38,7 +31,11 @@ class BrandsController extends \yii\base\Controller
         $model = Users::findOne(["id" => $snUserId]);
         $snCategoriesList = [];
         if (!empty($model)) {
-            $snBrandsList = Brands::find()->where(['parent_category_id' => $requestParam['parent_category_id'], "sub_category_id" => $requestParam['sub_category_id']])->asArray()->all();
+            if(!empty($requestParam['parent_category_id']) && !empty($requestParam['sub_category_id'])){
+                $snBrandsList = Brands::find()->where(['parent_category_id' => $requestParam['parent_category_id'], "sub_category_id" => $requestParam['sub_category_id']])->asArray()->all();
+            }else{
+                $snBrandsList = Brands::find()->asArray()->all();
+            }
             $amReponseParam = [];
             if (!empty($snBrandsList)) {
                 $amReponseParam = $snBrandsList;
