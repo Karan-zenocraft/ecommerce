@@ -248,7 +248,11 @@ class ProductsController extends \yii\base\Controller
         $snUserId = $requestParam['user_id'];
         $model = Users::findOne(["id" => $snUserId]);
         if (!empty($model)) {
-            $product = Products::find()->with('brand')->with('productPhotos')->with('seller')->where(["id" => $requestParam['product_id']])->asArray()->all();
+            $product = Products::find()->with(['category'=>function($q){
+                        return $q->select('id,title');
+                    }])->with(['subcategory'=>function($q){
+                        return $q->select('id,title');
+                    }])->with('brand')->with('productPhotos')->with('seller')->where(["id" => $requestParam['product_id']])->asArray()->all();
             if (!empty($product)) {
                 $wishlist = Wishlist::find()->where(['user_id' => $requestParam['user_id']])->asArray()->all();
                 $wishlist_arr = array_column($wishlist, 'product_id');
