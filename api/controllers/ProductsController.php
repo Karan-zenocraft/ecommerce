@@ -312,7 +312,11 @@ class ProductsController extends \yii\base\Controller
         $snUserId = $requestParam['user_id'];
         $model = Users::findOne(["id" => $snUserId]);
         if (!empty($model)) {
-            $products = Products::find()->where(['seller_id' => $requestParam['user_id']])->asArray()->all();
+            $products = Products::find()->with(['category'=>function($q){
+                        return $q->select('id,title');
+                    }])->with(['subcategory'=>function($q){
+                        return $q->select('id,title');
+                    }])->where(['seller_id' => $requestParam['user_id']])->asArray()->all();
 
             if (!empty($products)) {
                 foreach ($products as $key => $product) {
