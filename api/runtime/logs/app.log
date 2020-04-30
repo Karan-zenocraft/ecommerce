@@ -34978,3 +34978,2003 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1586868073.637
     'REQUEST_TIME' => 1586868073
 ]
+2020-04-14 13:15:14 [::1][-][-][error][ParseError] ParseError: syntax error, unexpected '.' in /var/www/html/ecommerce/api/controllers/OrdersController.php:330
+Stack trace:
+#0 [internal function]: yii\BaseYii::autoload('api\\controllers...')
+#1 [internal function]: spl_autoload_call('api\\controllers...')
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(637): class_exists('api\\controllers...')
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(596): yii\base\Module->createControllerByID('orders')
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(522): yii\base\Module->createController('get-seller-prod...')
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('orders/get-sell...', Array)
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#8 {main}
+2020-04-14 13:15:14 [::1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '139'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ORIGIN' => 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'
+    'HTTP_SEC_FETCH_SITE' => 'cross-site'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '55584'
+    'REDIRECT_URL' => '/ecommerce/api/web/orders/get-seller-product-order-list'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/orders/get-seller-product-order-list'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1586870114.419
+    'REQUEST_TIME' => 1586870114
+]
+2020-04-14 13:15:20 [::1][-][-][error][ParseError] ParseError: syntax error, unexpected '.' in /var/www/html/ecommerce/api/controllers/OrdersController.php:330
+Stack trace:
+#0 [internal function]: yii\BaseYii::autoload('api\\controllers...')
+#1 [internal function]: spl_autoload_call('api\\controllers...')
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(637): class_exists('api\\controllers...')
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(596): yii\base\Module->createControllerByID('orders')
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(522): yii\base\Module->createController('get-seller-prod...')
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('orders/get-sell...', Array)
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#8 {main}
+2020-04-14 13:15:20 [::1][-][-][info][application] $_GET = []
+
+$_POST = [
+    'user_id' => '3'
+]
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '139'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'
+    'CONTENT_TYPE' => 'multipart/form-data; boundary=----WebKitFormBoundaryLkwE3QYcUPQPGUMa'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ORIGIN' => 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'
+    'HTTP_SEC_FETCH_SITE' => 'cross-site'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '55586'
+    'REDIRECT_URL' => '/ecommerce/api/web/orders/get-seller-product-order-list'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/orders/get-seller-product-order-list'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1586870120.593
+    'REQUEST_TIME' => 1586870120
+]
+2020-04-14 13:20:48 [::1][-][-][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined variable: query in /var/www/html/ecommerce/api/controllers/OrdersController.php:334
+Stack trace:
+#0 /var/www/html/ecommerce/api/controllers/OrdersController.php(334): yii\base\ErrorHandler->handleError(8, 'Undefined varia...', '/var/www/html/e...', 334, Array)
+#1 [internal function]: api\controllers\OrdersController->actionGetSellerProductOrderList()
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('get-seller-prod...', Array)
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('orders/get-sell...', Array)
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#8 {main}
+2020-04-14 13:20:48 [::1][-][-][info][application] $_GET = []
+
+$_POST = [
+    'user_id' => '39'
+]
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '140'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'
+    'CONTENT_TYPE' => 'multipart/form-data; boundary=----WebKitFormBoundaryjfiVAtDV6SUHCSmZ'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ORIGIN' => 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'
+    'HTTP_SEC_FETCH_SITE' => 'cross-site'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '55838'
+    'REDIRECT_URL' => '/ecommerce/api/web/orders/get-seller-product-order-list'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/orders/get-seller-product-order-list'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1586870448.574
+    'REQUEST_TIME' => 1586870448
+]
+2020-04-14 13:24:56 [::1][-][-][error][yii\base\ErrorException:8] yii\base\ErrorException: Array to string conversion in /var/www/html/ecommerce/api/controllers/OrdersController.php:330
+Stack trace:
+#0 /var/www/html/ecommerce/api/controllers/OrdersController.php(330): yii\base\ErrorHandler->handleError(8, 'Array to string...', '/var/www/html/e...', 330, Array)
+#1 [internal function]: api\controllers\OrdersController->actionGetSellerProductOrderList()
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('get-seller-prod...', Array)
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('orders/get-sell...', Array)
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#8 {main}
+2020-04-14 13:24:56 [::1][-][-][info][application] $_GET = []
+
+$_POST = [
+    'user_id' => '3'
+]
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '139'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'
+    'CONTENT_TYPE' => 'multipart/form-data; boundary=----WebKitFormBoundaryiMGWKts4SXreheg8'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ORIGIN' => 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'
+    'HTTP_SEC_FETCH_SITE' => 'cross-site'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '55862'
+    'REDIRECT_URL' => '/ecommerce/api/web/orders/get-seller-product-order-list'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/orders/get-seller-product-order-list'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1586870696.568
+    'REQUEST_TIME' => 1586870696
+]
+2020-04-15 06:36:27 [::1][-][-][error][Error] Error: Class 'api\controllers\EmailFormat' not found in /var/www/html/ecommerce/api/controllers/OrdersController.php:132
+Stack trace:
+#0 [internal function]: api\controllers\OrdersController->actionCreateOrder()
+#1 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('create-order', Array)
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('orders/create-o...', Array)
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#6 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#7 {main}
+2020-04-15 06:36:24 [::1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '370'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ORIGIN' => 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'
+    'HTTP_SEC_FETCH_SITE' => 'cross-site'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '48812'
+    'REDIRECT_URL' => '/ecommerce/api/web/orders/create-order'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/orders/create-order'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1586932584.523
+    'REQUEST_TIME' => 1586932584
+]
+2020-04-15 08:45:45 [::1][-][-][error][ParseError] ParseError: syntax error, unexpected '}', expecting ';' in /var/www/html/ecommerce/api/controllers/OrdersController.php:191
+Stack trace:
+#0 [internal function]: yii\BaseYii::autoload('api\\controllers...')
+#1 [internal function]: spl_autoload_call('api\\controllers...')
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(637): class_exists('api\\controllers...')
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(596): yii\base\Module->createControllerByID('orders')
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(522): yii\base\Module->createController('get-my-orders-l...')
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('orders/get-my-o...', Array)
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#8 {main}
+2020-04-15 08:45:45 [::1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '139'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ORIGIN' => 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'
+    'HTTP_SEC_FETCH_SITE' => 'cross-site'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '50460'
+    'REDIRECT_URL' => '/ecommerce/api/web/orders/get-my-orders-list'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/orders/get-my-orders-list'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1586940345.923
+    'REQUEST_TIME' => 1586940345
+]
+2020-04-15 08:46:37 [::1][-][-][error][yii\base\InvalidArgumentException] yii\base\InvalidArgumentException: Syntax error. in /var/www/html/ecommerce/vendor/yiisoft/yii2/helpers/BaseJson.php:133
+Stack trace:
+#0 /var/www/html/ecommerce/vendor/yiisoft/yii2/helpers/BaseJson.php(107): yii\helpers\BaseJson::handleJsonError(4)
+#1 /var/www/html/ecommerce/common/components/Common.php(1559): yii\helpers\BaseJson::decode('------WebKitFor...', true)
+#2 /var/www/html/ecommerce/api/controllers/OrdersController.php(167): common\components\Common::checkRequestType()
+#3 [internal function]: api\controllers\OrdersController->actionGetMyOrdersList()
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('get-my-orders-l...', Array)
+#7 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('orders/get-my-o...', Array)
+#8 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#10 {main}
+2020-04-15 08:46:37 [::1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '139'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ORIGIN' => 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'
+    'HTTP_SEC_FETCH_SITE' => 'cross-site'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '50472'
+    'REDIRECT_URL' => '/ecommerce/api/web/orders/get-my-orders-list'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/orders/get-my-orders-list'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1586940397.426
+    'REQUEST_TIME' => 1586940397
+]
+2020-04-15 08:46:43 [::1][-][-][error][yii\base\InvalidArgumentException] yii\base\UnknownMethodException: Calling unknown method: common\models\OrderProducts::getproducts() in /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Component.php:300
+Stack trace:
+#0 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/BaseActiveRecord.php(1244): yii\base\Component->__call('getproducts', Array)
+#1 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(177): yii\db\BaseActiveRecord->getRelation('products')
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(144): yii\db\ActiveQuery->normalizeRelations(Object(common\models\OrderProducts), Array)
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '[[<span class="...')
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(270): yii\db\ActiveQuery->all()
+#7 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('orderProducts', '<span class="st...')
+#8 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#9 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#10 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#11 /var/www/html/ecommerce/api/controllers/OrdersController.php(191): yii\db\ActiveQuery->all()
+#12 [internal function]: api\controllers\OrdersController->actionGetMyOrdersList()
+#13 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#14 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#15 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('get-my-orders-l...', Array)
+#16 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('orders/get-my-o...', Array)
+#17 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#18 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#19 {main}
+
+Next yii\base\InvalidArgumentException: common\models\OrderProducts has no relation named "products". in /var/www/html/ecommerce/vendor/yiisoft/yii2/db/BaseActiveRecord.php:1247
+Stack trace:
+#0 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(177): yii\db\BaseActiveRecord->getRelation('products')
+#1 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(144): yii\db\ActiveQuery->normalizeRelations(Object(common\models\OrderProducts), Array)
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '[[<span class="...')
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(270): yii\db\ActiveQuery->all()
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('orderProducts', '<span class="st...')
+#7 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#8 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#9 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#10 /var/www/html/ecommerce/api/controllers/OrdersController.php(191): yii\db\ActiveQuery->all()
+#11 [internal function]: api\controllers\OrdersController->actionGetMyOrdersList()
+#12 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#13 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#14 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('get-my-orders-l...', Array)
+#15 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('orders/get-my-o...', Array)
+#16 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#17 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#18 {main}
+2020-04-15 08:46:43 [::1][-][-][info][application] $_GET = []
+
+$_POST = [
+    'user_id' => '3'
+]
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '139'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'
+    'CONTENT_TYPE' => 'multipart/form-data; boundary=----WebKitFormBoundaryq6gkE8E6rajYBPT6'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ORIGIN' => 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'
+    'HTTP_SEC_FETCH_SITE' => 'cross-site'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '50474'
+    'REDIRECT_URL' => '/ecommerce/api/web/orders/get-my-orders-list'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/orders/get-my-orders-list'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1586940403.035
+    'REQUEST_TIME' => 1586940403
+]
+2020-04-15 08:46:59 [::1][-][-][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined index: id in /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php:526
+Stack trace:
+#0 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(526): yii\base\ErrorHandler->handleError(8, 'Undefined index...', '/var/www/html/e...', 526, Array)
+#1 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(248): yii\db\ActiveQuery->filterByModels(Array)
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('productPhotos', '<span class="st...')
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#6 /var/www/html/ecommerce/common/models/ProductsQuery.php(24): yii\db\ActiveQuery->all(NULL)
+#7 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(270): common\models\ProductsQuery->all()
+#8 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('product', '<span class="st...')
+#9 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#10 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#11 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#12 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(270): yii\db\ActiveQuery->all()
+#13 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('orderProducts', '<span class="st...')
+#14 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#15 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#16 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#17 /var/www/html/ecommerce/api/controllers/OrdersController.php(191): yii\db\ActiveQuery->all()
+#18 [internal function]: api\controllers\OrdersController->actionGetMyOrdersList()
+#19 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#20 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#21 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('get-my-orders-l...', Array)
+#22 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('orders/get-my-o...', Array)
+#23 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#24 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#25 {main}
+2020-04-15 08:46:59 [::1][-][-][info][application] $_GET = []
+
+$_POST = [
+    'user_id' => '3'
+]
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '139'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'
+    'CONTENT_TYPE' => 'multipart/form-data; boundary=----WebKitFormBoundaryvrMBEsnDAlh4hpw6'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ORIGIN' => 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'
+    'HTTP_SEC_FETCH_SITE' => 'cross-site'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '50476'
+    'REDIRECT_URL' => '/ecommerce/api/web/orders/get-my-orders-list'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/orders/get-my-orders-list'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1586940419.028
+    'REQUEST_TIME' => 1586940419
+]
+2020-04-15 08:47:11 [::1][-][-][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined index: id in /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php:526
+Stack trace:
+#0 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(526): yii\base\ErrorHandler->handleError(8, 'Undefined index...', '/var/www/html/e...', 526, Array)
+#1 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(248): yii\db\ActiveQuery->filterByModels(Array)
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('productPhotos', '<span class="st...')
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#6 /var/www/html/ecommerce/common/models/ProductsQuery.php(24): yii\db\ActiveQuery->all(NULL)
+#7 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(270): common\models\ProductsQuery->all()
+#8 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('product', '<span class="st...')
+#9 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#10 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#11 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#12 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(270): yii\db\ActiveQuery->all()
+#13 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('orderProducts', '<span class="st...')
+#14 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#15 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#16 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#17 /var/www/html/ecommerce/api/controllers/OrdersController.php(191): yii\db\ActiveQuery->all()
+#18 [internal function]: api\controllers\OrdersController->actionGetMyOrdersList()
+#19 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#20 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#21 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('get-my-orders-l...', Array)
+#22 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('orders/get-my-o...', Array)
+#23 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#24 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#25 {main}
+2020-04-15 08:47:11 [::1][-][-][info][application] $_GET = []
+
+$_POST = [
+    'user_id' => '3'
+]
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '139'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'
+    'CONTENT_TYPE' => 'multipart/form-data; boundary=----WebKitFormBoundary0uPdElvt8doy0DOV'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ORIGIN' => 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'
+    'HTTP_SEC_FETCH_SITE' => 'cross-site'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '50480'
+    'REDIRECT_URL' => '/ecommerce/api/web/orders/get-my-orders-list'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/orders/get-my-orders-list'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1586940431.949
+    'REQUEST_TIME' => 1586940431
+]
+2020-04-15 08:49:30 [::1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'title' in 'field list' in /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Command.php:1290
+Stack trace:
+#0 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Command.php(1290): PDOStatement->execute()
+#1 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Command.php(1158): yii\db\Command->internalExecute('SELECT `title` ...')
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Command.php(399): yii\db\Command->queryInternal('fetchAll', NULL)
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(237): yii\db\Command->queryAll()
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(270): yii\db\ActiveQuery->all()
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('orderProducts', '<span class="st...')
+#7 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#8 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#9 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#10 /var/www/html/ecommerce/api/controllers/OrdersController.php(191): yii\db\ActiveQuery->all()
+#11 [internal function]: api\controllers\OrdersController->actionGetMyOrdersList()
+#12 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#13 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#14 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('get-my-orders-l...', Array)
+#15 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('orders/get-my-o...', Array)
+#16 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#17 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#18 {main}
+
+Next yii\db\Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'title' in 'field list'
+The SQL being executed was: SELECT `title` FROM `order_products` WHERE `order_id` IN ('10', '26') in /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Schema.php:674
+Stack trace:
+#0 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Command.php(1295): yii\db\Schema->convertException(Object(PDOException), 'SELECT `title` ...')
+#1 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Command.php(1158): yii\db\Command->internalExecute('SELECT `title` ...')
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Command.php(399): yii\db\Command->queryInternal('fetchAll', NULL)
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(237): yii\db\Command->queryAll()
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(270): yii\db\ActiveQuery->all()
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('orderProducts', '<span class="st...')
+#7 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#8 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#9 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#10 /var/www/html/ecommerce/api/controllers/OrdersController.php(191): yii\db\ActiveQuery->all()
+#11 [internal function]: api\controllers\OrdersController->actionGetMyOrdersList()
+#12 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#13 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#14 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('get-my-orders-l...', Array)
+#15 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('orders/get-my-o...', Array)
+#16 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#17 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#18 {main}
+Additional Information:
+Array
+(
+    [0] => 42S22
+    [1] => 1054
+    [2] => Unknown column 'title' in 'field list'
+)
+
+2020-04-15 08:49:30 [::1][-][-][info][application] $_GET = []
+
+$_POST = [
+    'user_id' => '3'
+]
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '139'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'
+    'CONTENT_TYPE' => 'multipart/form-data; boundary=----WebKitFormBoundaryx8x1IMZPuyixh7ft'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ORIGIN' => 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'
+    'HTTP_SEC_FETCH_SITE' => 'cross-site'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '50490'
+    'REDIRECT_URL' => '/ecommerce/api/web/orders/get-my-orders-list'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/orders/get-my-orders-list'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1586940570.446
+    'REQUEST_TIME' => 1586940570
+]
+2020-04-15 08:50:01 [::1][-][-][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined index: id in /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php:526
+Stack trace:
+#0 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(526): yii\base\ErrorHandler->handleError(8, 'Undefined index...', '/var/www/html/e...', 526, Array)
+#1 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(248): yii\db\ActiveQuery->filterByModels(Array)
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('productPhotos', '<span class="st...')
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#6 /var/www/html/ecommerce/common/models/ProductsQuery.php(24): yii\db\ActiveQuery->all(NULL)
+#7 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(270): common\models\ProductsQuery->all()
+#8 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('product', '<span class="st...')
+#9 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#10 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#11 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#12 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(270): yii\db\ActiveQuery->all()
+#13 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('orderProducts', '<span class="st...')
+#14 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#15 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#16 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#17 /var/www/html/ecommerce/api/controllers/OrdersController.php(191): yii\db\ActiveQuery->all()
+#18 [internal function]: api\controllers\OrdersController->actionGetMyOrdersList()
+#19 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#20 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#21 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('get-my-orders-l...', Array)
+#22 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('orders/get-my-o...', Array)
+#23 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#24 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#25 {main}
+2020-04-15 08:50:01 [::1][-][-][info][application] $_GET = []
+
+$_POST = [
+    'user_id' => '3'
+]
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '139'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'
+    'CONTENT_TYPE' => 'multipart/form-data; boundary=----WebKitFormBoundary0SayPuTfpaEo9fnQ'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ORIGIN' => 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'
+    'HTTP_SEC_FETCH_SITE' => 'cross-site'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '50494'
+    'REDIRECT_URL' => '/ecommerce/api/web/orders/get-my-orders-list'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/orders/get-my-orders-list'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1586940601.159
+    'REQUEST_TIME' => 1586940601
+]
+2020-04-15 10:15:42 [::1][-][-][error][yii\base\ErrorException:2] yii\base\ErrorException: Use of undefined constant so2 - assumed 'so2' (this will throw an Error in a future version of PHP) in /var/www/html/ecommerce/api/controllers/OrdersController.php:240
+Stack trace:
+#0 /var/www/html/ecommerce/api/controllers/OrdersController.php(240): yii\base\ErrorHandler->handleError(2, 'Use of undefine...', '/var/www/html/e...', 240, Array)
+#1 [internal function]: api\controllers\OrdersController->actionCancelOrder()
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('cancel-order', Array)
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('orders/cancel-o...', Array)
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#8 {main}
+2020-04-15 10:15:42 [::1][-][-][info][application] $_GET = []
+
+$_POST = [
+    'user_id' => '3'
+    'order_id' => '10'
+]
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '236'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'
+    'CONTENT_TYPE' => 'multipart/form-data; boundary=----WebKitFormBoundary0S2kWF4OFthcQdRt'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ORIGIN' => 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'
+    'HTTP_SEC_FETCH_SITE' => 'cross-site'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '50896'
+    'REDIRECT_URL' => '/ecommerce/api/web/orders/cancel-order'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/orders/cancel-order'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1586945742.133
+    'REQUEST_TIME' => 1586945742
+]
+2020-04-15 10:16:17 [::1][-][-][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined property: stdClass::$name in /var/www/html/ecommerce/api/controllers/OrdersController.php:291
+Stack trace:
+#0 /var/www/html/ecommerce/api/controllers/OrdersController.php(291): yii\base\ErrorHandler->handleError(8, 'Undefined prope...', '/var/www/html/e...', 291, Array)
+#1 [internal function]: api\controllers\OrdersController->actionCancelOrder()
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('cancel-order', Array)
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('orders/cancel-o...', Array)
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#8 {main}
+2020-04-15 10:16:13 [::1][-][-][info][application] $_GET = []
+
+$_POST = [
+    'user_id' => '3'
+    'order_id' => '10'
+]
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '236'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'
+    'CONTENT_TYPE' => 'multipart/form-data; boundary=----WebKitFormBoundary8cl2Sj2GbDv6pSJu'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ORIGIN' => 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'
+    'HTTP_SEC_FETCH_SITE' => 'cross-site'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '50900'
+    'REDIRECT_URL' => '/ecommerce/api/web/orders/cancel-order'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/orders/cancel-order'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1586945773.371
+    'REQUEST_TIME' => 1586945773
+]
+2020-04-15 11:51:11 [::1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request: cron/send-payments-to-sellers in /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php:128
+Stack trace:
+#0 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('send-payments-t...', Array)
+#1 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('cron/send-payme...', Array)
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#3 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#4 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php:115
+Stack trace:
+#0 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#2 {main}
+2020-04-15 11:51:11 [::1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '0'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ORIGIN' => 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'
+    'HTTP_SEC_FETCH_SITE' => 'cross-site'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '53232'
+    'REDIRECT_URL' => '/ecommerce/api/web/cron/send-payments-to-sellers'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/cron/send-payments-to-sellers'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1586951471.411
+    'REQUEST_TIME' => 1586951471
+]
+2020-04-16 07:39:59 [::1][-][-][error][yii\base\ErrorException:8] yii\base\ErrorException: Trying to get property 'success' of non-object in /var/www/html/ecommerce/api/controllers/OrdersController.php:121
+Stack trace:
+#0 /var/www/html/ecommerce/api/controllers/OrdersController.php(121): yii\base\ErrorHandler->handleError(8, 'Trying to get p...', '/var/www/html/e...', 121, Array)
+#1 [internal function]: api\controllers\OrdersController->actionCreateOrder()
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('create-order', Array)
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('orders/create-o...', Array)
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#8 {main}
+2020-04-16 07:39:58 [::1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '269'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'
+    'CONTENT_TYPE' => 'text/plain;charset=UTF-8'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ORIGIN' => 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'
+    'HTTP_SEC_FETCH_SITE' => 'cross-site'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '44684'
+    'REDIRECT_URL' => '/ecommerce/api/web/orders/create-order'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/orders/create-order'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1587022798.026
+    'REQUEST_TIME' => 1587022798
+]
+2020-04-17 05:56:32 [::1][-][-][error][yii\base\InvalidArgumentException] yii\base\InvalidArgumentException: Syntax error. in /var/www/html/ecommerce/vendor/yiisoft/yii2/helpers/BaseJson.php:133
+Stack trace:
+#0 /var/www/html/ecommerce/vendor/yiisoft/yii2/helpers/BaseJson.php(107): yii\helpers\BaseJson::handleJsonError(4)
+#1 /var/www/html/ecommerce/common/components/Common.php(1559): yii\helpers\BaseJson::decode('------WebKitFor...', true)
+#2 /var/www/html/ecommerce/api/controllers/CartController.php(100): common\components\Common::checkRequestType()
+#3 [internal function]: api\controllers\CartController->actionAddProductToCart()
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('add-product-to-...', Array)
+#7 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('cart/add-produc...', Array)
+#8 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#10 {main}
+2020-04-17 05:56:32 [::1][-][-][info][application] $_GET = []
+
+$_POST = [
+    '------WebKitFormBoundaryasBVCdycZjCy5Jr5
+Content-Disposition:_form-data;_name' => '\"user_id\"
+
+3
+------WebKitFormBoundaryasBVCdycZjCy5Jr5
+Content-Disposition: form-data; name=\"product_id\"
+
+1222
+------WebKitFormBoundaryasBVCdycZjCy5Jr5
+Content-Disposition: form-data; name=\"quantity\"
+
+2
+------WebKitFormBoundaryasBVCdycZjCy5Jr5--
+'
+]
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '336'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ORIGIN' => 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'
+    'HTTP_SEC_FETCH_SITE' => 'cross-site'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '49210'
+    'REDIRECT_URL' => '/ecommerce/api/web/cart/add-product-to-cart'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/cart/add-product-to-cart'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1587102991.93
+    'REQUEST_TIME' => 1587102991
+]
+2020-04-17 05:56:40 [::1][-][-][error][Error] Error: Class 'api\controllers\Products' not found in /var/www/html/ecommerce/api/controllers/CartController.php:125
+Stack trace:
+#0 [internal function]: api\controllers\CartController->actionAddProductToCart()
+#1 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('add-product-to-...', Array)
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('cart/add-produc...', Array)
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#6 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#7 {main}
+2020-04-17 05:56:39 [::1][-][-][info][application] $_GET = []
+
+$_POST = [
+    'user_id' => '3'
+    'product_id' => '1222'
+    'quantity' => '2'
+]
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '336'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'
+    'CONTENT_TYPE' => 'multipart/form-data; boundary=----WebKitFormBoundaryDtQhAmngE0TNRcud'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ORIGIN' => 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'
+    'HTTP_SEC_FETCH_SITE' => 'cross-site'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '49212'
+    'REDIRECT_URL' => '/ecommerce/api/web/cart/add-product-to-cart'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/cart/add-product-to-cart'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1587102999.744
+    'REQUEST_TIME' => 1587102999
+]
+2020-04-17 10:56:34 [::1][-][-][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined variable: notificationList in /var/www/html/ecommerce/api/controllers/NotificationController.php:96
+Stack trace:
+#0 /var/www/html/ecommerce/api/controllers/NotificationController.php(96): yii\base\ErrorHandler->handleError(8, 'Undefined varia...', '/var/www/html/e...', 96, Array)
+#1 [internal function]: api\controllers\NotificationController->actionSendChatNotification()
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('send-chat-notif...', Array)
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('notification/se...', Array)
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#8 {main}
+2020-04-17 10:56:33 [::1][-][-][info][application] $_GET = []
+
+$_POST = [
+    'user_id' => '3'
+    'message_title' => 'test chat notification'
+    'message_body' => 'test chat notification'
+]
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '382'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'
+    'CONTENT_TYPE' => 'multipart/form-data; boundary=----WebKitFormBoundary4AWBN7LCnjQAU1gg'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ORIGIN' => 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop'
+    'HTTP_SEC_FETCH_SITE' => 'cross-site'
+    'HTTP_SEC_FETCH_MODE' => 'cors'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '38122'
+    'REDIRECT_URL' => '/ecommerce/api/web/notification/send-chat-notification'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/notification/send-chat-notification'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1587120993.706
+    'REQUEST_TIME' => 1587120993
+]
+2020-04-20 09:54:34 [::1][-][-][error][Error] Error: Class 'api\controllers\OrderProducts' not found in /var/www/html/ecommerce/api/controllers/CronController.php:107
+Stack trace:
+#0 [internal function]: api\controllers\CronController->actionSendPaymentToSellers()
+#1 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('send-payment-to...', Array)
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('cron/send-payme...', Array)
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#6 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#7 {main}
+2020-04-20 09:54:31 [::1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_USER_AGENT' => 'PostmanRuntime/7.24.1'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_POSTMAN_TOKEN' => 'e1346b47-6a87-4432-8acd-983426610604'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '0'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '39704'
+    'REDIRECT_URL' => '/ecommerce/api/web/cron/send-payment-to-sellers'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/cron/send-payment-to-sellers'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1587376471.613
+    'REQUEST_TIME' => 1587376471
+]
+2020-04-20 09:55:27 [::1][-][-][error][yii\base\ErrorException:8] yii\base\ErrorException: Trying to get property 'batch_header' of non-object in /var/www/html/ecommerce/api/controllers/CronController.php:110
+Stack trace:
+#0 /var/www/html/ecommerce/api/controllers/CronController.php(110): yii\base\ErrorHandler->handleError(8, 'Trying to get p...', '/var/www/html/e...', 110, Array)
+#1 [internal function]: api\controllers\CronController->actionSendPaymentToSellers()
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('send-payment-to...', Array)
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('cron/send-payme...', Array)
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#8 {main}
+2020-04-20 09:55:24 [::1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_USER_AGENT' => 'PostmanRuntime/7.24.1'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_POSTMAN_TOKEN' => '88739842-858c-4232-99e1-4763a9017d67'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '0'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '39720'
+    'REDIRECT_URL' => '/ecommerce/api/web/cron/send-payment-to-sellers'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/cron/send-payment-to-sellers'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1587376524.045
+    'REQUEST_TIME' => 1587376524
+]
+2020-04-20 10:16:42 [::1][-][-][error][yii\web\HeadersAlreadySentException] yii\web\HeadersAlreadySentException: Headers already sent in /var/www/html/ecommerce/api/controllers/CronController.php on line 131. in /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Response.php:366
+Stack trace:
+#0 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Response.php(339): yii\web\Response->sendHeaders()
+#1 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Response->send()
+#2 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#3 {main}
+2020-04-20 10:16:27 [::1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_USER_AGENT' => 'PostmanRuntime/7.24.1'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_POSTMAN_TOKEN' => 'a6ab6455-6208-4673-a421-2bd2a1d9b744'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '0'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '39974'
+    'REDIRECT_URL' => '/ecommerce/api/web/cron/send-payment-to-sellers'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/cron/send-payment-to-sellers'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1587377787.121
+    'REQUEST_TIME' => 1587377787
+]
+2020-04-20 10:26:20 [::1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'order_products.seller_payment_status' in 'where clause' in /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Command.php:1290
+Stack trace:
+#0 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Command.php(1290): PDOStatement->execute()
+#1 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Command.php(1158): yii\db\Command->internalExecute('SELECT * FROM `...')
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Command.php(399): yii\db\Command->queryInternal('fetchAll', NULL)
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(237): yii\db\Command->queryAll()
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#5 /var/www/html/ecommerce/common/models/ProductsQuery.php(24): yii\db\ActiveQuery->all(NULL)
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(270): common\models\ProductsQuery->all()
+#7 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('product', '<span class="st...')
+#8 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#9 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#10 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#11 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(270): yii\db\ActiveQuery->all()
+#12 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('orderProducts', '<span class="st...')
+#13 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#14 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#15 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#16 /var/www/html/ecommerce/api/controllers/CronController.php(25): yii\db\ActiveQuery->all()
+#17 [internal function]: api\controllers\CronController->actionSendPaymentToSellers()
+#18 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#19 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#20 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('send-payment-to...', Array)
+#21 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('cron/send-payme...', Array)
+#22 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#23 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#24 {main}
+
+Next yii\db\Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'order_products.seller_payment_status' in 'where clause'
+The SQL being executed was: SELECT * FROM `products` WHERE (order_products.seller_payment_status != 1 AND seller_transfer_transaction_id is NULL) AND (`id` IN ('46', '47', '21', '44', '48')) in /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Schema.php:674
+Stack trace:
+#0 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Command.php(1295): yii\db\Schema->convertException(Object(PDOException), 'SELECT * FROM `...')
+#1 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Command.php(1158): yii\db\Command->internalExecute('SELECT * FROM `...')
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Command.php(399): yii\db\Command->queryInternal('fetchAll', NULL)
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(237): yii\db\Command->queryAll()
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#5 /var/www/html/ecommerce/common/models/ProductsQuery.php(24): yii\db\ActiveQuery->all(NULL)
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(270): common\models\ProductsQuery->all()
+#7 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('product', '<span class="st...')
+#8 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#9 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#10 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#11 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(270): yii\db\ActiveQuery->all()
+#12 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('orderProducts', '<span class="st...')
+#13 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#14 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#15 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#16 /var/www/html/ecommerce/api/controllers/CronController.php(25): yii\db\ActiveQuery->all()
+#17 [internal function]: api\controllers\CronController->actionSendPaymentToSellers()
+#18 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#19 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#20 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('send-payment-to...', Array)
+#21 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('cron/send-payme...', Array)
+#22 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#23 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#24 {main}
+Additional Information:
+Array
+(
+    [0] => 42S22
+    [1] => 1054
+    [2] => Unknown column 'order_products.seller_payment_status' in 'where clause'
+)
+
+2020-04-20 10:26:20 [::1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_USER_AGENT' => 'PostmanRuntime/7.24.1'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_POSTMAN_TOKEN' => '924d2bc5-9f72-4cb3-bd01-29fcb41dcbc9'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '0'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '40066'
+    'REDIRECT_URL' => '/ecommerce/api/web/cron/send-payment-to-sellers'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/cron/send-payment-to-sellers'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1587378380.456
+    'REQUEST_TIME' => 1587378380
+]
+2020-04-20 10:27:03 [::1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'order_products.seller_payment_status' in 'where clause' in /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Command.php:1290
+Stack trace:
+#0 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Command.php(1290): PDOStatement->execute()
+#1 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Command.php(1158): yii\db\Command->internalExecute('SELECT * FROM `...')
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Command.php(399): yii\db\Command->queryInternal('fetchAll', NULL)
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(237): yii\db\Command->queryAll()
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#5 /var/www/html/ecommerce/common/models/ProductsQuery.php(24): yii\db\ActiveQuery->all(NULL)
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(270): common\models\ProductsQuery->all()
+#7 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('product', '<span class="st...')
+#8 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#9 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#10 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#11 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(270): yii\db\ActiveQuery->all()
+#12 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('orderProducts', '<span class="st...')
+#13 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#14 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#15 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#16 /var/www/html/ecommerce/api/controllers/CronController.php(25): yii\db\ActiveQuery->all()
+#17 [internal function]: api\controllers\CronController->actionSendPaymentToSellers()
+#18 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#19 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#20 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('send-payment-to...', Array)
+#21 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('cron/send-payme...', Array)
+#22 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#23 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#24 {main}
+
+Next yii\db\Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'order_products.seller_payment_status' in 'where clause'
+The SQL being executed was: SELECT * FROM `products` WHERE (order_products.seller_payment_status != 1 AND order_products.seller_transfer_transaction_id is NULL) AND (`id` IN ('46', '47', '21', '44', '48')) in /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Schema.php:674
+Stack trace:
+#0 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Command.php(1295): yii\db\Schema->convertException(Object(PDOException), 'SELECT * FROM `...')
+#1 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Command.php(1158): yii\db\Command->internalExecute('SELECT * FROM `...')
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Command.php(399): yii\db\Command->queryInternal('fetchAll', NULL)
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(237): yii\db\Command->queryAll()
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#5 /var/www/html/ecommerce/common/models/ProductsQuery.php(24): yii\db\ActiveQuery->all(NULL)
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(270): common\models\ProductsQuery->all()
+#7 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('product', '<span class="st...')
+#8 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#9 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#10 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#11 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(270): yii\db\ActiveQuery->all()
+#12 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('orderProducts', '<span class="st...')
+#13 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#14 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#15 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#16 /var/www/html/ecommerce/api/controllers/CronController.php(25): yii\db\ActiveQuery->all()
+#17 [internal function]: api\controllers\CronController->actionSendPaymentToSellers()
+#18 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#19 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#20 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('send-payment-to...', Array)
+#21 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('cron/send-payme...', Array)
+#22 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#23 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#24 {main}
+Additional Information:
+Array
+(
+    [0] => 42S22
+    [1] => 1054
+    [2] => Unknown column 'order_products.seller_payment_status' in 'where clause'
+)
+
+2020-04-20 10:27:03 [::1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_USER_AGENT' => 'PostmanRuntime/7.24.1'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_POSTMAN_TOKEN' => '21a7119d-05d9-4143-a5e4-1f1e63a514f3'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '0'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '40078'
+    'REDIRECT_URL' => '/ecommerce/api/web/cron/send-payment-to-sellers'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/cron/send-payment-to-sellers'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1587378423.374
+    'REQUEST_TIME' => 1587378423
+]
+2020-04-20 10:28:26 [::1][-][-][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined variable: payment_arr in /var/www/html/ecommerce/api/controllers/CronController.php:47
+Stack trace:
+#0 /var/www/html/ecommerce/api/controllers/CronController.php(47): yii\base\ErrorHandler->handleError(8, 'Undefined varia...', '/var/www/html/e...', 47, Array)
+#1 [internal function]: api\controllers\CronController->actionSendPaymentToSellers()
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('send-payment-to...', Array)
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('cron/send-payme...', Array)
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#8 {main}
+2020-04-20 10:28:26 [::1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_USER_AGENT' => 'PostmanRuntime/7.24.1'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_POSTMAN_TOKEN' => '28a1913b-e7e6-41bf-80c4-db506562e7e5'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '0'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '40090'
+    'REDIRECT_URL' => '/ecommerce/api/web/cron/send-payment-to-sellers'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/cron/send-payment-to-sellers'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1587378506.913
+    'REQUEST_TIME' => 1587378506
+]
+2020-04-20 10:29:35 [::1][-][-][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined variable: payment_arr in /var/www/html/ecommerce/api/controllers/CronController.php:49
+Stack trace:
+#0 /var/www/html/ecommerce/api/controllers/CronController.php(49): yii\base\ErrorHandler->handleError(8, 'Undefined varia...', '/var/www/html/e...', 49, Array)
+#1 [internal function]: api\controllers\CronController->actionSendPaymentToSellers()
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('send-payment-to...', Array)
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('cron/send-payme...', Array)
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#8 {main}
+2020-04-20 10:29:35 [::1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_USER_AGENT' => 'PostmanRuntime/7.24.1'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_POSTMAN_TOKEN' => 'c879b541-cf6a-4acf-bfab-dedc43c20174'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '0'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '40104'
+    'REDIRECT_URL' => '/ecommerce/api/web/cron/send-payment-to-sellers'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/cron/send-payment-to-sellers'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1587378575.43
+    'REQUEST_TIME' => 1587378575
+]
+2020-04-20 10:40:32 [::1][-][-][error][yii\web\HeadersAlreadySentException] yii\web\HeadersAlreadySentException: Headers already sent in /var/www/html/ecommerce/api/controllers/CronController.php on line 140. in /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Response.php:366
+Stack trace:
+#0 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Response.php(339): yii\web\Response->sendHeaders()
+#1 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Response->send()
+#2 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#3 {main}
+2020-04-20 10:40:13 [::1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_USER_AGENT' => 'PostmanRuntime/7.24.1'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_POSTMAN_TOKEN' => '56b88139-1265-42aa-b84d-19071c13ca1d'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '0'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '40224'
+    'REDIRECT_URL' => '/ecommerce/api/web/cron/send-payment-to-sellers'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/cron/send-payment-to-sellers'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1587379213.503
+    'REQUEST_TIME' => 1587379213
+]
+2020-04-28 13:01:30 [::1][-][-][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined index: is_rent in /var/www/html/ecommerce/api/controllers/ProductsController.php:187
+Stack trace:
+#0 /var/www/html/ecommerce/api/controllers/ProductsController.php(187): yii\base\ErrorHandler->handleError(8, 'Undefined index...', '/var/www/html/e...', 187, Array)
+#1 [internal function]: api\controllers\ProductsController->actionGetProductsList()
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('get-products-li...', Array)
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('products/get-pr...', Array)
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#8 {main}
+2020-04-28 13:01:30 [::1][-][-][info][application] $_GET = []
+
+$_POST = [
+    'user_id' => '39'
+]
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_USER_AGENT' => 'PostmanRuntime/7.24.1'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_POSTMAN_TOKEN' => '955d1c2d-08a8-46d4-9e22-34eb3c1deba1'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_TYPE' => 'multipart/form-data; boundary=--------------------------452411063513113042074144'
+    'CONTENT_LENGTH' => '164'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '55688'
+    'REDIRECT_URL' => '/ecommerce/api/web/products/get-products-list'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/products/get-products-list'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1588078890.507
+    'REQUEST_TIME' => 1588078890
+]
+2020-04-29 06:27:27 [::1][-][-][error][yii\base\InvalidArgumentException] yii\base\InvalidArgumentException: Syntax error. in /var/www/html/ecommerce/vendor/yiisoft/yii2/helpers/BaseJson.php:133
+Stack trace:
+#0 /var/www/html/ecommerce/vendor/yiisoft/yii2/helpers/BaseJson.php(107): yii\helpers\BaseJson::handleJsonError(4)
+#1 /var/www/html/ecommerce/common/components/Common.php(1559): yii\helpers\BaseJson::decode('{\n    "user_id"...', true)
+#2 /var/www/html/ecommerce/api/controllers/OrdersController.php(27): common\components\Common::checkRequestType()
+#3 [internal function]: api\controllers\OrdersController->actionCreateOrder()
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('create-order', Array)
+#7 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('orders/create-o...', Array)
+#8 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#10 {main}
+2020-04-29 06:27:27 [::1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'CONTENT_TYPE' => 'text/plain'
+    'HTTP_USER_AGENT' => 'PostmanRuntime/7.24.1'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_POSTMAN_TOKEN' => 'ae5e4f28-9ee9-46a7-81bf-bbb66270db44'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '288'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '56340'
+    'REDIRECT_URL' => '/ecommerce/api/web/orders/create-order'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/orders/create-order'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1588141647.118
+    'REQUEST_TIME' => 1588141647
+]
+2020-04-30 06:15:04 [::1][-][-][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined index: id in /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php:583
+Stack trace:
+#0 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(583): yii\base\ErrorHandler->handleError(8, 'Undefined index...', '/var/www/html/e...', 583, Array)
+#1 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(432): yii\db\ActiveQuery->getModelKey(Array, Array)
+#2 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(275): yii\db\ActiveQuery->buildBuckets(Array, Array)
+#3 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('category', '<span class="st...')
+#4 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#5 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#6 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#7 /var/www/html/ecommerce/common/models/ProductsQuery.php(24): yii\db\ActiveQuery->all(NULL)
+#8 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(270): common\models\ProductsQuery->all()
+#9 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('product', '<span class="st...')
+#10 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#11 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#12 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#13 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveRelationTrait.php(270): yii\db\ActiveQuery->all()
+#14 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQueryTrait.php(151): yii\db\ActiveQuery->populateRelation('orderProducts', '<span class="st...')
+#15 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(224): yii\db\ActiveQuery->findWith(Array, '<span class="st...')
+#16 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/Query.php(238): yii\db\ActiveQuery->populate(Array)
+#17 /var/www/html/ecommerce/vendor/yiisoft/yii2/db/ActiveQuery.php(133): yii\db\Query->all(NULL)
+#18 /var/www/html/ecommerce/api/controllers/OrdersController.php(239): yii\db\ActiveQuery->all()
+#19 [internal function]: api\controllers\OrdersController->actionGetMyOrdersList()
+#20 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#21 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#22 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('get-my-orders-l...', Array)
+#23 /var/www/html/ecommerce/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('orders/get-my-o...', Array)
+#24 /var/www/html/ecommerce/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#25 /var/www/html/ecommerce/api/web/index.php(33): yii\base\Application->run()
+#26 {main}
+2020-04-30 06:15:04 [::1][-][-][info][application] $_GET = []
+
+$_POST = [
+    'user_id' => '3'
+]
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'CONTENT_TYPE' => 'multipart/form-data; boundary=--------------------------737281847465297510008301'
+    'HTTP_USER_AGENT' => 'PostmanRuntime/7.24.1'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_POSTMAN_TOKEN' => '76add400-a8a5-4ef3-b713-ea96d705c06e'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '163'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.29 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => '/var/www/html'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/html/ecommerce/api/web/index.php'
+    'REMOTE_PORT' => '51316'
+    'REDIRECT_URL' => '/ecommerce/api/web/orders/get-my-orders-list'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/ecommerce/api/web/orders/get-my-orders-list'
+    'SCRIPT_NAME' => '/ecommerce/api/web/index.php'
+    'PHP_SELF' => '/ecommerce/api/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1588227304.357
+    'REQUEST_TIME' => 1588227304
+]

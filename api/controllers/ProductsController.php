@@ -59,7 +59,7 @@ class ProductsController extends \yii\base\Controller
             }
         }
         if (!empty($model)) {
-            $category_check = Categories::findOne($requestParam['category_id']);
+            $category_check = Category::findOne($requestParam['category_id']);
             if (!empty($category_check)) {
                 if (!empty($requestParam['product_id'])) {
                     $productModel = Products::findOne($requestParam['product_id']);
