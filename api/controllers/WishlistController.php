@@ -9,6 +9,7 @@ use common\models\Users;
 use common\models\Wishlist;
 use Yii;
 use yii\web\Controller;
+use common\models\Products;
 
 /**
  * MainController implements the CRUD actions for APIs.
