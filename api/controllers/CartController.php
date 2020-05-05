@@ -127,7 +127,7 @@ class CartController extends \yii\base\Controller
                 $Product = Products::find()->where(['id' => $requestParam['product_id'], "is_approve" => "1"])->one();
                 if (!empty($Product)) {
                     if ($Product->seller_id != $requestParam['user_id']) {
-                        if($Product->quantity >= $requestParam['quantity']){
+                        if($Product->quantity_in_stock >= $requestParam['quantity']){
                         $cartModel = new Cart();
                         $cartModel->user_id = $requestParam['user_id'];
                         $cartModel->product_id = $requestParam['product_id'];
@@ -137,7 +137,7 @@ class CartController extends \yii\base\Controller
                         $ssMessage = 'Product successfully added to your cart.';
                         $amResponse = Common::successResponse($ssMessage, $amReponseParam);  
                         }else{
-                            $ssMessage = "You can not add this product to cart because it has only ".$Product->quantity." items left in stock";
+                            $ssMessage = "You can not add this product to cart because it has only ".$Product->quantity_in_stock." items left in stock";
                             $amResponse = Common::errorResponse($ssMessage);
                         }
 
@@ -189,6 +189,9 @@ class CartController extends \yii\base\Controller
                     $ssMessage = 'This product already added on your cart';
                     $amResponse = Common::errorResponse($ssMessage);
                 } else {
+                $Product = Products::find()->where(['id' => $WishListModel->product_id, "is_approve" => "1"])->one();
+                if (!empty($Product)) {
+                if($Product->quantity_in_stock >= $requestParam['quantity']){
                     $cartModel = new Cart();
                     $cartModel->user_id = $WishListModel->user_id;
                     $cartModel->product_id = $WishListModel->product_id;
@@ -198,6 +201,13 @@ class CartController extends \yii\base\Controller
                     $WishListModel->delete();
                     $ssMessage = 'Product successfully added to your cart.';
                     $amResponse = Common::successResponse($ssMessage, $amReponseParam);
+                    }else{
+                            $ssMessage = "You can not add this product to cart because it has only ".$Product->quantity_in_stock." items left in stock";
+                            $amResponse = Common::errorResponse($ssMessage);
+                        }
+                } else {
+                    $ssMessage = 'Invalid Product';
+                    $amResponse = Common::errorResponse($ssMessage);
                 }
 
             } else {

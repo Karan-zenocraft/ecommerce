@@ -80,6 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'rent_price',
         'rent_price_duration',
         'quantity',
+        'quantity_in_stock',
         'discount',
         [
             'attribute' => 'is_approve',

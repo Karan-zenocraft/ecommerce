@@ -83,6 +83,7 @@ class ProductsController extends \yii\base\Controller
                 $productModel->rent_price = $requestParam['rent_price'];
                 $productModel->rent_price_duration = $requestParam['rent_price_duration'];
                 $productModel->quantity = $requestParam['quantity'];
+                $productModel->quantity_in_stock = $requestParam['quantity'];
                 if ($productModel->save(false)) {
                     if (isset($requestFileparam['photo']) && isset($requestFileparam['photo']['name'])) {
                         if (!empty($requestParam['product_id'])) {

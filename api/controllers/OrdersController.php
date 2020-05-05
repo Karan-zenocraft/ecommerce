@@ -104,7 +104,7 @@ class OrdersController extends \yii\base\Controller
                         }
                         $orderProducts->total_price_with_tax_discount = $sellPrice;
                         $orderProducts->save(false);
-                        $productDetails->quantity = $productDetails->quantity - $product['quantity'];
+                        $productDetails->quantity_in_stock = $productDetails->quantity_in_stock - $product['quantity'];
                         $productDetails->save(false);
                         $prices[] = $sellPrice;
                         //$orderProducts->save(false);
@@ -351,6 +351,9 @@ class OrdersController extends \yii\base\Controller
                                     $orderProducts = $order->orderProducts;
                                     if (!empty($orderProducts)) {
                                         foreach ($orderProducts as $key => $product) {
+                                        $productDetails = Products::findOne($product['product_id']);
+                                        $productDetails->quantity_in_stock = $productDetails->quantity_in_stock + $product['quantity'];
+                                        $productDetails->save(false);
                                             $seller_id = $product['seller_id'];
                                             $sellerDetails = Common::get_name_by_id($seller_id, "Users");
                                             $product_name = Common::get_name_by_id($product['product_id'], "Products");
