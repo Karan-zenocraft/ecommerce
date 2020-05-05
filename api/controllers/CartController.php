@@ -190,6 +190,7 @@ class CartController extends \yii\base\Controller
                     $amResponse = Common::errorResponse($ssMessage);
                 } else {
                 $Product = Products::find()->where(['id' => $WishListModel->product_id, "is_approve" => "1"])->one();
+
                 if (!empty($Product)) {
                 if($Product->quantity_in_stock >= $requestParam['quantity']){
                     $cartModel = new Cart();
@@ -209,6 +210,7 @@ class CartController extends \yii\base\Controller
                     $ssMessage = 'Invalid Product';
                     $amResponse = Common::errorResponse($ssMessage);
                 }
+            }
 
             } else {
                 $ssMessage = 'Invalid Wishlist Id.';
