@@ -96,7 +96,7 @@ class WishlistController extends \yii\base\Controller
             $Product = Products::find()->where(['id' => $requestParam['product_id'], "is_approve" => "1"])->one();
             if (!empty($Product)) {
                 if ($Product->seller_id != $requestParam['user_id']) {
-                    $WModel = Wishlist::find()->where(['user_id' => $requestParam['user_id'], "product_id" => $requestParam['product_id'], "is_approve" => 1])->one();
+                    $WModel = Wishlist::find()->where(['user_id' => $requestParam['user_id'], "product_id" => $requestParam['product_id']])->one();
                     if (!empty($WModel)) {
                         $ssMessage = 'This product already added on your wish list';
                         $amResponse = Common::errorResponse($ssMessage);
