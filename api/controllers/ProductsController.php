@@ -12,7 +12,7 @@ use Yii;
 /* USE COMMON MODELS */
 use yii\web\Controller;
 use \yii\web\UploadedFile;
-
+use common\models\Category;
 /**
  * MainController implements the CRUD actions for APIs.
  */
