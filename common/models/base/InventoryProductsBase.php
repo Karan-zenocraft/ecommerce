@@ -6,6 +6,8 @@ use Yii;
 use common\models\Users;
 use common\models\InventoryProductsPhotos;
 use common\models\InventoryProductsQuery;
+use common\models\Category; 
+
 
 /**
  * This is the model class for table "inventory_products".
@@ -81,6 +83,11 @@ return [
     'updated_at' => 'Updated At',
 ];
 }
+
+ public function getCategory() 
+   { 
+   return $this->hasOne(Category::className(), ['id' => 'category_id']); 
+   } 
 
     /**
     * @return \yii\db\ActiveQuery

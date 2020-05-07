@@ -173,7 +173,7 @@ class InventoryController extends \yii\base\Controller
      * Author : Rutusha Joshi
      */
 
-    public function actionGetProductsList()
+    public function actionGetCategoryList()
     {
         //Get all request parameter
         $amData = Common::checkRequestType();
@@ -196,53 +196,19 @@ class InventoryController extends \yii\base\Controller
         $snUserId = $requestParam['user_id'];
         $model = Users::findOne(["id" => $snUserId]);
         if (!empty($model)) {
-            $query = "select *
-                            from products WHERE is_approve = '" . Yii::$app->params['is_approve_value']['true'] . "' AND quantity >= '1'";
-            if (!empty($requestParam['lat']) && !empty($requestParam['longg'])) {
-                $user_latitude = $requestParam['lat'];
-                $user_longitude = $requestParam['longg'];
-                $radius = 30;
-                $query = $query." AND round(( 3959 * acos( least(1.0,cos( radians(" . $user_latitude . ") ) * cos( radians(lat) ) * cos( radians(longg) - radians(" . $user_longitude . ") ) + sin( radians(" . $user_latitude . ") ) * sin( radians(lat))))), 1) < " . $radius ."";
-            }
-            if(!empty($requestParam['category_id'])){
-                $query = $query." AND category_id = '" . $requestParam['category_id'] . "'";
-            }
-            if(!empty($requestParam['price'])){
-                $query = $query." AND price = '" . $requestParam['price'] . "'";
-            }
-              if(!empty($requestParam['brand_id'])){
-                $query = $query." AND brand_id = '" . $requestParam['brand_id'] . "'";
-            }
-             if(!empty($requestParam['year_of_purchase'])){
-                $query = $query." AND year_of_purchase = '" . $requestParam['year_of_purchase'] . "'";
-            }
-            if(!empty($requestParam['is_rent']) && ($requestParam['is_rent'] == "3")){
-                $query = $query;
-            } 
-            if(isset($requestParam['is_rent']) && ($requestParam['is_rent'] != "3") ){
-                $query = $query." AND is_rent = '" . $requestParam['is_rent'] . "'";
-            }
-            $products = Yii::$app->db->createCommand($query)->queryAll();
-            if (!empty($products)) {
-                $wishlist = Wishlist::find()->where(['user_id' => $requestParam['user_id']])->asArray()->all();
-                $wishlist_arr = array_column($wishlist, 'product_id');
-                foreach ($products as $key => $product) {
-                    $productPhotos = ProductPhotos::find()->where(['product_id' => $product['id']])->asArray()->all();
-                    $product['is_wishlist'] = in_array($product['id'], $wishlist_arr) ? "true" : "false";
-                    $product['rent_price'] = !empty($product['rent_price']) ? $product['rent_price'] : "";
-                    $product['rent_price_duration'] = !empty($product['rent_price_duration']) ? $product['rent_price_duration'] : "";
-                    $product['lat'] = !empty($product['lat']) ? $product['lat'] : "";
-                    $product['longg'] = !empty($product['longg']) ? $product['longg'] : "";
-                    $product['owner_discount'] = !empty($product['owner_discount']) ? $product['owner_discount'] : "0";
-                    $product['productPhotos'] = !empty($productPhotos) ? $productPhotos : [];
-                    $products[$key] = $product;
+            $categoriesList = Category::find()->asArray()->all();
+            if (!empty($categoriesList)) {
+                foreach ($categoriesList as $key => $category) {
+                    $category['photo'] = !empty($category['photo']) ? $category['photo'] : "";
+                    $category['parent_id'] = !empty($category['parent_id']) ? $category['parent_id'] : "";
+                    $categories[] = $category;
                 }
-                $amReponseParam = $products;
-                $ssMessage = 'Products List';
-                $amResponse = Common::successResponse($ssMessage, $products);
+                $amReponseParam = $categories;
+                $ssMessage = 'All Categories List';
+                $amResponse = Common::successResponse($ssMessage, $amReponseParam);
             } else {
                 $amReponseParam = [];
-                $ssMessage = 'Products not found.';
+                $ssMessage = 'Categories not found.';
                 $amResponse = Common::successResponse($ssMessage, $amReponseParam);
             }
 
@@ -260,13 +226,13 @@ class InventoryController extends \yii\base\Controller
      * Response Params : user's details
      * Author : Rutusha Joshi
      */
-    public function actionGetProductDetails()
+    public function actionGetMyInventoryProductDetails()
     {
         //Get all request parameter
         $amData = Common::checkRequestType();
         $amResponse = $amReponseParam = [];
         // Check required validation for request parameter.
-        $amRequiredParams = array('user_id', 'product_id');
+        $amRequiredParams = array('user_id', 'inventory_product_id');
         $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
 
         // If any getting error in request paramter then set error message.
@@ -283,32 +249,23 @@ class InventoryController extends \yii\base\Controller
         $snUserId = $requestParam['user_id'];
         $model = Users::findOne(["id" => $snUserId]);
         if (!empty($model)) {
-            $product = Products::find()->with(['category'=>function($q){
+            $product = InventoryProducts::find()->with(['category'=>function($q){
                         return $q->select('id,title');
-                    }])->with(['subcategory'=>function($q){
-                        return $q->select('id,title');
-                    }])->with('brand')->with('productPhotos')->with('seller')->where(["id" => $requestParam['product_id']])->asArray()->all();
+                    }])->with('inventoryProductsPhotos')->with('user')->where(["id" => $requestParam['inventory_product_id']])->asArray()->all();
             if (!empty($product)) {
-                $wishlist = Wishlist::find()->where(['user_id' => $requestParam['user_id']])->asArray()->all();
-                $wishlist_arr = array_column($wishlist, 'product_id');
-                $product[0]['is_wishlist'] = in_array($requestParam['product_id'], $wishlist_arr) ? "true" : "false";
-                $product[0]['seller_first_name'] = $product[0]['seller']['first_name'];
-                $product[0]['seller_last_name'] = $product[0]['seller']['last_name'];
-                $product[0]['owner_discount'] = !empty($product[0]['owner_discount']) ? $product[0]['owner_discount'] : "0";
-                $product[0]['seller_email'] = !empty($product[0]['seller']['email']) ? $product[0]['seller']['email'] : "";
-                $product[0]['seller_photo'] = !empty($product[0]['seller']['photo']) ? $product[0]['seller']['photo'] : "";
-                $product[0]['rent_price'] = !empty($product[0]['rent_price']) ? $product[0]['rent_price'] : "";
-                $product[0]['rent_price_duration'] = !empty($product[0]['rent_price_duration']) ? $product[0]['rent_price_duration'] : "";
-                $product[0]['lat'] = !empty($product[0]['lat']) ? $product[0]['lat'] : "";
-                $product[0]['longg'] = !empty($product[0]['longg']) ? $product[0]['longg'] : "";
-                $product[0]['productPhotos'] = !empty($product[0]['productPhotos']) ? $product[0]['productPhotos'] : [];
-                unset($product[0]['seller']);
+                $inventoryProductsPhotos = $product[0]['inventoryProductsPhotos'];
+                foreach ($inventoryProductsPhotos as $key => $photo) {
+                   $photo['image_name'] = $photo['image_name'] = Yii::$app->params['root_url'] . '/' . "uploads/inventory_products/" . $photo['image_name'];
+                   $photos[] = $photo;
+                }
+                $product[0]['receipt_image'] = (!empty($product[0]['receipt_image']) && file_exists(Yii::getAlias('@root') . '/' . "uploads/inventory_products/receipt_images/" . $product[0]['receipt_image'])) ? Yii::$app->params['root_url'] . '/' . "uploads/inventory_products/receipt_images/" .  $product[0]['receipt_image'] : ""; 
+                $product[0]['inventoryProductsPhotos'] = $photos; 
                 $amReponseParam = $product[0];
-                $ssMessage = "Product's details";
+                $ssMessage = "Inventory Product's details";
                 $amResponse = Common::successResponse($ssMessage, $amReponseParam);
             } else {
                 $amReponseParam = [];
-                $ssMessage = 'Products not found.';
+                $ssMessage = 'Inventory Product not found.';
                 $amResponse = Common::successResponse($ssMessage, $amReponseParam);
             }
 
@@ -328,7 +285,7 @@ class InventoryController extends \yii\base\Controller
      * Author : Rutusha Joshi
      */
 
-    public function actionGetMyProductsList()
+    public function actionGetMyInventoryProductsList()
     {
         //Get all request parameter
         $amData = Common::checkRequestType();
@@ -351,29 +308,28 @@ class InventoryController extends \yii\base\Controller
         $snUserId = $requestParam['user_id'];
         $model = Users::findOne(["id" => $snUserId]);
         if (!empty($model)) {
-            $products = Products::find()->with(['category'=>function($q){
+            $products = InventoryProducts::find()->with(['category'=>function($q){
                         return $q->select('id,title');
-                    }])->with(['subcategory'=>function($q){
-                        return $q->select('id,title');
-                    }])->where(['seller_id' => $requestParam['user_id']])->asArray()->all();
+                    }])->with('inventoryProductsPhotos')->where(['user_id' => $requestParam['user_id']])->asArray()->all();
 
             if (!empty($products)) {
                 foreach ($products as $key => $product) {
-                    $productPhotos = ProductPhotos::find()->where(['product_id' => $product['id']])->asArray()->all();
-                    $product['rent_price'] = !empty($product['rent_price']) ? $product['rent_price'] : "";
-                    $product['rent_price_duration'] = !empty($product['rent_price_duration']) ? $product['rent_price_duration'] : "";
-                    $product['lat'] = !empty($product['lat']) ? $product['lat'] : "";
-                    $product['longg'] = !empty($product['longg']) ? $product['longg'] : "";
-                    $product['owner_discount'] = !empty($product['owner_discount']) ? $product['owner_discount'] : "0";
-                    $product['productPhotos'] = !empty($productPhotos) ? $productPhotos : [];
-                    $products[$key] = $product;
+                    $product['receipt_image'] = (!empty($product['receipt_image']) && file_exists(Yii::getAlias('@root') . '/' . "uploads/inventory_products/receipt_images/" . $product['receipt_image'])) ? Yii::$app->params['root_url'] . '/' . "uploads/inventory_products/receipt_images/" .  $product['receipt_image'] : ""; 
+                    $inventoryProductsPhotos = $product['inventoryProductsPhotos'];
+                    foreach ($inventoryProductsPhotos as $key => $photo) {
+                       $photo['image_name'] = $photo['image_name'] = Yii::$app->params['root_url'] . '/' . "uploads/inventory_products/" . $photo['image_name'];
+                       $photos[] = $photo;
+                    }
+                    $product['inventoryProductsPhotos']= $photos;
+                    $productsWithPath[] = $product;
                 }
-                $amReponseParam = $products;
-                $ssMessage = 'Products List';
-                $amResponse = Common::successResponse($ssMessage, $products);
+                //$amReponseParam['replacement_total_value'] = array_sum($products);
+                $amReponseParam = $productsWithPath;
+                $ssMessage = 'Inventory Products List';
+                $amResponse = Common::successResponse($ssMessage, $amReponseParam);
             } else {
                 $amReponseParam = [];
-                $ssMessage = 'Products not found.';
+                $ssMessage = 'Inventory Products not found.';
                 $amResponse = Common::successResponse($ssMessage, $amReponseParam);
             }
 
@@ -393,13 +349,13 @@ class InventoryController extends \yii\base\Controller
      * Author : Rutusha Joshi
      */
 
-    public function actionDeleteMyProduct()
+    public function actionDeleteInventoryProduct()
     {
         //Get all request parameter
         $amData = Common::checkRequestType();
         $amResponse = $amReponseParam = [];
         // Check required validation for request parameter.
-        $amRequiredParams = array('user_id', 'product_id');
+        $amRequiredParams = array('user_id', 'inventory_product_id');
         $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
 
         // If any getting error in request paramter then set error message.
@@ -416,15 +372,15 @@ class InventoryController extends \yii\base\Controller
         $snUserId = $requestParam['user_id'];
         $model = Users::findOne(["id" => $snUserId]);
         if (!empty($model)) {
-            $product = Products::find()->where(['seller_id' => $requestParam['user_id'], 'id' => $requestParam['product_id']])->one();
+            $product = InventoryProducts::find()->where(['user_id' => $requestParam['user_id'], 'id' => $requestParam['inventory_product_id']])->one();
 
             if (!empty($product)) {
                 $product->delete();
                 $amReponseParam = [];
-                $ssMessage = 'Product deleted Successfully.';
+                $ssMessage = 'Product deleted Successfully from the Inventory.';
                 $amResponse = Common::successResponse($ssMessage, $amReponseParam);
             } else {
-                $ssMessage = 'Please provide valid product_id';
+                $ssMessage = 'Please provide valid inventory_product_id';
                 $amResponse = Common::errorResponse($ssMessage);
             }
 
