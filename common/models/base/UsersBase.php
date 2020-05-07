@@ -12,6 +12,7 @@ use ommon\models\UserAdresses;
 use ommon\models\UserRole;
 use ommon\models\WishList;
 use Yii;
+use common\models\InventoryProducts;
 
 /**
  * This is the model class for table "users".
@@ -97,6 +98,11 @@ class Users extends \yii\db\ActiveRecord
     {
         return $this->hasMany(NotificationList::className(), ['user_id' => 'id']);
     }
+
+     public function getInventoryProducts()
+     {
+        return $this->hasMany(InventoryProducts::className(), ['user_id' => 'id']);
+     }
 
     public function getAccountDetails()
     {
