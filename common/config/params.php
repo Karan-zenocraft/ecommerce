@@ -40,5 +40,6 @@ return [
         'stripe' => '2',
     ],
     'device_type' => ["android" => "1", "ios" => "2"],
+    "is_warranty" => ["1"=>"Yes","0"=>"No"]
 
 ];
