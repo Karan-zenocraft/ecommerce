@@ -367,6 +367,7 @@ class InventoryController extends \yii\base\Controller
                     }])->with('inventoryProductsPhotos')->with('inventoryProductsReceiptImages')->where(['user_id' => $requestParam['user_id']])->asArray()->all();
 
             if (!empty($products)) {
+                $replacement_value_arr = array_column($products,'replacement_value');
                 foreach ($products as $key => $product) {
                     $inventoryProductsPhotos = $product['inventoryProductsPhotos'];
                     foreach ($inventoryProductsPhotos as $key => $photo) {
@@ -388,8 +389,8 @@ class InventoryController extends \yii\base\Controller
                     $product['inventoryProductsPhotos']= $photos;
                     $productsWithPath[] = $product;
                 }
-                //$amReponseParam['replacement_total_value'] = array_sum($products);
                 $amReponseParam = $productsWithPath;
+                $amReponseParam['replacement_total_value'] = array_sum($replacement_value_arr);
                 $ssMessage = 'Inventory Products List';
                 $amResponse = Common::successResponse($ssMessage, $amReponseParam);
             } else {
