@@ -45,4 +45,9 @@ class Category extends \common\models\base\CategoryBase
     {
         return ArrayHelper::map(Category::find()->where(["parent_id" => $parent_id])->orderBy('title')->asArray()->all(), 'id', 'title');
     }
+
+     public function AllCategoryDropdown()
+    {
+        return ArrayHelper::map(Category::find()->orderBy('title')->asArray()->all(), 'id', 'title');
+    }
 }

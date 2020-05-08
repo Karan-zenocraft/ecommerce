@@ -14,7 +14,7 @@ use common\models\InventoryProducts;
 /* @var $searchModel common\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = ' Manage Users';
+$this->title = ' Manage User Inventory';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-index email-format-index">
@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="muted pull-left"><?=Html::encode($this->title)?></div>
         <div class="pull-right">
             <?=Html::a(Yii::t('app', '<i class="icon-plus"></i> Add User'), ['create'], ['class' => 'btn btn-success'])?>
-            <?=Html::a(Yii::t('app', '<i class="icon-refresh"></i> Reset'), Yii::$app->urlManager->createUrl(['users/index']), ['class' => 'btn btn-primary'])?>
+            <?=Html::a(Yii::t('app', '<i class="icon-refresh"></i> Reset'), Yii::$app->urlManager->createUrl(['users-inventory/index']), ['class' => 'btn btn-primary'])?>
         </div>
     </div>
     <?php // echo $this->render('_search', ['model' => $searchModel]);  ?>
@@ -70,66 +70,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 return !empty($data->id) ? InventoryProducts::getInventoryProductCount($data->id) : '-';
             },
         ],
-        [
-            'attribute' => 'replacement_total_value',
-            'header' => 'Inventory Total Replacement Value',
-            'value' => function ($data){
-                return !empty($data->id) ? InventoryProducts::getInventoryProductReplacementValue($data->id) : '-';
-            },
-        ],
-        //'email:email',
-       // 'phone',
-      /*  [
-            'attribute' => 'photo',
-            'format' => 'image',
-            'value' => function ($data) {
-                return $data->photo;
-            },
-        ],*/
-      //  'city',
-        //'verification_code',
-        //'is_code_verified',
-        //'password_reset_token:ntext',
-        //'auth_token',
-        //'badge_count',
-        //'login_type',
-        [
-            'attribute' => 'status',
-            'filterOptions' => ["style" => "width:13%;"],
-            'headerOptions' => ["style" => "width:13%;"],
-            'contentOptions' => ["style" => "width:13%;"],
-            'value' => function ($data) {
-                return Yii::$app->params['user_status'][$data->status];
-            },
-        ],
-        //'created_at',
-        //'updated_at',
-        //'restaurant_id',
-
+ 
         [
             'header' => 'Actions',
             'class' => 'yii\grid\ActionColumn',
             'headerOptions' => ["style" => "width:40%;"],
             'contentOptions' => ["style" => "width:40%;"],
-            'template' => '{update}{delete}{manage_user_addresses}',
+            'template' => '{manage_user_inventory_products}',
             'buttons' => [
-                'update' => function ($url, $model) {
-                    $flag = 1;
-                    return Common::template_update_button($url, $model, $flag);
-                },
-                'manage_user_addresses' => function ($url, $model) {
-                    $title = "Manage User Addresses";
-                    $flag = 4;
-                    $url = Yii::$app->urlManager->createUrl(['user-addresses/index', 'uid' => $model->id]);
+                'manage_user_inventory_products' => function ($url, $model) {
+                    $title = "Manage User Inventory products";
+                    $flag = 5;
+                    $url = Yii::$app->urlManager->createUrl(['inventory-products/index', 'uid' => $model->id]);
                     return Common::template_view_gallery_button($url, $model, $title, $flag);
 
                 },
-                'delete' => function ($url, $model) {
-                    $flag = 1;
-                    $confirmmessage = "Are you sure you want to delete this user?";
-                    return Common::template_delete_button($url, $model, $confirmmessage, $flag);
-                },
-
             ],
         ],
     ],
