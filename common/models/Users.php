@@ -113,6 +113,10 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             return true;
         }
     }
+     public function getInventoryProducts()
+     {
+        return $this->hasMany(InventoryProducts::className(), ['user_id' => 'id']);
+     }
 
     /**
      * {@inheritdoc}

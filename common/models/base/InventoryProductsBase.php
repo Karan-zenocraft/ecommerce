@@ -7,6 +7,8 @@ use common\models\Users;
 use common\models\InventoryProductsPhotos;
 use common\models\InventoryProductsQuery;
 use common\models\Category; 
+use common\models\InventoryProductsReceiptImages;
+
 
 
 /**
@@ -84,7 +86,7 @@ return [
 ];
 }
 
- public function getCategory() 
+    public function getCategory() 
    { 
    return $this->hasOne(Category::className(), ['id' => 'category_id']); 
    } 
@@ -104,6 +106,11 @@ return [
     {
     return $this->hasMany(InventoryProductsPhotos::className(), ['inventory_product_id' => 'id']);
     }
+
+     public function getInventoryProductsReceiptImages() 
+       { 
+        return $this->hasMany(InventoryProductsReceiptImages::className(), ['inventory_product_id' => 'id']); 
+       } 
 
     /**
      * @inheritdoc
