@@ -13,4 +13,15 @@ class InventoryProducts extends \common\models\base\InventoryProductsBase
 
         return parent::beforeSave($insert);
     }
+
+    public function getInventoryProductCount($user_id){
+
+    	$count = InventoryProducts::find()->where(['user_id'=>$user_id])->count();
+    	return $count;
+    }
+     public function getInventoryProductReplacementValue($user_id){
+
+    	$count = InventoryProducts::find()->select("SUM('replacement_value')")->where(['user_id'=>$user_id])->groupBy('user_id');
+    	return $count;
+    }
 }

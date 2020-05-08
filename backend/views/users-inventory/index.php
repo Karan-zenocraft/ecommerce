@@ -9,6 +9,7 @@ use common\components\Common;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\Pjax;
+use common\models\InventoryProducts;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -59,30 +60,33 @@ $this->params['breadcrumbs'][] = $this->title;
     'columns' => [
         ['class' => 'yii\grid\SerialColumn'],
 //        'id',
-        [
-            'attribute' => 'role_id',
-            'header' => 'Role',
-            //  'filter' => $UserRolesDropdown,
-            'filterOptions' => ["style" => "width:17%;"],
-            'headerOptions' => ["style" => "width:17%;"],
-            'contentOptions' => ["style" => "width:17%;"],
-            'value' => function ($data) use ($UserRolesDropdown) {
-                return !empty($UserRolesDropdown[$data->role_id]) ? $UserRolesDropdown[$data->role_id] : '';
-            },
-        ],
         'first_name',
         'last_name',
         'user_name',
-        'email:email',
-        'phone',
+          [
+            'attribute' => 'product_count',
+            'header' => 'Inventory Product Count',
+            'value' => function ($data){
+                return !empty($data->id) ? InventoryProducts::getInventoryProductCount($data->id) : '-';
+            },
+        ],
         [
+            'attribute' => 'replacement_total_value',
+            'header' => 'Inventory Total Replacement Value',
+            'value' => function ($data){
+                return !empty($data->id) ? InventoryProducts::getInventoryProductReplacementValue($data->id) : '-';
+            },
+        ],
+        //'email:email',
+       // 'phone',
+      /*  [
             'attribute' => 'photo',
             'format' => 'image',
             'value' => function ($data) {
                 return $data->photo;
             },
-        ],
-        'city',
+        ],*/
+      //  'city',
         //'verification_code',
         //'is_code_verified',
         //'password_reset_token:ntext',

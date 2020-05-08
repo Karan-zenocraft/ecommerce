@@ -389,7 +389,7 @@ class InventoryController extends \yii\base\Controller
                     $product['inventoryProductsPhotos']= $photos;
                     $productsWithPath[] = $product;
                 }
-                $amReponseParam = $productsWithPath;
+                $amReponseParam['products'] = $productsWithPath;
                 $amReponseParam['replacement_total_value'] = array_sum($replacement_value_arr);
                 $ssMessage = 'Inventory Products List';
                 $amResponse = Common::successResponse($ssMessage, $amReponseParam);

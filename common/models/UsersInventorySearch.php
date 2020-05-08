@@ -3,6 +3,7 @@
 namespace common\models;
 
 use common\models\Users;
+use common\models\InventoryProducts;
 use yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -19,7 +20,7 @@ class UsersInventorySearch extends Users
     {
         return [
             [['id', 'role_id', 'phone', 'badge_count', 'status'], 'integer'],
-            [['first_name', 'last_name', 'user_name', 'email', 'password', 'login_type', 'photo', 'city', 'verification_code', 'is_code_verified', 'password_reset_token', 'auth_token', 'created_at', 'updated_at'], 'safe'],
+            [['first_name', 'last_name', 'user_name', 'email', 'password', 'login_type', 'photo', 'city', 'verification_code', 'is_code_verified', 'password_reset_token', 'auth_token', 'created_at', 'updated_at','product_name'], 'safe'],
         ];
     }
 
