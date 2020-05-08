@@ -84,7 +84,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'created_at',
             //'updated_at',
 
-                    [
+               /*     [
             'header' => 'Actions',
             'class' => 'yii\grid\ActionColumn',
             'headerOptions' => ["style" => "width:40%;"],
@@ -100,7 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 },
             ],
-        ],
+        ],*/
         ],
     ]); ?>
       </div>
