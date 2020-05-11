@@ -104,7 +104,11 @@ margin-left: 0px!important;
             'filter' => false,
             'format' => 'html',
             'value' => function ($data) {
+<<<<<<< HEAD
                 return Html::img(Yii::getAlias('@web') . "/../uploads/inventory_products/" . $data['image_name'], ['alt'=>'No Image','width'=>'70','height'=>'70','class'=>"myImg"]);
+=======
+                return Html::img(Yii::getAlias('@web') . "/../uploads/inventory_products/" . $data['image_name'], ['alt'=>'','width'=>'70','height'=>'70','class'=>"myImg"]);
+>>>>>>> 10438472bcf7954afa3b75f9eaace75b2c9fe0a4
             },
         ],
            // 'created_at',
