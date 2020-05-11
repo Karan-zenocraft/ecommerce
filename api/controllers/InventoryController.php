@@ -394,7 +394,8 @@ class InventoryController extends \yii\base\Controller
                 $ssMessage = 'Inventory Products List';
                 $amResponse = Common::successResponse($ssMessage, $amReponseParam);
             } else {
-                $amReponseParam = [];
+                $amReponseParam['products'] = [];
+                $amReponseParam['replacement_total_value'] = "";
                 $ssMessage = 'Inventory Products not found.';
                 $amResponse = Common::successResponse($ssMessage, $amReponseParam);
             }
