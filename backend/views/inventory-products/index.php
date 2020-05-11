@@ -84,23 +84,30 @@ $this->params['breadcrumbs'][] = $this->title;
             //'created_at',
             //'updated_at',
 
-               /*     [
+                    [
             'header' => 'Actions',
             'class' => 'yii\grid\ActionColumn',
             'headerOptions' => ["style" => "width:40%;"],
             'contentOptions' => ["style" => "width:40%;"],
-            'template' => '{manage_user_addresses}',
+            'template' => '{inventory_product_photos}{receipt_images}',
             'buttons' => [
               
-                'manage_user_addresses' => function ($url, $model) {
-                    $title = "Manage User Addresses";
+                'inventory_product_photos' => function ($url, $model) {
+                    $title = "Inventory Product Photos";
                     $flag = 4;
-                    $url = Yii::$app->urlManager->createUrl(['user-addresses/index', 'uid' => $model->id]);
+                    $url = Yii::$app->urlManager->createUrl(['inventory-products-photos/index', 'uid' => $model->id]);
+                    return Common::template_view_gallery_button($url, $model, $title, $flag);
+
+                },
+                'receipt_images' => function ($url, $model) {
+                    $title = "Receipt Images";
+                    $flag = 4;
+                    $url = Yii::$app->urlManager->createUrl(['inventory-products-receipt-images/index', 'uid' => $model->id]);
                     return Common::template_view_gallery_button($url, $model, $title, $flag);
 
                 },
             ],
-        ],*/
+        ],
         ],
     ]); ?>
       </div>
