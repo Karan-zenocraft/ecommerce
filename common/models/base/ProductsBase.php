@@ -63,7 +63,7 @@ class ProductsBase extends \yii\db\ActiveRecord
             [['category_id', 'subcategory_id', 'seller_id', 'title', 'description', 'location_address', 'price', 'is_rent', 'quantity', 'created_at', 'updated_at'], 'required'],
             [['category_id', 'subcategory_id', 'seller_id', 'brand_id', 'price', 'rent_price', 'rent_price_duration', 'quantity', 'status'], 'integer'],
             [['description', 'location_address', 'is_rent', 'is_approve'], 'string'],
-            [['year_of_purchase', 'created_at', 'updated_at', 'discount', 'tax','quantity_in_stock'], 'safe'],
+            [['year_of_purchase', 'created_at', 'updated_at', 'discount', 'tax','quantity_in_stock','is_delete'], 'safe'],
             [['lat', 'longg', 'owner_discount'], 'number'],
             [['title', 'city'], 'string', 'max' => 255],
             [['brand_id'], 'exist', 'skipOnError' => true, 'targetClass' => Brands::className(), 'targetAttribute' => ['brand_id' => 'id']],
@@ -102,6 +102,7 @@ class ProductsBase extends \yii\db\ActiveRecord
             'status' => 'Status',
             'is_approve' => 'Is Approve',
             'owner_discount' => 'Owner Percentage',
+            'is_delete' => 'Is Deleted',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];

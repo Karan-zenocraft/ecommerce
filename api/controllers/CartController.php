@@ -124,7 +124,7 @@ class CartController extends \yii\base\Controller
                 $ssMessage = 'This product already added on your cart';
                 $amResponse = Common::errorResponse($ssMessage);
             } else {
-                $Product = Products::find()->where(['id' => $requestParam['product_id'], "is_approve" => "1"])->one();
+                $Product = Products::find()->where(['id' => $requestParam['product_id'], "is_approve" => "1","is_delete"=>"0"])->one();
                 if (!empty($Product)) {
                     if ($Product->seller_id != $requestParam['user_id']) {
                         if($Product->quantity_in_stock >= $requestParam['quantity']){

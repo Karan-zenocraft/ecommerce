@@ -163,7 +163,7 @@ class ProductsController extends \yii\base\Controller
         $model = Users::findOne(["id" => $snUserId]);
         if (!empty($model)) {
             $query = "select *
-                            from products WHERE is_approve = '" . Yii::$app->params['is_approve_value']['true'] . "' AND quantity >= '1'";
+                            from products WHERE is_approve = '" . Yii::$app->params['is_approve_value']['true'] . "' AND quantity >= '1' AND is_delete = '0'";
             if (!empty($requestParam['lat']) && !empty($requestParam['longg'])) {
                 $user_latitude = $requestParam['lat'];
                 $user_longitude = $requestParam['longg'];
@@ -385,7 +385,8 @@ class ProductsController extends \yii\base\Controller
             $product = Products::find()->where(['seller_id' => $requestParam['user_id'], 'id' => $requestParam['product_id']])->one();
 
             if (!empty($product)) {
-                $product->delete();
+                $product->is_delete = "1";
+                $product->save(false);
                 $amReponseParam = [];
                 $ssMessage = 'Product deleted Successfully.';
                 $amResponse = Common::successResponse($ssMessage, $amReponseParam);
