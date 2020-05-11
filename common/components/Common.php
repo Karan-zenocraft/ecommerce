@@ -287,7 +287,23 @@ class Common
             ]);
         }
          if ($flag == 5) {
-            return Html::a('<i class="icon-list icon-white"></i>', $url, [
+            return Html::a('<i class="icon-check icon-white"></i>', $url, [
+                'title' => Yii::t('yii', $title),
+                'class' => 'btn btn-primary btn-small',
+                //'target' => '_blanck'
+            ]);
+        }
+
+        if ($flag == 6) {
+            return Html::a('<i class="icon-check icon-white"></i>', $url, [
+                'title' => Yii::t('yii', $title),
+                'class' => 'btn btn-primary btn-small',
+                //'target' => '_blanck'
+            ]);
+        }
+
+        if ($flag == 7) {
+            return Html::a('<i class="icon-file icon-white"></i>', $url, [
                 'title' => Yii::t('yii', $title),
                 'class' => 'btn btn-primary btn-small',
                 //'target' => '_blanck'
