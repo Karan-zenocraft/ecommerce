@@ -51,7 +51,7 @@ class ProductPhotosBase extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'product_id' => 'Product ID',
-            'image_name' => 'Image Name',
+            'image_name' => 'Image',
             'image_path' => 'Image Path',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
