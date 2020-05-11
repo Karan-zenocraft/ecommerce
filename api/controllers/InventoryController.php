@@ -390,7 +390,8 @@ class InventoryController extends \yii\base\Controller
                     $productsWithPath[] = $product;
                 }
                 $amReponseParam['products'] = $productsWithPath;
-                $amReponseParam['replacement_total_value'] = array_sum($replacement_value_arr);
+                $replacement_total_value = array_sum($replacement_value_arr);
+                $amReponseParam['replacement_total_value'] = "$replacement_total_value";
                 $ssMessage = 'Inventory Products List';
                 $amResponse = Common::successResponse($ssMessage, $amReponseParam);
             } else {
