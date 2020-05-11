@@ -20,6 +20,8 @@ CommonAppAsset::register($this);
         <?=Html::csrfMetaTags()?>
         <title><?=Yii::getAlias('@site_title');?>&nbsp; - &nbsp;<?=Html::encode($this->title)?></title>
         <?php $this->head()?>
+
+
     </head>
     <body>
         <?php $this->beginBody()?>
