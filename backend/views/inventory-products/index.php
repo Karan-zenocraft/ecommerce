@@ -95,14 +95,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'inventory_product_photos' => function ($url, $model) {
                     $title = "Inventory Product Photos";
                     $flag = 3;
-                    $url = Yii::$app->urlManager->createUrl(['inventory-products-photos/index', 'uid' => $model->id]);
+                    $url = Yii::$app->urlManager->createUrl(['inventory-products-photos/index', 'uid' => $_GET['uid'],'pid'=>$model->id]);
                     return Common::template_view_gallery_button($url, $model, $title, $flag);
 
                 },
                 'receipt_images' => function ($url, $model) {
                     $title = "Receipt Images";
                     $flag = 7;
-                    $url = Yii::$app->urlManager->createUrl(['inventory-products-receipt-images/index', 'uid' => $model->id]);
+                    $url = Yii::$app->urlManager->createUrl(['inventory-products-receipt-images/index', 'uid' => $_GET['uid'],'pid'=>$model->id]);
                     return Common::template_view_gallery_button($url, $model, $title, $flag);
 
                 },

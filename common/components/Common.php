@@ -11,7 +11,7 @@ use common\models\Questions;
 use common\models\Restaurants;
 use common\models\SystemConfig;
 use common\models\Tasks;
-use common\models\Timesheet;
+use common\models\InventoryProducts;
 use common\models\Users;
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -1235,10 +1235,10 @@ class Common
     public static function get_name_by_id($id = '', $flag = '')
     {
 
-        if ($flag == "Questions") {
-            $snQuestionDetail = Questions::find()->where(['id' => $id])->one();
-            $question = $snQuestionDetail->question;
-            return !empty($question) ? $question : '';
+        if ($flag == "InventoryProducts") {
+            $snQuestionDetail = InventoryProducts::find()->where(['id' => $id])->one();
+            $product_name = $snQuestionDetail->product_name;
+            return !empty($product_name) ? $product_name : '';
         }
         if ($flag == "Products") {
             $productDetails = Products::find()->where(['id' => $id])->one();

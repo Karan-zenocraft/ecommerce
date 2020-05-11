@@ -22,7 +22,7 @@ class InventoryProductsReceiptImagesController extends AdminCoreController
      * Lists all InventoryProductsReceiptImages models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($pid)
     {
         $searchModel = new InventoryProductsReceiptImagesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);

@@ -40,7 +40,7 @@ class InventoryProductsPhotosSearch extends InventoryProductsPhotos
      */
     public function search($params)
     {
-        $query = InventoryProductsPhotos::find();
+        $query = InventoryProductsPhotos::find()->where(['inventory_product_id'=>$_GET['pid']]);
 
         // add conditions that should always apply here
 

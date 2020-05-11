@@ -3,29 +3,39 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\InventoryProductsPhotos;
-use common\models\InventoryProductsPhotosSearch;
-use yii\web\Controller;
+use common\models\ProductPhotos;
+use common\models\ProductPhotosSearch;
+use backend\components\AdminCoreController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use backend\components\AdminCoreController;
 
 /**
- * InventoryProductsPhotosController implements the CRUD actions for InventoryProductsPhotos model.
+ * ProductPhotosController implements the CRUD actions for ProductPhotos model.
  */
-class InventoryProductsPhotosController extends AdminCoreController
+class ProductPhotosController extends AdminCoreController
 {
     /**
      * {@inheritdoc}
      */
-  
+  /*  public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+        ];
+    }*/
+
     /**
-     * Lists all InventoryProductsPhotos models.
+     * Lists all ProductPhotos models.
      * @return mixed
      */
     public function actionIndex($pid)
     {
-        $searchModel = new InventoryProductsPhotosSearch();
+        $searchModel = new ProductPhotosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -35,7 +45,7 @@ class InventoryProductsPhotosController extends AdminCoreController
     }
 
     /**
-     * Displays a single InventoryProductsPhotos model.
+     * Displays a single ProductPhotos model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -48,13 +58,13 @@ class InventoryProductsPhotosController extends AdminCoreController
     }
 
     /**
-     * Creates a new InventoryProductsPhotos model.
+     * Creates a new ProductPhotos model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new InventoryProductsPhotos();
+        $model = new ProductPhotos();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -66,7 +76,7 @@ class InventoryProductsPhotosController extends AdminCoreController
     }
 
     /**
-     * Updates an existing InventoryProductsPhotos model.
+     * Updates an existing ProductPhotos model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -86,7 +96,7 @@ class InventoryProductsPhotosController extends AdminCoreController
     }
 
     /**
-     * Deletes an existing InventoryProductsPhotos model.
+     * Deletes an existing ProductPhotos model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -100,15 +110,15 @@ class InventoryProductsPhotosController extends AdminCoreController
     }
 
     /**
-     * Finds the InventoryProductsPhotos model based on its primary key value.
+     * Finds the ProductPhotos model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return InventoryProductsPhotos the loaded model
+     * @return ProductPhotos the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = InventoryProductsPhotos::findOne($id)) !== null) {
+        if (($model = ProductPhotos::findOne($id)) !== null) {
             return $model;
         }
 

@@ -107,7 +107,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'class' => 'yii\grid\ActionColumn',
             'headerOptions' => ["style" => "width:40%;"],
             'contentOptions' => ["style" => "width:40%;"],
-            'template' => '{approve_product}',
+            'template' => '{approve_product}{product_photos}',
             'buttons' => [
 
                 'approve_product' => function ($url, $model) {
@@ -115,6 +115,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     $flag = 1;
                     $url = Yii::$app->urlManager->createUrl(['products/approve-product', 'product_id' => $model->id]);
                     return Common::template_update_permission_button($url, $model, $title, $flag);
+
+                },
+                 'product_photos' => function ($url, $model) {
+                    $title = "Product Photos";
+                    $flag = 3;
+                    $url = Yii::$app->urlManager->createUrl(['product-photos/index','pid'=>$model->id]);
+                    return Common::template_view_gallery_button($url, $model, $title, $flag);
 
                 },
 

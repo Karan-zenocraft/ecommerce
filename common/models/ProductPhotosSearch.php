@@ -4,12 +4,12 @@ namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\InventoryProductsReceiptImages;
+use common\models\ProductPhotos;
 
 /**
- * InventoryProductsReceiptImagesSearch represents the model behind the search form of `common\models\InventoryProductsReceiptImages`.
+ * ProductPhotosSearch represents the model behind the search form of `common\models\ProductPhotos`.
  */
-class InventoryProductsReceiptImagesSearch extends InventoryProductsReceiptImages
+class ProductPhotosSearch extends ProductPhotos
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class InventoryProductsReceiptImagesSearch extends InventoryProductsReceiptImage
     public function rules()
     {
         return [
-            [['id', 'inventory_product_id'], 'integer'],
-            [['image_name', 'created_at', 'updated_at'], 'safe'],
+            [['id', 'product_id'], 'integer'],
+            [['image_name', 'image_path', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class InventoryProductsReceiptImagesSearch extends InventoryProductsReceiptImage
      */
     public function search($params)
     {
-        $query = InventoryProductsReceiptImages::find()->where(['inventory_product_id'=>$_GET['pid']]);
+        $query = ProductPhotos::find()->where(['product_id'=>$_GET['pid']]);
 
         // add conditions that should always apply here
 
@@ -59,12 +59,13 @@ class InventoryProductsReceiptImagesSearch extends InventoryProductsReceiptImage
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'inventory_product_id' => $this->inventory_product_id,
+            'product_id' => $this->product_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'image_name', $this->image_name]);
+        $query->andFilterWhere(['like', 'image_name', $this->image_name])
+            ->andFilterWhere(['like', 'image_path', $this->image_path]);
 
         return $dataProvider;
     }
