@@ -128,7 +128,7 @@ margin-left: 0px!important;
         <!-- Modal body -->
         <div class="Model-Center">
           <img class="img-fluid" id="img01">
-  <div id="caption"></div>
+
         </div>
         
         <!-- Modal footer -->
