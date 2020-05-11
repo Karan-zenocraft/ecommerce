@@ -109,7 +109,7 @@ margin-left: 0px!important;
             'filter' => false,
             'format' => 'html',
             'value' => function ($data) {
-                return Html::img(Yii::getAlias('@web') . "/../uploads/inventory_products/" . $data['image_name'], ['alt'=>'Vehicle Registration Image Front','width'=>'70','height'=>'70','class'=>"myImg"]);
+                return Html::img(Yii::getAlias('@web') . "/../uploads/inventory_products/" . $data['image_name'], ['alt'=>'','width'=>'70','height'=>'70','class'=>"myImg"]);
             },
         ],
            // 'created_at',
