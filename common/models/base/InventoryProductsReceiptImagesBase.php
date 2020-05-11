@@ -48,7 +48,7 @@ public function attributeLabels()
 return [
     'id' => 'ID',
     'inventory_product_id' => 'Inventory Product ID',
-    'image_name' => 'Image Name',
+    'image_name' => 'Image',
     'created_at' => 'Created At',
     'updated_at' => 'Updated At',
 ];
