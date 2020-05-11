@@ -93,7 +93,7 @@ class WishlistController extends \yii\base\Controller
         $snUserId = $requestParam['user_id'];
         $model = Users::findOne(["id" => $snUserId]);
         if (!empty($model)) {
-            $Product = Products::find()->where(['id' => $requestParam['product_id'], "is_approve" => "1"])->one();
+            $Product = Products::find()->where(['id' => $requestParam['product_id'], "is_approve" => "1","is_delete"=>"0"])->one();
             if (!empty($Product)) {
                 if ($Product->seller_id != $requestParam['user_id']) {
                     $WModel = Wishlist::find()->where(['user_id' => $requestParam['user_id'], "product_id" => $requestParam['product_id']])->one();
