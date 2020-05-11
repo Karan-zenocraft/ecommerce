@@ -92,12 +92,14 @@ Breadcrumbs::widget([
                 </div>
             </div>
             <hr>
-            <footer class="footer">
+        </div>
+
+                    <footer class="footer">
                 <div class="container">
                     <p class="pull-left">&copy; <?=Yii::getAlias('@site_footer') . " " . date('Y');?></p>
                 </div>
             </footer>
-        </div>
+
         <!--div class="wrap">
         <?php
 /* NavBar::begin([
