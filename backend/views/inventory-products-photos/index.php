@@ -7,7 +7,7 @@ use common\components\Common;
 /* @var $searchModel common\models\InventoryProductsPhotosSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Inventory Products Photos';
+$this->title = 'Inventory Products Images';
 $this->params['breadcrumbs'][] = ['label' => 'Manage User Inventory', 'url' => ['users-inventory/index']];
 $this->params['breadcrumbs'][] = ['label' => 'Inventory Products', 'url' => ['inventory-products/index', 'uid' => $_GET['uid']]];
 $this->params['breadcrumbs'][] = $this->title;
@@ -79,11 +79,6 @@ margin-left: 0px!important;
 
 
 <div class="inventory-products-photos-index email-format-index">
-        <div class="email-format-index">
-        <div class="navbar navbar-inner block-header">
-            <div class="muted pull-left">Search Here</div>
-        </div>
-</div>
    <div class="navbar navbar-inner block-header">
         <div class="muted pull-left">
             <?php echo Html::encode($this->title) . ' - ' .Common::get_name_by_id($_GET['pid'],"InventoryProducts"); ?>
@@ -109,7 +104,7 @@ margin-left: 0px!important;
             'filter' => false,
             'format' => 'html',
             'value' => function ($data) {
-                return Html::img(Yii::getAlias('@web') . "/../uploads/inventory_products/" . $data['image_name'], ['alt'=>'Vehicle Registration Image Front','width'=>'70','height'=>'70','class'=>"myImg"]);
+                return Html::img(Yii::getAlias('@web') . "/../uploads/inventory_products/" . $data['image_name'], ['alt'=>'No Image','width'=>'70','height'=>'70','class'=>"myImg"]);
             },
         ],
            // 'created_at',

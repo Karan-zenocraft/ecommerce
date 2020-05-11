@@ -72,14 +72,9 @@ margin-left: 0px!important;
 }
 </style>
 <div class="inventory-products-receipt-images-index email-format-index">
-   <div class="email-format-index">
-        <div class="navbar navbar-inner block-header">
-            <div class="muted pull-left">Search Here</div>
-        </div>
-</div>
    <div class="navbar navbar-inner block-header">
         <div class="muted pull-left">
-            <?php echo Html::encode($this->title) . ' - ' .Common::get_name_by_id($_GET['pid'],"InventoryProductsReceiptImages"); ?>
+            <?php echo Html::encode($this->title) . ' - ' .Common::get_name_by_id($_GET['pid'],"InventoryProducts"); ?>
         </div>
     </div>
     <div class="block-content">
@@ -98,7 +93,7 @@ margin-left: 0px!important;
             'filter' => false,
             'format' => 'html',
             'value' => function ($data) {
-                return Html::img(Yii::getAlias('@web') . "/../uploads/receipt_images/" . $data['image_name'], ['alt'=>'Vehicle Registration Image Front','width'=>'70','height'=>'70','class'=>"myImg"]);
+                return Html::img(Yii::getAlias('@web') . "/../uploads/receipt_images/" . $data['image_name'], ['alt'=>'No Image','width'=>'70','height'=>'70','class'=>"myImg"]);
             },
         ],
             //'created_at',
