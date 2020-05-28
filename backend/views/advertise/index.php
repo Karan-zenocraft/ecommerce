@@ -43,7 +43,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="goodtable">
     <?=GridView::widget([
     'dataProvider' => $dataProvider,
-    'filterModel' => $searchModel,
+    'filterModel' => null,
+    'layout' => "<div class='table-scrollable'>{items}</div>\n<div class='margin-top-10'>{summary}</div>\n<div class='dataTables_paginate paging_bootstrap pagination'>{pager}</div>",
     'columns' => [
         ['class' => 'yii\grid\SerialColumn'],
 
