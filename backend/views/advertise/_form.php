@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
     <div class="block-content collapse in">
 <div class="advertise-form span12 common_search">
 
-    <?php $form = ActiveForm::begin();?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]);?>
 <div class="row">
                 <div class="span3 style_input_width">
     <?=$form->field($model, 'url')->textInput(['maxlength' => true])?>
@@ -22,8 +22,11 @@ use yii\widgets\ActiveForm;
 </div>
 <div class="row">
                 <div class="span3 style_input_width">
-
+<?php if ($model->isNewRecord) {?>
       <?=$form->field($model, 'image')->fileInput(['id' => 'photo', 'value' => $model->image, 'required' => "required"]);?>
+  <?php } else {?>
+     <?=$form->field($model, 'image')->fileInput(['id' => 'photo', 'value' => $model->image]);?>
+<?php }?>
 </div>
 </div>
     <div class="row">

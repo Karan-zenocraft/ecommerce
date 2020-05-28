@@ -44,6 +44,7 @@ class AdvertiseController extends \yii\base\Controller
                 foreach ($snAdvertiseList as $key => $Advertise) {
 
                     $Advertise['image'] = Yii::$app->params['root_url'] . "/uploads/advertise/" . $Advertise['image'];
+                    $Advertise['url'] = !empty($Advertise['url']) ? $Advertise['url'] : "";
                     $ads[] = $Advertise;
                 }
                 $amReponseParam = $ads;

@@ -107,7 +107,7 @@ class AdvertiseController extends AdminCoreController
                 $file->saveAs(Yii::getAlias('@root') . '/uploads/advertise/' . $file_filter, false);
                 $model->image = $file_filter;
             } else {
-                $model->image = Yii::$app->params['root_url'] . '/uploads/advertise/' . $old_image;
+                $model->image = $old_image;
             }
             $model->save(false);
             Yii::$app->session->setFlash('success', Yii::getAlias('@advertise_update_message'));
