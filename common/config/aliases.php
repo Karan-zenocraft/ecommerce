@@ -61,3 +61,9 @@ Yii::setAlias('brand_add_message', 'Brand has been added successfully !');
 Yii::setAlias('brand_update_message', 'Brand has been updated successfully !');
 Yii::setAlias('brand_delete_message', 'Brand has been deleted successfully !');
 //END:  Brands message
+
+//START: Advertise message
+Yii::setAlias('advertise_add_message', 'Advertise has been added successfully !');
+Yii::setAlias('advertise_update_message', 'Advertise has been updated successfully !');
+Yii::setAlias('advertise_delete_message', 'Advertise has been deleted successfully !');
+//END:  Advertise message
