@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
 <div class="row">
                 <div class="span3 style_input_width">
 
-      <?=$form->field($model, 'image')->fileInput(['id' => 'photo', 'value' => $model->image]);?>
+      <?=$form->field($model, 'image')->fileInput(['id' => 'photo', 'value' => $model->image, 'required' => "required"]);?>
 </div>
 </div>
     <div class="row">

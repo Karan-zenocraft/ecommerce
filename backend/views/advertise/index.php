@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $searchModel common\models\AdvertiseSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Advertises';
+$this->title = 'Manage Advertisement';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="advertise-index email-format-index">
