@@ -3,16 +3,16 @@
 namespace api\controllers;
 
 use common\components\Common;
-use common\models\Categories;
+use common\models\Category;
 use common\models\ProductPhotos;
 use common\models\Products;
 use common\models\Users;
 use common\models\Wishlist;
-use Yii;
 /* USE COMMON MODELS */
+use Yii;
 use yii\web\Controller;
 use \yii\web\UploadedFile;
-use common\models\Category;
+
 /**
  * MainController implements the CRUD actions for APIs.
  */
@@ -168,25 +168,25 @@ class ProductsController extends \yii\base\Controller
                 $user_latitude = $requestParam['lat'];
                 $user_longitude = $requestParam['longg'];
                 $radius = 30;
-                $query = $query." AND round(( 3959 * acos( least(1.0,cos( radians(" . $user_latitude . ") ) * cos( radians(lat) ) * cos( radians(longg) - radians(" . $user_longitude . ") ) + sin( radians(" . $user_latitude . ") ) * sin( radians(lat))))), 1) < " . $radius ."";
+                $query = $query . " AND round(( 3959 * acos( least(1.0,cos( radians(" . $user_latitude . ") ) * cos( radians(lat) ) * cos( radians(longg) - radians(" . $user_longitude . ") ) + sin( radians(" . $user_latitude . ") ) * sin( radians(lat))))), 1) < " . $radius . "";
             }
-            if(!empty($requestParam['category_id'])){
-                $query = $query." AND category_id = '" . $requestParam['category_id'] . "'";
+            if (!empty($requestParam['category_id'])) {
+                $query = $query . " AND category_id = '" . $requestParam['category_id'] . "'";
             }
-            if(!empty($requestParam['price'])){
-                $query = $query." AND price = '" . $requestParam['price'] . "'";
+            if (!empty($requestParam['price'])) {
+                $query = $query . " AND price = '" . $requestParam['price'] . "'";
             }
-              if(!empty($requestParam['brand_id'])){
-                $query = $query." AND brand_id = '" . $requestParam['brand_id'] . "'";
+            if (!empty($requestParam['brand_id'])) {
+                $query = $query . " AND brand_id = '" . $requestParam['brand_id'] . "'";
             }
-             if(!empty($requestParam['year_of_purchase'])){
-                $query = $query." AND year_of_purchase = '" . $requestParam['year_of_purchase'] . "'";
+            if (!empty($requestParam['year_of_purchase'])) {
+                $query = $query . " AND year_of_purchase = '" . $requestParam['year_of_purchase'] . "'";
             }
-            if(!empty($requestParam['is_rent']) && ($requestParam['is_rent'] == "3")){
+            if (!empty($requestParam['is_rent']) && ($requestParam['is_rent'] == "3")) {
                 $query = $query;
-            } 
-            if(isset($requestParam['is_rent']) && ($requestParam['is_rent'] != "3") ){
-                $query = $query." AND is_rent = '" . $requestParam['is_rent'] . "'";
+            }
+            if (isset($requestParam['is_rent']) && ($requestParam['is_rent'] != "3")) {
+                $query = $query . " AND is_rent = '" . $requestParam['is_rent'] . "'";
             }
             $products = Yii::$app->db->createCommand($query)->queryAll();
             if (!empty($products)) {
@@ -249,11 +249,11 @@ class ProductsController extends \yii\base\Controller
         $snUserId = $requestParam['user_id'];
         $model = Users::findOne(["id" => $snUserId]);
         if (!empty($model)) {
-            $product = Products::find()->with(['category'=>function($q){
-                        return $q->select('id,title');
-                    }])->with(['subcategory'=>function($q){
-                        return $q->select('id,title');
-                    }])->with('brand')->with('productPhotos')->with('seller')->where(["id" => $requestParam['product_id']])->asArray()->all();
+            $product = Products::find()->with(['category' => function ($q) {
+                return $q->select('id,title');
+            }])->with(['subcategory' => function ($q) {
+                return $q->select('id,title');
+            }])->with('brand')->with('productPhotos')->with('seller')->where(["id" => $requestParam['product_id']])->asArray()->all();
             if (!empty($product)) {
                 $wishlist = Wishlist::find()->where(['user_id' => $requestParam['user_id']])->asArray()->all();
                 $wishlist_arr = array_column($wishlist, 'product_id');
@@ -317,11 +317,11 @@ class ProductsController extends \yii\base\Controller
         $snUserId = $requestParam['user_id'];
         $model = Users::findOne(["id" => $snUserId]);
         if (!empty($model)) {
-            $products = Products::find()->with(['category'=>function($q){
-                        return $q->select('id,title');
-                    }])->with(['subcategory'=>function($q){
-                        return $q->select('id,title');
-                    }])->where(['seller_id' => $requestParam['user_id']])->asArray()->all();
+            $products = Products::find()->with(['category' => function ($q) {
+                return $q->select('id,title');
+            }])->with(['subcategory' => function ($q) {
+                return $q->select('id,title');
+            }])->where(['seller_id' => $requestParam['user_id']])->asArray()->all();
 
             if (!empty($products)) {
                 foreach ($products as $key => $product) {
