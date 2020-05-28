@@ -3,19 +3,17 @@
 namespace api\controllers;
 
 use common\components\Common;
-use common\models\Categories;
-use common\models\ProductPhotos;
-use common\models\Products;
-use common\models\Users;
-use common\models\Wishlist;
-use Yii;
-/* USE COMMON MODELS */
-use yii\web\Controller;
-use \yii\web\UploadedFile;
 use common\models\Category;
 use common\models\InventoryProducts;
 use common\models\InventoryProductsPhotos;
 use common\models\InventoryProductsReceiptImages;
+/* USE COMMON MODELS */
+use common\models\ProductPhotos;
+use common\models\Products;
+use common\models\Users;
+use Yii;
+use yii\web\Controller;
+use \yii\web\UploadedFile;
 
 /**
  * MainController implements the CRUD actions for APIs.
@@ -37,7 +35,7 @@ class InventoryController extends \yii\base\Controller
         $amData = Common::checkRequestType();
         $amResponse = $amReponseParam = [];
         // Check required validation for request parameter.
-        $amRequiredParams = array('user_id', 'category_id','product_name','serial_no','note','purchase_date','current_value','replacement_value','purchased_from','is_warranty');
+        $amRequiredParams = array('user_id', 'category_id', 'product_name', 'serial_no', 'note', 'purchase_date', 'current_value', 'replacement_value', 'purchased_from', 'is_warranty');
         $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
 
         // If any getting error in request paramter then set error message.
@@ -47,7 +45,7 @@ class InventoryController extends \yii\base\Controller
         }
         $requestParam = $amData['request_param'];
         $requestFileparam = $amData['file_param'];
-        if(empty($requestFileparam['photo']['name'][0])){
+        if (empty($requestFileparam['photo']['name'][0])) {
             $amResponse = Common::errorResponse("Please upload product's photos");
             Common::encodeResponseJSON($amResponse);
         }
@@ -76,45 +74,45 @@ class InventoryController extends \yii\base\Controller
                 $productModel->current_value = $requestParam['current_value'];
                 $productModel->replacement_value = $requestParam['replacement_value'];
                 $productModel->purchased_from = $requestParam['purchased_from'];
-              if($requestParam['is_warranty'] == "1"){
-                if(empty($requestParam['warranty_start_date']) || empty($requestParam['warranty_end_date'])){
-                    $ssMessage = 'warranty_start_date and warranty_end_date can not be blank';
-                    $amResponse = Common::errorResponse($ssMessage);
-                    Common::encodeResponseJSON($amResponse);
-                }else{
-                    $productModel->is_warranty = "1"; 
-                    $productModel->warranty_start_date = $requestParam['warranty_start_date'];
-                    $productModel->warranty_end_date = $requestParam['warranty_end_date'];
-                }
-              }else{
-                    $productModel->is_warranty = "0"; 
+                if ($requestParam['is_warranty'] == "1") {
+                    if (empty($requestParam['warranty_start_date']) || empty($requestParam['warranty_end_date'])) {
+                        $ssMessage = 'warranty_start_date and warranty_end_date can not be blank';
+                        $amResponse = Common::errorResponse($ssMessage);
+                        Common::encodeResponseJSON($amResponse);
+                    } else {
+                        $productModel->is_warranty = "1";
+                        $productModel->warranty_start_date = $requestParam['warranty_start_date'];
+                        $productModel->warranty_end_date = $requestParam['warranty_end_date'];
+                    }
+                } else {
+                    $productModel->is_warranty = "0";
                     $productModel->warranty_start_date = "";
                     $productModel->warranty_end_date = "";
-              }
-   /*             if (isset($requestFileparam['receipt_image']['name']) && !empty($requestFileparam['receipt_image']['name'])) {
-                    $productModel->receipt_image = UploadedFile::getInstanceByName('receipt_image');
-                    $Modifier = md5(($productModel->receipt_image));
-                    $OriginalModifier = $Modifier . rand(11111, 99999);
-                    $Extension = $productModel->receipt_image->extension;
-                    $productModel->receipt_image->saveAs(__DIR__ . "../../../uploads/receipt_images/" . $OriginalModifier . '.' . $productModel->receipt_image->extension);
-                    $productModel->receipt_image = $OriginalModifier . '.' . $Extension;
-                    if(!empty($requestParam['inventory_product_id'])){
+                }
+                /*             if (isset($requestFileparam['receipt_image']['name']) && !empty($requestFileparam['receipt_image']['name'])) {
+                $productModel->receipt_image = UploadedFile::getInstanceByName('receipt_image');
+                $Modifier = md5(($productModel->receipt_image));
+                $OriginalModifier = $Modifier . rand(11111, 99999);
+                $Extension = $productModel->receipt_image->extension;
+                $productModel->receipt_image->saveAs(__DIR__ . "../../../uploads/receipt_images/" . $OriginalModifier . '.' . $productModel->receipt_image->extension);
+                $productModel->receipt_image = $OriginalModifier . '.' . $Extension;
+                if(!empty($requestParam['inventory_product_id'])){
 
-                     unlink(Yii::getAlias('@root') . '/uploads/receipt_images/' . $old_reciept_image);
-                    }
+                unlink(Yii::getAlias('@root') . '/uploads/receipt_images/' . $old_reciept_image);
+                }
                 }*/
                 if ($productModel->save(false)) {
                     if (isset($requestFileparam['photo']) && isset($requestFileparam['photo']['name']) && !empty($requestFileparam['photo']['name'])) {
                         if (!empty($requestParam['inventory_product_id'])) {
                             $photosOld = InventoryProductsPhotos::find()->where(['inventory_product_id' => $requestParam['inventory_product_id']])->asArray()->all();
-                            if(!empty($photosOld)){
+                            if (!empty($photosOld)) {
                                 foreach ($photosOld as $key => $oldPhoto) {
                                     if (!empty($oldPhoto['image_name']) && file_exists(Yii::getAlias('@root') . '/uploads/inventory_products/' . $oldPhoto['image_name'])) {
-                                            unlink(Yii::getAlias('@root') . '/uploads/inventory_products/' . $oldPhoto['image_name']);
-                                        }
+                                        unlink(Yii::getAlias('@root') . '/uploads/inventory_products/' . $oldPhoto['image_name']);
+                                    }
                                 }
                             }
-                             $photos = InventoryProductsPhotos::deleteAll(['inventory_product_id' => $requestParam['inventory_product_id']]);
+                            $photos = InventoryProductsPhotos::deleteAll(['inventory_product_id' => $requestParam['inventory_product_id']]);
                         }
 
                         foreach ($requestFileparam['photo']['name'] as $key => $name) {
@@ -128,25 +126,25 @@ class InventoryController extends \yii\base\Controller
                             $photoModel->image_name->saveAs(__DIR__ . "../../../uploads/inventory_products/" . $OriginalModifier . '.' . $photoModel->image_name->extension);
                             $filename = $OriginalModifier . '.' . $Extension;
                             $photoModel->image_name = $filename;
-                          //  $photoModel->image_path = Yii::$app->params['root_url'] . '/' . "uploads/inventory_products/" . $filename;
+                            //  $photoModel->image_path = Yii::$app->params['root_url'] . '/' . "uploads/inventory_products/" . $filename;
                             $photoModel->save(false);
-                          $photoModel->image_name = Yii::$app->params['root_url'] . '/' . "uploads/inventory_products/" .  $photoModel->image_name;
+                            $photoModel->image_name = Yii::$app->params['root_url'] . '/' . "uploads/inventory_products/" . $photoModel->image_name;
 
                             $ProductPhotos[] = $photoModel;
                         }
                     }
 
-                if (isset($requestFileparam['receipt_image']) && isset($requestFileparam['receipt_image']['name']) && !empty($requestFileparam['receipt_image']['name'])) {
+                    if (isset($requestFileparam['receipt_image']) && isset($requestFileparam['receipt_image']['name']) && !empty($requestFileparam['receipt_image']['name'])) {
                         if (!empty($requestParam['inventory_product_id'])) {
                             $reciptImageOld = InventoryProductsReceiptImages::find()->where(['inventory_product_id' => $requestParam['inventory_product_id']])->asArray()->all();
-                            if(!empty($reciptImageOld)){
+                            if (!empty($reciptImageOld)) {
                                 foreach ($reciptImageOld as $key => $oldecepitImage) {
                                     if (!empty($oldecepitImage['image_name']) && file_exists(Yii::getAlias('@root') . '/uploads/receipt_images/' . $oldecepitImage['image_name'])) {
-                                            unlink(Yii::getAlias('@root') . '/uploads/receipt_images/' . $oldecepitImage['image_name']);
-                                        }
+                                        unlink(Yii::getAlias('@root') . '/uploads/receipt_images/' . $oldecepitImage['image_name']);
+                                    }
                                 }
                             }
-                             $photos = InventoryProductsReceiptImages::deleteAll(['inventory_product_id' => $requestParam['inventory_product_id']]);
+                            $photos = InventoryProductsReceiptImages::deleteAll(['inventory_product_id' => $requestParam['inventory_product_id']]);
                         }
 
                         foreach ($requestFileparam['receipt_image']['name'] as $key => $name) {
@@ -161,7 +159,7 @@ class InventoryController extends \yii\base\Controller
                             $filename = $OriginalModifier . '.' . $Extension;
                             $receiptImageModel->image_name = $filename;
                             $receiptImageModel->save(false);
-                          $receiptImageModel->image_name = Yii::$app->params['root_url'] . '/' . "uploads/receipt_images/" .  $receiptImageModel->image_name;
+                            $receiptImageModel->image_name = Yii::$app->params['root_url'] . '/' . "uploads/receipt_images/" . $receiptImageModel->image_name;
 
                             $receiptImages[] = $receiptImageModel;
                         }
@@ -177,17 +175,17 @@ class InventoryController extends \yii\base\Controller
                 if (!empty($requestParam['inventory_product_id'])) {
                     $photos = InventoryProductsPhotos::find()->where(['inventory_product_id' => $requestParam['inventory_product_id']])->asArray()->all();
                     foreach ($photos as $key => $photo) {
-                       $photo['image_name'] = Yii::$app->params['root_url'] . '/' . "uploads/inventory_products/" . $photo['image_name'];
-                       $photosWithPath[] = $photo;
+                        $photo['image_name'] = Yii::$app->params['root_url'] . '/' . "uploads/inventory_products/" . $photo['image_name'];
+                        $photosWithPath[] = $photo;
                     }
                     $amReponseParam['photos'] = $photosWithPath;
                 }
 
-                 if (!empty($requestParam['inventory_product_id'])) {
+                if (!empty($requestParam['inventory_product_id'])) {
                     $receipt_images = InventoryProductsReceiptImages::find()->where(['inventory_product_id' => $requestParam['inventory_product_id']])->asArray()->all();
                     foreach ($receipt_images as $key => $image) {
-                       $image['image_name'] = Yii::$app->params['root_url'] . '/' . "uploads/receipt_images/" . $image['image_name'];
-                       $imagesWithPath[] = $image;
+                        $image['image_name'] = Yii::$app->params['root_url'] . '/' . "uploads/receipt_images/" . $image['image_name'];
+                        $imagesWithPath[] = $image;
                     }
                     $amReponseParam['receipt_images'] = $imagesWithPath;
                 }
@@ -291,28 +289,28 @@ class InventoryController extends \yii\base\Controller
         $snUserId = $requestParam['user_id'];
         $model = Users::findOne(["id" => $snUserId]);
         if (!empty($model)) {
-            $product = InventoryProducts::find()->with(['category'=>function($q){
-                        return $q->select('id,title');
-                    }])->with('inventoryProductsPhotos')->with('inventoryProductsReceiptImages')->with(['user'=>function($q){
-                        return $q->select('id,first_name,last_name,email,user_name,phone,photo,city');
-                    }])->where(["id" => $requestParam['inventory_product_id']])->asArray()->all();
+            $product = InventoryProducts::find()->with(['category' => function ($q) {
+                return $q->select('id,title');
+            }])->with('inventoryProductsPhotos')->with('inventoryProductsReceiptImages')->with(['user' => function ($q) {
+                return $q->select('id,first_name,last_name,email,user_name,phone,photo,city');
+            }])->where(["id" => $requestParam['inventory_product_id']])->asArray()->all();
             if (!empty($product)) {
                 $inventoryProductsPhotos = $product[0]['inventoryProductsPhotos'];
                 foreach ($inventoryProductsPhotos as $key => $photo) {
-                   $photo['image_name'] = $photo['image_name'] = Yii::$app->params['root_url'] . '/' . "uploads/inventory_products/" . $photo['image_name'];
-                   $photos[] = $photo;
+                    $photo['image_name'] = $photo['image_name'] = Yii::$app->params['root_url'] . '/' . "uploads/inventory_products/" . $photo['image_name'];
+                    $photos[] = $photo;
                 }
-                $product[0]['inventoryProductsPhotos'] = $photos; 
+                $product[0]['inventoryProductsPhotos'] = $photos;
                 $inventoryProductsReceiptImages = $product[0]['inventoryProductsReceiptImages'];
-                if(!empty($inventoryProductsReceiptImages)){
+                if (!empty($inventoryProductsReceiptImages)) {
                     foreach ($inventoryProductsReceiptImages as $key => $image) {
-                       $image['image_name'] = $image['image_name'] = Yii::$app->params['root_url'] . '/' . "uploads/receipt_images/" . $image['image_name'];
-                       $images[] = $image;
+                        $image['image_name'] = $image['image_name'] = Yii::$app->params['root_url'] . '/' . "uploads/receipt_images/" . $image['image_name'];
+                        $images[] = $image;
                     }
-                    $product[0]['inventoryProductsReceiptImages'] = $images; 
+                    $product[0]['inventoryProductsReceiptImages'] = $images;
 
-                }else{
-                   $product[0]['inventoryProductsReceiptImages'] = [];  
+                } else {
+                    $product[0]['inventoryProductsReceiptImages'] = [];
                 }
                 $amReponseParam = $product[0];
                 $ssMessage = "Inventory Product's details";
@@ -362,31 +360,31 @@ class InventoryController extends \yii\base\Controller
         $snUserId = $requestParam['user_id'];
         $model = Users::findOne(["id" => $snUserId]);
         if (!empty($model)) {
-            $products = InventoryProducts::find()->with(['category'=>function($q){
-                        return $q->select('id,title');
-                    }])->with('inventoryProductsPhotos')->with('inventoryProductsReceiptImages')->where(['user_id' => $requestParam['user_id']])->asArray()->all();
+            $products = InventoryProducts::find()->with(['category' => function ($q) {
+                return $q->select('id,title');
+            }])->with('inventoryProductsPhotos')->with('inventoryProductsReceiptImages')->where(['user_id' => $requestParam['user_id'], "is_delete" => "0"])->asArray()->all();
 
             if (!empty($products)) {
-                $replacement_value_arr = array_column($products,'replacement_value');
+                $replacement_value_arr = array_column($products, 'replacement_value');
                 foreach ($products as $key => $product) {
                     $inventoryProductsPhotos = $product['inventoryProductsPhotos'];
                     foreach ($inventoryProductsPhotos as $key => $photo) {
-                       $photo['image_name'] = $photo['image_name'] = Yii::$app->params['root_url'] . '/' . "uploads/inventory_products/" . $photo['image_name'];
-                       $photos[] = $photo;
+                        $photo['image_name'] = $photo['image_name'] = Yii::$app->params['root_url'] . '/' . "uploads/inventory_products/" . $photo['image_name'];
+                        $photos[] = $photo;
                     }
                     $inventoryProductsReceiptImages = $product['inventoryProductsReceiptImages'];
 
-                    if(!empty($inventoryProductsReceiptImages)){
-                    foreach ($inventoryProductsReceiptImages as $key => $image) {
-                       $image['image_name'] = $image['image_name'] = Yii::$app->params['root_url'] . '/' . "uploads/receipt_images/" . $image['image_name'];
-                       $images[] = $image;
-                    }
-                    $product['inventoryProductsReceiptImages'] = $images; 
+                    if (!empty($inventoryProductsReceiptImages)) {
+                        foreach ($inventoryProductsReceiptImages as $key => $image) {
+                            $image['image_name'] = $image['image_name'] = Yii::$app->params['root_url'] . '/' . "uploads/receipt_images/" . $image['image_name'];
+                            $images[] = $image;
+                        }
+                        $product['inventoryProductsReceiptImages'] = $images;
 
-                }else{
-                   $product['inventoryProductsReceiptImages'] = [];  
-                }
-                    $product['inventoryProductsPhotos']= $photos;
+                    } else {
+                        $product['inventoryProductsReceiptImages'] = [];
+                    }
+                    $product['inventoryProductsPhotos'] = $photos;
                     $productsWithPath[] = $product;
                 }
                 $amReponseParam['products'] = $productsWithPath;
@@ -443,29 +441,140 @@ class InventoryController extends \yii\base\Controller
             $product = InventoryProducts::find()->where(['user_id' => $requestParam['user_id'], 'id' => $requestParam['inventory_product_id']])->one();
 
             if (!empty($product)) {
-                $ProductPhotos = InventoryProductsPhotos::find()->where(["inventory_product_id"=>$requestParam['inventory_product_id']])->asArray()->all();
-                $receipt_images = InventoryProductsReceiptImages::find()->where(["inventory_product_id"=>$requestParam['inventory_product_id']])->asArray()->all();
-                $photos = !empty($ProductPhotos) ? array_column($ProductPhotos,'image_name') : "";
-                $images = !empty($receipt_images) ? array_column($receipt_images,'image_name') : ""; 
-                if($product->delete()){
-                    if(!empty($photos)){ 
+                $ProductPhotos = InventoryProductsPhotos::find()->where(["inventory_product_id" => $requestParam['inventory_product_id']])->asArray()->all();
+                $receipt_images = InventoryProductsReceiptImages::find()->where(["inventory_product_id" => $requestParam['inventory_product_id']])->asArray()->all();
+                $photos = !empty($ProductPhotos) ? array_column($ProductPhotos, 'image_name') : "";
+                $images = !empty($receipt_images) ? array_column($receipt_images, 'image_name') : "";
+                if ($product->delete()) {
+                    if (!empty($photos)) {
                         foreach ($photos as $key => $photo) {
-                           if (!empty($photo) && file_exists(Yii::getAlias('@root') . '/uploads/inventory_products/' . $photo)) {
-                                    unlink(Yii::getAlias('@root') . '/uploads/inventory_products/' . $photo);
-                                        }
+                            if (!empty($photo) && file_exists(Yii::getAlias('@root') . '/uploads/inventory_products/' . $photo)) {
+                                unlink(Yii::getAlias('@root') . '/uploads/inventory_products/' . $photo);
+                            }
                         }
                     }
-                      if(!empty($images)){ 
-                         foreach ($images as $key => $image) {
-                       if (!empty($image) && file_exists(Yii::getAlias('@root') . '/uploads/receipt_images/' . $image)) {
+                    if (!empty($images)) {
+                        foreach ($images as $key => $image) {
+                            if (!empty($image) && file_exists(Yii::getAlias('@root') . '/uploads/receipt_images/' . $image)) {
                                 unlink(Yii::getAlias('@root') . '/uploads/receipt_images/' . $image);
-                                    }
+                            }
+                        }
                     }
-                }
                 }
                 $amReponseParam = [];
                 $ssMessage = 'Product deleted Successfully from the Inventory.';
                 $amResponse = Common::successResponse($ssMessage, $amReponseParam);
+            } else {
+                $ssMessage = 'Please provide valid inventory_product_id';
+                $amResponse = Common::errorResponse($ssMessage);
+            }
+
+        } else {
+            $ssMessage = 'Invalid User.';
+            $amResponse = Common::errorResponse($ssMessage);
+        }
+        // FOR ENCODE RESPONSE INTO JSON //
+        Common::encodeResponseJSON($amResponse);
+    }
+
+    public function actionAddInventoryProductForSale()
+    {
+        //Get all request parameter
+        $amData = Common::checkRequestType();
+        $amResponse = $amReponseParam = [];
+        // Check required validation for request parameter.
+        $amRequiredParams = array('user_id', 'inventory_product_id', 'category_id', 'subcategory_id', 'title', 'description', 'year_of_purchase', 'price', 'is_rent', 'quantity', 'lat', 'longg', 'location_address', 'discount');
+        $amParamsResult = Common::checkRequestParameterKey($amData['request_param'], $amRequiredParams);
+
+        // If any getting error in request paramter then set error message.
+        if (!empty($amParamsResult['error'])) {
+            $amResponse = Common::errorResponse($amParamsResult['error']);
+            Common::encodeResponseJSON($amResponse);
+        }
+        $requestParam = $amData['request_param'];
+        $requestFileparam = $amData['file_param'];
+        //Check User Status//
+        Common::matchUserStatus($requestParam['user_id']);
+        //VERIFY AUTH TOKEN
+        $authToken = Common::get_header('auth_token');
+        Common::checkAuthentication($authToken, $requestParam['user_id']);
+        $snUserId = $requestParam['user_id'];
+        $model = Users::findOne(["id" => $snUserId]);
+        if ($requestParam['is_rent'] == "1") {
+            if (empty($requestParam['rent_price']) || empty($requestParam['rent_price_duration'])) {
+                $ssMessage = "Please add rent_price and rent price duration keys.";
+                $amResponse = Common::errorResponse($ssMessage);
+                Common::encodeResponseJSON($amResponse);
+            }
+        }
+        if (!empty($model)) {
+            $product = InventoryProducts::find()->where(['user_id' => $requestParam['user_id'], 'id' => $requestParam['inventory_product_id']])->one();
+
+            if (!empty($product)) {
+                $category_check = Category::findOne($requestParam['category_id']);
+                if (!empty($category_check)) {
+                    if (!empty($requestParam['product_id'])) {
+                        $productModel = Products::findOne($requestParam['product_id']);
+                    } else {
+                        $productModel = new Products();
+                    }
+                    $productModel->category_id = $requestParam['category_id'];
+                    $productModel->subcategory_id = $requestParam['subcategory_id'];
+                    $productModel->seller_id = $requestParam['user_id'];
+                    $productModel->title = $requestParam['title'];
+                    $productModel->description = $requestParam['description'];
+                    $productModel->brand_id = !empty($requestParam['brand_id']) ? $requestParam['brand_id'] : "";
+                    $productModel->year_of_purchase = $requestParam['year_of_purchase'];
+                    $productModel->lat = $requestParam['lat'];
+                    $productModel->longg = $requestParam['longg'];
+                    $productModel->location_address = $requestParam['location_address'];
+                    $productModel->city = !empty($requestParam['city']) ? $requestParam['city'] : "";
+                    $productModel->price = $requestParam['price'];
+                    $productModel->discount = $requestParam['discount'];
+                    $productModel->is_rent = $requestParam['is_rent'];
+                    $productModel->rent_price = $requestParam['rent_price'];
+                    $productModel->rent_price_duration = $requestParam['rent_price_duration'];
+                    $productModel->quantity = $requestParam['quantity'];
+                    $productModel->quantity_in_stock = $requestParam['quantity'];
+                    if ($productModel->save(false)) {
+                        if (isset($requestFileparam['photo']) && !empty($requestFileparam['photo']['name'])) {
+                            if (!empty($requestParam['product_id'])) {
+                                $photos = ProductPhotos::deleteAll(['product_id' => $requestParam['product_id']]);
+                            }
+
+                            foreach ($requestFileparam['photo']['name'] as $key => $name) {
+                                $photoModel = new ProductPhotos();
+                                $photoModel->image_name = UploadedFile::getInstanceByName("photo[$key]");
+                                $photoModel->product_id = $productModel->id;
+
+                                $Modifier = md5(($photoModel->image_name));
+                                $OriginalModifier = $Modifier . rand(11111, 99999);
+                                $Extension = $photoModel->image_name->extension;
+                                $photoModel->image_name->saveAs(__DIR__ . "../../../uploads/products/" . $OriginalModifier . '.' . $photoModel->image_name->extension);
+                                $filename = $OriginalModifier . '.' . $Extension;
+                                $photoModel->image_name = $filename;
+                                $photoModel->image_path = Yii::$app->params['root_url'] . '/' . "uploads/products/" . $filename;
+                                $photoModel->save(false);
+                                $ProductPhotos[] = $photoModel;
+                            }
+                        }
+                    }
+                    $amReponseParam['product'] = $productModel;
+                    if (isset($requestFileparam['photo']) && isset($requestFileparam['photo']['name'])) {
+                        $amReponseParam['photos'] = $ProductPhotos;
+                    }
+                    if (!empty($requestParam['product_id'])) {
+                        $photos = ProductPhotos::find()->where(['product_id' => $requestParam['product_id']])->asArray()->all();
+                        $amReponseParam['photos'] = $photos;
+                    }
+                    $product->is_delete = "1";
+                    $product->save(false);
+                    $ssMessage = 'Your Inventory Product successfully added for sale';
+                    $amResponse = Common::successResponse($ssMessage, $amReponseParam);
+                } else {
+                    $ssMessage = 'Invalid category_id.Please add valid category_id';
+                    $amResponse = Common::errorResponse($ssMessage);
+                }
             } else {
                 $ssMessage = 'Please provide valid inventory_product_id';
                 $amResponse = Common::errorResponse($ssMessage);

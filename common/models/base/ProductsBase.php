@@ -5,6 +5,7 @@ namespace common\models\base;
 use common\models\Brands;
 use common\models\Cart;
 use common\models\Category;
+use common\models\InventoryProducts;
 use common\models\ProductPhotos;
 use common\models\ProductsQuery;
 use common\models\Users;
@@ -63,7 +64,7 @@ class ProductsBase extends \yii\db\ActiveRecord
             [['category_id', 'subcategory_id', 'seller_id', 'title', 'description', 'location_address', 'price', 'is_rent', 'quantity', 'created_at', 'updated_at'], 'required'],
             [['category_id', 'subcategory_id', 'seller_id', 'brand_id', 'price', 'rent_price', 'rent_price_duration', 'quantity', 'status'], 'integer'],
             [['description', 'location_address', 'is_rent', 'is_approve'], 'string'],
-            [['year_of_purchase', 'created_at', 'updated_at', 'discount', 'tax','quantity_in_stock','is_delete'], 'safe'],
+            [['year_of_purchase', 'created_at', 'updated_at', 'discount', 'tax', 'quantity_in_stock', 'is_delete', 'inventory_product_id'], 'safe'],
             [['lat', 'longg', 'owner_discount'], 'number'],
             [['title', 'city'], 'string', 'max' => 255],
             [['brand_id'], 'exist', 'skipOnError' => true, 'targetClass' => Brands::className(), 'targetAttribute' => ['brand_id' => 'id']],
@@ -98,11 +99,12 @@ class ProductsBase extends \yii\db\ActiveRecord
             'rent_price' => 'Rent Price',
             'rent_price_duration' => 'Rent Price Duration',
             'quantity' => 'Total Quantity',
-            'quantity_in_stock'=>'Quantity in Stock',
+            'quantity_in_stock' => 'Quantity in Stock',
             'status' => 'Status',
             'is_approve' => 'Is Approve',
             'owner_discount' => 'Owner Percentage',
             'is_delete' => 'Is Deleted',
+            'inventory_product_id' => 'Inventory Product ID',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -114,6 +116,11 @@ class ProductsBase extends \yii\db\ActiveRecord
     public function getProductPhotos()
     {
         return $this->hasMany(ProductPhotos::className(), ['product_id' => 'id']);
+    }
+
+    public function getInventoryProduct()
+    {
+        return $this->hasOne(InventoryProducts::className(), ['id' => 'inventory_product_id']);
     }
 
     /**
