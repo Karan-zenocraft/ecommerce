@@ -196,6 +196,7 @@ class ProductsController extends \yii\base\Controller
                     $productPhotos = ProductPhotos::find()->where(['product_id' => $product['id']])->asArray()->all();
                     $product['is_wishlist'] = in_array($product['id'], $wishlist_arr) ? "true" : "false";
                     $product['rent_price'] = !empty($product['rent_price']) ? $product['rent_price'] : "";
+                    $product['inventory_product_id'] = !empty($product['inventory_product_id']) ? $product['inventory_product_id'] : "";
                     $product['rent_price_duration'] = !empty($product['rent_price_duration']) ? $product['rent_price_duration'] : "";
                     $product['lat'] = !empty($product['lat']) ? $product['lat'] : "";
                     $product['longg'] = !empty($product['longg']) ? $product['longg'] : "";
@@ -327,6 +328,7 @@ class ProductsController extends \yii\base\Controller
                 foreach ($products as $key => $product) {
                     $productPhotos = ProductPhotos::find()->where(['product_id' => $product['id']])->asArray()->all();
                     $product['rent_price'] = !empty($product['rent_price']) ? $product['rent_price'] : "";
+                    $product['inventory_product_id'] = !empty($product['inventory_product_id']) ? $product['inventory_product_id'] : "";
                     $product['rent_price_duration'] = !empty($product['rent_price_duration']) ? $product['rent_price_duration'] : "";
                     $product['lat'] = !empty($product['lat']) ? $product['lat'] : "";
                     $product['longg'] = !empty($product['longg']) ? $product['longg'] : "";
