@@ -265,6 +265,7 @@ class ProductsController extends \yii\base\Controller
                 $product[0]['seller_email'] = !empty($product[0]['seller']['email']) ? $product[0]['seller']['email'] : "";
                 $product[0]['seller_photo'] = !empty($product[0]['seller']['photo']) ? $product[0]['seller']['photo'] : "";
                 $product[0]['rent_price'] = !empty($product[0]['rent_price']) ? $product[0]['rent_price'] : "";
+                $product[0]['inventory_product_id'] = !empty($product[0]['inventory_product_id']) ? $product[0]['inventory_product_id'] : "";
                 $product[0]['rent_price_duration'] = !empty($product[0]['rent_price_duration']) ? $product[0]['rent_price_duration'] : "";
                 $product[0]['lat'] = !empty($product[0]['lat']) ? $product[0]['lat'] : "";
                 $product[0]['longg'] = !empty($product[0]['longg']) ? $product[0]['longg'] : "";
