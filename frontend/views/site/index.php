@@ -5,6 +5,13 @@ use yii\captcha\Captcha;
 ?>
 <style type="text/css">
     
+@media (min-width: 320px) and (max-width: 767px){
+.IOSabbr:hover::after,
+.IOSabbr:focus::after{
+     top:  -40px!important;
+     bottom: unset!important;
+}
+}
 
 abbr[data-title] {
   position: relative;
@@ -43,7 +50,7 @@ a:hover{text-decoration: none;outline: none;}
                             Suits You Better</h1>
                         <p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards.</p>
                         <div class="Technology">
-                            <abbr data-title="Coming Soon !!!">
+                            <abbr class="IOSabbr" data-title="Coming Soon !!!">
                             <div class="Android">
                                 <div class="Icon">
                                     <i class="fa fa-apple" aria-hidden="true"></i>
