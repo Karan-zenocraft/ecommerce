@@ -3,7 +3,36 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\captcha\Captcha;
 ?>
+<style type="text/css">
+    
 
+abbr[data-title] {
+  position: relative;
+  transition: 0.8s all;
+  
+}
+abbr[data-title]:hover::after,
+abbr[data-title]:focus::after {
+  content: attr(data-title);
+  position: absolute;
+  left: 53%;
+  bottom:  -40px;
+  transform: translateX(-50%);
+  width: auto;
+  white-space: nowrap;
+  transition: 0.8s all;
+  background: #000;
+  color: #fff;
+  border-radius: 2px;
+  box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.4);
+  font-size: 14px;
+ padding: 7px 15px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+}
+a:hover{text-decoration: none;outline: none;}
+</style>
 <section class="Banner">
         <div class="container">
             <div class="row">
@@ -14,28 +43,31 @@ use yii\captcha\Captcha;
                             Suits You Better</h1>
                         <p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards.</p>
                         <div class="Technology">
+                            <abbr data-title="Coming Soon !!!">
                             <div class="Android">
                                 <div class="Icon">
                                     <i class="fa fa-apple" aria-hidden="true"></i>
                                 </div>
                                 <div class="Des">
-                                    <p><span>Available</span>
+                                    <a ><p><span>Available</span>
                                         on App Store
-                                    </p>
+                                    </p></a>
                                 </div>
                             </div>
-
-
+                        </abbr>
+                            <abbr data-title="Coming Soon !!!">
                             <div class="Android Ios">
                                 <div class="Icon">
                                     <i class="fa fa-android" aria-hidden="true"></i>
                                 </div>
+                                
                                 <div class="Des">
-                                    <p><span>Available</span>
+                                    <a draggable="false"><p><span>Available</span>
                                         on App Store
-                                    </p>
+                                    </p></a>
                                 </div>
                             </div>
+                            </abbr>
 
                         </div>
 
